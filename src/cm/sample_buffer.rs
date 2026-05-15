@@ -27,6 +27,19 @@ unsafe impl Send for CMSampleBuffer {}
 unsafe impl Sync for CMSampleBuffer {}
 
 impl CMSampleBuffer {
+    /// Wrap a raw `CMSampleBufferRef` without bumping its refcount or
+    /// checking for NULL.
+    ///
+    /// # Safety
+    ///
+    /// The caller must ensure `ptr` is a valid `CMSampleBufferRef` retained
+    /// at +1 (the wrapper will release on drop). For NULL-tolerant
+    /// construction prefer [`Self::from_raw`].
+    #[must_use]
+    pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
+        Self(ptr)
+    }
+
     /// Wrap a raw `CMSampleBufferRef` without bumping its refcount.
     ///
     /// Use this when the caller has just received a `+1` retained pointer
