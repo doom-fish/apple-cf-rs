@@ -44,12 +44,18 @@ pub mod iosurface;
 #[cfg_attr(docsrs, doc(cfg(feature = "dispatch")))]
 pub mod dispatch_queue;
 
+#[cfg(feature = "cm")]
+#[cfg_attr(docsrs, doc(cfg(feature = "cm")))]
+pub mod cm;
+
 pub use utils::FourCharCode;
 
 /// Common imports for users of this crate.
 pub mod prelude {
     #[cfg(feature = "cg")]
     pub use crate::cg::{CGPoint, CGRect, CGSize};
+    #[cfg(feature = "cm")]
+    pub use crate::cm::{CMBlockBuffer, CMFormatDescription, CMSampleBuffer, CMTime};
     #[cfg(feature = "dispatch")]
     pub use crate::dispatch_queue::{DispatchQoS, DispatchQueue};
     #[cfg(feature = "iosurface")]

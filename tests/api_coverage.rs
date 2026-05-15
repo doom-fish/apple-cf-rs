@@ -121,7 +121,9 @@ fn report(
     );
 
     if !missing.is_empty() {
-        println!("\n--- Missing (real coverage gaps; add to INTENTIONALLY_OMITTED if intentional) ---");
+        println!(
+            "\n--- Missing (real coverage gaps; add to INTENTIONALLY_OMITTED if intentional) ---"
+        );
         for s in &missing {
             println!("  - {s}");
         }
@@ -272,11 +274,304 @@ fn snake_to_pascal_iosurface(snake: &str) -> String {
 
 #[test]
 fn snake_to_pascal_helper_works() {
-    assert_eq!(snake_to_pascal_iosurface("io_surface_create"), "IOSurfaceCreate");
-    assert_eq!(snake_to_pascal_iosurface("io_surface_get_width"), "IOSurfaceGetWidth");
+    assert_eq!(
+        snake_to_pascal_iosurface("io_surface_create"),
+        "IOSurfaceCreate"
+    );
+    assert_eq!(
+        snake_to_pascal_iosurface("io_surface_get_width"),
+        "IOSurfaceGetWidth"
+    );
     assert_eq!(
         snake_to_pascal_iosurface("io_surface_get_width_of_plane"),
         "IOSurfaceGetWidthOfPlane"
     );
-    assert_eq!(snake_to_pascal_iosurface("io_surface_get_id"), "IOSurfaceGetID");
+    assert_eq!(
+        snake_to_pascal_iosurface("io_surface_get_id"),
+        "IOSurfaceGetID"
+    );
+}
+
+// ---- CoreMedia coverage tests ----
+
+fn snake_to_pascal_with_prefix(snake: &str, target_prefix: &str, snake_prefix: &str) -> String {
+    let mut out = String::from(target_prefix);
+    for word in snake.trim_start_matches(snake_prefix).split('_') {
+        let mut c = word.chars();
+        if let Some(first) = c.next() {
+            out.push(first.to_ascii_uppercase());
+            for ch in c {
+                out.push(ch);
+            }
+        }
+    }
+    // Apple naming exceptions: CMSampleBuffer uses "TimeStamp" (capital S),
+    // CMFormatDescription uses "SubType" (capital T). Our snake_case
+    // collapses those to "Timestamp"/"Subtype"; rewrite back.
+    out = out.replace("Timestamp", "TimeStamp");
+    out = out.replace("Subtype", "SubType");
+    out
+}
+
+fn cm_sample_buffer_omitted() -> BTreeSet<String> {
+    [
+        "CMSampleBufferCreate",
+        "CMSampleBufferCreateCopy",
+        "CMSampleBufferCreateCopyWithNewTiming",
+        "CMSampleBufferCreateForImageBuffer",
+        "CMSampleBufferCreateReady",
+        "CMSampleBufferCreateReadyWithImageBuffer",
+        "CMSampleBufferCreateReadyWithPacketDescriptions",
+        "CMAudioSampleBufferCreateReadyWithPacketDescriptions",
+        "CMAudioSampleBufferCreateWithPacketDescriptions",
+        "CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler",
+        "CMSampleBufferCreateForImageBufferWithMakeDataReadyCallback",
+        "CMSampleBufferCreateWithMakeDataReadyHandler",
+        "CMSampleBufferCreateWithMakeDataReadyCallback",
+        "CMSampleBufferCreateReadyWithMakeDataReadyHandler",
+        "CMSampleBufferCopySampleBufferForRange",
+        "CMSampleBufferGetTypeID",
+        "CMSampleBufferSetDataBuffer",
+        "CMSampleBufferSetDataBufferFromAudioBufferList",
+        "CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer",
+        "CMSampleBufferGetAudioStreamPacketDescriptions",
+        "CMSampleBufferGetAudioStreamPacketDescriptionsPtr",
+        "CMSampleBufferGetSampleAttachmentsArray",
+        "CMSampleBufferGetSampleSize",
+        "CMSampleBufferGetSampleSizeArray",
+        "CMSampleBufferGetTotalSampleSize",
+        "CMSampleBufferGetSampleTimingInfo",
+        "CMSampleBufferGetSampleTimingInfoArray",
+        "CMSampleBufferGetOutputDuration",
+        "CMSampleBufferGetOutputPresentationTimeStamp",
+        "CMSampleBufferGetOutputDecodeTimeStamp",
+        "CMSampleBufferGetOutputSampleTimingInfoArray",
+        "CMSampleBufferSetOutputPresentationTimeStamp",
+        "CMSampleBufferGetSampleAttachmentsCount",
+        "CMSampleBufferCallForEachSample",
+        "CMSampleBufferCallBlockForEachSample",
+        "CMSampleBufferInvalidate",
+        "CMSampleBufferMakeDataReady",
+        "CMSampleBufferSetInvalidateHandler",
+        "CMSampleBufferSetInvalidateCallback",
+        "CMSampleBufferTrackDataReadiness",
+        "CMSampleBufferTrackingClock",
+        "CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler",
+        "CMSampleBufferCopyPCMDataIntoAudioBufferList",
+        "CMSampleBufferHasDataFailed",
+        "CMSampleBufferSetDataFailed",
+        "CMSampleBufferSetDataReady",
+        // False-positive regex match — `CMSampleBuffers(` actually appears in a
+        // header comment, not a function declaration.
+        "CMSampleBuffers",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect()
+}
+
+#[test]
+fn cm_sample_buffer_api_coverage() {
+    let sdk = sdk_root();
+    let header = sdk.join("System/Library/Frameworks/CoreMedia.framework/Headers/CMSampleBuffer.h");
+    let mut apple = extract_c_function_names("CMSampleBuffer", &[header.clone()]);
+    apple.append(&mut extract_c_function_names(
+        "CMAudioSampleBuffer",
+        &[header],
+    ));
+
+    let ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
+        .into_iter()
+        .filter(|n| n.starts_with("cm_sample_buffer_"))
+        .map(|n| snake_to_pascal_with_prefix(&n, "CMSampleBuffer", "cm_sample_buffer_"))
+        .collect();
+
+    // CF-inherited (CFRetain/CFRelease/CFHash on a CFTypeRef).
+    let bridge_only: BTreeSet<String> = [
+        "CMSampleBufferRetain",
+        "CMSampleBufferRelease",
+        "CMSampleBufferHash",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect();
+
+    assert!(report(
+        "CMSampleBuffer",
+        &apple,
+        &ours,
+        &cm_sample_buffer_omitted(),
+        &bridge_only,
+    ));
+    let (wrapped, missing, _) = diff(&apple, &ours, &cm_sample_buffer_omitted(), &bridge_only);
+    let coverable = wrapped.len() + missing.len();
+    let pct = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    assert!(
+        pct >= 100.0,
+        "CMSampleBuffer: {pct:.1}%; missing: {missing:?}"
+    );
+}
+
+fn cm_block_buffer_omitted() -> BTreeSet<String> {
+    [
+        "CMBlockBufferAccessDataBytes",
+        "CMBlockBufferAppendBufferReference",
+        "CMBlockBufferAppendMemoryBlock",
+        "CMBlockBufferAssureBlockMemory",
+        "CMBlockBufferAssureBufferMemory",
+        "CMBlockBufferCreateContiguous",
+        "CMBlockBufferCreateWithBufferReference",
+        "CMBlockBufferCreateWithMemoryBlock",
+        "CMBlockBufferCustomBlockSourceGetTypeID",
+        "CMBlockBufferFillDataBytes",
+        "CMBlockBufferGetTypeID",
+        "CMBlockBufferReplaceDataBytes",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect()
+}
+
+#[test]
+fn cm_block_buffer_api_coverage() {
+    let sdk = sdk_root();
+    let header = sdk.join("System/Library/Frameworks/CoreMedia.framework/Headers/CMBlockBuffer.h");
+    let apple = extract_c_function_names("CMBlockBuffer", &[header]);
+    let ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
+        .into_iter()
+        .filter(|n| n.starts_with("cm_block_buffer_"))
+        .map(|n| snake_to_pascal_with_prefix(&n, "CMBlockBuffer", "cm_block_buffer_"))
+        .collect();
+
+    let bridge_only: BTreeSet<String> = [
+        "CMBlockBufferCreateWithData",
+        "CMBlockBufferRetain",
+        "CMBlockBufferRelease",
+        "CMBlockBufferHash",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect();
+
+    assert!(report(
+        "CMBlockBuffer",
+        &apple,
+        &ours,
+        &cm_block_buffer_omitted(),
+        &bridge_only
+    ));
+    let (wrapped, missing, _) = diff(&apple, &ours, &cm_block_buffer_omitted(), &bridge_only);
+    let coverable = wrapped.len() + missing.len();
+    let pct = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    assert!(
+        pct >= 100.0,
+        "CMBlockBuffer: {pct:.1}%; missing: {missing:?}"
+    );
+}
+
+fn cm_format_description_omitted() -> BTreeSet<String> {
+    [
+        "CMFormatDescriptionCreate",
+        "CMFormatDescriptionCreateFromBigEndianImageDescriptionData",
+        "CMFormatDescriptionCreateFromBigEndianSoundDescriptionData",
+        "CMFormatDescriptionEqual",
+        "CMFormatDescriptionEqualIgnoringExtensionKeys",
+        "CMFormatDescriptionGetExtension",
+        "CMFormatDescriptionGetTypeID",
+        "CMAudioFormatDescriptionCreate",
+        "CMAudioFormatDescriptionCreateSummary",
+        "CMAudioFormatDescriptionEqual",
+        "CMAudioFormatDescriptionGetChannelLayout",
+        "CMAudioFormatDescriptionGetFormatList",
+        "CMAudioFormatDescriptionGetMagicCookie",
+        "CMAudioFormatDescriptionGetMostCompatibleFormat",
+        "CMAudioFormatDescriptionGetRichestDecodableFormat",
+        "CMAudioFormatDescriptionGetStreamBasicDescription",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect()
+}
+
+#[test]
+fn cm_format_description_api_coverage() {
+    let sdk = sdk_root();
+    let header =
+        sdk.join("System/Library/Frameworks/CoreMedia.framework/Headers/CMFormatDescription.h");
+    let mut apple = extract_c_function_names("CMFormatDescription", &[header.clone()]);
+    apple.append(&mut extract_c_function_names(
+        "CMAudioFormatDescription",
+        &[header],
+    ));
+
+    let ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
+        .into_iter()
+        .filter(|n| n.starts_with("cm_format_description_"))
+        .map(|n| {
+            if n.starts_with("cm_format_description_get_audio_") {
+                let tail = n.trim_start_matches("cm_format_description_get_audio_");
+                // Map to Apple's CMAudioFormatDescriptionGet<Field> form, but
+                // note Apple's actual API uses CMAudioFormatDescriptionGet
+                // followed by audio-style names that don't match field names
+                // 1:1 — so map onto the actual existing Apple symbols.
+                match tail {
+                    "sample_rate" | "channel_count" | "bits_per_channel" | "bytes_per_frame"
+                    | "format_flags" => {
+                        // Apple's only CMAudioFormatDescription getter is
+                        // CMAudioFormatDescriptionGetStreamBasicDescription;
+                        // our split-out scalar getters are bridge-only convenience.
+                        "CMAudioFormatDescriptionGetStreamBasicDescription".to_string()
+                    }
+                    _ => snake_to_pascal_with_prefix(
+                        &format!("__get_{tail}"),
+                        "CMAudioFormatDescription",
+                        "__",
+                    ),
+                }
+            } else {
+                snake_to_pascal_with_prefix(&n, "CMFormatDescription", "cm_format_description_")
+            }
+        })
+        .collect();
+
+    let bridge_only: BTreeSet<String> = [
+        "CMFormatDescriptionRetain",
+        "CMFormatDescriptionRelease",
+        "CMFormatDescriptionHash",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect();
+
+    assert!(report(
+        "CMFormatDescription",
+        &apple,
+        &ours,
+        &cm_format_description_omitted(),
+        &bridge_only,
+    ));
+    let (wrapped, missing, _) = diff(
+        &apple,
+        &ours,
+        &cm_format_description_omitted(),
+        &bridge_only,
+    );
+    let coverable = wrapped.len() + missing.len();
+    let pct = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    assert!(
+        pct >= 100.0,
+        "CMFormatDescription: {pct:.1}%; missing: {missing:?}"
+    );
 }

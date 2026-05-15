@@ -29,6 +29,7 @@ fn main() {
     println!("cargo:rustc-link-lib=framework=CoreGraphics");
     println!("cargo:rustc-link-lib=framework=IOSurface");
     println!("cargo:rustc-link-lib=framework=CoreFoundation");
+    println!("cargo:rustc-link-lib=framework=CoreMedia");
 
     let swift_dir = "swift-bridge";
     let out_dir = env::var("OUT_DIR").unwrap();

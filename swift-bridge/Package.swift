@@ -22,6 +22,7 @@ let package = Package(
                 "CoreGraphicsBridge",
                 "IOSurfaceBridge",
                 "DispatchBridge",
+                "CoreMediaBridge",
             ],
             path: "Sources/AppleCFBridge",
             publicHeadersPath: "include"),
@@ -34,5 +35,8 @@ let package = Package(
         .target(
             name: "DispatchBridge",
             path: "Sources/DispatchBridge"),
+        .target(
+            name: "CoreMediaBridge",
+            path: "Sources/CoreMediaBridge"),
     ]
 )

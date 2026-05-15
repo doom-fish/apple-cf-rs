@@ -11,8 +11,8 @@ Safe, dependency-free Rust bindings for Apple's shared **Core\*** frameworks —
 | [`cg`](src/cg) | CoreGraphics value types (`CGRect`, `CGPoint`, `CGSize`) | `cg` | ✅ |
 | [`iosurface`](src/iosurface) | IOSurface (zero-copy GPU buffers, multi-planar formats) | `iosurface` | ✅ |
 | [`dispatch_queue`](src/dispatch_queue.rs) | Grand Central Dispatch queues + QoS | `dispatch` | ✅ |
+| [`cm`](src/cm) | CoreMedia (`CMSampleBuffer`, `CMTime`, `CMBlockBuffer`, `CMFormatDescription`) | `cm` | ✅ |
 | [`utils`](src/utils) | Shared FFI helpers (always on) | — | ✅ |
-| `cm` | CoreMedia (`CMSampleBuffer`, `CMTime`, `CMFormatDescription`) | `cm` | 🚧 planned |
 | `cv` | CoreVideo (`CVPixelBuffer`, `CVPixelBufferPool`) | `cv` | 🚧 planned |
 | `metal` | Metal (`MTLDevice`, `MTLTexture`) | `metal` | 🚧 planned |
 

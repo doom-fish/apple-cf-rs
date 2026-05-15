@@ -35,20 +35,22 @@ name = "apple_cf"
 crate-type = ["lib"]
 
 [features]
-default = ["cg", "iosurface", "dispatch"]
+default = ["cg", "iosurface", "dispatch", "cm"]
 
 # Per-framework feature flags. Downstream crates can opt into only what they need.
 cg = []
 iosurface = []
 dispatch = []
+cm = []
 
 # Convenience aggregate.
-all-frameworks = ["cg", "iosurface", "dispatch"]
+all-frameworks = ["cg", "iosurface", "dispatch", "cm"]
 
 [dependencies]
 
 [dev-dependencies]
 regex-lite = "0.1"
+videotoolbox = { path = "../videotoolbox-rs" }
 
 [package.metadata.docs.rs]
 all-features = true
