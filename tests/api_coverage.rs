@@ -703,3 +703,174 @@ fn cv_pixel_buffer_pool_api_coverage() {
         "CVPixelBufferPool: {pct:.1}%; missing: {missing:?}"
     );
 }
+
+// ---- CVPixelBuffer attribute-key constants ----
+
+/// Read the bridge file for textual matches against named keys.
+fn read_bridge_files() -> String {
+    let mut blob = String::new();
+    let bridge_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("swift-bridge/Sources");
+    for entry in std::fs::read_dir(&bridge_root).unwrap_or_else(|e| {
+        panic!("can't read bridge root {}: {e}", bridge_root.display())
+    }) {
+        let dir = entry.unwrap().path();
+        if !dir.is_dir() {
+            continue;
+        }
+        for sub in std::fs::read_dir(&dir).unwrap_or_else(|e| {
+            panic!("can't read bridge subdir {}: {e}", dir.display())
+        }) {
+            let path = sub.unwrap().path();
+            if path.extension().is_some_and(|e| e == "swift") {
+                if let Ok(text) = std::fs::read_to_string(&path) {
+                    blob.push_str(&text);
+                    blob.push('\n');
+                }
+            }
+        }
+    }
+    blob
+}
+
+#[test]
+fn cv_pixel_buffer_attribute_keys_coverage() {
+    // CVPixelBuffer creation is configured via a `[kCVPixelBuffer*Key:
+    // value]` attribute dictionary. Verify every key the Swift bridge
+    // references is a real, currently-valid `CVPixelBuffer.h` constant —
+    // future SDK renames surface here instead of as a runtime "Apple
+    // silently ignored an unknown key" no-op.
+    let sdk = sdk_root();
+    let header = sdk.join("System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBuffer.h");
+    let contents = std::fs::read_to_string(&header)
+        .unwrap_or_else(|e| panic!("can't read {}: {e}", header.display()));
+    let re = regex_lite::Regex::new(
+        r"CV_EXPORT\s+const\s+CFStringRef\s+(?:CV_NONNULL\s+)?(kCVPixelBuffer[A-Za-z0-9]+Key)\b",
+    )
+    .unwrap();
+    let apple: BTreeSet<String> = re
+        .captures_iter(&contents)
+        .map(|c| c[1].to_string())
+        .collect();
+
+    let bridge = read_bridge_files();
+    let our_keys: BTreeSet<String> = apple
+        .iter()
+        .filter(|name| {
+            let needle = format!(r"\b{}\b", regex_lite::escape(name));
+            regex_lite::Regex::new(&needle).unwrap().is_match(&bridge)
+        })
+        .cloned()
+        .collect();
+
+    // v0.1 surface: width, height, pixel format, and IOSurface backing
+    // hint. Every other key is intentionally omitted (most are advanced
+    // GPU-interop hints not yet exposed by the wrapper).
+    let kept: BTreeSet<&str> = [
+        "kCVPixelBufferWidthKey",
+        "kCVPixelBufferHeightKey",
+        "kCVPixelBufferPixelFormatTypeKey",
+        "kCVPixelBufferIOSurfacePropertiesKey",
+    ]
+    .into_iter()
+    .collect();
+    let omitted: BTreeSet<String> = apple
+        .iter()
+        .filter(|s| !kept.contains(s.as_str()))
+        .cloned()
+        .collect();
+
+    let wrapped: BTreeSet<&String> = apple.intersection(&our_keys).collect();
+    let missing: BTreeSet<&String> = apple
+        .difference(&our_keys)
+        .filter(|s| !omitted.contains(*s))
+        .collect();
+    let coverable = wrapped.len() + missing.len();
+    let pct = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    println!(
+        "\n=== CVPixelBuffer attribute-key coverage ===\n  apple={}, omitted={}, coverable={coverable}, wrapped={}, missing={}, pct={pct:.1}%",
+        apple.len(),
+        omitted.len(),
+        wrapped.len(),
+        missing.len(),
+    );
+    if !missing.is_empty() {
+        for s in &missing {
+            println!("  - {s}");
+        }
+    }
+    assert!(
+        pct >= 100.0,
+        "CVPixelBuffer attribute keys: {pct:.1}%; missing: {missing:?}"
+    );
+}
+
+#[test]
+fn cv_pixel_buffer_pool_attribute_keys_coverage() {
+    // CVPixelBufferPool creation is configured via a `[kCVPixelBufferPool*Key:
+    // value]` attribute dictionary. Same rationale as above — verify the
+    // keys our pool bridge passes are real Apple constants.
+    let sdk = sdk_root();
+    let header =
+        sdk.join("System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferPool.h");
+    let contents = std::fs::read_to_string(&header)
+        .unwrap_or_else(|e| panic!("can't read {}: {e}", header.display()));
+    let re = regex_lite::Regex::new(
+        r"CV_EXPORT\s+const\s+CFStringRef\s+(?:CV_NONNULL\s+)?(kCVPixelBufferPool[A-Za-z0-9]+Key)\b",
+    )
+    .unwrap();
+    let apple: BTreeSet<String> = re
+        .captures_iter(&contents)
+        .map(|c| c[1].to_string())
+        .collect();
+
+    let bridge = read_bridge_files();
+    let our_keys: BTreeSet<String> = apple
+        .iter()
+        .filter(|name| {
+            let needle = format!(r"\b{}\b", regex_lite::escape(name));
+            regex_lite::Regex::new(&needle).unwrap().is_match(&bridge)
+        })
+        .cloned()
+        .collect();
+
+    let kept: BTreeSet<&str> = ["kCVPixelBufferPoolMinimumBufferCountKey"]
+        .into_iter()
+        .collect();
+    let omitted: BTreeSet<String> = apple
+        .iter()
+        .filter(|s| !kept.contains(s.as_str()))
+        .cloned()
+        .collect();
+
+    let wrapped: BTreeSet<&String> = apple.intersection(&our_keys).collect();
+    let missing: BTreeSet<&String> = apple
+        .difference(&our_keys)
+        .filter(|s| !omitted.contains(*s))
+        .collect();
+    let coverable = wrapped.len() + missing.len();
+    let pct = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    println!(
+        "\n=== CVPixelBufferPool attribute-key coverage ===\n  apple={}, omitted={}, coverable={coverable}, wrapped={}, missing={}, pct={pct:.1}%",
+        apple.len(),
+        omitted.len(),
+        wrapped.len(),
+        missing.len(),
+    );
+    if !missing.is_empty() {
+        for s in &missing {
+            println!("  - {s}");
+        }
+    }
+    assert!(
+        pct >= 100.0,
+        "CVPixelBufferPool attribute keys: {pct:.1}%; missing: {missing:?}"
+    );
+}
