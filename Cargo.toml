@@ -35,16 +35,17 @@ name = "apple_cf"
 crate-type = ["lib"]
 
 [features]
-default = ["cg", "iosurface", "dispatch", "cm"]
+default = ["cg", "iosurface", "dispatch", "cm", "cv"]
 
 # Per-framework feature flags. Downstream crates can opt into only what they need.
 cg = []
 iosurface = []
 dispatch = []
 cm = []
+cv = ["iosurface"] # CVPixelBuffer's IOSurface accessor needs the IOSurface wrapper
 
 # Convenience aggregate.
-all-frameworks = ["cg", "iosurface", "dispatch", "cm"]
+all-frameworks = ["cg", "iosurface", "dispatch", "cm", "cv"]
 
 [dependencies]
 

@@ -310,6 +310,8 @@ fn snake_to_pascal_with_prefix(snake: &str, target_prefix: &str, snake_prefix: &
     // collapses those to "Timestamp"/"Subtype"; rewrite back.
     out = out.replace("Timestamp", "TimeStamp");
     out = out.replace("Subtype", "SubType");
+    out = out.replace("IoSurface", "IOSurface");
+    out = out.replace("TypeId", "TypeID");
     out
 }
 
@@ -573,5 +575,131 @@ fn cm_format_description_api_coverage() {
     assert!(
         pct >= 100.0,
         "CMFormatDescription: {pct:.1}%; missing: {missing:?}"
+    );
+}
+
+// ---- CoreVideo coverage ----
+
+fn cv_pixel_buffer_omitted() -> BTreeSet<String> {
+    [
+        // CVPixelBufferGetTypeID is wrapped via the renamed snake form.
+        // Async / managed-buffer creation variants — v0.2
+        "CVPixelBufferCreateResolvedAttributesDictionary",
+        "CVPixelBufferCreateWithBytesAndCallback",
+        "CVPixelBufferCreateWithPlanarBytesAndCallback",
+        "CVPixelBufferGetIOSurfacePropertiesFromPixelBufferAttributes",
+        "CVPixelBufferGetPixelBufferAttributesFromIOSurfaceProperties",
+        // Attachments + KVO — v0.2
+        "CVPixelBufferCopyCreationAttributes",
+        "CVPixelBufferGetAttachment",
+        "CVPixelBufferSetAttachment",
+        "CVPixelBufferGetAttachments",
+        "CVPixelBufferSetAttachments",
+        "CVPixelBufferRemoveAttachment",
+        "CVPixelBufferRemoveAllAttachments",
+        "CVPixelBufferCopyAttachments",
+        "CVPixelBufferPropagateAttachments",
+        "CVPixelBufferRetainedBufferRetainsCachedAttachments",
+        // Compatibility check — v0.2
+        "CVPixelBufferIsCompatibleWithAttributes",
+        // Cleanup callbacks — internal Apple plumbing
+        "CVPixelBufferReleaseBytesCallback",
+        "CVPixelBufferReleasePlanarBytesCallback",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect()
+}
+
+#[test]
+fn cv_pixel_buffer_api_coverage() {
+    let sdk = sdk_root();
+    let main_header =
+        sdk.join("System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBuffer.h");
+    let iosurface_header =
+        sdk.join("System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferIOSurface.h");
+    let apple = extract_c_function_names("CVPixelBuffer", &[main_header, iosurface_header]);
+    let ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
+        .into_iter()
+        .filter(|n| n.starts_with("cv_pixel_buffer_") && !n.starts_with("cv_pixel_buffer_pool_"))
+        .map(|n| snake_to_pascal_with_prefix(&n, "CVPixelBuffer", "cv_pixel_buffer_"))
+        .collect();
+    let bridge_only: BTreeSet<String> = [
+        "CVPixelBufferRetain",
+        "CVPixelBufferRelease",
+        "CVPixelBufferHash",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect();
+
+    assert!(report(
+        "CVPixelBuffer",
+        &apple,
+        &ours,
+        &cv_pixel_buffer_omitted(),
+        &bridge_only,
+    ));
+    let (wrapped, missing, _) = diff(&apple, &ours, &cv_pixel_buffer_omitted(), &bridge_only);
+    let coverable = wrapped.len() + missing.len();
+    let pct = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    assert!(
+        pct >= 100.0,
+        "CVPixelBuffer: {pct:.1}%; missing: {missing:?}"
+    );
+}
+
+fn cv_pixel_buffer_pool_omitted() -> BTreeSet<String> {
+    [
+        "CVPixelBufferPoolGetTypeID",
+        "CVPixelBufferPoolCreatePixelBufferWithAuxAttributes",
+        "CVPixelBufferPoolCreateWithMinimumBufferCount",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect()
+}
+
+#[test]
+fn cv_pixel_buffer_pool_api_coverage() {
+    let sdk = sdk_root();
+    let header =
+        sdk.join("System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferPool.h");
+    let apple = extract_c_function_names("CVPixelBufferPool", &[header]);
+    let ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
+        .into_iter()
+        .filter(|n| n.starts_with("cv_pixel_buffer_pool_"))
+        .map(|n| snake_to_pascal_with_prefix(&n, "CVPixelBufferPool", "cv_pixel_buffer_pool_"))
+        .collect();
+    let bridge_only: BTreeSet<String> = [
+        "CVPixelBufferPoolRetain",
+        "CVPixelBufferPoolRelease",
+        "CVPixelBufferPoolHash",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect();
+
+    assert!(report(
+        "CVPixelBufferPool",
+        &apple,
+        &ours,
+        &cv_pixel_buffer_pool_omitted(),
+        &bridge_only,
+    ));
+    let (wrapped, missing, _) = diff(&apple, &ours, &cv_pixel_buffer_pool_omitted(), &bridge_only);
+    let coverable = wrapped.len() + missing.len();
+    let pct = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    assert!(
+        pct >= 100.0,
+        "CVPixelBufferPool: {pct:.1}%; missing: {missing:?}"
     );
 }

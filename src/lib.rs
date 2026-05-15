@@ -48,6 +48,10 @@ pub mod dispatch_queue;
 #[cfg_attr(docsrs, doc(cfg(feature = "cm")))]
 pub mod cm;
 
+#[cfg(feature = "cv")]
+#[cfg_attr(docsrs, doc(cfg(feature = "cv")))]
+pub mod cv;
+
 pub use utils::FourCharCode;
 
 /// Common imports for users of this crate.
@@ -56,6 +60,8 @@ pub mod prelude {
     pub use crate::cg::{CGPoint, CGRect, CGSize};
     #[cfg(feature = "cm")]
     pub use crate::cm::{CMBlockBuffer, CMFormatDescription, CMSampleBuffer, CMTime};
+    #[cfg(feature = "cv")]
+    pub use crate::cv::{CVPixelBuffer, CVPixelBufferLockFlags};
     #[cfg(feature = "dispatch")]
     pub use crate::dispatch_queue::{DispatchQoS, DispatchQueue};
     #[cfg(feature = "iosurface")]

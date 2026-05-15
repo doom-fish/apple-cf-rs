@@ -12,8 +12,8 @@ Safe, dependency-free Rust bindings for Apple's shared **Core\*** frameworks —
 | [`iosurface`](src/iosurface) | IOSurface (zero-copy GPU buffers, multi-planar formats) | `iosurface` | ✅ |
 | [`dispatch_queue`](src/dispatch_queue.rs) | Grand Central Dispatch queues + QoS | `dispatch` | ✅ |
 | [`cm`](src/cm) | CoreMedia (`CMSampleBuffer`, `CMTime`, `CMBlockBuffer`, `CMFormatDescription`) | `cm` | ✅ |
+| [`cv`](src/cv) | CoreVideo (`CVPixelBuffer`, `CVPixelBufferPool`) | `cv` | ✅ |
 | [`utils`](src/utils) | Shared FFI helpers (always on) | — | ✅ |
-| `cv` | CoreVideo (`CVPixelBuffer`, `CVPixelBufferPool`) | `cv` | 🚧 planned |
 | `metal` | Metal (`MTLDevice`, `MTLTexture`) | `metal` | 🚧 planned |
 
 ## Why this crate exists

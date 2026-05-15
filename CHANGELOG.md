@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **`cv` module** — `CVPixelBuffer` and `CVPixelBufferPool` carved out of
+  `screencapturekit-rs`. Wraps the CoreVideo primitives that pair an
+  IOSurface with format metadata.
+- `cv` feature flag (on by default; implies `iosurface`).
+- `CoreVideoBridge` Swift target with the underlying `cv_pixel_buffer_*`
+  and `cv_pixel_buffer_pool_*` `@_cdecl` exports.
+- `CVPixelBuffer::create_with_io_surface(&IOSurface)` lets downstream
+  consumers (e.g. `vision-rs`) ingest live capture data without a PNG
+  round-trip.
+- Smoke test `04_cv_pixel_buffer` proves the IOSurface ↔ CVPixelBuffer
+  round-trip: write `[0xDE, 0xAD, 0xBE, 0xEF]` via IOSurface, read back
+  via the wrapped CVPixelBuffer, verify identical bytes and identical
+  IOSurface id on the round-trip.
+- API harness extended to CVPixelBuffer + CVPixelBufferPool — 7/7 tests
+  pass at 100% coverable.
+
+### Added
+
 - **`cm` module** — CoreMedia value types and reference-counted wrappers
   carved out of `screencapturekit-rs`:
   - `CMTime` / `CMSampleTimingInfo` (pure value types, 0 deps)
