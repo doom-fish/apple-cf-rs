@@ -48,6 +48,7 @@ all-frameworks = ["cg", "iosurface", "dispatch"]
 [dependencies]
 
 [dev-dependencies]
+regex-lite = "0.1"
 
 [package.metadata.docs.rs]
 all-features = true
@@ -60,4 +61,3 @@ maintenance = { status = "actively-developed" }
 
 [profile.release]
 debug = "full"
-strip = "none"

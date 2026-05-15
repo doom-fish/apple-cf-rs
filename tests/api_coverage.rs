@@ -1,0 +1,282 @@
+//! API-surface coverage harness.
+//!
+//! For each Apple framework wrapped by this crate, parses the SDK header(s)
+//! to enumerate the public C symbols, parses our `extern "C"` declarations
+//! in `src/ffi/mod.rs`, and reports the diff:
+//!
+//! * **Wrapped** — Apple symbol present in our `extern "C"` block.
+//! * **Missing** — Apple symbol absent from our wrapper. Either:
+//!     - intentionally omitted (listed in `INTENTIONALLY_OMITTED`), or
+//!     - a real coverage gap that fails this test.
+//! * **Unknown** — Symbol in our `extern "C"` block that doesn't exist in
+//!   the SDK header. Indicates a typo, a removed-API binding, or a
+//!   privately-exported symbol. Always fails the test.
+//!
+//! The harness is intentionally regex-based rather than libclang-based:
+//! Apple's header conventions are stable enough that a 30-line regex covers
+//! every framework we care about, and we avoid pulling in `clang-sys`.
+
+use std::collections::BTreeSet;
+use std::path::PathBuf;
+use std::process::Command;
+
+/// Resolve the active macOS SDK root via `xcrun --sdk macosx`.
+fn sdk_root() -> PathBuf {
+    let out = Command::new("xcrun")
+        .args(["--sdk", "macosx", "--show-sdk-path"])
+        .output()
+        .expect("xcrun must be available");
+    assert!(out.status.success(), "xcrun --show-sdk-path failed");
+    PathBuf::from(
+        String::from_utf8(out.stdout)
+            .expect("non-UTF-8 SDK path")
+            .trim()
+            .to_string(),
+    )
+}
+
+/// Extract every C function name matching `prefix*(` from the given header(s).
+fn extract_c_function_names(prefix: &str, header_paths: &[PathBuf]) -> BTreeSet<String> {
+    let pattern = format!(r"\b({prefix}[A-Za-z0-9_]+)\s*\(");
+    let re = regex_lite::Regex::new(&pattern).expect("regex compiles");
+    let mut names = BTreeSet::new();
+    for header in header_paths {
+        let contents = std::fs::read_to_string(header)
+            .unwrap_or_else(|e| panic!("can't read {}: {e}", header.display()));
+        for cap in re.captures_iter(&contents) {
+            names.insert(cap[1].to_string());
+        }
+    }
+    names
+}
+
+/// Extract every `pub fn <name>(` symbol from a Rust `extern "C" { ... }` block.
+fn extract_rust_extern_names(rust_source_path: &str) -> BTreeSet<String> {
+    let path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(rust_source_path);
+    let contents = std::fs::read_to_string(&path)
+        .unwrap_or_else(|e| panic!("can't read {}: {e}", path.display()));
+    let re = regex_lite::Regex::new(r"pub\s+fn\s+([A-Za-z0-9_]+)\s*\(").unwrap();
+    re.captures_iter(&contents)
+        .map(|c| c[1].to_string())
+        .collect()
+}
+
+/// Compare two symbol sets and return `(wrapped, missing, unknown)`.
+fn diff(
+    apple_symbols: &BTreeSet<String>,
+    our_symbols: &BTreeSet<String>,
+    intentionally_omitted: &BTreeSet<String>,
+    bridge_only: &BTreeSet<String>,
+) -> (BTreeSet<String>, BTreeSet<String>, BTreeSet<String>) {
+    let wrapped: BTreeSet<String> = apple_symbols.intersection(our_symbols).cloned().collect();
+    let missing: BTreeSet<String> = apple_symbols
+        .difference(our_symbols)
+        .filter(|s| !intentionally_omitted.contains(*s))
+        .cloned()
+        .collect();
+    let unknown: BTreeSet<String> = our_symbols
+        .difference(apple_symbols)
+        .filter(|s| !bridge_only.contains(*s))
+        .cloned()
+        .collect();
+    (wrapped, missing, unknown)
+}
+
+fn report(
+    framework: &str,
+    apple: &BTreeSet<String>,
+    ours: &BTreeSet<String>,
+    omitted: &BTreeSet<String>,
+    bridge_only: &BTreeSet<String>,
+) -> bool {
+    let (wrapped, missing, unknown) = diff(apple, ours, omitted, bridge_only);
+    let total_apple = apple.len();
+    let coverable = wrapped.len() + missing.len();
+    let pct_of_coverable = if coverable == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / coverable as f64 * 100.0
+    };
+    let pct_of_apple = if total_apple == 0 {
+        100.0
+    } else {
+        wrapped.len() as f64 / total_apple as f64 * 100.0
+    };
+
+    println!(
+        "\n=== {framework} API coverage ===\n\
+         Apple symbols:           {total_apple}\n\
+         Intentionally omitted:    {}\n\
+         Bridge-only (in our FFI): {}\n\
+         ----\n\
+         Coverable (Apple - omitted): {coverable}\n\
+         Wrapped:                  {} ({pct_of_coverable:.1}% of coverable, {pct_of_apple:.1}% of all Apple)\n\
+         Missing (gap):            {}\n\
+         Unknown (stale?):         {}",
+        omitted.len(),
+        bridge_only.len(),
+        wrapped.len(),
+        missing.len(),
+        unknown.len(),
+    );
+
+    if !missing.is_empty() {
+        println!("\n--- Missing (real coverage gaps; add to INTENTIONALLY_OMITTED if intentional) ---");
+        for s in &missing {
+            println!("  - {s}");
+        }
+    }
+    if !unknown.is_empty() {
+        println!(
+            "\n--- Unknown (in our extern \"C\" but NOT in Apple's headers — possible typo or stale binding) ---"
+        );
+        for s in &unknown {
+            println!("  - {s}");
+        }
+    }
+
+    // Test passes only when there are zero unknown symbols. Missing is
+    // informational; CI fails only via the per-crate threshold assertion below.
+    unknown.is_empty()
+}
+
+// ---- Framework-specific test cases ----
+
+/// Symbols filtered out from `IOSurfaceRef.h` because they:
+/// - are deprecated
+/// - are macOS-only IPC primitives we don't need (Mach ports)
+/// - return CFArrays/CFDictionaries that need higher-level wrappers
+///   (planned for a future minor release)
+fn iosurface_intentionally_omitted() -> BTreeSet<String> {
+    [
+        "IOSurfaceCreateMachPort",
+        "IOSurfaceLookupFromMachPort",
+        "IOSurfaceCreatePort",
+        "IOSurfaceLookupFromPort",
+        "IOSurfaceLookup",
+        "IOSurfaceGetTypeID",
+        "IOSurfaceCopyAllValues",
+        "IOSurfaceCopyValue",
+        "IOSurfaceSetValue",
+        "IOSurfaceSetValues",
+        "IOSurfaceRemoveValue",
+        "IOSurfaceRemoveAllValues",
+        "IOSurfaceGetPropertyAlignment",
+        "IOSurfaceGetPropertyMaximum",
+        "IOSurfaceAlignProperty",
+        "IOSurfaceAllowsPixelSizeCasting",
+        "IOSurfaceSetPurgeable",
+        "IOSurfaceCopyComponentName",
+        "IOSurfaceGetNameOfComponentOfPlane",
+        "IOSurfaceGetNumberOfComponentsOfPlane",
+        "IOSurfaceGetTypeOfComponentOfPlane",
+        "IOSurfaceGetSubsamplingOfComponentOfPlane",
+        "IOSurfaceGetBitDepthOfComponentOfPlane",
+        "IOSurfaceGetBitOffsetOfComponentOfPlane",
+        "IOSurfaceGetRangeOfComponentOfPlane",
+        // Per-plane element accessors — overlap with non-planar accessors
+        // and IOSurface returns 0 for single-plane formats anyway. Track
+        // separately if a multi-planar consumer needs them.
+        "IOSurfaceGetBytesPerElementOfPlane",
+        "IOSurfaceGetElementHeightOfPlane",
+        "IOSurfaceGetElementWidthOfPlane",
+        // Misc accessors not yet wrapped — file an issue if you need them.
+        "IOSurfaceGetSubsampling",
+        "IOSurfaceGetUseCount",
+        "IOSurfaceSetOwnershipIdentity",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect()
+}
+
+/// Symbols our Rust `extern "C"` block declares that AREN'T standalone
+/// Apple symbols — they're either Swift-bridge helpers or inherited from
+/// CoreFoundation (CFRetain/CFRelease/CFHash on a `CFTypeRef`).
+fn iosurface_bridge_only() -> BTreeSet<String> {
+    [
+        // Swift bridge wrapper — single Rust entry point that calls the
+        // multi-arg Apple `IOSurfaceCreate(CFDictionary)` form internally.
+        "IOSurfaceCreateWithProperties",
+        // CFTypeRef inheritance — IOSurfaceRef *is* a CFTypeRef, so
+        // CFRetain / CFRelease / CFHash apply but aren't declared in
+        // IOSurfaceRef.h. We re-export under IOSurface* names from the
+        // Swift bridge for ergonomics.
+        "IOSurfaceHash",
+        "IOSurfaceRetain",
+        "IOSurfaceRelease",
+    ]
+    .into_iter()
+    .map(String::from)
+    .collect()
+}
+
+#[test]
+fn iosurface_api_coverage() {
+    let sdk = sdk_root();
+    let header = sdk.join("System/Library/Frameworks/IOSurface.framework/Headers/IOSurfaceRef.h");
+    let apple = extract_c_function_names("IOSurface", &[header]);
+    let ours = extract_rust_extern_names("src/ffi/mod.rs");
+    // Filter our symbols to just the IOSurface namespace (we map snake_case
+    // `io_surface_*` to `IOSurface*`).
+    let ours_iosurface: BTreeSet<String> = ours
+        .iter()
+        .filter(|n| n.starts_with("io_surface_"))
+        .map(|n| snake_to_pascal_iosurface(n))
+        .collect();
+
+    assert!(
+        report(
+            "IOSurface",
+            &apple,
+            &ours_iosurface,
+            &iosurface_intentionally_omitted(),
+            &iosurface_bridge_only()
+        ),
+        "IOSurface coverage harness reported unknown symbols — see stdout"
+    );
+
+    let (wrapped, missing, _) = diff(
+        &apple,
+        &ours_iosurface,
+        &iosurface_intentionally_omitted(),
+        &iosurface_bridge_only(),
+    );
+    let coverable = wrapped.len() + missing.len();
+    let pct = wrapped.len() as f64 / coverable as f64 * 100.0;
+    assert!(
+        pct >= 100.0,
+        "IOSurface coverable API coverage regressed below 100% (now {pct:.1}%); missing: {missing:?}"
+    );
+}
+
+/// Convert `io_surface_get_width_of_plane` -> `IOSurfaceGetWidthOfPlane`.
+fn snake_to_pascal_iosurface(snake: &str) -> String {
+    // Manual map for IO + acronyms that get camelCased oddly.
+    let mut out = String::from("IOSurface");
+    for word in snake.trim_start_matches("io_surface_").split('_') {
+        if word == "id" {
+            out.push_str("ID");
+        } else {
+            let mut c = word.chars();
+            if let Some(first) = c.next() {
+                out.push(first.to_ascii_uppercase());
+                for ch in c {
+                    out.push(ch);
+                }
+            }
+        }
+    }
+    out
+}
+
+#[test]
+fn snake_to_pascal_helper_works() {
+    assert_eq!(snake_to_pascal_iosurface("io_surface_create"), "IOSurfaceCreate");
+    assert_eq!(snake_to_pascal_iosurface("io_surface_get_width"), "IOSurfaceGetWidth");
+    assert_eq!(
+        snake_to_pascal_iosurface("io_surface_get_width_of_plane"),
+        "IOSurfaceGetWidthOfPlane"
+    );
+    assert_eq!(snake_to_pascal_iosurface("io_surface_get_id"), "IOSurfaceGetID");
+}
