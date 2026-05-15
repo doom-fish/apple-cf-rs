@@ -1,6 +1,6 @@
 //! Smoke test for `apple_cf::cm` — encode an H.264 frame with videotoolbox
-//! and inspect the resulting CMSampleBuffer's metadata via the safe
-//! CMSampleBuffer wrapper.
+//! and inspect the resulting `CMSampleBuffer`'s metadata via the safe
+//! `CMSampleBuffer` wrapper.
 //!
 //! Verifies that the cm/ FFI declarations actually link against the Swift
 //! bridge and that retain/release accounting works end-to-end.

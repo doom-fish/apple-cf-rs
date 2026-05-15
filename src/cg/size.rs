@@ -42,6 +42,7 @@ impl CGSize {
     /// let size = CGSize::new(800.0, 600.0);
     /// assert_eq!(size.width, 800.0);
     /// ```
+    #[must_use] 
     pub const fn new(width: f64, height: f64) -> Self {
         Self { width, height }
     }
@@ -56,16 +57,19 @@ impl CGSize {
     /// let size = CGSize::zero();
     /// assert!(size.is_null());
     /// ```
+    #[must_use] 
     pub const fn zero() -> Self {
         Self::new(0.0, 0.0)
     }
 
     /// Get the area (width * height)
+    #[must_use] 
     pub const fn area(&self) -> f64 {
         self.width * self.height
     }
 
     /// Get the aspect ratio (width / height)
+    #[must_use] 
     pub fn aspect_ratio(&self) -> f64 {
         if self.height == 0.0 {
             0.0
@@ -77,15 +81,18 @@ impl CGSize {
     /// Check if this is a square (width == height)
     /// Note: Uses exact comparison, may not work well with computed values
     #[allow(clippy::float_cmp)]
+    #[must_use] 
     pub const fn is_square(&self) -> bool {
         self.width == self.height
     }
 
+    #[must_use] 
     pub fn is_empty(&self) -> bool {
         self.width <= 0.0 || self.height <= 0.0
     }
 
     /// Check if size is null (both dimensions are zero)
+    #[must_use] 
     pub const fn is_null(&self) -> bool {
         self.width == 0.0 && self.height == 0.0
     }

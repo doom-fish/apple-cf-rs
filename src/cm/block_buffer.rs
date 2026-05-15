@@ -20,7 +20,7 @@ use std::io;
 /// # Examples
 ///
 /// ```no_run
-/// use screencapturekit::cm::CMBlockBuffer;
+/// use apple_cf::cm::CMBlockBuffer;
 ///
 /// fn process_block_buffer(buffer: &CMBlockBuffer) {
 ///     // Check if there's any data
@@ -74,7 +74,7 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// let data = vec![1u8, 2, 3, 4, 5];
     /// let buffer = CMBlockBuffer::create(&data).expect("Failed to create buffer");
@@ -105,7 +105,7 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// let buffer = CMBlockBuffer::create_empty().expect("Failed to create empty buffer");
     /// assert!(buffer.is_empty());
@@ -132,12 +132,13 @@ impl CMBlockBuffer {
 
     /// # Safety
     /// The caller must ensure the pointer is a valid `CMBlockBuffer` pointer.
-    pub unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
+    pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
     /// Get the raw pointer to the block buffer
-    pub fn as_ptr(&self) -> *mut std::ffi::c_void {
+    #[must_use] 
+    pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
     }
 
@@ -146,13 +147,14 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```no_run
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn check_size(buffer: &CMBlockBuffer) {
     ///     let size = buffer.data_length();
     ///     println!("Buffer contains {} bytes", size);
     /// }
     /// ```
+    #[must_use] 
     pub fn data_length(&self) -> usize {
         unsafe { ffi::cm_block_buffer_get_data_length(self.0) }
     }
@@ -162,7 +164,7 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```no_run
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn process(buffer: &CMBlockBuffer) {
     ///     if buffer.is_empty() {
@@ -172,6 +174,7 @@ impl CMBlockBuffer {
     ///     // Process data...
     /// }
     /// ```
+    #[must_use] 
     pub fn is_empty(&self) -> bool {
         unsafe { ffi::cm_block_buffer_is_empty(self.0) }
     }
@@ -186,6 +189,7 @@ impl CMBlockBuffer {
     /// # Returns
     ///
     /// `true` if the specified range is contiguous in memory
+    #[must_use] 
     pub fn is_range_contiguous(&self, offset: usize, length: usize) -> bool {
         unsafe { ffi::cm_block_buffer_is_range_contiguous(self.0, offset, length) }
     }
@@ -207,7 +211,7 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```no_run
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn read_data(buffer: &CMBlockBuffer) {
     ///     if let Some((ptr, length)) = buffer.data_pointer(0) {
@@ -217,6 +221,7 @@ impl CMBlockBuffer {
     ///     }
     /// }
     /// ```
+    #[must_use] 
     pub fn data_pointer(&self, offset: usize) -> Option<(*const u8, usize)> {
         unsafe {
             let mut length_at_offset: usize = 0;
@@ -245,6 +250,7 @@ impl CMBlockBuffer {
     ///
     /// The caller must ensure that modifying the data is safe and that no other
     /// references to this data exist.
+    #[must_use] 
     pub unsafe fn data_pointer_mut(&self, offset: usize) -> Option<(*mut u8, usize)> {
         let mut length_at_offset: usize = 0;
         let mut total_length: usize = 0;
@@ -282,13 +288,14 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```no_run
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn extract_data(buffer: &CMBlockBuffer) -> Option<Vec<u8>> {
     ///     // Copy all data from the buffer
     ///     buffer.copy_data_bytes(0, buffer.data_length())
     /// }
     /// ```
+    #[must_use] 
     pub fn copy_data_bytes(&self, offset: usize, length: usize) -> Option<Vec<u8>> {
         if length == 0 {
             return Some(Vec::new());
@@ -330,7 +337,7 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```no_run
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn read_header(buffer: &CMBlockBuffer) -> Result<[u8; 4], i32> {
     ///     let mut header = [0u8; 4];
@@ -371,7 +378,7 @@ impl CMBlockBuffer {
     /// # Examples
     ///
     /// ```no_run
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn process_contiguous(buffer: &CMBlockBuffer) {
     ///     if let Some(data) = buffer.as_slice() {
@@ -384,6 +391,7 @@ impl CMBlockBuffer {
     ///     }
     /// }
     /// ```
+    #[must_use] 
     pub fn as_slice(&self) -> Option<&[u8]> {
         let len = self.data_length();
         if len == 0 {
@@ -418,7 +426,7 @@ impl CMBlockBuffer {
     ///
     /// ```no_run
     /// use std::io::{Read, Seek, SeekFrom};
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn read_data(buffer: &CMBlockBuffer) {
     ///     if let Some(mut cursor) = buffer.cursor() {
@@ -462,7 +470,7 @@ impl CMBlockBuffer {
     ///
     /// ```no_run
     /// use std::io::{Read, Seek, SeekFrom};
-    /// use screencapturekit::cm::CMBlockBuffer;
+    /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn read_contiguous(buffer: &CMBlockBuffer) {
     ///     // Try zero-copy first

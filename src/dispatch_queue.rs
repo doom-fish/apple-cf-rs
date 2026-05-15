@@ -94,6 +94,7 @@ impl DispatchQueue {
     /// # Panics
     ///
     /// Panics if the label contains null bytes or if queue creation fails
+    #[must_use] 
     pub fn new(label: &str, qos: DispatchQoS) -> Self {
         let c_label = CString::new(label).expect("Label contains null byte");
         let ptr = unsafe { crate::ffi::dispatch_queue_create(c_label.as_ptr(), qos as i32) };
@@ -104,7 +105,8 @@ impl DispatchQueue {
     /// Returns the raw pointer to the dispatch queue
     ///
     /// This is used internally for FFI calls (and for testing)
-    pub fn as_ptr(&self) -> *const c_void {
+    #[must_use] 
+    pub const fn as_ptr(&self) -> *const c_void {
         self.ptr
     }
 }

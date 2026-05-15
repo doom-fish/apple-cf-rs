@@ -16,6 +16,8 @@
 //! Apple's header conventions are stable enough that a 30-line regex covers
 //! every framework we care about, and we avoid pulling in `clang-sys`.
 
+#![allow(clippy::cast_precision_loss, clippy::iter_on_single_items)]
+
 use std::collections::BTreeSet;
 use std::path::PathBuf;
 use std::process::Command;
@@ -376,7 +378,7 @@ fn cm_sample_buffer_omitted() -> BTreeSet<String> {
 fn cm_sample_buffer_api_coverage() {
     let sdk = sdk_root();
     let header = sdk.join("System/Library/Frameworks/CoreMedia.framework/Headers/CMSampleBuffer.h");
-    let mut apple = extract_c_function_names("CMSampleBuffer", &[header.clone()]);
+    let mut apple = extract_c_function_names("CMSampleBuffer", std::slice::from_ref(&header));
     apple.append(&mut extract_c_function_names(
         "CMAudioSampleBuffer",
         &[header],
@@ -508,7 +510,7 @@ fn cm_format_description_api_coverage() {
     let sdk = sdk_root();
     let header =
         sdk.join("System/Library/Frameworks/CoreMedia.framework/Headers/CMFormatDescription.h");
-    let mut apple = extract_c_function_names("CMFormatDescription", &[header.clone()]);
+    let mut apple = extract_c_function_names("CMFormatDescription", std::slice::from_ref(&header));
     apple.append(&mut extract_c_function_names(
         "CMAudioFormatDescription",
         &[header],

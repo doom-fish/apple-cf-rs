@@ -1,16 +1,16 @@
-//! CoreMedia primitives — `CMTime`, `CMSampleBuffer`, `CMBlockBuffer`,
+//! `CoreMedia` primitives — `CMTime`, `CMSampleBuffer`, `CMBlockBuffer`,
 //! `CMFormatDescription`, audio buffer list bridging.
 //!
 //! These are the framework-agnostic value types and reference-counted
-//! wrappers shared by every Apple media framework. ScreenCaptureKit /
-//! VideoToolbox / AVFoundation / AVAssetWriter all speak `CMSampleBuffer`,
+//! wrappers shared by every Apple media framework. `ScreenCaptureKit` /
+//! `VideoToolbox` / `AVFoundation` / `AVAssetWriter` all speak `CMSampleBuffer`,
 //! and this module is the single source of truth for the safe Rust wrapper.
 //!
 //! The image-buffer accessor (`CMSampleBuffer::image_buffer`) is gated
-//! behind the `cv` feature so users who only need CMSampleBuffer for
-//! audio / encoded video don't pay the CoreVideo dependency cost.
-//! The SCStreamFrameInfo attachment readers stay in `screencapturekit-rs`
-//! since they're tied to ScreenCaptureKit's specific attachment keys.
+//! behind the `cv` feature so users who only need `CMSampleBuffer` for
+//! audio / encoded video don't pay the `CoreVideo` dependency cost.
+//! The `SCStreamFrameInfo` attachment readers stay in `screencapturekit-rs`
+//! since they're tied to `ScreenCaptureKit`'s specific attachment keys.
 
 pub mod audio;
 pub mod block_buffer;

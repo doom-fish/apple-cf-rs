@@ -11,11 +11,11 @@
 //! | Module | Framework | Feature flag |
 //! |---|---|---|
 //! | [`cg`] | CoreGraphics value types | `cg` |
-//! | [`iosurface`] | IOSurface (zero-copy GPU buffers) | `iosurface` |
+//! | [`iosurface`] | `IOSurface` (zero-copy GPU buffers) | `iosurface` |
 //! | [`dispatch_queue`] | Grand Central Dispatch | `dispatch` |
 //! | [`utils`] | shared FFI helpers (always on) | — |
 //!
-//! Future frameworks (CoreMedia, CoreVideo, Metal) will be added as separate
+//! Future frameworks (`CoreMedia`, `CoreVideo`, Metal) will be added as separate
 //! features so that downstream crates only pull in what they need.
 //!
 //! # Architecture

@@ -8,9 +8,9 @@
 //! * `acf_free_string` — heap-string deallocator used by every bridge fn that
 //!   returns an owned C string back to Rust.
 //! * `dispatch_queue_*` — Grand Central Dispatch queue lifetime + creation.
-//! * `io_surface_*` — IOSurface accessors and lifetime control.
+//! * `io_surface_*` — `IOSurface` accessors and lifetime control.
 //!
-//! Future framework additions (CoreMedia, CoreVideo, Metal, ...) extend this
+//! Future framework additions (`CoreMedia`, `CoreVideo`, Metal, ...) extend this
 //! module and gain matching `@_cdecl` exports under
 //! `swift-bridge/Sources/<Framework>Bridge/`.
 

@@ -1,4 +1,4 @@
-//! Smoke test: create a tiny IOSurface, write a pixel, read it back.
+//! Smoke test: create a tiny `IOSurface`, write a pixel, read it back.
 //!
 //! Run with: `cargo run --example 01_iosurface_smoke`
 

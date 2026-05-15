@@ -95,11 +95,12 @@ impl CVPixelBuffer {
 
     /// # Safety
     /// The caller must ensure the pointer is a valid `CVPixelBuffer` pointer.
-    pub unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
+    pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
-    pub fn as_ptr(&self) -> *mut std::ffi::c_void {
+    #[must_use] 
+    pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
     }
 
@@ -313,31 +314,37 @@ impl CVPixelBuffer {
     }
 
     /// Get the Core Foundation type ID for `CVPixelBuffer`
+    #[must_use] 
     pub fn type_id() -> usize {
         unsafe { ffi::cv_pixel_buffer_get_type_id() }
     }
 
     /// Get the data size of the pixel buffer
+    #[must_use] 
     pub fn data_size(&self) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_data_size(self.0) }
     }
 
     /// Check if the pixel buffer is planar
+    #[must_use] 
     pub fn is_planar(&self) -> bool {
         unsafe { ffi::cv_pixel_buffer_is_planar(self.0) }
     }
 
     /// Get the number of planes in the pixel buffer
+    #[must_use] 
     pub fn plane_count(&self) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_plane_count(self.0) }
     }
 
     /// Get the width of a specific plane
+    #[must_use] 
     pub fn width_of_plane(&self, plane_index: usize) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_width_of_plane(self.0, plane_index) }
     }
 
     /// Get the height of a specific plane
+    #[must_use] 
     pub fn height_of_plane(&self, plane_index: usize) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_height_of_plane(self.0, plane_index) }
     }
@@ -358,11 +365,13 @@ impl CVPixelBuffer {
     }
 
     /// Get the bytes per row of a specific plane
+    #[must_use] 
     pub fn bytes_per_row_of_plane(&self, plane_index: usize) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_bytes_per_row_of_plane(self.0, plane_index) }
     }
 
     /// Get the extended pixel information (left, right, top, bottom)
+    #[must_use] 
     pub fn extended_pixels(&self) -> (usize, usize, usize, usize) {
         unsafe {
             let mut left: usize = 0;
@@ -381,23 +390,28 @@ impl CVPixelBuffer {
     }
 
     /// Check if the pixel buffer is backed by an `IOSurface`
+    #[must_use] 
     pub fn is_backed_by_io_surface(&self) -> bool {
         self.io_surface().is_some()
     }
 
     /// Get the width of the pixel buffer in pixels
+    #[must_use] 
     pub fn width(&self) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_width(self.0) }
     }
 
+    #[must_use] 
     pub fn height(&self) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_height(self.0) }
     }
 
+    #[must_use] 
     pub fn pixel_format(&self) -> u32 {
         unsafe { ffi::cv_pixel_buffer_get_pixel_format_type(self.0) }
     }
 
+    #[must_use] 
     pub fn bytes_per_row(&self) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_bytes_per_row(self.0) }
     }
@@ -450,6 +464,7 @@ impl CVPixelBuffer {
     }
 
     /// Get the `IOSurface` backing this pixel buffer
+    #[must_use] 
     pub fn io_surface(&self) -> Option<IOSurface> {
         unsafe {
             let ptr = ffi::cv_pixel_buffer_get_io_surface(self.0);
@@ -518,6 +533,7 @@ pub struct CVPixelBufferLockGuard<'a> {
 
 impl CVPixelBufferLockGuard<'_> {
     /// Get the base address of the locked buffer
+    #[must_use] 
     pub fn base_address(&self) -> *const u8 {
         self.buffer
             .base_address_raw()
@@ -560,16 +576,19 @@ impl CVPixelBufferLockGuard<'_> {
     }
 
     /// Get the width of the buffer
+    #[must_use] 
     pub fn width(&self) -> usize {
         self.buffer.width()
     }
 
     /// Get the height of the buffer
+    #[must_use] 
     pub fn height(&self) -> usize {
         self.buffer.height()
     }
 
     /// Get bytes per row
+    #[must_use] 
     pub fn bytes_per_row(&self) -> usize {
         self.buffer.bytes_per_row()
     }
@@ -577,26 +596,31 @@ impl CVPixelBufferLockGuard<'_> {
     /// Get the data size in bytes
     ///
     /// This provides API parity with `IOSurfaceLockGuard::data_size()`.
+    #[must_use] 
     pub fn data_size(&self) -> usize {
         self.buffer.data_size()
     }
 
     /// Get the number of planes
+    #[must_use] 
     pub fn plane_count(&self) -> usize {
         self.buffer.plane_count()
     }
 
     /// Get the width of a specific plane
+    #[must_use] 
     pub fn width_of_plane(&self, plane_index: usize) -> usize {
         self.buffer.width_of_plane(plane_index)
     }
 
     /// Get the height of a specific plane
+    #[must_use] 
     pub fn height_of_plane(&self, plane_index: usize) -> usize {
         self.buffer.height_of_plane(plane_index)
     }
 
     /// Get the bytes per row of a specific plane
+    #[must_use] 
     pub fn bytes_per_row_of_plane(&self, plane_index: usize) -> usize {
         self.buffer.bytes_per_row_of_plane(plane_index)
     }
@@ -604,6 +628,7 @@ impl CVPixelBufferLockGuard<'_> {
     /// Get data as a byte slice
     ///
     /// The lock guard ensures the buffer is locked for the lifetime of the slice.
+    #[must_use] 
     pub fn as_slice(&self) -> &[u8] {
         let ptr = self.base_address();
         let len = self.buffer.height() * self.buffer.bytes_per_row();
@@ -632,6 +657,7 @@ impl CVPixelBufferLockGuard<'_> {
     /// Returns the data for a specific plane as a byte slice.
     ///
     /// Returns `None` if the plane index is out of bounds.
+    #[must_use] 
     pub fn plane_data(&self, plane_index: usize) -> Option<&[u8]> {
         let base = self.base_address_of_plane(plane_index)?;
         let height = self.buffer.height_of_plane(plane_index);
@@ -642,6 +668,7 @@ impl CVPixelBufferLockGuard<'_> {
     /// Get a specific row from a plane as a slice
     ///
     /// Returns `None` if the plane or row index is out of bounds.
+    #[must_use] 
     pub fn plane_row(&self, plane_index: usize, row_index: usize) -> Option<&[u8]> {
         if !self.buffer.is_planar() || plane_index >= self.buffer.plane_count() {
             return None;
@@ -660,6 +687,7 @@ impl CVPixelBufferLockGuard<'_> {
     /// Get a specific row as a slice
     ///
     /// Returns `None` if the row index is out of bounds.
+    #[must_use] 
     pub fn row(&self, row_index: usize) -> Option<&[u8]> {
         if row_index >= self.height() {
             return None;
@@ -697,11 +725,13 @@ impl CVPixelBufferLockGuard<'_> {
     ///     cursor.seek(SeekFrom::Start(offset as u64)).unwrap();
     /// }
     /// ```
+    #[must_use] 
     pub fn cursor(&self) -> io::Cursor<&[u8]> {
         io::Cursor::new(self.as_slice())
     }
 
     /// Get raw pointer to buffer data
+    #[must_use] 
     pub fn as_ptr(&self) -> *const u8 {
         self.base_address()
     }
@@ -714,16 +744,19 @@ impl CVPixelBufferLockGuard<'_> {
     }
 
     /// Check if this is a read-only lock
+    #[must_use] 
     pub const fn is_read_only(&self) -> bool {
         self.flags.is_read_only()
     }
 
     /// Get the lock options
+    #[must_use] 
     pub const fn options(&self) -> CVPixelBufferLockFlags {
         self.flags
     }
 
     /// Get the pixel format
+    #[must_use] 
     pub fn pixel_format(&self) -> u32 {
         self.buffer.pixel_format()
     }
@@ -817,11 +850,12 @@ impl CVPixelBufferPool {
 
     /// # Safety
     /// The caller must ensure the pointer is a valid `CVPixelBufferPool` pointer.
-    pub unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
+    pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
-    pub fn as_ptr(&self) -> *mut std::ffi::c_void {
+    #[must_use] 
+    pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
     }
 
@@ -890,6 +924,7 @@ impl CVPixelBufferPool {
     }
 
     /// Get the Core Foundation type ID for `CVPixelBufferPool`
+    #[must_use] 
     pub fn type_id() -> usize {
         unsafe { ffi::cv_pixel_buffer_pool_get_type_id() }
     }
@@ -914,6 +949,7 @@ impl CVPixelBufferPool {
     /// Try to create a pixel buffer from the pool without blocking
     ///
     /// Returns None if no buffers are available
+    #[must_use] 
     pub fn try_create_pixel_buffer(&self) -> Option<CVPixelBuffer> {
         self.create_pixel_buffer().ok()
     }
@@ -930,6 +966,7 @@ impl CVPixelBufferPool {
     /// Check if the pool is empty (no available buffers)
     ///
     /// Note: This is an approximation based on whether we can create a buffer
+    #[must_use] 
     pub fn is_empty(&self) -> bool {
         self.try_create_pixel_buffer().is_none()
     }
@@ -937,6 +974,7 @@ impl CVPixelBufferPool {
     /// Get the pool attributes
     ///
     /// Returns the raw pointer to the `CFDictionary` containing pool attributes
+    #[must_use] 
     pub fn attributes(&self) -> Option<*const std::ffi::c_void> {
         unsafe {
             let ptr = ffi::cv_pixel_buffer_pool_get_attributes(self.0);
@@ -951,6 +989,7 @@ impl CVPixelBufferPool {
     /// Get the pixel buffer attributes
     ///
     /// Returns the raw pointer to the `CFDictionary` containing pixel buffer attributes
+    #[must_use] 
     pub fn pixel_buffer_attributes(&self) -> Option<*const std::ffi::c_void> {
         unsafe {
             let ptr = ffi::cv_pixel_buffer_pool_get_pixel_buffer_attributes(self.0);

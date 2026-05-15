@@ -1,9 +1,9 @@
-//! Smoke test for `apple_cf::cv` — wrap an IOSurface in a CVPixelBuffer
+//! Smoke test for `apple_cf::cv` — wrap an `IOSurface` in a `CVPixelBuffer`
 //! and verify the round-trip plus pixel-buffer accessors.
 //!
 //! Run with: `cargo run --example 04_cv_pixel_buffer`
 
-use apple_cf::cv::{CVPixelBuffer, CVPixelBufferLockFlags};
+use apple_cf::cv::CVPixelBuffer;
 use apple_cf::iosurface::{IOSurface, IOSurfaceLockOptions};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

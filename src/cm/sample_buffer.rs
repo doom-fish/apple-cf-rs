@@ -1,9 +1,9 @@
-//! [`CMSampleBuffer`] — framework-agnostic safe wrapper around a CoreMedia
+//! [`CMSampleBuffer`] — framework-agnostic safe wrapper around a `CoreMedia`
 //! `CMSampleBufferRef`.
 //!
-//! This wrapper exposes the *generic* CMSampleBuffer surface that every
+//! This wrapper exposes the *generic* `CMSampleBuffer` surface that every
 //! consumer needs: presentation timestamp, format description, attached
-//! data buffer (CMBlockBuffer), sample count, validity. Framework-specific
+//! data buffer (`CMBlockBuffer`), sample count, validity. Framework-specific
 //! attachment readers (e.g. `SCStreamFrameInfo`'s frame status, content
 //! rect, dirty rects) live in the consuming crates so that, for example,
 //! `screencapturekit-rs`'s SC-attachment readers don't get pulled into
@@ -13,7 +13,7 @@ use super::{CMBlockBuffer, CMFormatDescription, CMTime};
 use crate::ffi;
 use std::fmt;
 
-/// Owned reference to a CoreMedia `CMSampleBufferRef`.
+/// Owned reference to a `CoreMedia` `CMSampleBufferRef`.
 ///
 /// Cloning increments the underlying refcount via `CFRetain`; dropping
 /// releases via `CFRelease`. The pointer is opaque to safe Rust — accessor
@@ -157,7 +157,7 @@ impl CMSampleBuffer {
     /// the sample buffer is data-bearing (as opposed to image-bearing).
     ///
     /// Video frames from `VTCompressionSession` always have a data buffer
-    /// (the encoded NAL units / ProRes frame data). Decoded video frames
+    /// (the encoded NAL units / `ProRes` frame data). Decoded video frames
     /// from a capture pipeline typically use an image buffer instead — see
     /// [`Self::image_buffer_ptr`].
     #[must_use]
@@ -191,7 +191,7 @@ impl CMSampleBuffer {
     /// turn this into a safe `CVPixelBuffer`.
     ///
     /// Returns NULL for sample buffers that don't carry an image buffer
-    /// (e.g. compressed video from VideoToolbox, audio samples).
+    /// (e.g. compressed video from `VideoToolbox`, audio samples).
     #[must_use]
     pub fn image_buffer_ptr(&self) -> *mut std::ffi::c_void {
         unsafe { ffi::cm_sample_buffer_get_image_buffer(self.0) }
