@@ -52,6 +52,10 @@ pub mod cm;
 #[cfg_attr(docsrs, doc(cfg(feature = "cv")))]
 pub mod cv;
 
+#[cfg(feature = "metal")]
+#[cfg_attr(docsrs, doc(cfg(feature = "metal")))]
+pub mod metal;
+
 pub use utils::FourCharCode;
 
 /// Common imports for users of this crate.
