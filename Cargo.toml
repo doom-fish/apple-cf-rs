@@ -1,6 +1,6 @@
 [package]
 name = "apple-cf"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/doom-fish/apple-cf-rs"
@@ -43,10 +43,16 @@ iosurface = []
 dispatch = []
 cm = []
 cv = ["iosurface"] # CVPixelBuffer's IOSurface accessor needs the IOSurface wrapper
-metal = ["iosurface"] # Opt-in: Metal interop adds IOSurface -> MTLTexture bridge.
 
 # Convenience aggregate.
-all-frameworks = ["cg", "iosurface", "dispatch", "cm", "cv", "metal"]
+all-frameworks = ["cg", "iosurface", "dispatch", "cm", "cv"]
+
+# Deprecated: the Metal interop module moved to its own crate,
+# `apple-metal`, in v0.1.2. This feature is now a no-op and will be
+# removed in a future major release. Switch your dependency to
+# `apple-metal = "0.1"` and use `apple_metal::{MetalDevice,
+# IOSurfaceMetalExt}` instead.
+metal = []
 
 [dependencies]
 
