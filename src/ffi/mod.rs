@@ -28,6 +28,9 @@ extern "C" {
     pub fn dispatch_queue_release(queue: *const c_void);
     pub fn dispatch_queue_retain(queue: *const c_void) -> *const c_void;
 
+    // ---- CoreGraphics bridge helpers ----
+    pub fn cgimage_save_png(image: *mut c_void, path: *const c_char) -> bool;
+
     // ---- IOSurface ----
     pub fn io_surface_create(
         width: usize,

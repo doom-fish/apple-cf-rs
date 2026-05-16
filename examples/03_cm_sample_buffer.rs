@@ -9,7 +9,7 @@
 //! (cm is in the default feature set, so just `cargo run --example 03_cm_sample_buffer`)
 
 use apple_cf::cm::CMSampleBuffer;
-use apple_cf::iosurface::{IOSurface, IOSurfaceLockOptions};
+use apple_cf_compat_04::iosurface::{IOSurface, IOSurfaceLockOptions};
 use videotoolbox::prelude::*;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -37,9 +37,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("Encoded {} bytes of H.264", frame.data.len());
 
-    // The encoder hands us back a raw CMSampleBufferRef (opaque). Wrap it
-    // in apple_cf::cm::CMSampleBuffer and inspect via the safe API. The
-    // wrapper retains-on-take so videotoolbox's EncodedFrame still owns
+    // videotoolbox 0.10 still depends on apple-cf 0.4.x, so this example
+    // allocates its IOSurface through the renamed compatibility dependency
+    // above. The encoder hands us back a raw CMSampleBufferRef (opaque);
+    // wrap that pointer in the current apple_cf::cm::CMSampleBuffer API.
+    // The wrapper retains-on-take so videotoolbox's EncodedFrame still owns
     // the original.
     let raw_ptr = frame.cm_sample_buffer_ptr();
     let sample_buffer = unsafe { CMSampleBuffer::from_raw_retained(raw_ptr) }

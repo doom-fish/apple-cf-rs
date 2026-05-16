@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0]
+
+### Added
+
+- **`cg::CGContext`** — safe Core Graphics bitmap-context wrapper with RGBA8 and grayscale constructors, byte accessors, path/rect drawing, transforms, graphics-state save/restore, image drawing, and bitmap snapshots.
+- `CGImage::save_png()` helper backed by the existing ImageIO Swift bridge so bitmap snapshots can be written to disk without extra dependencies.
+- Smoke example `05_cgcontext_smoke` proving a 64×64 offscreen `CGContext` can draw shapes, snapshot to `CGImage`, export a PNG, and verify pixel contents.
+
+### Changed
+
+- `cg` module docs now cover both value types and bitmap drawing wrappers.
+
 ### Added
 
 - **`cv` module** — `CVPixelBuffer` and `CVPixelBufferPool` carved out of

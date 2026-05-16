@@ -10,7 +10,7 @@
 //!
 //! | Module | Framework | Feature flag |
 //! |---|---|---|
-//! | [`cg`] | CoreGraphics value types | `cg` |
+//! | [`cg`] | CoreGraphics value types + bitmap drawing wrappers | `cg` |
 //! | [`iosurface`] | `IOSurface` (zero-copy GPU buffers) | `iosurface` |
 //! | [`dispatch_queue`] | Grand Central Dispatch | `dispatch` |
 //! | [`utils`] | shared FFI helpers (always on) | — |
@@ -21,16 +21,21 @@
 //! # Architecture
 //!
 //! ```text
-//! Safe Rust API (CGRect, IOSurface, DispatchQueue, ...)
-//!     └── extern "C" FFI declarations (src/ffi/mod.rs)
-//!             └── Swift @_cdecl bridge (swift-bridge/Sources/...)
+//! Safe Rust API (CGRect, CGContext, IOSurface, DispatchQueue, ...)
+//!     ├── direct Apple framework FFI (src/cg/mod.rs)
+//!     └── Swift @_cdecl bridge FFI (src/ffi/mod.rs)
+//!             └── swift-bridge/Sources/...
 //!                     └── Apple Core* frameworks
 //! ```
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+mod error;
+
 pub mod ffi;
 pub mod utils;
+
+pub use error::CFError;
 
 #[cfg(feature = "cg")]
 #[cfg_attr(docsrs, doc(cfg(feature = "cg")))]

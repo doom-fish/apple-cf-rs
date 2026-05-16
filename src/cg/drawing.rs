@@ -1,12 +1,19 @@
-//! `CGColorSpace`, `CGColor`, and `CGImage` — the most-used pieces
-//! of CoreGraphics' drawing surface.
+//! `CGColorSpace` and `CGImage` — the most-used Core Graphics drawing types.
 //!
 //! These are RAII wrappers around `CFType`-style references with
-//! retain/release. Use them with [`CGContext`] for offscreen
+//! retain/release. Use them with [`crate::cg::CGContext`] for offscreen
 //! rasterisation, or for converting between formats via `ImageIO`.
 
 use core::ffi::c_void;
 use core::ptr;
+use std::ffi::CString;
+use std::io;
+use std::os::unix::ffi::OsStrExt;
+use std::path::Path;
+
+use crate::ffi as bridge_ffi;
+
+use super::ffi as cg_ffi;
 
 /// Reference-counted `CGColorSpaceRef`.
 pub struct CGColorSpace {
@@ -19,7 +26,7 @@ unsafe impl Sync for CGColorSpace {}
 impl Drop for CGColorSpace {
     fn drop(&mut self) {
         if !self.ptr.is_null() {
-            unsafe { CGColorSpaceRelease(self.ptr) };
+            unsafe { cg_ffi::CGColorSpaceRelease(self.ptr) };
             self.ptr = ptr::null_mut();
         }
     }
@@ -27,17 +34,28 @@ impl Drop for CGColorSpace {
 
 impl Clone for CGColorSpace {
     fn clone(&self) -> Self {
-        let p = unsafe { CGColorSpaceRetain(self.ptr) };
+        let p = unsafe { cg_ffi::CGColorSpaceRetain(self.ptr) };
         Self { ptr: p }
     }
 }
 
 impl CGColorSpace {
+    /// Wrap a raw `CGColorSpaceRef` pointer — takes ownership without retaining.
+    ///
+    /// # Safety
+    ///
+    /// `ptr` must be a non-null `CGColorSpaceRef` whose ownership the caller is
+    /// transferring to the returned [`CGColorSpace`].
+    #[must_use]
+    pub const unsafe fn from_raw(ptr: *mut c_void) -> Self {
+        Self { ptr }
+    }
+
     /// Device RGB.
     #[must_use]
     pub fn device_rgb() -> Self {
         Self {
-            ptr: unsafe { CGColorSpaceCreateDeviceRGB() },
+            ptr: unsafe { cg_ffi::CGColorSpaceCreateDeviceRGB() },
         }
     }
 
@@ -45,7 +63,7 @@ impl CGColorSpace {
     #[must_use]
     pub fn device_gray() -> Self {
         Self {
-            ptr: unsafe { CGColorSpaceCreateDeviceGray() },
+            ptr: unsafe { cg_ffi::CGColorSpaceCreateDeviceGray() },
         }
     }
 
@@ -54,7 +72,7 @@ impl CGColorSpace {
     pub fn srgb() -> Self {
         unsafe {
             let n = CFStringCreateWithCStringLite(b"kCGColorSpaceSRGB\0".as_ptr());
-            let p = CGColorSpaceCreateWithName(n);
+            let p = cg_ffi::CGColorSpaceCreateWithName(n);
             CFReleaseLite(n);
             Self { ptr: p }
         }
@@ -65,7 +83,7 @@ impl CGColorSpace {
     pub fn display_p3() -> Self {
         unsafe {
             let n = CFStringCreateWithCStringLite(b"kCGColorSpaceDisplayP3\0".as_ptr());
-            let p = CGColorSpaceCreateWithName(n);
+            let p = cg_ffi::CGColorSpaceCreateWithName(n);
             CFReleaseLite(n);
             Self { ptr: p }
         }
@@ -74,7 +92,7 @@ impl CGColorSpace {
     /// Number of color components (`3` for RGB, `1` for gray, …).
     #[must_use]
     pub fn number_of_components(&self) -> usize {
-        unsafe { CGColorSpaceGetNumberOfComponents(self.ptr) }
+        unsafe { cg_ffi::CGColorSpaceGetNumberOfComponents(self.ptr) }
     }
 
     /// Raw `CGColorSpaceRef` pointer.
@@ -95,7 +113,7 @@ unsafe impl Sync for CGImage {}
 impl Drop for CGImage {
     fn drop(&mut self) {
         if !self.ptr.is_null() {
-            unsafe { CGImageRelease(self.ptr) };
+            unsafe { cg_ffi::CGImageRelease(self.ptr) };
             self.ptr = ptr::null_mut();
         }
     }
@@ -103,19 +121,18 @@ impl Drop for CGImage {
 
 impl Clone for CGImage {
     fn clone(&self) -> Self {
-        let p = unsafe { CGImageRetain(self.ptr) };
+        let p = unsafe { cg_ffi::CGImageRetain(self.ptr) };
         Self { ptr: p }
     }
 }
 
 impl CGImage {
-    /// Wrap a raw `CGImageRef` pointer — takes ownership without
-    /// retaining.
+    /// Wrap a raw `CGImageRef` pointer — takes ownership without retaining.
     ///
     /// # Safety
     ///
-    /// `ptr` must be a non-null `CGImageRef` whose ownership the
-    /// caller is transferring to the returned [`CGImage`].
+    /// `ptr` must be a non-null `CGImageRef` whose ownership the caller is
+    /// transferring to the returned [`CGImage`].
     #[must_use]
     pub const unsafe fn from_raw(ptr: *mut c_void) -> Self {
         Self { ptr }
@@ -124,31 +141,55 @@ impl CGImage {
     /// Width in pixels.
     #[must_use]
     pub fn width(&self) -> usize {
-        unsafe { CGImageGetWidth(self.ptr) }
+        unsafe { cg_ffi::CGImageGetWidth(self.ptr) }
     }
 
     /// Height in pixels.
     #[must_use]
     pub fn height(&self) -> usize {
-        unsafe { CGImageGetHeight(self.ptr) }
+        unsafe { cg_ffi::CGImageGetHeight(self.ptr) }
     }
 
     /// Bits per component (`8`, `16`, `32`).
     #[must_use]
     pub fn bits_per_component(&self) -> usize {
-        unsafe { CGImageGetBitsPerComponent(self.ptr) }
+        unsafe { cg_ffi::CGImageGetBitsPerComponent(self.ptr) }
     }
 
     /// Bits per pixel.
     #[must_use]
     pub fn bits_per_pixel(&self) -> usize {
-        unsafe { CGImageGetBitsPerPixel(self.ptr) }
+        unsafe { cg_ffi::CGImageGetBitsPerPixel(self.ptr) }
     }
 
     /// Bytes per row.
     #[must_use]
     pub fn bytes_per_row(&self) -> usize {
-        unsafe { CGImageGetBytesPerRow(self.ptr) }
+        unsafe { cg_ffi::CGImageGetBytesPerRow(self.ptr) }
+    }
+
+    /// Save the image as a PNG file.
+    ///
+    /// # Errors
+    ///
+    /// Returns an I/O error if the path contains an interior NUL byte or if
+    /// the underlying `ImageIO` export fails.
+    pub fn save_png<P: AsRef<Path>>(&self, path: P) -> io::Result<()> {
+        let c_path = CString::new(path.as_ref().as_os_str().as_bytes()).map_err(|_| {
+            io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "path contains an interior NUL byte",
+            )
+        })?;
+
+        if unsafe { bridge_ffi::cgimage_save_png(self.ptr, c_path.as_ptr()) } {
+            Ok(())
+        } else {
+            Err(io::Error::new(
+                io::ErrorKind::Other,
+                "cgimage_save_png returned false",
+            ))
+        }
     }
 
     /// Raw `CGImageRef` pointer.
@@ -158,23 +199,7 @@ impl CGImage {
     }
 }
 
-#[link(name = "ApplicationServices", kind = "framework")]
 extern "C" {
-    fn CGColorSpaceCreateDeviceRGB() -> *mut c_void;
-    fn CGColorSpaceCreateDeviceGray() -> *mut c_void;
-    fn CGColorSpaceCreateWithName(name: *const c_void) -> *mut c_void;
-    fn CGColorSpaceRelease(cs: *mut c_void);
-    fn CGColorSpaceRetain(cs: *mut c_void) -> *mut c_void;
-    fn CGColorSpaceGetNumberOfComponents(cs: *mut c_void) -> usize;
-
-    fn CGImageGetWidth(image: *mut c_void) -> usize;
-    fn CGImageGetHeight(image: *mut c_void) -> usize;
-    fn CGImageGetBitsPerComponent(image: *mut c_void) -> usize;
-    fn CGImageGetBitsPerPixel(image: *mut c_void) -> usize;
-    fn CGImageGetBytesPerRow(image: *mut c_void) -> usize;
-    fn CGImageRelease(image: *mut c_void);
-    fn CGImageRetain(image: *mut c_void) -> *mut c_void;
-
     fn CFStringCreateWithCString(
         allocator: *const c_void,
         bytes: *const u8,
