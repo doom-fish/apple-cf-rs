@@ -271,7 +271,7 @@ impl CMTime {
         }
     }
 
-    #[must_use] 
+    #[must_use]
     pub fn as_seconds(&self) -> Option<f64> {
         if self.is_valid() && self.timescale != 0 {
             // Precision loss is acceptable for time conversion to seconds
@@ -280,6 +280,79 @@ impl CMTime {
         } else {
             None
         }
+    }
+
+    /// Construct a `CMTime` from a floating-point number of seconds
+    /// with the requested `preferred_timescale` (typically `600` for
+    /// video, `48000` / `44100` for audio). Wraps `CMTimeMakeWithSeconds`.
+    #[must_use]
+    pub fn from_seconds(seconds: f64, preferred_timescale: i32) -> Self {
+        extern "C" {
+            fn CMTimeMakeWithSeconds(seconds: f64, preferredTimescale: i32) -> CMTime;
+        }
+        unsafe { CMTimeMakeWithSeconds(seconds, preferred_timescale) }
+    }
+
+    /// Add two times. Wraps `CMTimeAdd`. Returns
+    /// [`CMTime::INVALID`] if either operand is invalid.
+    #[must_use]
+    #[allow(clippy::should_implement_trait)]
+    pub fn add(self, other: Self) -> Self {
+        extern "C" {
+            fn CMTimeAdd(addend1: CMTime, addend2: CMTime) -> CMTime;
+        }
+        unsafe { CMTimeAdd(self, other) }
+    }
+
+    /// Subtract `other` from `self`. Wraps `CMTimeSubtract`.
+    #[must_use]
+    #[allow(clippy::should_implement_trait)]
+    pub fn subtract(self, other: Self) -> Self {
+        extern "C" {
+            fn CMTimeSubtract(minuend: CMTime, subtrahend: CMTime) -> CMTime;
+        }
+        unsafe { CMTimeSubtract(self, other) }
+    }
+
+    /// Multiply by an integer. Wraps `CMTimeMultiply`.
+    #[must_use]
+    pub fn multiply(self, multiplier: i32) -> Self {
+        extern "C" {
+            fn CMTimeMultiply(time: CMTime, multiplier: i32) -> CMTime;
+        }
+        unsafe { CMTimeMultiply(self, multiplier) }
+    }
+
+    /// Multiply by an `f64` factor. Wraps `CMTimeMultiplyByFloat64`.
+    #[must_use]
+    pub fn multiply_by_f64(self, factor: f64) -> Self {
+        extern "C" {
+            fn CMTimeMultiplyByFloat64(time: CMTime, multiplier: f64) -> CMTime;
+        }
+        unsafe { CMTimeMultiplyByFloat64(self, factor) }
+    }
+
+    /// Compare two times. Returns `Ordering::Less` if `self < other`,
+    /// `Greater` if `self > other`, `Equal` otherwise. Wraps
+    /// `CMTimeCompare`.
+    #[must_use]
+    pub fn compare(self, other: Self) -> core::cmp::Ordering {
+        extern "C" {
+            fn CMTimeCompare(time1: CMTime, time2: CMTime) -> i32;
+        }
+        let c = unsafe { CMTimeCompare(self, other) };
+        c.cmp(&0)
+    }
+
+    /// Convert this time to a different `new_timescale`, applying
+    /// Apple's default rounding (`kCMTimeRoundingMethod_Default`).
+    /// Wraps `CMTimeConvertScale`.
+    #[must_use]
+    pub fn convert_scale(self, new_timescale: i32) -> Self {
+        extern "C" {
+            fn CMTimeConvertScale(time: CMTime, newTimescale: i32, method: u32) -> CMTime;
+        }
+        unsafe { CMTimeConvertScale(self, new_timescale, 0) }
     }
 }
 
