@@ -2,17 +2,17 @@
 
 Safe, dependency-free Rust bindings for Apple's shared **Core\*** frameworks — the foundation underneath the [doom-fish](https://github.com/doom-fish) macOS Rust suite.
 
-> **Status:** `v0.6.0` covers the crate's ergonomic CoreFoundation + CoreMedia + CoreVideo + IOSurface + Dispatch surface. See [`COVERAGE.md`](COVERAGE.md) for the header audit and deferred legacy APIs.
+> **Status:** `v0.6.1` closes the highest-value audit gaps with `CFSet`, `CFPropertyList`, `CMMetadataFormatDescription`, and dispatch async/apply helpers. See [`COVERAGE.md`](COVERAGE.md) for the framework summary and [`COVERAGE_AUDIT.md`](COVERAGE_AUDIT.md) for the full symbol audit and deferred long tail.
 
 ## What's in the box
 
 | Module | Framework | Feature flag | Status |
 |---|---|---|---|
-| [`cf`](src/cf) | CoreFoundation values, collections, locale/formatter helpers, runtime primitives | — | ✅ |
+| [`cf`](src/cf) | CoreFoundation values, collections, property lists, locale/formatter helpers, runtime primitives | — | ✅ |
 | [`cg`](src/cg) | CoreGraphics value types + bitmap drawing wrappers | `cg` | ✅ |
 | [`iosurface`](src/iosurface) | IOSurface (zero-copy GPU buffers, multi-planar formats) | `iosurface` | ✅ |
-| [`dispatch_queue`](src/dispatch_queue.rs) | Dispatch queues, groups, semaphores, timer sources | `dispatch` | ✅ |
-| [`cm`](src/cm) | `CMTime`, `CMTimeRange`, `CMTimebase`, `CMSampleBuffer`, `CMBlockBuffer`, `CMFormatDescription` | `cm` | ✅ |
+| [`dispatch_queue`](src/dispatch_queue.rs) | Dispatch queues, async/apply helpers, groups, semaphores, timer sources | `dispatch` | ✅ |
+| [`cm`](src/cm) | `CMTime`, `CMTimeRange`, `CMTimebase`, `CMSampleBuffer`, `CMBlockBuffer`, `CMFormatDescription`, `CMMetadataFormatDescription` | `cm` | ✅ |
 | [`cv`](src/cv) | `CVBuffer`, `CVImageBuffer`, `CVPixelBuffer`, `CVPixelBufferPool`, `CVMetalTextureCache` | `cv` | ✅ |
 | [`utils`](src/utils) | Shared FFI helpers (always on) | — | ✅ |
 
@@ -37,14 +37,14 @@ Safe Rust wrappers
 
 ```toml
 [dependencies]
-apple-cf = "0.6"
+apple-cf = "0.6.1"
 ```
 
 Or pick only the frameworks you need:
 
 ```toml
 [dependencies]
-apple-cf = { version = ">=0.6, <0.7", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
+apple-cf = { version = ">=0.6.1, <0.7", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
 ```
 
 ## Quick examples
@@ -96,12 +96,14 @@ The Rust crate has **zero runtime dependencies**.
 
 ## Examples and tests
 
-This release ships 13 numbered examples plus dedicated smoke tests for:
+This release ships 14 numbered examples plus dedicated smoke tests for:
 
-- CoreFoundation primitives, collections, resources, runtime helpers
-- Dispatch groups / semaphores / timer sources
-- `CMTimeRange` / `CMTimebase`
-- `CVBuffer` / `CVImageBuffer` / `CVMetalTextureCache`
+- CoreFoundation primitives, collections, property lists, resources, runtime helpers
+- Dispatch queues, `dispatch_async`, `dispatch_async_and_wait`, `dispatch_apply`, groups, semaphores, and timer sources
+- `CMTimeRange`, `CMTimebase`, and `CMMetadataFormatDescription`
+- `CVBuffer`, `CVImageBuffer`, `CVPixelBuffer`, and `CVMetalTextureCache`
+
+`CVDisplayLink` remains out of scope and is tracked as exempt in the audit because Apple deprecated the family on macOS 15.
 
 ## License
 

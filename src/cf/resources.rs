@@ -267,7 +267,8 @@ impl CFCharacterSet {
     /// Create a character set from the characters contained in `string`.
     #[must_use]
     pub fn from_characters_in_string(string: &CFString) -> Self {
-        let ptr = unsafe { ffi::cf_character_set_create_with_characters_in_string(string.as_ptr()) };
+        let ptr =
+            unsafe { ffi::cf_character_set_create_with_characters_in_string(string.as_ptr()) };
         Self::from_raw(ptr).expect("CFCharacterSetCreateWithCharactersInString returned NULL")
     }
 
@@ -338,9 +339,8 @@ impl CFDateFormatter {
     /// Format a date into a localized string.
     #[must_use]
     pub fn format_date(&self, date: &CFDate) -> CFString {
-        let ptr = unsafe {
-            ffi::cf_date_formatter_create_string_with_date(self.as_ptr(), date.as_ptr())
-        };
+        let ptr =
+            unsafe { ffi::cf_date_formatter_create_string_with_date(self.as_ptr(), date.as_ptr()) };
         CFString::from_raw(ptr).expect("CFDateFormatterCreateStringWithDate returned NULL")
     }
 }

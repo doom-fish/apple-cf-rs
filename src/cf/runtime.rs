@@ -89,7 +89,12 @@ impl CFNotificationCenter {
     }
 
     /// Post a notification with an optional user-info dictionary.
-    pub fn post(&self, name: &CFString, user_info: Option<&CFDictionary>, deliver_immediately: bool) {
+    pub fn post(
+        &self,
+        name: &CFString,
+        user_info: Option<&CFDictionary>,
+        deliver_immediately: bool,
+    ) {
         unsafe {
             ffi::cf_notification_center_post_notification(
                 self.as_ptr(),
@@ -182,7 +187,8 @@ impl CFMessagePort {
     /// Create a local message port that echoes request data back as the reply.
     #[must_use]
     pub fn create_echo_local(name: &str) -> Self {
-        let name = std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
+        let name =
+            std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
         let ptr = unsafe { ffi::cf_message_port_create_echo_local(name.as_ptr()) };
         Self::from_raw(ptr).expect("CFMessagePortCreateLocal returned NULL")
     }
@@ -190,7 +196,8 @@ impl CFMessagePort {
     /// Connect to an existing remote message port.
     #[must_use]
     pub fn connect_remote(name: &str) -> Option<Self> {
-        let name = std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
+        let name =
+            std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
         let ptr = unsafe { ffi::cf_message_port_create_remote(name.as_ptr()) };
         Self::from_raw(ptr)
     }
@@ -241,7 +248,8 @@ impl CFStreamPair {
         let mut write = std::ptr::null_mut();
         unsafe { ffi::cf_stream_create_bound_pair(transfer_buffer_size, &mut read, &mut write) };
         Self {
-            read: CFReadStream::from_raw(read).expect("CFStreamCreateBoundPair read stream was NULL"),
+            read: CFReadStream::from_raw(read)
+                .expect("CFStreamCreateBoundPair read stream was NULL"),
             write: CFWriteStream::from_raw(write)
                 .expect("CFStreamCreateBoundPair write stream was NULL"),
         }
@@ -262,7 +270,8 @@ impl CFReadStream {
 
     /// Read bytes into `buffer`.
     pub fn read(&self, buffer: &mut [u8]) -> Result<usize, isize> {
-        let count = unsafe { ffi::cf_read_stream_read(self.as_ptr(), buffer.as_mut_ptr(), buffer.len()) };
+        let count =
+            unsafe { ffi::cf_read_stream_read(self.as_ptr(), buffer.as_mut_ptr(), buffer.len()) };
         if count < 0 {
             Err(count)
         } else {
@@ -285,7 +294,8 @@ impl CFWriteStream {
 
     /// Write bytes from `buffer`.
     pub fn write(&self, buffer: &[u8]) -> Result<usize, isize> {
-        let count = unsafe { ffi::cf_write_stream_write(self.as_ptr(), buffer.as_ptr(), buffer.len()) };
+        let count =
+            unsafe { ffi::cf_write_stream_write(self.as_ptr(), buffer.as_ptr(), buffer.len()) };
         if count < 0 {
             Err(count)
         } else {

@@ -10,7 +10,9 @@ fn cv_buffer_attachment_round_trip() {
 
     buffer.set_attachment(&key, &value, CVAttachmentMode::ShouldPropagate);
     assert!(buffer.attachment(&key).is_some());
-    assert!(buffer.attachments(CVAttachmentMode::ShouldPropagate).is_some());
+    assert!(buffer
+        .attachments(CVAttachmentMode::ShouldPropagate)
+        .is_some());
     buffer.remove_all_attachments();
     assert!(buffer.attachment(&key).is_none());
 }

@@ -1,6 +1,6 @@
 # COVERAGE
 
-Wave-C audit for `apple-cf` `v0.6.0` against the active macOS SDK headers (`MacOSX26.2.sdk`).
+Wave-C audit for `apple-cf` `v0.6.1` against the active macOS SDK headers (`MacOSX26.2.sdk`).
 
 Legend:
 
@@ -22,6 +22,8 @@ Legend:
 | `CFArray` | `CFArray.h` | ✅ | Typed construction, count, retained element access. |
 | `CFDictionary` / `CFDict` | `CFDictionary.h` | ✅ | Pair construction, lookup, keys/values arrays. |
 | `CFBag` | `CFBag.h` | ✅ | Construction, count, contains, multiplicity. |
+| `CFSet` | `CFSet.h` | ✅ | Immutable + mutable set wrappers with membership, retained element access, and apply helpers. |
+| `CFPropertyList` | `CFPropertyList.h` | ✅ | Parse, serialize, deep-copy, validate, and stream/write helpers. |
 | `CFTree` | `CFTree.h` | ✅ | Tree nodes with payload + child append/access. |
 | `CFAttributedString` | `CFAttributedString.h` | ✅ | Plain-string construction and string/length access. |
 | `CFURL` | `CFURL.h` | ✅ | URL-string and file-path constructors, string/path accessors. |
@@ -50,6 +52,7 @@ Legend:
 | `CMSampleBuffer` | `CMSampleBuffer.h` | ✅ | Existing safe wrapper + smoke example + coverage harness. |
 | `CMBlockBuffer` | `CMBlockBuffer.h` | ✅ | Existing wrapper + coverage harness. |
 | `CMFormatDescription` | `CMFormatDescription.h` | ✅ | Existing wrapper + coverage harness. |
+| `CMMetadataFormatDescription` | `CMFormatDescription.h` | ✅ | Metadata-specific constructors, extension constants, identifier/key lookup, and merge/extend helpers. |
 | `CMTime` | `CMTime.h` | ✅ | Existing value-type wrapper. |
 | `CMTimeRange` | `CMTimeRange.h` | ✅ | Added range helpers (`end`, containment, intersection, union). |
 | `CMTimebase` | `CMTimebase.h` | ✅ | Added timebase wrapper with master clock, time, rate. |
@@ -59,6 +62,7 @@ Legend:
 | `CVMetalTextureCache` | `CVMetalTextureCache.h` | ✅ | Added system-default cache creation + flush wrapper. |
 | `IOSurface` | `IOSurfaceRef.h` | ✅ | Existing wrapper + coverage harness. |
 | `DispatchQueue` | `dispatch/queue.h` | ✅ | Existing queue wrapper. |
+| `dispatch_async` / `dispatch_async_and_wait` / `dispatch_apply` | `dispatch/queue.h`, `dispatch/apply.h` | ✅ | Safe closure-based helpers bridged through Swift queue equivalents because the direct `_f` entry points are unavailable to Swift. |
 | `DispatchGroup` | `dispatch/group.h` | ✅ | Added group creation/enter/leave/wait wrapper. |
 | `DispatchSemaphore` | `dispatch/semaphore.h` | ✅ | Added semaphore create/signal/wait wrapper. |
 | `DispatchSource` | `dispatch/source.h` | ✅ | Timer-backed source wrapper with resume/cancel/fire-count. |
@@ -73,4 +77,5 @@ Legend:
 | IOSurface Mach-port / property-dictionary families | `IOSurfaceRef.h` | ⏭️ | Already intentionally omitted by the coverage harness as legacy / niche IPC surface. |
 | `CMSampleBufferCreate*`, `CMBlockBufferAppend*`, `CMFormatDescriptionCreate*` heavy constructors | `CMSampleBuffer.h`, `CMBlockBuffer.h`, `CMFormatDescription.h` | ⏭️ | Existing harness intentionally omits these constructor-heavy / legacy callback entry points; safe read-side coverage remains 100% for the crate surface. |
 | `CVMetalTextureCacheCreateTextureFromImage` | `CVMetalTextureCache.h` | ⏭️ | Requires public Metal texture wrapper surface that still lives in `apple-metal`; cache creation/flush covered here. |
+| `CVDisplayLink` family | `CVDisplayLink.h` | ⏭️ | Deprecated on macOS 15; tracked as exempt in `COVERAGE_AUDIT.md` instead of adding new wrappers. |
 | Non-timer dispatch sources | `dispatch/source.h` | ⏭️ | Timer source covered here; file, process, signal, mach, and vnode source flavors remain for a future dedicated surface. |

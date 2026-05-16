@@ -6,7 +6,11 @@ fn main() {
     let bytes = CFData::from_bytes([0xAA, 0xBB, 0xCC]);
     let now = CFDate::now();
     let uuid = CFUUID::new();
-    let error = CoreFoundationError::new(&CFString::new("com.doomfish.apple-cf.example"), 7, Some("demo error"));
+    let error = CoreFoundationError::new(
+        &CFString::new("com.doomfish.apple-cf.example"),
+        7,
+        Some("demo error"),
+    );
 
     assert_eq!(string.to_string(), "apple-cf");
     assert_eq!(number.to_i64(), Some(42));

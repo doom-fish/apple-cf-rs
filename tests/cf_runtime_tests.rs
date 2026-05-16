@@ -1,6 +1,6 @@
 use apple_cf::cf::{
-    CFFileDescriptor, CFMessagePort, CFNotificationCenter, CFRunLoop, CFRunLoopRunResult,
-    CFSocket, CFString, CFStreamPair, CFTimer,
+    CFFileDescriptor, CFMessagePort, CFNotificationCenter, CFRunLoop, CFRunLoopRunResult, CFSocket,
+    CFStreamPair, CFString, CFTimer,
 };
 use std::process;
 use std::time::Duration;
@@ -8,7 +8,11 @@ use std::time::Duration;
 #[test]
 fn cf_runtime_wrappers_work() {
     let center = CFNotificationCenter::local();
-    center.post(&CFString::new("com.doomfish.apple-cf.runtime-tests"), None, false);
+    center.post(
+        &CFString::new("com.doomfish.apple-cf.runtime-tests"),
+        None,
+        false,
+    );
 
     let timer = CFTimer::new(Duration::from_millis(10), false);
     let run_loop = CFRunLoop::current();
@@ -26,7 +30,9 @@ fn cf_runtime_wrappers_work() {
     let name = format!("com.doomfish.apple-cf.echo.test.{}", process::id());
     let _local = CFMessagePort::create_echo_local(&name);
     let remote = CFMessagePort::connect_remote(&name).expect("remote port");
-    let reply = remote.send_request(b"ping", Duration::from_millis(100)).expect("reply");
+    let reply = remote
+        .send_request(b"ping", Duration::from_millis(100))
+        .expect("reply");
     assert_eq!(reply, b"ping");
 
     let pair = CFStreamPair::new(1024);

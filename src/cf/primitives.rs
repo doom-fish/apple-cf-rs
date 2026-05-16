@@ -284,7 +284,9 @@ impl CFError {
     #[must_use]
     pub fn new(domain: &CFString, code: i64, description: Option<&str>) -> Self {
         let description = description.map(to_cstring);
-        let description_ptr = description.as_ref().map_or(std::ptr::null(), |s| s.as_ptr());
+        let description_ptr = description
+            .as_ref()
+            .map_or(std::ptr::null(), |s| s.as_ptr());
         let ptr = unsafe { ffi::cf_error_create(domain.as_ptr(), code, description_ptr) };
         Self::from_raw(ptr).expect("CFErrorCreate returned NULL")
     }

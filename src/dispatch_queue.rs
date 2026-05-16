@@ -17,13 +17,16 @@
 #![allow(clippy::missing_panics_doc)]
 
 //! ```rust,no_run
-//! use apple_cf::dispatch_queue::{DispatchQueue, DispatchQoS};
+//! use apple_cf::dispatch_queue::{dispatch_async_and_wait, DispatchQueue, DispatchQoS};
 //!
 //! // Create a high-priority queue for frame processing
 //! let queue = DispatchQueue::new("com.myapp.capture", DispatchQoS::UserInteractive);
-//! // Pass `queue.as_ptr()` into any framework that accepts a `dispatch_queue_t`.
+//! dispatch_async_and_wait(&queue, || {
+//!     // do queue-bound work here
+//! });
 //! ```
 
+use crate::utils::panic_safe;
 use std::ffi::{c_void, CString};
 use std::fmt;
 use std::time::Duration;
@@ -112,6 +115,11 @@ impl DispatchQueue {
     pub const fn as_ptr(&self) -> *const c_void {
         self.ptr
     }
+
+    #[must_use]
+    const fn as_mut_ptr(&self) -> *mut c_void {
+        self.ptr.cast_mut()
+    }
 }
 
 impl Clone for DispatchQueue {
@@ -147,7 +155,95 @@ impl fmt::Display for DispatchQueue {
 }
 
 fn timeout_ms(timeout: Option<Duration>) -> i64 {
-    timeout.map_or(-1, |duration| i64::try_from(duration.as_millis()).unwrap_or(i64::MAX))
+    timeout.map_or(-1, |duration| {
+        i64::try_from(duration.as_millis()).unwrap_or(i64::MAX)
+    })
+}
+
+struct DispatchOnceTask {
+    site: &'static str,
+    work: Option<Box<dyn FnOnce() + Send + 'static>>,
+}
+
+struct DispatchApplyTask {
+    work: Box<dyn Fn(usize) + Send + Sync + 'static>,
+}
+
+extern "C" fn dispatch_once_trampoline(context: *mut c_void) {
+    if context.is_null() {
+        return;
+    }
+    let mut task = unsafe { Box::from_raw(context.cast::<DispatchOnceTask>()) };
+    if let Some(work) = task.work.take() {
+        panic_safe::catch_user_panic(task.site, work);
+    }
+}
+
+extern "C" fn dispatch_apply_trampoline(iteration: usize, context: *mut c_void) {
+    if context.is_null() {
+        return;
+    }
+    let task = unsafe { &*context.cast::<DispatchApplyTask>() };
+    panic_safe::catch_user_panic("dispatch_apply", || (task.work)(iteration));
+}
+
+/// Submit `work` to `queue` and return immediately.
+pub fn dispatch_async<F>(queue: &DispatchQueue, work: F)
+where
+    F: FnOnce() + Send + 'static,
+{
+    let task = Box::new(DispatchOnceTask {
+        site: "dispatch_async",
+        work: Some(Box::new(work)),
+    });
+    unsafe {
+        crate::ffi::acf_dispatch_async_f(
+            queue.as_mut_ptr(),
+            Box::into_raw(task).cast(),
+            dispatch_once_trampoline,
+        );
+    }
+}
+
+/// Submit `work` to `queue` and wait until it finishes.
+pub fn dispatch_async_and_wait<F>(queue: &DispatchQueue, work: F)
+where
+    F: FnOnce() + Send + 'static,
+{
+    let task = Box::new(DispatchOnceTask {
+        site: "dispatch_async_and_wait",
+        work: Some(Box::new(work)),
+    });
+    unsafe {
+        crate::ffi::acf_dispatch_async_and_wait_f(
+            queue.as_mut_ptr(),
+            Box::into_raw(task).cast(),
+            dispatch_once_trampoline,
+        );
+    }
+}
+
+/// Run `work` for every `iteration` on `queue`, waiting for all iterations to finish.
+pub fn dispatch_apply<F>(iterations: usize, queue: &DispatchQueue, work: F)
+where
+    F: Fn(usize) + Send + Sync + 'static,
+{
+    if iterations == 0 {
+        return;
+    }
+    let task = Box::new(DispatchApplyTask {
+        work: Box::new(work),
+    });
+    let raw = Box::into_raw(task);
+    unsafe {
+        crate::ffi::acf_dispatch_apply_f(
+            iterations,
+            queue.as_mut_ptr(),
+            raw.cast(),
+            dispatch_apply_trampoline,
+        );
+        drop(Box::from_raw(raw));
+    }
 }
 
 /// Wrapper around `DispatchGroup`.
@@ -155,6 +251,9 @@ fn timeout_ms(timeout: Option<Duration>) -> i64 {
 pub struct DispatchGroup {
     ptr: *mut c_void,
 }
+
+unsafe impl Send for DispatchGroup {}
+unsafe impl Sync for DispatchGroup {}
 
 impl DispatchGroup {
     /// Create a new empty group.
@@ -204,7 +303,9 @@ impl Drop for DispatchGroup {
 
 impl fmt::Debug for DispatchGroup {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.debug_struct("DispatchGroup").field("ptr", &self.ptr).finish()
+        f.debug_struct("DispatchGroup")
+            .field("ptr", &self.ptr)
+            .finish()
     }
 }
 
@@ -213,6 +314,9 @@ impl fmt::Debug for DispatchGroup {
 pub struct DispatchSemaphore {
     ptr: *mut c_void,
 }
+
+unsafe impl Send for DispatchSemaphore {}
+unsafe impl Sync for DispatchSemaphore {}
 
 impl DispatchSemaphore {
     /// Create a semaphore with an initial signal count.
@@ -263,6 +367,9 @@ impl fmt::Debug for DispatchSemaphore {
 pub struct DispatchSource {
     ptr: *mut c_void,
 }
+
+unsafe impl Send for DispatchSource {}
+unsafe impl Sync for DispatchSource {}
 
 impl DispatchSource {
     /// Create a repeating timer source.

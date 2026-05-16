@@ -354,3 +354,202 @@ public func cm_format_description_get_audio_format_flags(
     guard let asbd = CMAudioFormatDescriptionGetStreamBasicDescription(fd) else { return 0 }
     return asbd.pointee.mFormatFlags
 }
+
+private func acfRetainedCFStringConstant(_ value: CFString) -> UnsafeMutableRawPointer {
+    Unmanaged.passRetained(value).toOpaque()
+}
+
+// MARK: - CMMetadataFormatDescription
+
+@_cdecl("cm_metadata_format_description_create_with_keys")
+public func cm_metadata_format_description_create_with_keys(
+    _ metadataType: UInt32,
+    _ keys: UnsafeMutableRawPointer?,
+    _ formatDescriptionOut: UnsafeMutablePointer<UnsafeMutableRawPointer?>
+) -> Int32 {
+    let keys = keys.map { Unmanaged<CFArray>.fromOpaque($0).takeUnretainedValue() }
+    var formatDescription: CMFormatDescription?
+    let status = CMMetadataFormatDescriptionCreateWithKeys(
+        allocator: nil,
+        metadataType: metadataType,
+        keys: keys,
+        formatDescriptionOut: &formatDescription
+    )
+    if status == noErr, let formatDescription {
+        formatDescriptionOut.pointee = Unmanaged.passRetained(formatDescription).toOpaque()
+    } else {
+        formatDescriptionOut.pointee = nil
+    }
+    return status
+}
+
+@_cdecl("cm_metadata_format_description_create_with_metadata_specifications")
+public func cm_metadata_format_description_create_with_metadata_specifications(
+    _ metadataType: UInt32,
+    _ metadataSpecifications: UnsafeMutableRawPointer,
+    _ formatDescriptionOut: UnsafeMutablePointer<UnsafeMutableRawPointer?>
+) -> Int32 {
+    let metadataSpecifications = Unmanaged<CFArray>.fromOpaque(metadataSpecifications).takeUnretainedValue()
+    var formatDescription: CMFormatDescription?
+    let status = CMMetadataFormatDescriptionCreateWithMetadataSpecifications(
+        allocator: nil,
+        metadataType: metadataType,
+        metadataSpecifications: metadataSpecifications,
+        formatDescriptionOut: &formatDescription
+    )
+    if status == noErr, let formatDescription {
+        formatDescriptionOut.pointee = Unmanaged.passRetained(formatDescription).toOpaque()
+    } else {
+        formatDescriptionOut.pointee = nil
+    }
+    return status
+}
+
+@_cdecl("cm_metadata_format_description_create_with_description_and_metadata_specifications")
+public func cm_metadata_format_description_create_with_description_and_metadata_specifications(
+    _ sourceDescription: UnsafeMutableRawPointer,
+    _ metadataSpecifications: UnsafeMutableRawPointer,
+    _ formatDescriptionOut: UnsafeMutablePointer<UnsafeMutableRawPointer?>
+) -> Int32 {
+    let sourceDescription = Unmanaged<CMFormatDescription>.fromOpaque(sourceDescription).takeUnretainedValue()
+    let metadataSpecifications = Unmanaged<CFArray>.fromOpaque(metadataSpecifications).takeUnretainedValue()
+    var formatDescription: CMFormatDescription?
+    let status = CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications(
+        allocator: nil,
+        sourceDescription: sourceDescription,
+        metadataSpecifications: metadataSpecifications,
+        formatDescriptionOut: &formatDescription
+    )
+    if status == noErr, let formatDescription {
+        formatDescriptionOut.pointee = Unmanaged.passRetained(formatDescription).toOpaque()
+    } else {
+        formatDescriptionOut.pointee = nil
+    }
+    return status
+}
+
+@_cdecl("cm_metadata_format_description_create_by_merging_descriptions")
+public func cm_metadata_format_description_create_by_merging_descriptions(
+    _ sourceDescription: UnsafeMutableRawPointer,
+    _ otherSourceDescription: UnsafeMutableRawPointer,
+    _ formatDescriptionOut: UnsafeMutablePointer<UnsafeMutableRawPointer?>
+) -> Int32 {
+    let sourceDescription = Unmanaged<CMFormatDescription>.fromOpaque(sourceDescription).takeUnretainedValue()
+    let otherSourceDescription = Unmanaged<CMFormatDescription>.fromOpaque(otherSourceDescription).takeUnretainedValue()
+    var formatDescription: CMFormatDescription?
+    let status = CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(
+        allocator: nil,
+        sourceDescription: sourceDescription,
+        otherSourceDescription: otherSourceDescription,
+        formatDescriptionOut: &formatDescription
+    )
+    if status == noErr, let formatDescription {
+        formatDescriptionOut.pointee = Unmanaged.passRetained(formatDescription).toOpaque()
+    } else {
+        formatDescriptionOut.pointee = nil
+    }
+    return status
+}
+
+@_cdecl("cm_metadata_format_description_get_identifiers")
+public func cm_metadata_format_description_get_identifiers(
+    _ formatDescription: UnsafeMutableRawPointer
+) -> UnsafeMutableRawPointer? {
+    let formatDescription = Unmanaged<CMFormatDescription>.fromOpaque(formatDescription).takeUnretainedValue()
+    guard let identifiers = CMMetadataFormatDescriptionGetIdentifiers(formatDescription) else {
+        return nil
+    }
+    return Unmanaged.passRetained(identifiers).toOpaque()
+}
+
+@_cdecl("cm_metadata_format_description_get_key_with_local_id")
+public func cm_metadata_format_description_get_key_with_local_id(
+    _ formatDescription: UnsafeMutableRawPointer,
+    _ localID: UInt32
+) -> UnsafeMutableRawPointer? {
+    let formatDescription = Unmanaged<CMFormatDescription>.fromOpaque(formatDescription).takeUnretainedValue()
+    guard let key = CMMetadataFormatDescriptionGetKeyWithLocalID(formatDescription, localKeyID: localID) else {
+        return nil
+    }
+    return Unmanaged.passRetained(key).toOpaque()
+}
+
+@_cdecl("cm_metadata_format_description_extension_key_metadata_key_table")
+public func cm_metadata_format_description_extension_key_metadata_key_table() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMFormatDescriptionExtensionKey_MetadataKeyTable)
+}
+
+@_cdecl("cm_metadata_format_description_key_conforming_data_types")
+public func cm_metadata_format_description_key_conforming_data_types() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_ConformingDataTypes)
+}
+
+@_cdecl("cm_metadata_format_description_key_data_type")
+public func cm_metadata_format_description_key_data_type() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_DataType)
+}
+
+@_cdecl("cm_metadata_format_description_key_data_type_namespace")
+public func cm_metadata_format_description_key_data_type_namespace() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_DataTypeNamespace)
+}
+
+@_cdecl("cm_metadata_format_description_key_language_tag")
+public func cm_metadata_format_description_key_language_tag() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_LanguageTag)
+}
+
+@_cdecl("cm_metadata_format_description_key_local_id")
+public func cm_metadata_format_description_key_local_id() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_LocalID)
+}
+
+@_cdecl("cm_metadata_format_description_key_namespace")
+public func cm_metadata_format_description_key_namespace() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_Namespace)
+}
+
+@_cdecl("cm_metadata_format_description_key_setup_data")
+public func cm_metadata_format_description_key_setup_data() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_SetupData)
+}
+
+@_cdecl("cm_metadata_format_description_key_structural_dependency")
+public func cm_metadata_format_description_key_structural_dependency() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_StructuralDependency)
+}
+
+@_cdecl("cm_metadata_format_description_key_value")
+public func cm_metadata_format_description_key_value() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionKey_Value)
+}
+
+@_cdecl("cm_metadata_format_description_metadata_specification_key_data_type")
+public func cm_metadata_format_description_metadata_specification_key_data_type() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType)
+}
+
+@_cdecl("cm_metadata_format_description_metadata_specification_key_extended_language_tag")
+public func cm_metadata_format_description_metadata_specification_key_extended_language_tag() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag)
+}
+
+@_cdecl("cm_metadata_format_description_metadata_specification_key_identifier")
+public func cm_metadata_format_description_metadata_specification_key_identifier() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier)
+}
+
+@_cdecl("cm_metadata_format_description_metadata_specification_key_setup_data")
+public func cm_metadata_format_description_metadata_specification_key_setup_data() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData)
+}
+
+@_cdecl("cm_metadata_format_description_metadata_specification_key_structural_dependency")
+public func cm_metadata_format_description_metadata_specification_key_structural_dependency() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency)
+}
+
+@_cdecl("cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag")
+public func cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag() -> UnsafeMutableRawPointer {
+    acfRetainedCFStringConstant(kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag)
+}

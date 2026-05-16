@@ -2,8 +2,8 @@
 
 #![allow(dead_code)]
 
-use crate::ffi;
-use std::fmt;
+use crate::{cf::{CFArray, CFDictionary}, ffi};
+use std::{fmt, ops::Deref};
 
 pub struct CMFormatDescription(*mut std::ffi::c_void);
 
@@ -73,6 +73,70 @@ pub mod codec_types {
     pub const OPUS: FourCharCode = FourCharCode::from_bytes(*b"opus");
     /// FLAC ('flac')
     pub const FLAC: FourCharCode = FourCharCode::from_bytes(*b"flac");
+}
+
+/// Metadata format subtypes (`CMMetadataFormatType`).
+pub mod metadata_format_types {
+    use crate::utils::four_char_code::FourCharCode;
+
+    /// `SHOUTCast` / `ICY` metadata ('icy ').
+    pub const ICY: FourCharCode = FourCharCode::from_bytes(*b"icy ");
+    /// ID3 metadata ('id3 ').
+    pub const ID3: FourCharCode = FourCharCode::from_bytes(*b"id3 ");
+    /// Boxed metadata ('mebx').
+    pub const BOXED: FourCharCode = FourCharCode::from_bytes(*b"mebx");
+    /// Event message metadata ('emsg').
+    pub const EMSG: FourCharCode = FourCharCode::from_bytes(*b"emsg");
+}
+
+macro_rules! cfstring_constant_fn {
+    ($vis:vis fn $name:ident => $ffi_name:ident) => {
+        #[must_use]
+        $vis fn $name() -> CFString {
+            let ptr = unsafe { ffi::$ffi_name() };
+            CFString::from_raw(ptr).expect(concat!(stringify!($ffi_name), " returned NULL"))
+        }
+    };
+}
+
+/// `CMFormatDescription` extension keys related to metadata descriptions.
+pub mod format_description_extension_keys {
+    use crate::{cf::CFString, ffi};
+
+    cfstring_constant_fn!(pub fn metadata_key_table => cm_metadata_format_description_extension_key_metadata_key_table);
+}
+
+/// `kCMMetadataFormatDescriptionKey_*` constants.
+pub mod metadata_description_keys {
+    use crate::{cf::CFString, ffi};
+
+    cfstring_constant_fn!(pub fn conforming_data_types => cm_metadata_format_description_key_conforming_data_types);
+    cfstring_constant_fn!(pub fn data_type => cm_metadata_format_description_key_data_type);
+    cfstring_constant_fn!(pub fn data_type_namespace => cm_metadata_format_description_key_data_type_namespace);
+    cfstring_constant_fn!(pub fn language_tag => cm_metadata_format_description_key_language_tag);
+    cfstring_constant_fn!(pub fn local_id => cm_metadata_format_description_key_local_id);
+    cfstring_constant_fn!(pub fn namespace => cm_metadata_format_description_key_namespace);
+    cfstring_constant_fn!(pub fn setup_data => cm_metadata_format_description_key_setup_data);
+    cfstring_constant_fn!(pub fn structural_dependency => cm_metadata_format_description_key_structural_dependency);
+    cfstring_constant_fn!(pub fn value => cm_metadata_format_description_key_value);
+}
+
+/// `kCMMetadataFormatDescriptionMetadataSpecificationKey_*` constants.
+pub mod metadata_specification_keys {
+    use crate::{cf::CFString, ffi};
+
+    cfstring_constant_fn!(pub fn data_type => cm_metadata_format_description_metadata_specification_key_data_type);
+    cfstring_constant_fn!(pub fn extended_language_tag => cm_metadata_format_description_metadata_specification_key_extended_language_tag);
+    cfstring_constant_fn!(pub fn identifier => cm_metadata_format_description_metadata_specification_key_identifier);
+    cfstring_constant_fn!(pub fn setup_data => cm_metadata_format_description_metadata_specification_key_setup_data);
+    cfstring_constant_fn!(pub fn structural_dependency => cm_metadata_format_description_metadata_specification_key_structural_dependency);
+}
+
+/// `kCMMetadataFormatDescription_StructuralDependencyKey_*` constants.
+pub mod metadata_structural_dependency_keys {
+    use crate::{cf::CFString, ffi};
+
+    cfstring_constant_fn!(pub fn dependency_is_invalid_flag => cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag);
 }
 
 impl CMFormatDescription {
@@ -353,5 +417,190 @@ impl fmt::Display for CMFormatDescription {
             self.media_type_raw(),
             self.media_subtype_raw()
         )
+    }
+}
+
+/// Metadata-specific wrapper around `CMFormatDescriptionRef`.
+#[derive(Clone, PartialEq, Eq, Hash)]
+pub struct CMMetadataFormatDescription(CMFormatDescription);
+
+impl CMMetadataFormatDescription {
+    /// Adopt a retained raw metadata format-description pointer.
+    #[must_use]
+    pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
+        CMFormatDescription::from_raw(ptr).map(Self)
+    }
+
+    /// # Safety
+    /// The caller must ensure the pointer is a valid metadata `CMFormatDescription` pointer.
+    pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
+        Self(CMFormatDescription::from_ptr(ptr))
+    }
+
+    #[must_use]
+    pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
+        self.0.as_ptr()
+    }
+
+    /// Access the metadata description as a plain `CMFormatDescription`.
+    #[must_use]
+    pub const fn as_format_description(&self) -> &CMFormatDescription {
+        &self.0
+    }
+
+    /// Consume the metadata wrapper and return the underlying `CMFormatDescription`.
+    #[must_use]
+    pub fn into_format_description(self) -> CMFormatDescription {
+        self.0
+    }
+
+    /// Create a metadata format description from an optional array of key dictionaries.
+    ///
+    /// # Errors
+    ///
+    /// Returns the `OSStatus` reported by Core Media if the description could not be created.
+    pub fn create_with_keys(
+        metadata_type: crate::utils::four_char_code::FourCharCode,
+        keys: Option<&CFArray>,
+    ) -> Result<Self, i32> {
+        let mut ptr = std::ptr::null_mut();
+        let status = unsafe {
+            ffi::cm_metadata_format_description_create_with_keys(
+                metadata_type.into(),
+                keys.map_or(std::ptr::null_mut(), CFArray::as_ptr),
+                &mut ptr,
+            )
+        };
+        if status == 0 && !ptr.is_null() {
+            Self::from_raw(ptr).ok_or(status)
+        } else {
+            Err(status)
+        }
+    }
+
+    /// Create a boxed metadata format description from metadata specification dictionaries.
+    ///
+    /// # Errors
+    ///
+    /// Returns the `OSStatus` reported by Core Media if the description could not be created.
+    pub fn create_with_metadata_specifications(
+        metadata_type: crate::utils::four_char_code::FourCharCode,
+        metadata_specifications: &CFArray,
+    ) -> Result<Self, i32> {
+        let mut ptr = std::ptr::null_mut();
+        let status = unsafe {
+            ffi::cm_metadata_format_description_create_with_metadata_specifications(
+                metadata_type.into(),
+                metadata_specifications.as_ptr(),
+                &mut ptr,
+            )
+        };
+        if status == 0 && !ptr.is_null() {
+            Self::from_raw(ptr).ok_or(status)
+        } else {
+            Err(status)
+        }
+    }
+
+    /// Extend an existing metadata description with additional metadata specifications.
+    ///
+    /// # Errors
+    ///
+    /// Returns the `OSStatus` reported by Core Media if the extended description could not be created.
+    pub fn extend_with_metadata_specifications(
+        &self,
+        metadata_specifications: &CFArray,
+    ) -> Result<Self, i32> {
+        let mut ptr = std::ptr::null_mut();
+        let status = unsafe {
+            ffi::cm_metadata_format_description_create_with_description_and_metadata_specifications(
+                self.as_ptr(),
+                metadata_specifications.as_ptr(),
+                &mut ptr,
+            )
+        };
+        if status == 0 && !ptr.is_null() {
+            Self::from_raw(ptr).ok_or(status)
+        } else {
+            Err(status)
+        }
+    }
+
+    /// Merge two metadata format descriptions into a new description.
+    ///
+    /// # Errors
+    ///
+    /// Returns the `OSStatus` reported by Core Media if the merged description could not be created.
+    pub fn merge(&self, other: &Self) -> Result<Self, i32> {
+        let mut ptr = std::ptr::null_mut();
+        let status = unsafe {
+            ffi::cm_metadata_format_description_create_by_merging_descriptions(
+                self.as_ptr(),
+                other.as_ptr(),
+                &mut ptr,
+            )
+        };
+        if status == 0 && !ptr.is_null() {
+            Self::from_raw(ptr).ok_or(status)
+        } else {
+            Err(status)
+        }
+    }
+
+    /// Copy the metadata identifiers declared by this description.
+    #[must_use]
+    pub fn identifiers(&self) -> Option<CFArray> {
+        let ptr = unsafe { ffi::cm_metadata_format_description_get_identifiers(self.as_ptr()) };
+        CFArray::from_raw(ptr)
+    }
+
+    /// Copy the metadata key dictionary for `local_id`, if present.
+    #[must_use]
+    pub fn key_with_local_id(&self, local_id: u32) -> Option<CFDictionary> {
+        let ptr = unsafe {
+            ffi::cm_metadata_format_description_get_key_with_local_id(self.as_ptr(), local_id)
+        };
+        CFDictionary::from_raw(ptr)
+    }
+}
+
+impl Deref for CMMetadataFormatDescription {
+    type Target = CMFormatDescription;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl TryFrom<CMFormatDescription> for CMMetadataFormatDescription {
+    type Error = CMFormatDescription;
+
+    fn try_from(value: CMFormatDescription) -> Result<Self, Self::Error> {
+        if value.is_metadata() {
+            Ok(Self(value))
+        } else {
+            Err(value)
+        }
+    }
+}
+
+impl From<CMMetadataFormatDescription> for CMFormatDescription {
+    fn from(value: CMMetadataFormatDescription) -> Self {
+        value.0
+    }
+}
+
+impl fmt::Debug for CMMetadataFormatDescription {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("CMMetadataFormatDescription")
+            .field("media_type", &self.media_type_string())
+            .field("codec", &self.media_subtype_string())
+            .finish()
+    }
+}
+
+impl fmt::Display for CMMetadataFormatDescription {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        fmt::Display::fmt(&self.0, f)
     }
 }

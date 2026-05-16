@@ -168,6 +168,52 @@ extern "C" {
         -> u32;
     pub fn cm_format_description_get_audio_bytes_per_frame(format_description: *mut c_void) -> u32;
     pub fn cm_format_description_get_audio_format_flags(format_description: *mut c_void) -> u32;
+    pub fn cm_metadata_format_description_create_with_keys(
+        metadata_type: u32,
+        keys: *mut c_void,
+        format_description_out: *mut *mut c_void,
+    ) -> i32;
+    pub fn cm_metadata_format_description_create_with_metadata_specifications(
+        metadata_type: u32,
+        metadata_specifications: *mut c_void,
+        format_description_out: *mut *mut c_void,
+    ) -> i32;
+    pub fn cm_metadata_format_description_create_with_description_and_metadata_specifications(
+        source_description: *mut c_void,
+        metadata_specifications: *mut c_void,
+        format_description_out: *mut *mut c_void,
+    ) -> i32;
+    pub fn cm_metadata_format_description_create_by_merging_descriptions(
+        source_description: *mut c_void,
+        other_source_description: *mut c_void,
+        format_description_out: *mut *mut c_void,
+    ) -> i32;
+    pub fn cm_metadata_format_description_get_identifiers(
+        format_description: *mut c_void,
+    ) -> *mut c_void;
+    pub fn cm_metadata_format_description_get_key_with_local_id(
+        format_description: *mut c_void,
+        local_id: u32,
+    ) -> *mut c_void;
+    pub fn cm_metadata_format_description_extension_key_metadata_key_table() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_conforming_data_types() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_data_type() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_data_type_namespace() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_language_tag() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_local_id() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_namespace() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_setup_data() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_structural_dependency() -> *mut c_void;
+    pub fn cm_metadata_format_description_key_value() -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_data_type() -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_extended_language_tag()
+        -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_identifier() -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_setup_data() -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_structural_dependency()
+        -> *mut c_void;
+    pub fn cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag()
+        -> *mut c_void;
 
     // ---- CVPixelBuffer ----
     pub fn cv_pixel_buffer_release(pixel_buffer: *mut c_void);

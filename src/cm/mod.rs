@@ -21,7 +21,7 @@ pub mod timebase;
 
 pub use audio::{AudioBuffer, AudioBufferList, AudioBufferListRaw};
 pub use block_buffer::CMBlockBuffer;
-pub use format_description::CMFormatDescription;
+pub use format_description::{CMFormatDescription, CMMetadataFormatDescription};
 pub use sample_buffer::CMSampleBuffer;
-pub use time::{CMSampleTimingInfo, CMClock, CMTime, CMTimeRange};
+pub use time::{CMClock, CMSampleTimingInfo, CMTime, CMTimeRange};
 pub use timebase::CMTimebase;

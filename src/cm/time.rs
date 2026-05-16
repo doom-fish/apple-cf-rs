@@ -433,7 +433,10 @@ impl CMTimeRange {
     #[must_use]
     pub fn intersection(&self, other: Self) -> Self {
         extern "C" {
-            fn CMTimeRangeGetIntersection(range: CMTimeRange, otherRange: CMTimeRange) -> CMTimeRange;
+            fn CMTimeRangeGetIntersection(
+                range: CMTimeRange,
+                otherRange: CMTimeRange,
+            ) -> CMTimeRange;
         }
         unsafe { CMTimeRangeGetIntersection(*self, other) }
     }
@@ -449,7 +452,11 @@ impl CMTimeRange {
 
 impl fmt::Display for CMTimeRange {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "CMTimeRange(start: {}, duration: {})", self.start, self.duration)
+        write!(
+            f,
+            "CMTimeRange(start: {}, duration: {})",
+            self.start, self.duration
+        )
     }
 }
 

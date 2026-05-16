@@ -1,10 +1,10 @@
 # apple-cf-rs coverage audit (vs MacOSX26.2.sdk)
 
 SDK_PUBLIC_SYMBOLS: 2865
-VERIFIED: 298
-GAPS: 2464
-EXEMPT: 103
-COVERAGE_PCT: 10.79%
+VERIFIED: 356
+GAPS: 2386
+EXEMPT: 123
+COVERAGE_PCT: 12.43%
 
 ## Notes
 
@@ -12,16 +12,19 @@ COVERAGE_PCT: 10.79%
 - Public declarations were enumerated from MacOSX26.2.sdk via clang AST + header scans.
 - Declarations unavailable on macOS were filtered out; deprecated declarations are retained as EXEMPT.
 - VERIFIED means the declaration is directly referenced by apple-cf-rs wrapper implementations or represented by a public wrapper type.
+- Rows whose header provenance resolved to `?` are tracked under the `Unscoped` bucket in the framework breakdown.
+- v0.6.1 focuses the highest-value missing families (`CFSet`, `CFPropertyList`, `CMMetadataFormatDescription`, and dispatch async/apply); the remaining 2k+ long-tail gaps are documented as low priority for now.
 
 ## Framework breakdown
 
 | Framework | Verified | Gaps | Exempt |
 | --- | ---: | ---: | ---: |
-| CoreFoundation | 175 | 1109 | 79 |
-| CoreMedia | 47 | 872 | 8 |
-| CoreVideo | 45 | 259 | 15 |
+| CoreFoundation | 205 | 1078 | 79 |
+| CoreMedia | 69 | 707 | 8 |
+| CoreVideo | 45 | 239 | 35 |
 | IOSurface | 26 | 66 | 1 |
-| Dispatch | 5 | 158 | 0 |
+| Dispatch | 11 | 139 | 0 |
+| Unscoped (`?`) | 0 | 157 | 0 |
 
 ## 🟢 VERIFIED
 | Symbol | Kind | Header | Wrapped by |
@@ -142,6 +145,14 @@ COVERAGE_PCT: 10.79%
 | CFPreferencesAppSynchronize | function | CoreFoundation/CFPreferences.h | cf::CFPreferences |
 | CFPreferencesCopyAppValue | function | CoreFoundation/CFPreferences.h | cf::CFPreferences |
 | CFPreferencesSetAppValue | function | CoreFoundation/CFPreferences.h | cf::CFPreferences |
+| CFPropertyListCreateData | function | CoreFoundation/CFPropertyList.h | cf::CFPropertyList |
+| CFPropertyListCreateDeepCopy | function | CoreFoundation/CFPropertyList.h | cf::CFPropertyList |
+| CFPropertyListCreateWithData | function | CoreFoundation/CFPropertyList.h | cf::CFPropertyList |
+| CFPropertyListCreateWithStream | function | CoreFoundation/CFPropertyList.h | cf::CFPropertyList |
+| CFPropertyListFormat | typedef enum | CoreFoundation/CFPropertyList.h | cf::CFPropertyListFormat |
+| CFPropertyListIsValid | function | CoreFoundation/CFPropertyList.h | cf::CFPropertyList |
+| CFPropertyListMutabilityOptions | typedef enum | CoreFoundation/CFPropertyList.h | cf::CFPropertyListMutabilityOptions |
+| CFPropertyListWrite | function | CoreFoundation/CFPropertyList.h | cf::CFPropertyList |
 | CFRunLoopAddSource | function | CoreFoundation/CFRunLoop.h | cf::CFRunLoop |
 | CFRunLoopAddTimer | function | CoreFoundation/CFRunLoop.h | cf::CFRunLoop |
 | CFRunLoopGetCurrent | function | CoreFoundation/CFRunLoop.h | cf::CFRunLoop |
@@ -159,6 +170,28 @@ COVERAGE_PCT: 10.79%
 | CFRunLoopTimerRef | typedef struct | CoreFoundation/CFRunLoop.h | cf::CFTimer |
 | CFRunLoopTimerSetNextFireDate | function | CoreFoundation/CFRunLoop.h | cf::CFTimer |
 | CFRunLoopWakeUp | function | CoreFoundation/CFRunLoop.h | cf::CFRunLoop |
+| CFMutableSetRef | typedef struct | CoreFoundation/CFSet.h | cf::CFMutableSet |
+| CFSetAddValue | function | CoreFoundation/CFSet.h | cf::CFMutableSet |
+| CFSetApplyFunction | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetCallBacks | typedef struct | CoreFoundation/CFSet.h | cf::CFSetCallbacks |
+| CFSetContainsValue | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetCreate | function | CoreFoundation/CFSet.h | cf::CFSet |
+| CFSetCreateCopy | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetCreateMutable | function | CoreFoundation/CFSet.h | cf::CFMutableSet |
+| CFSetCreateMutableCopy | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetGetCount | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetGetCountOfValue | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetGetTypeID | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetGetValue | function | CoreFoundation/CFSet.h | cf::CFSet |
+| CFSetGetValueIfPresent | function | CoreFoundation/CFSet.h | cf::CFSet |
+| CFSetGetValues | function | CoreFoundation/CFSet.h | cf::CFSet / cf::CFMutableSet |
+| CFSetRef | typedef struct | CoreFoundation/CFSet.h | cf::CFSet |
+| CFSetRemoveAllValues | function | CoreFoundation/CFSet.h | cf::CFMutableSet |
+| CFSetRemoveValue | function | CoreFoundation/CFSet.h | cf::CFMutableSet |
+| CFSetReplaceValue | function | CoreFoundation/CFSet.h | cf::CFMutableSet |
+| CFSetSetValue | function | CoreFoundation/CFSet.h | cf::CFMutableSet |
+| kCFCopyStringSetCallBacks | constant | CoreFoundation/CFSet.h | cf::CFSetCallbacks::CopyString |
+| kCFTypeSetCallBacks | constant | CoreFoundation/CFSet.h | cf::CFSetCallbacks::Type |
 | CFSocketCreate | function | CoreFoundation/CFSocket.h | cf::CFSocket |
 | CFSocketGetNative | function | CoreFoundation/CFSocket.h | cf::CFSocket |
 | CFSocketGetTypeID | function | CoreFoundation/CFSocket.h | cf::CFSocket |
@@ -215,6 +248,12 @@ COVERAGE_PCT: 10.79%
 | CMFormatDescriptionGetMediaSubType | function | CoreMedia/CMFormatDescription.h | cm::CMFormatDescription |
 | CMFormatDescriptionGetMediaType | function | CoreMedia/CMFormatDescription.h | cm::CMFormatDescription |
 | CMFormatDescriptionRef | typedef struct | CoreMedia/CMFormatDescription.h | cm::CMFormatDescription |
+| CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions | function | CoreMedia/CMFormatDescription.h | cm::CMMetadataFormatDescription |
+| CMMetadataFormatDescriptionCreateWithKeys | function | CoreMedia/CMFormatDescription.h | cm::CMMetadataFormatDescription |
+| CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications | function | CoreMedia/CMFormatDescription.h | cm::CMMetadataFormatDescription |
+| CMMetadataFormatDescriptionCreateWithMetadataSpecifications | function | CoreMedia/CMFormatDescription.h | cm::CMMetadataFormatDescription |
+| CMMetadataFormatDescriptionGetIdentifiers | function | CoreMedia/CMFormatDescription.h | cm::CMMetadataFormatDescription |
+| CMMetadataFormatDescriptionGetKeyWithLocalID | function | CoreMedia/CMFormatDescription.h | cm::CMMetadataFormatDescription |
 | CMSampleBufferDataIsReady | function | CoreMedia/CMSampleBuffer.h | cm::CMSampleBuffer |
 | CMSampleBufferGetDataBuffer | function | CoreMedia/CMSampleBuffer.h | cm::CMSampleBuffer |
 | CMSampleBufferGetDecodeTimeStamp | function | CoreMedia/CMSampleBuffer.h | cm::CMSampleBuffer |
@@ -294,6 +333,12 @@ COVERAGE_PCT: 10.79%
 | CVPixelBufferPoolGetTypeID | function | CoreVideo/CVPixelBufferPool.h | cv::CVPixelBufferPool |
 | CVPixelBufferPoolRef | typedef struct | CoreVideo/CVPixelBufferPool.h | cv::CVPixelBufferPool |
 | dispatch_group_t | typedef struct | Dispatch/group.h | DispatchGroup |
+| dispatch_apply | function | Dispatch/queue.h | dispatch_queue::dispatch_apply |
+| dispatch_apply_f | function | Dispatch/queue.h | dispatch_queue::dispatch_apply (Swift bridge uses `_f` callback form internally) |
+| dispatch_async | function | Dispatch/queue.h | dispatch_queue::dispatch_async |
+| dispatch_async_and_wait | function | Dispatch/queue.h | dispatch_queue::dispatch_async_and_wait |
+| dispatch_async_and_wait_f | function | Dispatch/queue.h | dispatch_queue::dispatch_async_and_wait (Swift bridge uses `_f` callback form internally) |
+| dispatch_async_f | function | Dispatch/queue.h | dispatch_queue::dispatch_async (Swift bridge uses `_f` callback form internally) |
 | dispatch_queue_create | function | Dispatch/queue.h | DispatchQueue |
 | dispatch_queue_t | typedef struct | Dispatch/queue.h | DispatchQueue |
 | dispatch_semaphore_t | typedef struct | Dispatch/semaphore.h | DispatchSemaphore |
@@ -324,6 +369,22 @@ COVERAGE_PCT: 10.79%
 | IOSurfaceRef | typedef struct | IOSurface/IOSurfaceRef.h | iosurface::IOSurface |
 | IOSurfaceUnlock | function | IOSurface/IOSurfaceRef.h | iosurface::IOSurface |
 | IOSurfaceLockOptions | typedef enum | IOSurface/IOSurfaceTypes.h | iosurface::IOSurface |
+| kCMFormatDescriptionExtensionKey_MetadataKeyTable | constant | CoreMedia/CMFormatDescription.h | cm::format_description::format_description_extension_keys::metadata_key_table |
+| kCMMetadataFormatDescriptionKey_ConformingDataTypes | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::conforming_data_types |
+| kCMMetadataFormatDescriptionKey_DataType | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::data_type |
+| kCMMetadataFormatDescriptionKey_DataTypeNamespace | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::data_type_namespace |
+| kCMMetadataFormatDescriptionKey_LanguageTag | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::language_tag |
+| kCMMetadataFormatDescriptionKey_LocalID | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::local_id |
+| kCMMetadataFormatDescriptionKey_Namespace | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::namespace |
+| kCMMetadataFormatDescriptionKey_SetupData | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::setup_data |
+| kCMMetadataFormatDescriptionKey_StructuralDependency | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::structural_dependency |
+| kCMMetadataFormatDescriptionKey_Value | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_description_keys::value |
+| kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_specification_keys::data_type |
+| kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_specification_keys::extended_language_tag |
+| kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_specification_keys::identifier |
+| kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_specification_keys::setup_data |
+| kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_specification_keys::structural_dependency |
+| kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag | constant | CoreMedia/CMFormatDescription.h | cm::format_description::metadata_structural_dependency_keys::dependency_is_invalid_flag |
 
 ## 🔴 GAPS
 | Symbol | Kind | Header | Notes |
@@ -881,14 +942,6 @@ COVERAGE_PCT: 10.79%
 | kCFPreferencesCurrentApplication | constant | CoreFoundation/CFPreferences.h | No safe wrapper or bridge entry point was detected. |
 | kCFPreferencesCurrentHost | constant | CoreFoundation/CFPreferences.h | No safe wrapper or bridge entry point was detected. |
 | kCFPreferencesCurrentUser | constant | CoreFoundation/CFPreferences.h | No safe wrapper or bridge entry point was detected. |
-| CFPropertyListCreateData | function | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
-| CFPropertyListCreateDeepCopy | function | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
-| CFPropertyListCreateWithData | function | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
-| CFPropertyListCreateWithStream | function | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
-| CFPropertyListFormat | typedef enum | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
-| CFPropertyListIsValid | function | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
-| CFPropertyListMutabilityOptions | typedef enum | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
-| CFPropertyListWrite | function | CoreFoundation/CFPropertyList.h | Property-list parse/serialize surface is not wrapped. |
 | CFRunLoopActivity | typedef enum | CoreFoundation/CFRunLoop.h | cf::CFRunLoop is covered, but this public declaration is not exposed. |
 | CFRunLoopAddCommonMode | function | CoreFoundation/CFRunLoop.h | cf::CFRunLoop is covered, but this public declaration is not exposed. |
 | CFRunLoopAddObserver | function | CoreFoundation/CFRunLoop.h | cf::CFRunLoop is covered, but this public declaration is not exposed. |
@@ -935,28 +988,6 @@ COVERAGE_PCT: 10.79%
 | CFRunLoopTimerSetTolerance | function | CoreFoundation/CFRunLoop.h | cf::CFTimer is covered, but this public declaration is not exposed. |
 | kCFRunLoopCommonModes | constant | CoreFoundation/CFRunLoop.h | No safe wrapper or bridge entry point was detected. |
 | kCFRunLoopDefaultMode | constant | CoreFoundation/CFRunLoop.h | No safe wrapper or bridge entry point was detected. |
-| CFMutableSetRef | typedef struct | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetAddValue | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetApplyFunction | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetCallBacks | typedef struct | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetContainsValue | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetCreate | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetCreateCopy | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetCreateMutable | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetCreateMutableCopy | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetGetCount | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetGetCountOfValue | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetGetTypeID | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetGetValue | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetGetValueIfPresent | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetGetValues | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetRef | typedef struct | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetRemoveAllValues | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetRemoveValue | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetReplaceValue | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| CFSetSetValue | function | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| kCFCopyStringSetCallBacks | constant | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
-| kCFTypeSetCallBacks | constant | CoreFoundation/CFSet.h | Entire CFSet family is currently uncovered. |
 | CFSocketCallBackType | typedef enum | CoreFoundation/CFSocket.h | cf::CFSocket is covered, but this public declaration is not exposed. |
 | CFSocketConnectToAddress | function | CoreFoundation/CFSocket.h | cf::CFSocket is covered, but this public declaration is not exposed. |
 | CFSocketContext | typedef struct | CoreFoundation/CFSocket.h | cf::CFSocket is covered, but this public declaration is not exposed. |
@@ -1652,12 +1683,6 @@ COVERAGE_PCT: 10.79%
 | CMFormatDescriptionEqualIgnoringExtensionKeys | function | CoreMedia/CMFormatDescription.h | cm::CMFormatDescription is covered, but this public declaration is not exposed. |
 | CMFormatDescriptionGetExtension | function | CoreMedia/CMFormatDescription.h | cm::CMFormatDescription is covered, but this public declaration is not exposed. |
 | CMFormatDescriptionGetTypeID | function | CoreMedia/CMFormatDescription.h | cm::CMFormatDescription is covered, but this public declaration is not exposed. |
-| CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| CMMetadataFormatDescriptionCreateWithKeys | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| CMMetadataFormatDescriptionCreateWithMetadataSpecifications | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| CMMetadataFormatDescriptionGetIdentifiers | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| CMMetadataFormatDescriptionGetKeyWithLocalID | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | CMMuxedFormatDescriptionCreate | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | CMTextFormatDescriptionGetDefaultStyle | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | CMTextFormatDescriptionGetDefaultTextBox | function | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
@@ -1717,7 +1742,6 @@ COVERAGE_PCT: 10.79%
 | kCMFormatDescriptionColorPrimaries_P3_D65 | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMFormatDescriptionColorPrimaries_SMPTE_C | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMFormatDescriptionConformsToMPEG2VideoProfile | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMFormatDescriptionExtensionKey_MetadataKeyTable | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMFormatDescriptionExtension_AlphaChannelMode | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMFormatDescriptionExtension_AlternativeTransferCharacteristics | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMFormatDescriptionExtension_AmbientViewingEnvironment | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
@@ -1803,21 +1827,6 @@ COVERAGE_PCT: 10.79%
 | kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4 | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2 | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995 | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_ConformingDataTypes | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_DataType | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_DataTypeNamespace | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_LanguageTag | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_LocalID | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_Namespace | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_SetupData | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_StructuralDependency | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionKey_Value | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
-| kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMTextFormatDescriptionColor_Alpha | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMTextFormatDescriptionColor_Blue | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
 | kCMTextFormatDescriptionColor_Green | constant | CoreMedia/CMFormatDescription.h | No safe wrapper or bridge entry point was detected. |
@@ -2326,26 +2335,6 @@ COVERAGE_PCT: 10.79%
 | kCVBufferPropagatedAttachmentsKey | constant | CoreVideo/CVBuffer.h | No safe wrapper or bridge entry point was detected. |
 | kCVBufferTimeScaleKey | constant | CoreVideo/CVBuffer.h | No safe wrapper or bridge entry point was detected. |
 | kCVBufferTimeValueKey | constant | CoreVideo/CVBuffer.h | No safe wrapper or bridge entry point was detected. |
-| CVDisplayLinkCreateWithActiveCGDisplays | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkCreateWithCGDisplay | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkCreateWithCGDisplays | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkCreateWithOpenGLDisplayMask | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkGetActualOutputVideoRefreshPeriod | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkGetCurrentCGDisplay | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkGetCurrentTime | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkGetNominalOutputVideoRefreshPeriod | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkGetOutputVideoLatency | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkIsRunning | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkRef | typedef struct | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkRetain | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkSetCurrentCGDisplay | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkSetOutputCallback | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkSetOutputHandler | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkStart | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkStop | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVDisplayLinkTranslateTime | function | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
-| CVTimeStamp | typedef struct | CoreVideo/CVDisplayLink.h | DisplayLink timing/display-sync surface is uncovered. |
 | CVGetCurrentHostTime | function | CoreVideo/CVHostTime.h | No safe wrapper or bridge entry point was detected. |
 | CVGetHostClockFrequency | function | CoreVideo/CVHostTime.h | No safe wrapper or bridge entry point was detected. |
 | CVGetHostClockMinimumTimeDelta | function | CoreVideo/CVHostTime.h | No safe wrapper or bridge entry point was detected. |
@@ -2652,15 +2641,9 @@ COVERAGE_PCT: 10.79%
 | dispatch_after | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_after_f | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_allow_send_signals | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
-| dispatch_apply | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
-| dispatch_apply_f | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_assert_queue | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_assert_queue_barrier | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_assert_queue_not | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
-| dispatch_async | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
-| dispatch_async_and_wait | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
-| dispatch_async_and_wait_f | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
-| dispatch_async_f | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_autorelease_frequency_t | typedef enum | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_barrier_async | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
 | dispatch_barrier_async_and_wait | function | Dispatch/queue.h | No safe wrapper or bridge entry point was detected. |
@@ -2887,6 +2870,26 @@ COVERAGE_PCT: 10.79%
 | CVBufferGetAttachments | function | CoreVideo/CVBuffer.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_WITH_REPLACEMENT("CVBufferCopyAttachments", macos(10.4, 12.0), ios(4.0,15.0), tvos(9.0, 15.0), watchos(4.0, 8.0)) |
 | CVDisplayLinkGetTypeID | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
 | CVDisplayLinkRelease | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_END |
+| CVDisplayLinkCreateWithActiveCGDisplays | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkCreateWithCGDisplay | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkCreateWithCGDisplays | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkCreateWithOpenGLDisplayMask | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkGetActualOutputVideoRefreshPeriod | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkGetCurrentCGDisplay | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkGetCurrentTime | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkGetNominalOutputVideoRefreshPeriod | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkGetOutputVideoLatency | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkIsRunning | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkRef | typedef struct | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkRetain | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkSetCurrentCGDisplay | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkSetOutputCallback | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkSetOutputHandler | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkStart | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkStop | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVDisplayLinkTranslateTime | function | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
+| CVTimeStamp | typedef struct | CoreVideo/CVDisplayLink.h | Deprecated on macOS; intentionally excluded from coverage targets. | API_DEPRECATED_BEGIN("use NSView.displayLink(target:selector:), NSWindow.displayLink(target:selector:), or NSScreen.displayLink(target:selector:) ", macos(10.4, 15.0)) |
 | kCVImageBufferTransferFunction_EBU_3213 | constant | CoreVideo/CVImageBuffer.h | Deprecated on macOS; intentionally excluded from coverage targets. | AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA) |
 | kCVImageBufferTransferFunction_ITU_R_2020 | constant | CoreVideo/CVImageBuffer.h | Deprecated on macOS; intentionally excluded from coverage targets. | AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA) |
 | kCVImageBufferTransferFunction_SMPTE_240M_1995 | constant | CoreVideo/CVImageBuffer.h | Deprecated on macOS; intentionally excluded from coverage targets. | AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA) |

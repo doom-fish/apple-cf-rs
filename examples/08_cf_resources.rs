@@ -5,7 +5,8 @@ use apple_cf::cf::{
 };
 
 fn main() {
-    let bundle_url = CFURL::from_file_system_path("/System/Library/Frameworks/CoreFoundation.framework", true);
+    let bundle_url =
+        CFURL::from_file_system_path("/System/Library/Frameworks/CoreFoundation.framework", true);
     let bundle = CFBundle::from_url(&bundle_url).expect("bundle");
     assert!(bundle.bundle_url().has_directory_path());
 
@@ -23,7 +24,11 @@ fn main() {
     let rendered = number_formatter.format_number(&CFNumber::from_i64(1234));
     assert!(!rendered.is_empty());
 
-    let date_formatter = CFDateFormatter::new(Some(&locale), CFDateFormatterStyle::Short, CFDateFormatterStyle::NoStyle);
+    let date_formatter = CFDateFormatter::new(
+        Some(&locale),
+        CFDateFormatterStyle::Short,
+        CFDateFormatterStyle::NoStyle,
+    );
     assert!(!date_formatter.format_date(&CFDate::now()).is_empty());
 
     let app_id = CFString::new("com.doomfish.apple-cf.example");
@@ -40,5 +45,8 @@ fn main() {
     assert!(file_security.owner_uuid().is_some());
 
     let escaped = CFXML::escape_entities(&CFString::new("<tag>value</tag>"));
-    assert_eq!(CFXML::unescape_entities(&escaped).to_string(), "<tag>value</tag>");
+    assert_eq!(
+        CFXML::unescape_entities(&escaped).to_string(),
+        "<tag>value</tag>"
+    );
 }

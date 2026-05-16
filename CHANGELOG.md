@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1]
+
+### Added
+
+- `cf::CFSet` / `CFMutableSet` and `cf::CFPropertyList`, including Swift bridge coverage, examples, and smoke tests.
+- `dispatch_queue::dispatch_async`, `dispatch_async_and_wait`, and `dispatch_apply` safe helpers.
+- `cm::CMMetadataFormatDescription` plus metadata-description constants, constructors, identifier lookup, and merge/extend helpers.
+- New numbered example `14_cm_metadata_format_description` and matching CoreMedia metadata smoke tests.
+
+### Changed
+
+- `COVERAGE_AUDIT.md` refreshed for the highest-value remaining gaps; deprecated `CVDisplayLink` symbols now live in the exempt bucket.
+- README / COVERAGE docs refreshed for the new CoreFoundation, Dispatch, and CoreMedia surface.
+- `Cargo.toml` version bumped to `0.6.1`.
+
 ## [0.6.0]
 
 ### Added

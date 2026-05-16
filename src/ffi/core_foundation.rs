@@ -44,7 +44,11 @@ extern "C" {
     pub fn cf_uuid_get_bytes(value: *mut c_void, out_bytes: *mut u8);
 
     pub fn cf_error_get_type_id() -> usize;
-    pub fn cf_error_create(domain: *mut c_void, code: i64, description: *const c_char) -> *mut c_void;
+    pub fn cf_error_create(
+        domain: *mut c_void,
+        code: i64,
+        description: *const c_char,
+    ) -> *mut c_void;
     pub fn cf_error_get_domain(value: *mut c_void) -> *mut c_void;
     pub fn cf_error_get_code(value: *mut c_void) -> i64;
     pub fn cf_error_copy_description(value: *mut c_void) -> *mut c_void;
@@ -104,10 +108,15 @@ extern "C" {
     ) -> *mut c_void;
 
     pub fn cf_date_formatter_get_type_id() -> usize;
-    pub fn cf_date_formatter_create(locale: *mut c_void, date_style: i32, time_style: i32)
-        -> *mut c_void;
-    pub fn cf_date_formatter_create_string_with_date(value: *mut c_void, date: *mut c_void)
-        -> *mut c_void;
+    pub fn cf_date_formatter_create(
+        locale: *mut c_void,
+        date_style: i32,
+        time_style: i32,
+    ) -> *mut c_void;
+    pub fn cf_date_formatter_create_string_with_date(
+        value: *mut c_void,
+        date: *mut c_void,
+    ) -> *mut c_void;
 
     pub fn cf_file_security_get_type_id() -> usize;
     pub fn cf_file_security_create() -> *mut c_void;
@@ -115,6 +124,35 @@ extern "C" {
     pub fn cf_file_security_set_owner_uuid(value: *mut c_void, uuid: *mut c_void) -> bool;
     pub fn cf_file_security_get_mode(value: *mut c_void, out_mode: *mut u32) -> bool;
     pub fn cf_file_security_set_mode(value: *mut c_void, mode: u32) -> bool;
+
+    pub fn cf_property_list_create_deep_copy(value: *mut c_void, options: u64) -> *mut c_void;
+    pub fn cf_property_list_create_with_data(
+        data: *mut c_void,
+        options: u64,
+        out_format: *mut isize,
+        out_error: *mut *mut c_void,
+    ) -> *mut c_void;
+    pub fn cf_property_list_create_with_stream(
+        stream: *mut c_void,
+        stream_length: isize,
+        options: u64,
+        out_format: *mut isize,
+        out_error: *mut *mut c_void,
+    ) -> *mut c_void;
+    pub fn cf_property_list_write(
+        value: *mut c_void,
+        stream: *mut c_void,
+        format: isize,
+        options: u64,
+        out_error: *mut *mut c_void,
+    ) -> isize;
+    pub fn cf_property_list_create_data(
+        value: *mut c_void,
+        format: isize,
+        options: u64,
+        out_error: *mut *mut c_void,
+    ) -> *mut c_void;
+    pub fn cf_property_list_is_valid(value: *mut c_void, format: isize) -> bool;
 
     pub fn cf_array_get_type_id() -> usize;
     pub fn cf_array_create(values: *const *mut c_void, count: usize) -> *mut c_void;
@@ -138,6 +176,32 @@ extern "C" {
     pub fn cf_bag_get_count(value: *mut c_void) -> usize;
     pub fn cf_bag_contains_value(value: *mut c_void, candidate: *mut c_void) -> bool;
     pub fn cf_bag_get_count_of_value(value: *mut c_void, candidate: *mut c_void) -> usize;
+
+    pub fn cf_set_get_type_id() -> usize;
+    pub fn cf_set_create(values: *const *mut c_void, count: usize, callbacks: i32) -> *mut c_void;
+    pub fn cf_set_create_copy(value: *mut c_void) -> *mut c_void;
+    pub fn cf_set_create_mutable(capacity: usize, callbacks: i32) -> *mut c_void;
+    pub fn cf_set_create_mutable_copy(value: *mut c_void, capacity: usize) -> *mut c_void;
+    pub fn cf_set_get_count(value: *mut c_void) -> usize;
+    pub fn cf_set_get_count_of_value(value: *mut c_void, candidate: *mut c_void) -> usize;
+    pub fn cf_set_contains_value(value: *mut c_void, candidate: *mut c_void) -> bool;
+    pub fn cf_set_get_value(value: *mut c_void, candidate: *mut c_void) -> *mut c_void;
+    pub fn cf_set_get_value_if_present(
+        value: *mut c_void,
+        candidate: *mut c_void,
+        out_value: *mut *mut c_void,
+    ) -> bool;
+    pub fn cf_set_get_values(value: *mut c_void, out_values: *mut *mut c_void);
+    pub fn cf_set_apply_function(
+        value: *mut c_void,
+        context: *mut c_void,
+        callback: extern "C" fn(*mut c_void, *mut c_void),
+    );
+    pub fn cf_set_add_value(value: *mut c_void, candidate: *mut c_void);
+    pub fn cf_set_replace_value(value: *mut c_void, candidate: *mut c_void);
+    pub fn cf_set_set_value(value: *mut c_void, candidate: *mut c_void);
+    pub fn cf_set_remove_value(value: *mut c_void, candidate: *mut c_void);
+    pub fn cf_set_remove_all_values(value: *mut c_void);
 
     pub fn cf_attributed_string_get_type_id() -> usize;
     pub fn cf_attributed_string_create(string: *mut c_void) -> *mut c_void;

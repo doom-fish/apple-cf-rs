@@ -1,5 +1,51 @@
 import Foundation
 
+@_cdecl("acf_dispatch_async_f")
+public func acf_dispatch_async_f(
+    _ queue: UnsafeMutableRawPointer,
+    _ context: UnsafeMutableRawPointer?,
+    _ work: (@convention(c) (UnsafeMutableRawPointer?) -> Void)?
+) {
+    guard let work else { return }
+    let queue = Unmanaged<DispatchQueue>.fromOpaque(queue).takeUnretainedValue()
+    queue.async {
+        work(context)
+    }
+}
+
+@_cdecl("acf_dispatch_async_and_wait_f")
+public func acf_dispatch_async_and_wait_f(
+    _ queue: UnsafeMutableRawPointer,
+    _ context: UnsafeMutableRawPointer?,
+    _ work: (@convention(c) (UnsafeMutableRawPointer?) -> Void)?
+) {
+    guard let work else { return }
+    let queue = Unmanaged<DispatchQueue>.fromOpaque(queue).takeUnretainedValue()
+    queue.asyncAndWait {
+        work(context)
+    }
+}
+
+@_cdecl("acf_dispatch_apply_f")
+public func acf_dispatch_apply_f(
+    _ iterations: Int,
+    _ queue: UnsafeMutableRawPointer,
+    _ context: UnsafeMutableRawPointer?,
+    _ work: (@convention(c) (Int, UnsafeMutableRawPointer?) -> Void)?
+) {
+    guard let work, iterations > 0 else { return }
+    let queue = Unmanaged<DispatchQueue>.fromOpaque(queue).takeUnretainedValue()
+    let group = DispatchGroup()
+    for iteration in 0..<iterations {
+        group.enter()
+        queue.async {
+            work(iteration, context)
+            group.leave()
+        }
+    }
+    group.wait()
+}
+
 private func dispatchDeadline(timeoutMs: Int64) -> DispatchTime {
     if timeoutMs < 0 {
         return .distantFuture

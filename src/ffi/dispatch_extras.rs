@@ -3,6 +3,23 @@
 use core::ffi::c_void;
 
 extern "C" {
+    pub fn acf_dispatch_async_f(
+        queue: *mut c_void,
+        context: *mut c_void,
+        work: extern "C" fn(*mut c_void),
+    );
+    pub fn acf_dispatch_async_and_wait_f(
+        queue: *mut c_void,
+        context: *mut c_void,
+        work: extern "C" fn(*mut c_void),
+    );
+    pub fn acf_dispatch_apply_f(
+        iterations: usize,
+        queue: *mut c_void,
+        context: *mut c_void,
+        work: extern "C" fn(usize, *mut c_void),
+    );
+
     pub fn acf_dispatch_group_create() -> *mut c_void;
     pub fn acf_dispatch_group_enter(group: *mut c_void);
     pub fn acf_dispatch_group_leave(group: *mut c_void);

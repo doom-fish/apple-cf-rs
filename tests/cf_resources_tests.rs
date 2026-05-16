@@ -7,7 +7,8 @@ use std::process;
 
 #[test]
 fn cf_resource_wrappers_work() {
-    let bundle_url = CFURL::from_file_system_path("/System/Library/Frameworks/CoreFoundation.framework", true);
+    let bundle_url =
+        CFURL::from_file_system_path("/System/Library/Frameworks/CoreFoundation.framework", true);
     let bundle = CFBundle::from_url(&bundle_url).expect("bundle");
     assert!(bundle.bundle_url().has_directory_path());
 
@@ -25,9 +26,15 @@ fn cf_resource_wrappers_work() {
     let number_formatter = CFNumberFormatter::new(Some(&locale), CFNumberFormatterStyle::Decimal);
     let rendered = number_formatter.format_number(&CFNumber::from_i64(1234));
     assert!(!rendered.is_empty());
-    assert!(number_formatter.parse_number(&CFString::new("42")).is_some());
+    assert!(number_formatter
+        .parse_number(&CFString::new("42"))
+        .is_some());
 
-    let date_formatter = CFDateFormatter::new(Some(&locale), CFDateFormatterStyle::Short, CFDateFormatterStyle::NoStyle);
+    let date_formatter = CFDateFormatter::new(
+        Some(&locale),
+        CFDateFormatterStyle::Short,
+        CFDateFormatterStyle::NoStyle,
+    );
     assert!(!date_formatter.format_date(&CFDate::now()).is_empty());
 
     let app_id = CFString::new(&format!("com.doomfish.apple-cf.tests.{}", process::id()));
@@ -46,5 +53,8 @@ fn cf_resource_wrappers_work() {
     assert_eq!(file_security.mode(), Some(0o644));
 
     let escaped = CFXML::escape_entities(&CFString::new("<tag>value</tag>"));
-    assert_eq!(CFXML::unescape_entities(&escaped).to_string(), "<tag>value</tag>");
+    assert_eq!(
+        CFXML::unescape_entities(&escaped).to_string(),
+        "<tag>value</tag>"
+    );
 }

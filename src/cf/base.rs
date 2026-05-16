@@ -69,7 +69,9 @@ impl CFType {
         if ptr.is_null() {
             return String::new();
         }
-        let string = unsafe { CStr::from_ptr(ptr) }.to_string_lossy().into_owned();
+        let string = unsafe { CStr::from_ptr(ptr) }
+            .to_string_lossy()
+            .into_owned();
         unsafe { ffi::acf_free_string(ptr) };
         string
     }

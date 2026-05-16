@@ -7,16 +7,23 @@
 mod base;
 mod collections;
 mod primitives;
+mod property_list;
 mod resources;
 mod runtime;
 
 pub use base::{AsCFType, CFType};
-pub use collections::{CFArray, CFAttributedString, CFBag, CFDict, CFDictionary, CFTree};
+pub use collections::{
+    CFArray, CFAttributedString, CFBag, CFDict, CFDictionary, CFMutableSet, CFSet,
+    CFSetCallbacks, CFTree,
+};
 pub use primitives::{CFData, CFDate, CFError, CFNumber, CFString, CFUUID};
+pub use property_list::{
+    CFPropertyList, CFPropertyListError, CFPropertyListFormat,
+    CFPropertyListMutabilityOptions,
+};
 pub use resources::{
-    CFBundle, CFCalendar, CFCharacterSet, CFDateFormatter, CFDateFormatterStyle,
-    CFFileSecurity, CFLocale, CFNumberFormatter, CFNumberFormatterStyle, CFPreferences,
-    CFTimeZone, CFURL, CFXML,
+    CFBundle, CFCalendar, CFCharacterSet, CFDateFormatter, CFDateFormatterStyle, CFFileSecurity,
+    CFLocale, CFNumberFormatter, CFNumberFormatterStyle, CFPreferences, CFTimeZone, CFURL, CFXML,
 };
 pub use runtime::{
     CFFileDescriptor, CFMessagePort, CFNotificationCenter, CFReadStream, CFRunLoop,

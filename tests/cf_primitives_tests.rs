@@ -7,7 +7,11 @@ fn cf_primitives_round_trip() {
     let bytes = CFData::from_bytes([1_u8, 2, 3]);
     let now = CFDate::now();
     let uuid = CFUUID::new();
-    let error = CoreFoundationError::new(&CFString::new("com.doomfish.apple-cf.tests"), 5, Some("failure"));
+    let error = CoreFoundationError::new(
+        &CFString::new("com.doomfish.apple-cf.tests"),
+        5,
+        Some("failure"),
+    );
 
     assert_eq!(string.to_string(), "apple-cf");
     assert_eq!(number.to_f64(), Some(3.5));
