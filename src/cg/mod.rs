@@ -3,10 +3,12 @@
 //! This module provides Rust equivalents of Core Graphics types used in
 //! `ScreenCaptureKit` for representing screen coordinates, sizes, and rectangles.
 
+mod affine;
 mod point;
 mod rect;
 mod size;
 
+pub use affine::{CGAffineTransform, CGVector};
 pub use point::CGPoint;
 pub use rect::CGRect;
 pub use size::CGSize;
