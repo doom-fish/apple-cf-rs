@@ -390,31 +390,31 @@ impl IOSurface {
     }
 
     /// Get the raw pointer
-    #[must_use] 
+    #[must_use]
     pub const fn as_ptr(&self) -> *mut c_void {
         self.0
     }
 
     /// Get the width of the surface in pixels
-    #[must_use] 
+    #[must_use]
     pub fn width(&self) -> usize {
         unsafe { ffi::io_surface_get_width(self.0) }
     }
 
     /// Get the height of the surface in pixels
-    #[must_use] 
+    #[must_use]
     pub fn height(&self) -> usize {
         unsafe { ffi::io_surface_get_height(self.0) }
     }
 
     /// Get the bytes per row of the surface
-    #[must_use] 
+    #[must_use]
     pub fn bytes_per_row(&self) -> usize {
         unsafe { ffi::io_surface_get_bytes_per_row(self.0) }
     }
 
     /// Get the total allocation size of the surface in bytes
-    #[must_use] 
+    #[must_use]
     pub fn alloc_size(&self) -> usize {
         unsafe { ffi::io_surface_get_alloc_size(self.0) }
     }
@@ -422,19 +422,19 @@ impl IOSurface {
     /// Get the data size of the surface in bytes (alias for `alloc_size`)
     ///
     /// This method provides API parity with `CVPixelBuffer::data_size()`.
-    #[must_use] 
+    #[must_use]
     pub fn data_size(&self) -> usize {
         self.alloc_size()
     }
 
     /// Get the pixel format of the surface (OSType/FourCC)
-    #[must_use] 
+    #[must_use]
     pub fn pixel_format(&self) -> u32 {
         unsafe { ffi::io_surface_get_pixel_format(self.0) }
     }
 
     /// Get the unique `IOSurfaceID` for this surface
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> u32 {
         unsafe { ffi::io_surface_get_id(self.0) }
     }
@@ -443,7 +443,7 @@ impl IOSurface {
     ///
     /// This value changes each time the surface is modified, useful for
     /// detecting whether the surface contents have changed.
-    #[must_use] 
+    #[must_use]
     pub fn seed(&self) -> u32 {
         unsafe { ffi::io_surface_get_seed(self.0) }
     }
@@ -455,7 +455,7 @@ impl IOSurface {
     /// - Plane 1: `CbCr` (chrominance)
     ///
     /// Single-plane formats like BGRA return 0.
-    #[must_use] 
+    #[must_use]
     pub fn plane_count(&self) -> usize {
         unsafe { ffi::io_surface_get_plane_count(self.0) }
     }
@@ -463,7 +463,7 @@ impl IOSurface {
     /// Get the width of a specific plane
     ///
     /// For YCbCr 4:2:0 formats, plane 1 (`CbCr`) is half the width of plane 0 (Y).
-    #[must_use] 
+    #[must_use]
     pub fn width_of_plane(&self, plane_index: usize) -> usize {
         unsafe { ffi::io_surface_get_width_of_plane(self.0, plane_index) }
     }
@@ -471,37 +471,37 @@ impl IOSurface {
     /// Get the height of a specific plane
     ///
     /// For YCbCr 4:2:0 formats, plane 1 (`CbCr`) is half the height of plane 0 (Y).
-    #[must_use] 
+    #[must_use]
     pub fn height_of_plane(&self, plane_index: usize) -> usize {
         unsafe { ffi::io_surface_get_height_of_plane(self.0, plane_index) }
     }
 
     /// Get the bytes per row of a specific plane
-    #[must_use] 
+    #[must_use]
     pub fn bytes_per_row_of_plane(&self, plane_index: usize) -> usize {
         unsafe { ffi::io_surface_get_bytes_per_row_of_plane(self.0, plane_index) }
     }
 
     /// Get the bytes per element of the surface
-    #[must_use] 
+    #[must_use]
     pub fn bytes_per_element(&self) -> usize {
         unsafe { ffi::io_surface_get_bytes_per_element(self.0) }
     }
 
     /// Get the element width of the surface
-    #[must_use] 
+    #[must_use]
     pub fn element_width(&self) -> usize {
         unsafe { ffi::io_surface_get_element_width(self.0) }
     }
 
     /// Get the element height of the surface
-    #[must_use] 
+    #[must_use]
     pub fn element_height(&self) -> usize {
         unsafe { ffi::io_surface_get_element_height(self.0) }
     }
 
     /// Check if the surface is currently in use
-    #[must_use] 
+    #[must_use]
     pub fn is_in_use(&self) -> bool {
         unsafe { ffi::io_surface_is_in_use(self.0) }
     }
@@ -669,43 +669,43 @@ pub struct IOSurfaceLockGuard<'a> {
 
 impl IOSurfaceLockGuard<'_> {
     /// Get the width of the surface in pixels
-    #[must_use] 
+    #[must_use]
     pub fn width(&self) -> usize {
         self.surface.width()
     }
 
     /// Get the height of the surface in pixels
-    #[must_use] 
+    #[must_use]
     pub fn height(&self) -> usize {
         self.surface.height()
     }
 
     /// Get the bytes per row of the surface
-    #[must_use] 
+    #[must_use]
     pub fn bytes_per_row(&self) -> usize {
         self.surface.bytes_per_row()
     }
 
     /// Get the total allocation size in bytes
-    #[must_use] 
+    #[must_use]
     pub fn alloc_size(&self) -> usize {
         self.surface.alloc_size()
     }
 
     /// Get the data size of the surface (alias for `alloc_size`)
-    #[must_use] 
+    #[must_use]
     pub fn data_size(&self) -> usize {
         self.alloc_size()
     }
 
     /// Get the pixel format of the surface
-    #[must_use] 
+    #[must_use]
     pub fn pixel_format(&self) -> u32 {
         self.surface.pixel_format()
     }
 
     /// Get the number of planes in the surface
-    #[must_use] 
+    #[must_use]
     pub fn plane_count(&self) -> usize {
         self.surface.plane_count()
     }
@@ -715,7 +715,7 @@ impl IOSurfaceLockGuard<'_> {
     /// # Safety
     ///
     /// The returned pointer is only valid while this guard is held.
-    #[must_use] 
+    #[must_use]
     pub fn base_address(&self) -> *const u8 {
         self.surface.base_address_raw().cast_const()
     }
@@ -765,7 +765,7 @@ impl IOSurfaceLockGuard<'_> {
     /// Get a slice view of the surface data
     ///
     /// The lock guard ensures the surface is locked for the lifetime of the slice.
-    #[must_use] 
+    #[must_use]
     pub fn as_slice(&self) -> &[u8] {
         let ptr = self.base_address();
         let len = self.alloc_size();
@@ -795,7 +795,7 @@ impl IOSurfaceLockGuard<'_> {
     /// Get a specific row as a slice
     ///
     /// Returns `None` if the row index is out of bounds.
-    #[must_use] 
+    #[must_use]
     pub fn row(&self, row_index: usize) -> Option<&[u8]> {
         if row_index >= self.height() {
             return None;
@@ -816,7 +816,7 @@ impl IOSurfaceLockGuard<'_> {
     /// calculated from the plane's height and bytes per row.
     ///
     /// Returns `None` if the plane index is out of bounds.
-    #[must_use] 
+    #[must_use]
     pub fn plane_data(&self, plane_index: usize) -> Option<&[u8]> {
         let base = self.base_address_of_plane(plane_index)?;
         let height = self.surface.height_of_plane(plane_index);
@@ -827,7 +827,7 @@ impl IOSurfaceLockGuard<'_> {
     /// Get a specific row from a plane as a slice
     ///
     /// Returns `None` if the plane or row index is out of bounds.
-    #[must_use] 
+    #[must_use]
     pub fn plane_row(&self, plane_index: usize, row_index: usize) -> Option<&[u8]> {
         let height = self.surface.height_of_plane(plane_index);
         if row_index >= height {
@@ -863,13 +863,13 @@ impl IOSurfaceLockGuard<'_> {
     ///     cursor.seek(SeekFrom::Start(offset as u64)).unwrap();
     /// }
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn cursor(&self) -> io::Cursor<&[u8]> {
         io::Cursor::new(self.as_slice())
     }
 
     /// Get raw pointer to surface data
-    #[must_use] 
+    #[must_use]
     pub fn as_ptr(&self) -> *const u8 {
         self.base_address()
     }
@@ -882,13 +882,13 @@ impl IOSurfaceLockGuard<'_> {
     }
 
     /// Check if this is a read-only lock
-    #[must_use] 
+    #[must_use]
     pub const fn is_read_only(&self) -> bool {
         self.options.is_read_only()
     }
 
     /// Get the lock options
-    #[must_use] 
+    #[must_use]
     pub const fn options(&self) -> IOSurfaceLockOptions {
         self.options
     }

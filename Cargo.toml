@@ -1,11 +1,11 @@
 [package]
 name = "apple-cf"
-version = "0.5.0"
+version = "0.6.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/doom-fish/apple-cf-rs"
 repository = "https://github.com/doom-fish/apple-cf-rs"
-description = "Safe Rust bindings for Apple's shared Core* frameworks (CoreGraphics, IOSurface, Dispatch). The foundation underneath the doom-fish macOS crates."
+description = "Safe Rust bindings for Apple's shared Core* frameworks (CoreFoundation, CoreMedia, CoreVideo, CoreGraphics, IOSurface, Dispatch)."
 authors = ["Per Johansson <per@doom.fish>"]
 keywords = ["coregraphics", "iosurface", "dispatch", "macos", "apple"]
 categories = ["api-bindings", "os::macos-apis"]

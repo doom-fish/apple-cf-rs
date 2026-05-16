@@ -36,13 +36,13 @@ impl FourCharCode {
     /// assert_eq!(code.display(), "BGRA");
     /// ```
     #[inline]
-    #[must_use] 
+    #[must_use]
     pub const fn from_bytes(bytes: [u8; 4]) -> Self {
         Self(u32::from_be_bytes(bytes))
     }
 
     /// Create a `FourCharCode` from a byte slice
-    #[must_use] 
+    #[must_use]
     pub fn from_slice(bytes: &[u8]) -> Option<Self> {
         if bytes.len() != 4 {
             return None;
@@ -64,34 +64,34 @@ impl FourCharCode {
     /// assert_eq!(value, 0x42475241);
     /// ```
     #[inline]
-    #[must_use] 
+    #[must_use]
     pub const fn as_u32(self) -> u32 {
         self.0
     }
 
     /// Get the bytes as an array
     #[inline]
-    #[must_use] 
+    #[must_use]
     pub const fn as_bytes(self) -> [u8; 4] {
         self.0.to_be_bytes()
     }
 
     /// Create from a u32 value (const version of From trait)
     #[inline]
-    #[must_use] 
+    #[must_use]
     pub const fn from_u32(value: u32) -> Self {
         Self(value)
     }
 
     /// Compare with another `FourCharCode` at compile time
     #[inline]
-    #[must_use] 
+    #[must_use]
     pub const fn equals(self, other: Self) -> bool {
         self.0 == other.0
     }
 
     /// Display the code as a string
-    #[must_use] 
+    #[must_use]
     pub fn display(self) -> String {
         let bytes = self.0.to_be_bytes();
         String::from_utf8_lossy(&bytes).to_string()

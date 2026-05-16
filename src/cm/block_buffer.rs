@@ -137,7 +137,7 @@ impl CMBlockBuffer {
     }
 
     /// Get the raw pointer to the block buffer
-    #[must_use] 
+    #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
     }
@@ -154,7 +154,7 @@ impl CMBlockBuffer {
     ///     println!("Buffer contains {} bytes", size);
     /// }
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn data_length(&self) -> usize {
         unsafe { ffi::cm_block_buffer_get_data_length(self.0) }
     }
@@ -174,7 +174,7 @@ impl CMBlockBuffer {
     ///     // Process data...
     /// }
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn is_empty(&self) -> bool {
         unsafe { ffi::cm_block_buffer_is_empty(self.0) }
     }
@@ -189,7 +189,7 @@ impl CMBlockBuffer {
     /// # Returns
     ///
     /// `true` if the specified range is contiguous in memory
-    #[must_use] 
+    #[must_use]
     pub fn is_range_contiguous(&self, offset: usize, length: usize) -> bool {
         unsafe { ffi::cm_block_buffer_is_range_contiguous(self.0, offset, length) }
     }
@@ -221,7 +221,7 @@ impl CMBlockBuffer {
     ///     }
     /// }
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn data_pointer(&self, offset: usize) -> Option<(*const u8, usize)> {
         unsafe {
             let mut length_at_offset: usize = 0;
@@ -250,7 +250,7 @@ impl CMBlockBuffer {
     ///
     /// The caller must ensure that modifying the data is safe and that no other
     /// references to this data exist.
-    #[must_use] 
+    #[must_use]
     pub unsafe fn data_pointer_mut(&self, offset: usize) -> Option<(*mut u8, usize)> {
         let mut length_at_offset: usize = 0;
         let mut total_length: usize = 0;
@@ -295,7 +295,7 @@ impl CMBlockBuffer {
     ///     buffer.copy_data_bytes(0, buffer.data_length())
     /// }
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn copy_data_bytes(&self, offset: usize, length: usize) -> Option<Vec<u8>> {
         if length == 0 {
             return Some(Vec::new());
@@ -391,7 +391,7 @@ impl CMBlockBuffer {
     ///     }
     /// }
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn as_slice(&self) -> Option<&[u8]> {
         let len = self.data_length();
         if len == 0 {

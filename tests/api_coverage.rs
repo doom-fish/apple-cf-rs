@@ -712,16 +712,16 @@ fn cv_pixel_buffer_pool_api_coverage() {
 fn read_bridge_files() -> String {
     let mut blob = String::new();
     let bridge_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("swift-bridge/Sources");
-    for entry in std::fs::read_dir(&bridge_root).unwrap_or_else(|e| {
-        panic!("can't read bridge root {}: {e}", bridge_root.display())
-    }) {
+    for entry in std::fs::read_dir(&bridge_root)
+        .unwrap_or_else(|e| panic!("can't read bridge root {}: {e}", bridge_root.display()))
+    {
         let dir = entry.unwrap().path();
         if !dir.is_dir() {
             continue;
         }
-        for sub in std::fs::read_dir(&dir).unwrap_or_else(|e| {
-            panic!("can't read bridge subdir {}: {e}", dir.display())
-        }) {
+        for sub in std::fs::read_dir(&dir)
+            .unwrap_or_else(|e| panic!("can't read bridge subdir {}: {e}", dir.display()))
+        {
             let path = sub.unwrap().path();
             if path.extension().is_some_and(|e| e == "swift") {
                 if let Ok(text) = std::fs::read_to_string(&path) {

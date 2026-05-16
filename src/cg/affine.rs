@@ -109,10 +109,7 @@ extern "C" {
     fn CGAffineTransformMakeTranslation(tx: f64, ty: f64) -> CGAffineTransform;
     fn CGAffineTransformMakeScale(sx: f64, sy: f64) -> CGAffineTransform;
     fn CGAffineTransformMakeRotation(radians: f64) -> CGAffineTransform;
-    fn CGAffineTransformConcat(
-        a: CGAffineTransform,
-        b: CGAffineTransform,
-    ) -> CGAffineTransform;
+    fn CGAffineTransformConcat(a: CGAffineTransform, b: CGAffineTransform) -> CGAffineTransform;
     fn CGAffineTransformInvert(t: CGAffineTransform) -> CGAffineTransform;
     fn CGAffineTransformIsIdentity(t: CGAffineTransform) -> bool;
 }

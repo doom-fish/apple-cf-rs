@@ -16,6 +16,14 @@
 
 #![allow(missing_docs)]
 
+mod core_foundation;
+mod core_video_extras;
+mod dispatch_extras;
+
+pub use core_foundation::*;
+pub use core_video_extras::*;
+pub use dispatch_extras::*;
+
 use core::ffi::{c_char, c_void};
 
 extern "C" {

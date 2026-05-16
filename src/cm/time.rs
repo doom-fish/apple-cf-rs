@@ -1,3 +1,5 @@
+#![allow(clippy::missing_panics_doc)]
+
 //! Core Media time types
 
 use std::ffi::c_void;
@@ -85,7 +87,7 @@ impl CMSampleTimingInfo {
     /// let timing = CMSampleTimingInfo::new();
     /// assert!(!timing.is_valid());
     /// ```
-    #[must_use] 
+    #[must_use]
     pub const fn new() -> Self {
         Self {
             duration: CMTime::INVALID,
@@ -95,7 +97,7 @@ impl CMSampleTimingInfo {
     }
 
     /// Create timing info with specific values
-    #[must_use] 
+    #[must_use]
     pub const fn with_times(
         duration: CMTime,
         presentation_time_stamp: CMTime,
@@ -109,7 +111,7 @@ impl CMSampleTimingInfo {
     }
 
     /// Check if all timing fields are valid
-    #[must_use] 
+    #[must_use]
     pub const fn is_valid(&self) -> bool {
         self.duration.is_valid()
             && self.presentation_time_stamp.is_valid()
@@ -117,37 +119,37 @@ impl CMSampleTimingInfo {
     }
 
     /// Check if presentation timestamp is valid
-    #[must_use] 
+    #[must_use]
     pub const fn has_valid_presentation_time(&self) -> bool {
         self.presentation_time_stamp.is_valid()
     }
 
     /// Check if decode timestamp is valid
-    #[must_use] 
+    #[must_use]
     pub const fn has_valid_decode_time(&self) -> bool {
         self.decode_time_stamp.is_valid()
     }
 
     /// Check if duration is valid
-    #[must_use] 
+    #[must_use]
     pub const fn has_valid_duration(&self) -> bool {
         self.duration.is_valid()
     }
 
     /// Get the presentation timestamp in seconds
-    #[must_use] 
+    #[must_use]
     pub fn presentation_seconds(&self) -> Option<f64> {
         self.presentation_time_stamp.as_seconds()
     }
 
     /// Get the decode timestamp in seconds
-    #[must_use] 
+    #[must_use]
     pub fn decode_seconds(&self) -> Option<f64> {
         self.decode_time_stamp.as_seconds()
     }
 
     /// Get the duration in seconds
-    #[must_use] 
+    #[must_use]
     pub fn duration_seconds(&self) -> Option<f64> {
         self.duration.as_seconds()
     }
@@ -184,7 +186,7 @@ impl CMTime {
         epoch: 0,
     };
 
-    #[must_use] 
+    #[must_use]
     pub const fn new(value: i64, timescale: i32) -> Self {
         Self {
             value,
@@ -194,43 +196,43 @@ impl CMTime {
         }
     }
 
-    #[must_use] 
+    #[must_use]
     pub const fn is_valid(&self) -> bool {
         self.flags & 0x1 != 0
     }
 
     /// Check if this time represents zero
-    #[must_use] 
+    #[must_use]
     pub const fn is_zero(&self) -> bool {
         self.value == 0 && self.is_valid()
     }
 
     /// Check if this time is indefinite
-    #[must_use] 
+    #[must_use]
     pub const fn is_indefinite(&self) -> bool {
         self.flags & 0x2 != 0
     }
 
     /// Check if this time is positive infinity
-    #[must_use] 
+    #[must_use]
     pub const fn is_positive_infinity(&self) -> bool {
         self.flags & 0x4 != 0
     }
 
     /// Check if this time is negative infinity
-    #[must_use] 
+    #[must_use]
     pub const fn is_negative_infinity(&self) -> bool {
         self.flags & 0x8 != 0
     }
 
     /// Check if this time has been rounded
-    #[must_use] 
+    #[must_use]
     pub const fn has_been_rounded(&self) -> bool {
         self.flags & 0x10 != 0
     }
 
     /// Compare two times for equality (value and timescale)
-    #[must_use] 
+    #[must_use]
     pub const fn equals(&self, other: &Self) -> bool {
         if !self.is_valid() || !other.is_valid() {
             return false;
@@ -239,7 +241,7 @@ impl CMTime {
     }
 
     /// Create a time representing positive infinity
-    #[must_use] 
+    #[must_use]
     pub const fn positive_infinity() -> Self {
         Self {
             value: 0,
@@ -250,7 +252,7 @@ impl CMTime {
     }
 
     /// Create a time representing negative infinity
-    #[must_use] 
+    #[must_use]
     pub const fn negative_infinity() -> Self {
         Self {
             value: 0,
@@ -261,7 +263,7 @@ impl CMTime {
     }
 
     /// Create an indefinite time
-    #[must_use] 
+    #[must_use]
     pub const fn indefinite() -> Self {
         Self {
             value: 0,
@@ -372,6 +374,85 @@ impl fmt::Display for CMTime {
     }
 }
 
+/// `CMTimeRange` representation matching Core Media's `CMTimeRange`.
+///
+/// ```
+/// use apple_cf::cm::{CMTime, CMTimeRange};
+///
+/// let range = CMTimeRange::new(CMTime::new(0, 600), CMTime::new(300, 600));
+/// assert_eq!(range.end(), CMTime::new(300, 600));
+/// assert!(range.contains_time(CMTime::new(150, 600)));
+/// ```
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct CMTimeRange {
+    pub start: CMTime,
+    pub duration: CMTime,
+}
+
+impl CMTimeRange {
+    pub const INVALID: Self = Self {
+        start: CMTime::INVALID,
+        duration: CMTime::INVALID,
+    };
+
+    #[must_use]
+    pub const fn new(start: CMTime, duration: CMTime) -> Self {
+        Self { start, duration }
+    }
+
+    #[must_use]
+    pub fn end(&self) -> CMTime {
+        extern "C" {
+            fn CMTimeRangeGetEnd(range: CMTimeRange) -> CMTime;
+        }
+        unsafe { CMTimeRangeGetEnd(*self) }
+    }
+
+    #[must_use]
+    pub const fn is_valid(&self) -> bool {
+        self.start.is_valid() && self.duration.is_valid()
+    }
+
+    #[must_use]
+    pub fn contains_time(&self, time: CMTime) -> bool {
+        extern "C" {
+            fn CMTimeRangeContainsTime(range: CMTimeRange, time: CMTime) -> bool;
+        }
+        unsafe { CMTimeRangeContainsTime(*self, time) }
+    }
+
+    #[must_use]
+    pub fn contains_range(&self, other: Self) -> bool {
+        extern "C" {
+            fn CMTimeRangeContainsTimeRange(range: CMTimeRange, otherRange: CMTimeRange) -> bool;
+        }
+        unsafe { CMTimeRangeContainsTimeRange(*self, other) }
+    }
+
+    #[must_use]
+    pub fn intersection(&self, other: Self) -> Self {
+        extern "C" {
+            fn CMTimeRangeGetIntersection(range: CMTimeRange, otherRange: CMTimeRange) -> CMTimeRange;
+        }
+        unsafe { CMTimeRangeGetIntersection(*self, other) }
+    }
+
+    #[must_use]
+    pub fn union(&self, other: Self) -> Self {
+        extern "C" {
+            fn CMTimeRangeGetUnion(range: CMTimeRange, otherRange: CMTimeRange) -> CMTimeRange;
+        }
+        unsafe { CMTimeRangeGetUnion(*self, other) }
+    }
+}
+
+impl fmt::Display for CMTimeRange {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "CMTimeRange(start: {}, duration: {})", self.start, self.duration)
+    }
+}
+
 /// `CMClock` wrapper for synchronization clock
 ///
 /// Represents a Core Media clock used for time synchronization.
@@ -396,13 +477,26 @@ impl std::hash::Hash for CMClock {
 
 impl CMClock {
     /// Create from raw pointer, returning None if null
-    #[must_use] 
+    #[must_use]
     pub fn from_raw(ptr: *const c_void) -> Option<Self> {
         if ptr.is_null() {
             None
         } else {
             Some(Self { ptr })
         }
+    }
+
+    /// Host-time master clock.
+    #[must_use]
+    pub fn host_time_clock() -> Self {
+        extern "C" {
+            fn CMClockGetHostTimeClock() -> *const c_void;
+            fn CFRetain(cf: *const c_void) -> *const c_void;
+        }
+        let ptr = unsafe { CMClockGetHostTimeClock() };
+        assert!(!ptr.is_null(), "CMClockGetHostTimeClock returned NULL");
+        let retained = unsafe { CFRetain(ptr) };
+        Self { ptr: retained }
     }
 
     /// Create from raw pointer (used internally)
@@ -415,7 +509,7 @@ impl CMClock {
     }
 
     /// Returns the raw pointer to the underlying `CMClock`
-    #[must_use] 
+    #[must_use]
     pub const fn as_ptr(&self) -> *const c_void {
         self.ptr
     }
@@ -424,7 +518,7 @@ impl CMClock {
     ///
     /// Note: Returns invalid time. Use `as_ptr()` with Core Media APIs directly
     /// for full clock functionality.
-    #[must_use] 
+    #[must_use]
     pub const fn time(&self) -> CMTime {
         // This would require FFI to CMClockGetTime - for now return invalid
         // Users can use the pointer directly with Core Media APIs

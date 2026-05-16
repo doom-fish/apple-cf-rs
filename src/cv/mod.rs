@@ -5,8 +5,12 @@
 //! (pixel format, dimensions, planes). Required for any pipeline that
 //! talks to `VideoToolbox` decoders, Vision, or `AVFoundation` capture.
 
+mod buffer;
+mod metal_texture_cache;
 mod pixel_buffer;
 
+pub use buffer::{CVAttachmentMode, CVBuffer, CVImageBuffer, CVImageRect, CVImageSize};
+pub use metal_texture_cache::CVMetalTextureCache;
 pub use pixel_buffer::{
     CVPixelBuffer, CVPixelBufferLockFlags, CVPixelBufferLockGuard, CVPixelBufferPool,
     PixelBufferCursorExt,

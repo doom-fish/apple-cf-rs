@@ -2,34 +2,29 @@
 
 Safe, dependency-free Rust bindings for Apple's shared **Core\*** frameworks — the foundation underneath the [doom-fish](https://github.com/doom-fish) macOS Rust suite.
 
-> **Status:** experimental. Carved out of [`screencapturekit-rs`](https://github.com/doom-fish/screencapturekit-rs); more frameworks (CoreMedia, CoreVideo, Metal) will land in subsequent releases.
+> **Status:** `v0.6.0` covers the crate's ergonomic CoreFoundation + CoreMedia + CoreVideo + IOSurface + Dispatch surface. See [`COVERAGE.md`](COVERAGE.md) for the header audit and deferred legacy APIs.
 
 ## What's in the box
 
 | Module | Framework | Feature flag | Status |
 |---|---|---|---|
-| [`cg`](src/cg) | CoreGraphics value types (`CGRect`, `CGPoint`, `CGSize`) | `cg` | ✅ |
+| [`cf`](src/cf) | CoreFoundation values, collections, locale/formatter helpers, runtime primitives | — | ✅ |
+| [`cg`](src/cg) | CoreGraphics value types + bitmap drawing wrappers | `cg` | ✅ |
 | [`iosurface`](src/iosurface) | IOSurface (zero-copy GPU buffers, multi-planar formats) | `iosurface` | ✅ |
-| [`dispatch_queue`](src/dispatch_queue.rs) | Grand Central Dispatch queues + QoS | `dispatch` | ✅ |
-| [`cm`](src/cm) | CoreMedia (`CMSampleBuffer`, `CMTime`, `CMBlockBuffer`, `CMFormatDescription`) | `cm` | ✅ |
-| [`cv`](src/cv) | CoreVideo (`CVPixelBuffer`, `CVPixelBufferPool`) | `cv` | ✅ |
+| [`dispatch_queue`](src/dispatch_queue.rs) | Dispatch queues, groups, semaphores, timer sources | `dispatch` | ✅ |
+| [`cm`](src/cm) | `CMTime`, `CMTimeRange`, `CMTimebase`, `CMSampleBuffer`, `CMBlockBuffer`, `CMFormatDescription` | `cm` | ✅ |
+| [`cv`](src/cv) | `CVBuffer`, `CVImageBuffer`, `CVPixelBuffer`, `CVPixelBufferPool`, `CVMetalTextureCache` | `cv` | ✅ |
 | [`utils`](src/utils) | Shared FFI helpers (always on) | — | ✅ |
-| `metal` | Metal (`MTLDevice`, `MTLTexture`) | `metal` | 🚧 planned |
 
 ## Why this crate exists
 
-Every doom-fish crate that wraps a media-adjacent Apple framework needs the same primitives — `CGRect`, `CVPixelBuffer`, `IOSurface`, dispatch queues. Instead of re-vendoring those inside every crate (and drifting), this crate owns them once.
+Every doom-fish crate that wraps a media-adjacent Apple framework needs the same primitives — `CFString`, `CGRect`, `CVPixelBuffer`, `IOSurface`, dispatch queues, time values. Instead of re-vendoring those inside every crate (and drifting), this crate owns them once.
 
-```
-┌────────────────────────────────────────────────────────────┐
-│ screencapturekit / videotoolbox / avfoundation / vision    │
-│           ↓ depends on ↓                                   │
-│ ┌────────────────────────────────────────────────────────┐ │
-│ │  apple-cf  (this crate)                                │ │
-│ └────────────────────────────────────────────────────────┘ │
-│           ↓ Swift @_cdecl bridge ↓                         │
-│ Apple Core* frameworks                                     │
-└────────────────────────────────────────────────────────────┘
+```text
+Safe Rust wrappers
+    ├── CoreFoundation / Dispatch / CoreMedia / CoreVideo ergonomic APIs
+    ├── direct C FFI for value-only primitives where appropriate
+    └── Swift @_cdecl bridge for reference-counted / callback-heavy surfaces
 ```
 
 ## Requirements
@@ -42,73 +37,71 @@ Every doom-fish crate that wraps a media-adjacent Apple framework needs the same
 
 ```toml
 [dependencies]
-apple-cf = "0.1"
+apple-cf = "0.6"
 ```
 
 Or pick only the frameworks you need:
 
 ```toml
 [dependencies]
-apple-cf = { version = "0.1", default-features = false, features = ["cg", "iosurface"] }
+apple-cf = { version = ">=0.6, <0.7", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
 ```
 
 ## Quick examples
 
-### Allocate an IOSurface and write a pixel
+### Build CoreFoundation values and collections
+
+```rust
+use apple_cf::cf::{CFArray, CFString};
+
+let first = CFString::new("first");
+let second = CFString::new("second");
+let array = CFArray::from_values(&[&first, &second]);
+assert_eq!(array.len(), 2);
+```
+
+### Create a timer-backed dispatch source
 
 ```rust,no_run
-use apple_cf::iosurface::{IOSurface, IOSurfaceLockOptions};
+use apple_cf::dispatch_queue::DispatchSource;
+use std::thread;
+use std::time::Duration;
 
-# fn main() -> Result<(), Box<dyn std::error::Error>> {
-let pixel_format = u32::from_be_bytes(*b"BGRA");
-let surface = IOSurface::create(16, 16, pixel_format, 4)
-    .ok_or("failed to allocate")?;
-
-let mut guard = surface
-    .lock(IOSurfaceLockOptions::NONE)
-    .map_err(|c| format!("lock failed: {c}"))?;
-if let Some(bytes) = guard.as_slice_mut() {
-    bytes[0] = 0xFF;
-}
-# Ok(())
-# }
+let source = DispatchSource::timer(Duration::from_millis(5), Duration::from_millis(1));
+source.resume();
+thread::sleep(Duration::from_millis(20));
+source.cancel();
+assert!(source.fire_count() > 0);
 ```
 
-### Create a custom dispatch queue
+### Allocate an IOSurface-backed `CVPixelBuffer`
 
-```rust
-use apple_cf::dispatch_queue::{DispatchQoS, DispatchQueue};
+```rust,no_run
+use apple_cf::cv::CVPixelBuffer;
 
-let q = DispatchQueue::new("com.example.work", DispatchQoS::UserInitiated);
-```
-
-### Work with CGRect
-
-```rust
-use apple_cf::cg::CGRect;
-
-let r = CGRect::new(10.0, 20.0, 800.0, 600.0);
-assert_eq!(r.center().x, 410.0);
+let pixel_buffer = CVPixelBuffer::create(16, 16, 0x4247_5241)
+    .expect("pixel buffer");
+assert_eq!(pixel_buffer.width(), 16);
 ```
 
 ## Architecture
 
 This crate uses the same Swift-bridge pattern as the rest of the doom-fish crates:
 
-- `swift-bridge/Sources/<Framework>Bridge/` exposes a thin `@_cdecl` C surface
-- `src/ffi/mod.rs` declares the matching `extern "C"` bindings
+- `swift-bridge/Sources/<Framework>Bridge/` exposes thin `@_cdecl` entry points
+- `src/ffi/*.rs` declares the matching `extern "C"` bindings
 - `src/<framework>/` provides the safe Rust API on top
 
 The Rust crate has **zero runtime dependencies**.
 
-## Roadmap
+## Examples and tests
 
-1. **CoreMedia** — `CMSampleBuffer`, `CMTime`, `CMFormatDescription`, `CMBlockBuffer` (carve out from screencapturekit-rs, leaving `SCStreamFrameInfo` attachment readers in place upstream)
-2. **CoreVideo** — `CVPixelBuffer`, `CVPixelBufferPool`
-3. **Metal** — `MTLDevice`, `MTLTexture`, `MTLCommandQueue`
-4. **CoreFoundation** — opt-in basic types if needed by downstream crates
+This release ships 13 numbered examples plus dedicated smoke tests for:
 
-Migrating screencapturekit-rs to consume `apple-cf` is the proof point that closes this story.
+- CoreFoundation primitives, collections, resources, runtime helpers
+- Dispatch groups / semaphores / timer sources
+- `CMTimeRange` / `CMTimebase`
+- `CVBuffer` / `CVImageBuffer` / `CVMetalTextureCache`
 
 ## License
 

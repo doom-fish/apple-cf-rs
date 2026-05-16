@@ -49,7 +49,7 @@ impl CGRect {
     /// let rect = CGRect::new(0.0, 0.0, 1920.0, 1080.0);
     /// assert_eq!(rect.width, 1920.0);
     /// ```
-    #[must_use] 
+    #[must_use]
     pub const fn new(x: f64, y: f64, width: f64, height: f64) -> Self {
         Self {
             x,
@@ -69,13 +69,13 @@ impl CGRect {
     /// let rect = CGRect::zero();
     /// assert!(rect.is_null());
     /// ```
-    #[must_use] 
+    #[must_use]
     pub const fn zero() -> Self {
         Self::new(0.0, 0.0, 0.0, 0.0)
     }
 
     /// Create a rect with origin and size
-    #[must_use] 
+    #[must_use]
     pub const fn with_origin_and_size(origin: CGPoint, size: CGSize) -> Self {
         Self {
             x: origin.x,
@@ -86,66 +86,66 @@ impl CGRect {
     }
 
     /// Get the origin point
-    #[must_use] 
+    #[must_use]
     pub const fn origin(&self) -> CGPoint {
         CGPoint::new(self.x, self.y)
     }
 
     /// Get the size
-    #[must_use] 
+    #[must_use]
     pub const fn size(&self) -> CGSize {
         CGSize::new(self.width, self.height)
     }
 
     /// Get the center point
-    #[must_use] 
+    #[must_use]
     pub const fn center(&self) -> CGPoint {
         CGPoint::new(self.x + self.width / 2.0, self.y + self.height / 2.0)
     }
 
     /// Get the minimum X coordinate
-    #[must_use] 
+    #[must_use]
     pub const fn min_x(&self) -> f64 {
         self.x
     }
 
     /// Get the minimum Y coordinate
-    #[must_use] 
+    #[must_use]
     pub const fn min_y(&self) -> f64 {
         self.y
     }
 
     /// Get the maximum X coordinate
-    #[must_use] 
+    #[must_use]
     pub const fn max_x(&self) -> f64 {
         self.x + self.width
     }
 
     /// Get the maximum Y coordinate
-    #[must_use] 
+    #[must_use]
     pub const fn max_y(&self) -> f64 {
         self.y + self.height
     }
 
     /// Get the mid X coordinate
-    #[must_use] 
+    #[must_use]
     pub const fn mid_x(&self) -> f64 {
         self.x + self.width / 2.0
     }
 
     /// Get the mid Y coordinate
-    #[must_use] 
+    #[must_use]
     pub const fn mid_y(&self) -> f64 {
         self.y + self.height / 2.0
     }
 
-    #[must_use] 
+    #[must_use]
     pub fn is_empty(&self) -> bool {
         self.width <= 0.0 || self.height <= 0.0
     }
 
     /// Check if rect is null (both position and size are zero)
-    #[must_use] 
+    #[must_use]
     pub const fn is_null(&self) -> bool {
         self.x == 0.0 && self.y == 0.0 && self.width == 0.0 && self.height == 0.0
     }

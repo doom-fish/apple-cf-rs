@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0]
+
+### Added
+
+- **`cf` module** — safe Core Foundation wrappers for:
+  - value types: `CFType`, `CFString`, `CFNumber`, `CFData`, `CFDate`, `CFUUID`, `CFError`
+  - collections: `CFArray`, `CFDictionary` / `CFDict`, `CFBag`, `CFTree`, `CFAttributedString`
+  - resources / locale / formatting: `CFURL`, `CFBundle`, `CFLocale`, `CFCalendar`, `CFTimeZone`, `CFCharacterSet`, `CFNumberFormatter`, `CFDateFormatter`, `CFPreferences`, `CFFileSecurity`, `CFXML`
+  - runtime helpers: `CFNotificationCenter`, `CFRunLoop`, `CFTimer`, `CFMessagePort`, `CFStreamPair`, `CFSocket`, `CFFileDescriptor`
+- **Dispatch sync primitives** — `DispatchGroup`, `DispatchSemaphore`, and timer-backed `DispatchSource` in `dispatch_queue`.
+- **CoreMedia time extras** — `CMTimeRange`, `CMClock::host_time_clock()`, and `CMTimebase`.
+- **CoreVideo extras** — `CVBuffer`, `CVImageBuffer`, `CVMetalTextureCache`.
+- Eight new numbered examples (`06_` through `13_`) covering the new CoreFoundation / Dispatch / CoreMedia / CoreVideo surface.
+- Seven new test files covering the new wrappers.
+- `COVERAGE.md` header-audit summary for the Wave-C sweep.
+
+### Changed
+
+- README refreshed for the expanded CoreFoundation / Dispatch / media coverage.
+- `Cargo.toml` version bumped to `0.6.0`.
+- `build.rs` now links the `Metal` framework for `CVMetalTextureCache` support.
+
 ## [0.5.0]
 
 ### Added

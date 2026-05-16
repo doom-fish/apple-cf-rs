@@ -10,13 +10,13 @@
 //!
 //! | Module | Framework | Feature flag |
 //! |---|---|---|
+//! | [`cf`] | Core Foundation value, collection, locale, formatter, and runtime wrappers | — |
 //! | [`cg`] | CoreGraphics value types + bitmap drawing wrappers | `cg` |
 //! | [`iosurface`] | `IOSurface` (zero-copy GPU buffers) | `iosurface` |
 //! | [`dispatch_queue`] | Grand Central Dispatch | `dispatch` |
+//! | [`cm`] | `CoreMedia` time / sample / buffer wrappers | `cm` |
+//! | [`cv`] | `CoreVideo` pixel-buffer wrappers | `cv` |
 //! | [`utils`] | shared FFI helpers (always on) | — |
-//!
-//! Future frameworks (`CoreMedia`, `CoreVideo`, Metal) will be added as separate
-//! features so that downstream crates only pull in what they need.
 //!
 //! # Architecture
 //!
@@ -32,6 +32,7 @@
 
 mod error;
 
+pub mod cf;
 pub mod ffi;
 pub mod utils;
 
@@ -61,14 +62,19 @@ pub use utils::FourCharCode;
 
 /// Common imports for users of this crate.
 pub mod prelude {
+    pub use crate::cf::{CFArray, CFString, CFType, CFURL};
     #[cfg(feature = "cg")]
     pub use crate::cg::{CGPoint, CGRect, CGSize};
     #[cfg(feature = "cm")]
-    pub use crate::cm::{CMBlockBuffer, CMFormatDescription, CMSampleBuffer, CMTime};
+    pub use crate::cm::{CMBlockBuffer, CMFormatDescription, CMSampleBuffer, CMTime, CMTimeRange};
     #[cfg(feature = "cv")]
-    pub use crate::cv::{CVPixelBuffer, CVPixelBufferLockFlags};
+    pub use crate::cv::{
+        CVBuffer, CVImageBuffer, CVMetalTextureCache, CVPixelBuffer, CVPixelBufferLockFlags,
+    };
     #[cfg(feature = "dispatch")]
-    pub use crate::dispatch_queue::{DispatchQoS, DispatchQueue};
+    pub use crate::dispatch_queue::{
+        DispatchGroup, DispatchQoS, DispatchQueue, DispatchSemaphore, DispatchSource,
+    };
     #[cfg(feature = "iosurface")]
     pub use crate::iosurface::{IOSurface, IOSurfaceLockOptions};
     pub use crate::utils::FourCharCode;

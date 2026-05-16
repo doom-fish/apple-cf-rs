@@ -90,37 +90,37 @@ impl CMFormatDescription {
         Self(ptr)
     }
 
-    #[must_use] 
+    #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
     }
 
     /// Get the media type as a raw u32 value
-    #[must_use] 
+    #[must_use]
     pub fn media_type_raw(&self) -> u32 {
         unsafe { ffi::cm_format_description_get_media_type(self.0) }
     }
 
     /// Get the media type as `FourCharCode`
-    #[must_use] 
+    #[must_use]
     pub fn media_type(&self) -> crate::utils::four_char_code::FourCharCode {
         crate::utils::four_char_code::FourCharCode::from(self.media_type_raw())
     }
 
     /// Get the media subtype (codec type) as a raw u32 value
-    #[must_use] 
+    #[must_use]
     pub fn media_subtype_raw(&self) -> u32 {
         unsafe { ffi::cm_format_description_get_media_subtype(self.0) }
     }
 
     /// Get the media subtype as `FourCharCode`
-    #[must_use] 
+    #[must_use]
     pub fn media_subtype(&self) -> crate::utils::four_char_code::FourCharCode {
         crate::utils::four_char_code::FourCharCode::from(self.media_subtype_raw())
     }
 
     /// Get format description extensions
-    #[must_use] 
+    #[must_use]
     pub fn extensions(&self) -> Option<*const std::ffi::c_void> {
         unsafe {
             let ptr = ffi::cm_format_description_get_extensions(self.0);
@@ -133,93 +133,93 @@ impl CMFormatDescription {
     }
 
     /// Check if this is a video format description
-    #[must_use] 
+    #[must_use]
     pub fn is_video(&self) -> bool {
         self.media_type() == media_types::VIDEO
     }
 
     /// Check if this is an audio format description
-    #[must_use] 
+    #[must_use]
     pub fn is_audio(&self) -> bool {
         self.media_type() == media_types::AUDIO
     }
 
     /// Check if this is a muxed format description
-    #[must_use] 
+    #[must_use]
     pub fn is_muxed(&self) -> bool {
         self.media_type() == media_types::MUXED
     }
 
     /// Check if this is a text/subtitle format description
-    #[must_use] 
+    #[must_use]
     pub fn is_text(&self) -> bool {
         self.media_type() == media_types::TEXT
     }
 
     /// Check if this is a closed caption format description
-    #[must_use] 
+    #[must_use]
     pub fn is_closed_caption(&self) -> bool {
         self.media_type() == media_types::CLOSED_CAPTION
     }
 
     /// Check if this is a metadata format description
-    #[must_use] 
+    #[must_use]
     pub fn is_metadata(&self) -> bool {
         self.media_type() == media_types::METADATA
     }
 
     /// Check if this is a timecode format description
-    #[must_use] 
+    #[must_use]
     pub fn is_timecode(&self) -> bool {
         self.media_type() == media_types::TIMECODE
     }
 
     /// Get a human-readable string for the media type
-    #[must_use] 
+    #[must_use]
     pub fn media_type_string(&self) -> String {
         self.media_type().display()
     }
 
     /// Get a human-readable string for the media subtype (codec)
-    #[must_use] 
+    #[must_use]
     pub fn media_subtype_string(&self) -> String {
         self.media_subtype().display()
     }
 
     /// Check if the codec is H.264
-    #[must_use] 
+    #[must_use]
     pub fn is_h264(&self) -> bool {
         self.media_subtype() == codec_types::H264
     }
 
     /// Check if the codec is HEVC/H.265
-    #[must_use] 
+    #[must_use]
     pub fn is_hevc(&self) -> bool {
         let subtype = self.media_subtype();
         subtype == codec_types::HEVC || subtype == codec_types::HEVC_2
     }
 
     /// Check if the codec is AAC
-    #[must_use] 
+    #[must_use]
     pub fn is_aac(&self) -> bool {
         self.media_subtype() == codec_types::AAC
     }
 
     /// Check if the codec is PCM
-    #[must_use] 
+    #[must_use]
     pub fn is_pcm(&self) -> bool {
         self.media_subtype() == codec_types::LPCM
     }
 
     /// Check if the codec is `ProRes`
-    #[must_use] 
+    #[must_use]
     pub fn is_prores(&self) -> bool {
         let subtype = self.media_subtype();
         subtype == codec_types::PRORES_422 || subtype == codec_types::PRORES_4444
     }
 
     /// Check if the codec is Apple Lossless (ALAC)
-    #[must_use] 
+    #[must_use]
     pub fn is_alac(&self) -> bool {
         self.media_subtype() == codec_types::ALAC
     }
@@ -229,7 +229,7 @@ impl CMFormatDescription {
     /// Get the audio sample rate in Hz
     ///
     /// Returns `None` if this is not an audio format description.
-    #[must_use] 
+    #[must_use]
     pub fn audio_sample_rate(&self) -> Option<f64> {
         if !self.is_audio() {
             return None;
@@ -245,7 +245,7 @@ impl CMFormatDescription {
     /// Get the number of audio channels
     ///
     /// Returns `None` if this is not an audio format description.
-    #[must_use] 
+    #[must_use]
     pub fn audio_channel_count(&self) -> Option<u32> {
         if !self.is_audio() {
             return None;
@@ -261,7 +261,7 @@ impl CMFormatDescription {
     /// Get the bits per audio channel
     ///
     /// Returns `None` if this is not an audio format description.
-    #[must_use] 
+    #[must_use]
     pub fn audio_bits_per_channel(&self) -> Option<u32> {
         if !self.is_audio() {
             return None;
@@ -277,7 +277,7 @@ impl CMFormatDescription {
     /// Get the bytes per audio frame
     ///
     /// Returns `None` if this is not an audio format description.
-    #[must_use] 
+    #[must_use]
     pub fn audio_bytes_per_frame(&self) -> Option<u32> {
         if !self.is_audio() {
             return None;
@@ -293,7 +293,7 @@ impl CMFormatDescription {
     /// Get the audio format flags
     ///
     /// Returns `None` if this is not an audio format description.
-    #[must_use] 
+    #[must_use]
     pub fn audio_format_flags(&self) -> Option<u32> {
         if !self.is_audio() {
             return None;
@@ -302,14 +302,14 @@ impl CMFormatDescription {
     }
 
     /// Check if audio is float format (based on format flags)
-    #[must_use] 
+    #[must_use]
     pub fn audio_is_float(&self) -> bool {
         // kAudioFormatFlagIsFloat = 1
         self.audio_format_flags().is_some_and(|f| f & 1 != 0)
     }
 
     /// Check if audio is big-endian (based on format flags)
-    #[must_use] 
+    #[must_use]
     pub fn audio_is_big_endian(&self) -> bool {
         // kAudioFormatFlagIsBigEndian = 2
         self.audio_format_flags().is_some_and(|f| f & 2 != 0)

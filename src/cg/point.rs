@@ -42,7 +42,7 @@ impl CGPoint {
     /// let point = CGPoint::new(100.0, 200.0);
     /// assert_eq!(point.x, 100.0);
     /// ```
-    #[must_use] 
+    #[must_use]
     pub const fn new(x: f64, y: f64) -> Self {
         Self { x, y }
     }
@@ -57,19 +57,19 @@ impl CGPoint {
     /// let point = CGPoint::zero();
     /// assert!(point.is_zero());
     /// ```
-    #[must_use] 
+    #[must_use]
     pub const fn zero() -> Self {
         Self::new(0.0, 0.0)
     }
 
     /// Check if point is at origin (0, 0)
-    #[must_use] 
+    #[must_use]
     pub const fn is_zero(&self) -> bool {
         self.x == 0.0 && self.y == 0.0
     }
 
     /// Calculate distance to another point
-    #[must_use] 
+    #[must_use]
     pub fn distance_to(&self, other: &Self) -> f64 {
         let dx = self.x - other.x;
         let dy = self.y - other.y;
@@ -77,7 +77,7 @@ impl CGPoint {
     }
 
     /// Calculate squared distance to another point (faster than `distance_to`)
-    #[must_use] 
+    #[must_use]
     pub const fn distance_squared_to(&self, other: &Self) -> f64 {
         let dx = self.x - other.x;
         let dy = self.y - other.y;
