@@ -25,7 +25,9 @@ where
     F: FnOnce() -> *mut i8,
 {
     unsafe {
-        doom_fish_utils::ffi_string::ffi_string_owned(ffi_call, |ptr| crate::ffi::acf_free_string(ptr))
+        doom_fish_utils::ffi_string::ffi_string_owned(ffi_call, |ptr| {
+            crate::ffi::acf_free_string(ptr)
+        })
     }
 }
 
