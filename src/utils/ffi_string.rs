@@ -26,7 +26,7 @@ where
 {
     unsafe {
         doom_fish_utils::ffi_string::ffi_string_owned(ffi_call, |ptr| {
-            crate::ffi::acf_free_string(ptr)
+            crate::ffi::acf_free_string(ptr);
         })
     }
 }
