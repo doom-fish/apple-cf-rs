@@ -40,7 +40,10 @@ fn cf_collection_wrappers_work() {
     assert!(mutable_set.is_empty());
 
     let plist = CFDictionary::from_pairs(&[(&first, &second)]);
-    assert!(CFPropertyList::is_valid(&plist, CFPropertyListFormat::BinaryV1_0));
+    assert!(CFPropertyList::is_valid(
+        &plist,
+        CFPropertyListFormat::BinaryV1_0
+    ));
     let deep_copy =
         CFPropertyList::create_deep_copy(&plist, CFPropertyListMutabilityOptions::IMMUTABLE)
             .expect("deep copy plist");
@@ -48,11 +51,9 @@ fn cf_collection_wrappers_work() {
 
     let data = CFPropertyList::create_data(&plist, CFPropertyListFormat::BinaryV1_0, 0)
         .expect("serialize plist");
-    let (decoded, detected_format) = CFPropertyList::create_with_data(
-        &data,
-        CFPropertyListMutabilityOptions::IMMUTABLE,
-    )
-    .expect("decode plist");
+    let (decoded, detected_format) =
+        CFPropertyList::create_with_data(&data, CFPropertyListMutabilityOptions::IMMUTABLE)
+            .expect("decode plist");
     assert_eq!(detected_format, CFPropertyListFormat::BinaryV1_0);
     assert_eq!(decoded.type_id(), CFDictionary::type_id());
 

@@ -206,14 +206,14 @@ extern "C" {
     pub fn cm_metadata_format_description_key_structural_dependency() -> *mut c_void;
     pub fn cm_metadata_format_description_key_value() -> *mut c_void;
     pub fn cm_metadata_format_description_metadata_specification_key_data_type() -> *mut c_void;
-    pub fn cm_metadata_format_description_metadata_specification_key_extended_language_tag()
-        -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_extended_language_tag(
+    ) -> *mut c_void;
     pub fn cm_metadata_format_description_metadata_specification_key_identifier() -> *mut c_void;
     pub fn cm_metadata_format_description_metadata_specification_key_setup_data() -> *mut c_void;
-    pub fn cm_metadata_format_description_metadata_specification_key_structural_dependency()
-        -> *mut c_void;
-    pub fn cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag()
-        -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_structural_dependency(
+    ) -> *mut c_void;
+    pub fn cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag(
+    ) -> *mut c_void;
 
     // ---- CVPixelBuffer ----
     pub fn cv_pixel_buffer_release(pixel_buffer: *mut c_void);

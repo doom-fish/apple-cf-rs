@@ -1,9 +1,9 @@
 use apple_cf::cf::{CFArray, CFData, CFDictionary, CFNumber, CFString};
-use apple_cf::cm::{CMFormatDescription, CMMetadataFormatDescription};
 use apple_cf::cm::format_description::{
     format_description_extension_keys, metadata_description_keys, metadata_format_types,
     metadata_specification_keys, metadata_structural_dependency_keys,
 };
+use apple_cf::cm::{CMFormatDescription, CMMetadataFormatDescription};
 use apple_cf::FourCharCode;
 
 fn boxed_metadata_key(local_id: u64, value: &str) -> CFDictionary {
@@ -66,9 +66,14 @@ fn cm_metadata_format_description_helpers_work() {
     let extended = by_keys
         .extend_with_metadata_specifications(&specs)
         .expect("extended metadata description");
-    assert_eq!(extended.identifiers().expect("extended identifiers").len(), 2);
+    assert_eq!(
+        extended.identifiers().expect("extended identifiers").len(),
+        2
+    );
 
-    let merged = by_keys.merge(&by_specs).expect("merged metadata description");
+    let merged = by_keys
+        .merge(&by_specs)
+        .expect("merged metadata description");
     assert_eq!(merged.identifiers().expect("merged identifiers").len(), 2);
 
     let format_description: CMFormatDescription = merged.into();

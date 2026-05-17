@@ -15,10 +15,10 @@
 
 #[allow(warnings)]
 #[allow(clippy::all)]
-mod generated;
+mod extras;
 #[allow(warnings)]
 #[allow(clippy::all)]
-mod extras;
+mod generated;
 
 pub use extras::*;
 pub use generated::*;

@@ -1,16 +1,15 @@
 //! Shared utilities used by other modules in this crate and by downstream
-//! crates that build on top of the apple-cf bridge.
+//! crates that build on top of the `apple-cf` bridge.
 //!
-//! * [`completion`] — sync/async completion-handler bridges
-//! * [`four_char_code`] — `FourCharCode` (used by pixel-format / `OSType` codes)
-//! * [`ffi_string`] — owned-string helpers around bridge fns that return
-//!   heap-allocated C strings
-//! * [`panic_safe`] — wrappers that catch panics inside `extern "C"` callbacks
-//!   so they don't unwind across the FFI boundary
+//! Since v0.7.0 these helpers live in the framework-agnostic
+//! `doom-fish-utils` crate. This module preserves the historic
+//! `apple_cf::utils::*` paths as re-exports plus a thin
+//! [`ffi_string`] convenience layer that bakes in `acf_free_string`
+//! for the string-owning helpers.
 
-pub mod completion;
+pub use doom_fish_utils::completion;
+pub use doom_fish_utils::four_char_code;
+pub use doom_fish_utils::four_char_code::FourCharCode;
+pub use doom_fish_utils::panic_safe;
+
 pub mod ffi_string;
-pub mod four_char_code;
-pub mod panic_safe;
-
-pub use four_char_code::FourCharCode;

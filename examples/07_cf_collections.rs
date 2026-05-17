@@ -1,7 +1,6 @@
 use apple_cf::cf::{
     CFArray, CFAttributedString, CFBag, CFDictionary, CFMutableSet, CFPropertyList,
-    CFPropertyListFormat, CFPropertyListMutabilityOptions, CFSet, CFSetCallbacks, CFString,
-    CFTree,
+    CFPropertyListFormat, CFPropertyListMutabilityOptions, CFSet, CFSetCallbacks, CFString, CFTree,
 };
 
 fn main() {
@@ -28,11 +27,9 @@ fn main() {
     let plist = CFDictionary::from_pairs(&[(&first, &second)]);
     let data = CFPropertyList::create_data(&plist, CFPropertyListFormat::BinaryV1_0, 0)
         .expect("serialize property list");
-    let (decoded, format) = CFPropertyList::create_with_data(
-        &data,
-        CFPropertyListMutabilityOptions::IMMUTABLE,
-    )
-    .expect("decode property list");
+    let (decoded, format) =
+        CFPropertyList::create_with_data(&data, CFPropertyListMutabilityOptions::IMMUTABLE)
+            .expect("decode property list");
     assert_eq!(format, CFPropertyListFormat::BinaryV1_0);
     assert_eq!(decoded.type_id(), CFDictionary::type_id());
 

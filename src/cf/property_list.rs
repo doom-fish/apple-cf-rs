@@ -22,7 +22,9 @@
 //! assert_eq!(decoded.type_id(), CFDictionary::type_id());
 //! ```
 
-use super::{AsCFType, CFData, CFError as CoreFoundationError, CFReadStream, CFType, CFWriteStream};
+use super::{
+    AsCFType, CFData, CFError as CoreFoundationError, CFReadStream, CFType, CFWriteStream,
+};
 use crate::ffi;
 use std::fmt;
 
@@ -109,8 +111,10 @@ fn property_list_error(
     operation: &'static str,
     error_ptr: *mut std::ffi::c_void,
 ) -> CFPropertyListError {
-    CoreFoundationError::from_raw(error_ptr)
-        .map_or_else(|| CFPropertyListError::Null(crate::CFError::new(operation)), CFPropertyListError::CoreFoundation)
+    CoreFoundationError::from_raw(error_ptr).map_or_else(
+        || CFPropertyListError::Null(crate::CFError::new(operation)),
+        CFPropertyListError::CoreFoundation,
+    )
 }
 
 fn property_list_format(raw: isize) -> CFPropertyListFormat {

@@ -1,5 +1,7 @@
 use apple_cf::cf::{CFArray, CFData, CFDictionary, CFNumber, CFString};
-use apple_cf::cm::format_description::{metadata_description_keys, metadata_format_types, metadata_specification_keys};
+use apple_cf::cm::format_description::{
+    metadata_description_keys, metadata_format_types, metadata_specification_keys,
+};
 use apple_cf::cm::CMMetadataFormatDescription;
 use apple_cf::FourCharCode;
 
@@ -50,6 +52,8 @@ fn main() {
     .expect("metadata description from specifications");
     assert_eq!(specified.identifiers().expect("identifiers").len(), 1);
 
-    let merged = keyed.merge(&specified).expect("merged metadata description");
+    let merged = keyed
+        .merge(&specified)
+        .expect("merged metadata description");
     assert_eq!(merged.identifiers().expect("merged identifiers").len(), 2);
 }

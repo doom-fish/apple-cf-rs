@@ -1,6 +1,6 @@
 use apple_cf::dispatch_queue::{
-    dispatch_apply, dispatch_async, dispatch_async_and_wait, DispatchGroup, DispatchQueue,
-    DispatchQoS, DispatchSemaphore, DispatchSource,
+    dispatch_apply, dispatch_async, dispatch_async_and_wait, DispatchGroup, DispatchQoS,
+    DispatchQueue, DispatchSemaphore, DispatchSource,
 };
 use std::sync::{
     atomic::{AtomicUsize, Ordering},

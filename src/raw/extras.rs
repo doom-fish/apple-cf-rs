@@ -50,73 +50,121 @@ pub const fn CFSwapInt64(arg: u64) -> u64 {
 #[must_use]
 #[inline]
 pub const fn CFSwapInt16BigToHost(arg: u16) -> u16 {
-    if cfg!(target_endian = "big") { arg } else { CFSwapInt16(arg) }
+    if cfg!(target_endian = "big") {
+        arg
+    } else {
+        CFSwapInt16(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt32BigToHost(arg: u32) -> u32 {
-    if cfg!(target_endian = "big") { arg } else { CFSwapInt32(arg) }
+    if cfg!(target_endian = "big") {
+        arg
+    } else {
+        CFSwapInt32(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt64BigToHost(arg: u64) -> u64 {
-    if cfg!(target_endian = "big") { arg } else { CFSwapInt64(arg) }
+    if cfg!(target_endian = "big") {
+        arg
+    } else {
+        CFSwapInt64(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt16HostToBig(arg: u16) -> u16 {
-    if cfg!(target_endian = "big") { arg } else { CFSwapInt16(arg) }
+    if cfg!(target_endian = "big") {
+        arg
+    } else {
+        CFSwapInt16(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt32HostToBig(arg: u32) -> u32 {
-    if cfg!(target_endian = "big") { arg } else { CFSwapInt32(arg) }
+    if cfg!(target_endian = "big") {
+        arg
+    } else {
+        CFSwapInt32(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt64HostToBig(arg: u64) -> u64 {
-    if cfg!(target_endian = "big") { arg } else { CFSwapInt64(arg) }
+    if cfg!(target_endian = "big") {
+        arg
+    } else {
+        CFSwapInt64(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt16LittleToHost(arg: u16) -> u16 {
-    if cfg!(target_endian = "little") { arg } else { CFSwapInt16(arg) }
+    if cfg!(target_endian = "little") {
+        arg
+    } else {
+        CFSwapInt16(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt32LittleToHost(arg: u32) -> u32 {
-    if cfg!(target_endian = "little") { arg } else { CFSwapInt32(arg) }
+    if cfg!(target_endian = "little") {
+        arg
+    } else {
+        CFSwapInt32(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt64LittleToHost(arg: u64) -> u64 {
-    if cfg!(target_endian = "little") { arg } else { CFSwapInt64(arg) }
+    if cfg!(target_endian = "little") {
+        arg
+    } else {
+        CFSwapInt64(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt16HostToLittle(arg: u16) -> u16 {
-    if cfg!(target_endian = "little") { arg } else { CFSwapInt16(arg) }
+    if cfg!(target_endian = "little") {
+        arg
+    } else {
+        CFSwapInt16(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt32HostToLittle(arg: u32) -> u32 {
-    if cfg!(target_endian = "little") { arg } else { CFSwapInt32(arg) }
+    if cfg!(target_endian = "little") {
+        arg
+    } else {
+        CFSwapInt32(arg)
+    }
 }
 
 #[must_use]
 #[inline]
 pub const fn CFSwapInt64HostToLittle(arg: u64) -> u64 {
-    if cfg!(target_endian = "little") { arg } else { CFSwapInt64(arg) }
+    if cfg!(target_endian = "little") {
+        arg
+    } else {
+        CFSwapInt64(arg)
+    }
 }
 
 #[must_use]
@@ -235,11 +283,16 @@ pub unsafe fn CFStringGetCharacterFromInlineBuffer(
         return 0;
     }
     if !buf.directUniCharBuffer.is_null() {
-        return unsafe { *buf.directUniCharBuffer.add((idx + buf.rangeToBuffer.location) as usize) };
+        return unsafe {
+            *buf.directUniCharBuffer
+                .add((idx + buf.rangeToBuffer.location) as usize)
+        };
     }
     if !buf.directCStringBuffer.is_null() {
-        return unsafe { *buf.directCStringBuffer.add((idx + buf.rangeToBuffer.location) as usize) as u8 }
-            as UniChar;
+        return unsafe {
+            *buf.directCStringBuffer
+                .add((idx + buf.rangeToBuffer.location) as usize) as u8
+        } as UniChar;
     }
     if idx >= buf.bufferedRangeEnd || idx < buf.bufferedRangeStart {
         buf.bufferedRangeStart = (idx - 4).max(0);
@@ -276,9 +329,8 @@ pub const fn CFStringGetLongCharacterForSurrogatePair(
     surrogateHigh: UniChar,
     surrogateLow: UniChar,
 ) -> UTF32Char {
-    (((surrogateHigh as UTF32Char - 0xD800) << 10)
-        + (surrogateLow as UTF32Char - 0xDC00)
-        + 0x10000) as UTF32Char
+    (((surrogateHigh as UTF32Char - 0xD800) << 10) + (surrogateLow as UTF32Char - 0xDC00) + 0x10000)
+        as UTF32Char
 }
 
 #[must_use]

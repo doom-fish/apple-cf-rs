@@ -2,7 +2,10 @@
 
 #![allow(dead_code)]
 
-use crate::{cf::{CFArray, CFDictionary}, ffi};
+use crate::{
+    cf::{CFArray, CFDictionary},
+    ffi,
+};
 use std::{fmt, ops::Deref};
 
 pub struct CMFormatDescription(*mut std::ffi::c_void);

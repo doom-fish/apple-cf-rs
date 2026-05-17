@@ -13,13 +13,12 @@ mod runtime;
 
 pub use base::{AsCFType, CFType};
 pub use collections::{
-    CFArray, CFAttributedString, CFBag, CFDict, CFDictionary, CFMutableSet, CFSet,
-    CFSetCallbacks, CFTree,
+    CFArray, CFAttributedString, CFBag, CFDict, CFDictionary, CFMutableSet, CFSet, CFSetCallbacks,
+    CFTree,
 };
 pub use primitives::{CFData, CFDate, CFError, CFNumber, CFString, CFUUID};
 pub use property_list::{
-    CFPropertyList, CFPropertyListError, CFPropertyListFormat,
-    CFPropertyListMutabilityOptions,
+    CFPropertyList, CFPropertyListError, CFPropertyListFormat, CFPropertyListMutabilityOptions,
 };
 pub use resources::{
     CFBundle, CFCalendar, CFCharacterSet, CFDateFormatter, CFDateFormatterStyle, CFFileSecurity,

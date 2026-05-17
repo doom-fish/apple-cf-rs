@@ -32,8 +32,14 @@ fn raw_bindings_cover_remaining_inline_and_metal_dispatch_symbols() {
 
     let tag = unsafe { raw::kCMTagMediaTypeVideo };
     assert_eq!(raw::CMTagIsValid(tag), 1);
-    assert_eq!(raw::CMTagGetCategory(tag), raw::kCMTagCategory_MediaType as raw::CMTagCategory);
-    assert_eq!(raw::CMTagHasCategory(tag, raw::kCMTagCategory_MediaType as raw::CMTagCategory), 1);
+    assert_eq!(
+        raw::CMTagGetCategory(tag),
+        raw::kCMTagCategory_MediaType as raw::CMTagCategory
+    );
+    assert_eq!(
+        raw::CMTagHasCategory(tag, raw::kCMTagCategory_MediaType as raw::CMTagCategory),
+        1
+    );
     assert_eq!(raw::CMTagCategoryEqualToTagCategory(tag, tag), 1);
     assert_eq!(raw::CMTagCategoryValueEqualToValue(tag, tag), 1);
 

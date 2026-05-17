@@ -209,7 +209,8 @@ impl CFSet {
     #[must_use]
     pub fn from_values_with_callbacks(values: &[&dyn AsCFType], callbacks: CFSetCallbacks) -> Self {
         let raw_values: Vec<*mut c_void> = values.iter().map(|value| value.as_ptr()).collect();
-        let ptr = unsafe { ffi::cf_set_create(raw_values.as_ptr(), raw_values.len(), callbacks as i32) };
+        let ptr =
+            unsafe { ffi::cf_set_create(raw_values.as_ptr(), raw_values.len(), callbacks as i32) };
         Self::from_raw(ptr).expect("CFSetCreate returned NULL")
     }
 

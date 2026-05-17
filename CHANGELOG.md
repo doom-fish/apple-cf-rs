@@ -5,7 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.7.0] — 2026-05-17
+
+### Changed
+
+- **Factored framework-agnostic helpers into the new
+  [`doom-fish-utils`](https://crates.io/crates/doom-fish-utils) crate**:
+  `completion`, `ffi_string`, `four_char_code`, and `panic_safe` now
+  live in `doom-fish-utils` so any doom-fish family crate can pull them
+  in without depending on the full `apple-cf` Core* surface.
+- `apple_cf::utils` is preserved as a re-export shim, so downstream
+  call sites (`apple_cf::utils::{completion, ffi_string,
+  four_char_code, FourCharCode, panic_safe}`) keep compiling without
+  any changes. The string-owning helpers
+  (`ffi_string_owned`, `ffi_string_owned_or_empty`) remain
+  apple-cf-specific shims that bake in `acf_free_string` as the
+  deallocator; the underlying generic helpers in `doom-fish-utils`
+  take a caller-supplied `free_fn` for sibling crates that need a
+  different `_free_string` symbol.
+- Added `doom-fish-utils = { version = "0.1" }` dependency.
+- `Cargo.toml` version bumped to `0.7.0` (minor: dependency graph
+  change, no public API breakage).
+- `COVERAGE_AUDIT_V2.md` published — independent re-verification
+  against `MacOSX26.2.sdk` confirming 100% non-exempt coverage of
+  the sampled top-300 symbols per framework.
+
+### Removed
+
+- `apple_cf/src/utils/{completion.rs, four_char_code.rs,
+  panic_safe.rs}` — relocated to `doom-fish-utils`. The
+  `apple_cf::utils::*` import paths still resolve via re-exports.
 
 ## [0.6.2]
 
