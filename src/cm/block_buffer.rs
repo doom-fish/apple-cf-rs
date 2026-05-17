@@ -510,6 +510,9 @@ impl Drop for CMBlockBuffer {
     }
 }
 
+// SAFETY: `CMBlockBufferRef` is a Core Foundation type; Apple documents its
+// retain/release operations as thread-safe.  Our wrapper never mutates the
+// data behind the pointer.
 unsafe impl Send for CMBlockBuffer {}
 unsafe impl Sync for CMBlockBuffer {}
 

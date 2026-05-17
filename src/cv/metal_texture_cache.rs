@@ -66,7 +66,9 @@ impl Clone for CVMetalTextureCache {
 
 impl Drop for CVMetalTextureCache {
     fn drop(&mut self) {
-        unsafe { ffi::cf_type_release(self.0) };
+        if !self.0.is_null() {
+            unsafe { ffi::cf_type_release(self.0) };
+        }
     }
 }
 

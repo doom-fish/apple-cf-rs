@@ -796,12 +796,17 @@ impl Clone for CVPixelBuffer {
 
 impl Drop for CVPixelBuffer {
     fn drop(&mut self) {
-        unsafe {
-            ffi::cv_pixel_buffer_release(self.0);
+        if !self.0.is_null() {
+            unsafe {
+                ffi::cv_pixel_buffer_release(self.0);
+            }
         }
     }
 }
 
+// SAFETY: `CVPixelBufferRef` is a Core Foundation type whose retain/release
+// operations are thread-safe.  Our wrapper only holds the opaque pointer; pixel
+// data access is gated behind a lock guard, so sharing across threads is safe.
 unsafe impl Send for CVPixelBuffer {}
 unsafe impl Sync for CVPixelBuffer {}
 
@@ -1013,12 +1018,17 @@ impl Clone for CVPixelBufferPool {
 
 impl Drop for CVPixelBufferPool {
     fn drop(&mut self) {
-        unsafe {
-            ffi::cv_pixel_buffer_pool_release(self.0);
+        if !self.0.is_null() {
+            unsafe {
+                ffi::cv_pixel_buffer_pool_release(self.0);
+            }
         }
     }
 }
 
+// SAFETY: `CVPixelBufferPoolRef` is a Core Foundation type whose retain/release
+// operations are thread-safe.  Pool creation and pixel-buffer allocation use
+// Apple's thread-safe primitives.
 unsafe impl Send for CVPixelBufferPool {}
 unsafe impl Sync for CVPixelBufferPool {}
 

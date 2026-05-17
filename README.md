@@ -2,7 +2,7 @@
 
 Safe, dependency-free Rust bindings for Apple's shared **Core\*** frameworks — the foundation underneath the [doom-fish](https://github.com/doom-fish) macOS Rust suite.
 
-> **Status:** `v0.6.2` adds an exhaustive `raw` module alongside the ergonomic safe wrappers, closing the remaining audited gaps across CoreFoundation, CoreMedia, CoreVideo, IOSurface, and Dispatch. See [`COVERAGE.md`](COVERAGE.md) for the framework summary and [`COVERAGE_AUDIT.md`](COVERAGE_AUDIT.md) for the full symbol audit.
+> **Status:** `v0.7.1` tightens the safety documentation — every `unsafe impl Send/Sync` now carries a `// SAFETY:` justification comment, Drop implementations uniformly null-guard their release calls, and the `doom-fish-utils` version constraint follows the crate-family `>=X.Y, <X.(Y+2)` convention. See [`COVERAGE.md`](COVERAGE.md) for the framework summary and [`COVERAGE_AUDIT_V2.md`](COVERAGE_AUDIT_V2.md) for the full symbol audit.
 
 ## What's in the box
 
@@ -39,14 +39,14 @@ Safe Rust wrappers
 
 ```toml
 [dependencies]
-apple-cf = "0.6.2"
+apple-cf = "0.7"
 ```
 
 Or pick only the frameworks you need:
 
 ```toml
 [dependencies]
-apple-cf = { version = ">=0.6.2, <0.7", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
+apple-cf = { version = ">=0.7, <0.9", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
 ```
 
 ## Quick examples

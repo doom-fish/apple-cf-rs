@@ -922,8 +922,10 @@ impl std::fmt::Debug for IOSurfaceLockGuard<'_> {
 
 impl Drop for IOSurface {
     fn drop(&mut self) {
-        unsafe {
-            ffi::io_surface_release(self.0);
+        if !self.0.is_null() {
+            unsafe {
+                ffi::io_surface_release(self.0);
+            }
         }
     }
 }
@@ -937,6 +939,10 @@ impl Clone for IOSurface {
     }
 }
 
+// SAFETY: `IOSurfaceRef` is a Core Foundation type documented by Apple as safe
+// to share across threads (it is the primary cross-process frame-delivery
+// mechanism).  Our wrapper holds only the opaque pointer; all mutation
+// (lock/unlock) goes through Apple's thread-safe primitives.
 unsafe impl Send for IOSurface {}
 unsafe impl Sync for IOSurface {}
 

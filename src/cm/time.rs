@@ -582,6 +582,7 @@ impl fmt::Display for CMClock {
     }
 }
 
-// Safety: CMClock is a CoreFoundation type that is thread-safe
+// SAFETY: `CMClockRef` is a Core Foundation type documented by Apple as
+// thread-safe; time queries are read-only operations on an opaque pointer.
 unsafe impl Send for CMClock {}
 unsafe impl Sync for CMClock {}

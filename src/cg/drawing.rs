@@ -20,6 +20,9 @@ pub struct CGColorSpace {
     ptr: *mut c_void,
 }
 
+// SAFETY: `CGColorSpaceRef` is an immutable, reference-counted Core Foundation
+// object.  All mutations go through Apple's thread-safe retain/release
+// primitives; sending or sharing the opaque pointer across threads is safe.
 unsafe impl Send for CGColorSpace {}
 unsafe impl Sync for CGColorSpace {}
 
@@ -107,6 +110,9 @@ pub struct CGImage {
     ptr: *mut c_void,
 }
 
+// SAFETY: `CGImageRef` is an immutable, reference-counted Core Foundation
+// object.  Apple's retain/release primitives are thread-safe, and the image
+// data itself is read-only after creation.
 unsafe impl Send for CGImage {}
 unsafe impl Sync for CGImage {}
 

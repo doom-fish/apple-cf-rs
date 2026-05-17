@@ -77,6 +77,10 @@ pub struct DispatchQueue {
     ptr: *const c_void,
 }
 
+// SAFETY: `dispatch_queue_t` is documented by Apple as safe to use from any
+// thread.  The Rust wrapper only holds an opaque pointer and never performs
+// interior mutation on it outside of the underlying GCD primitives, which are
+// themselves thread-safe.
 unsafe impl Send for DispatchQueue {}
 unsafe impl Sync for DispatchQueue {}
 
@@ -252,6 +256,8 @@ pub struct DispatchGroup {
     ptr: *mut c_void,
 }
 
+// SAFETY: `dispatch_group_t` is a thread-safe GCD primitive; it is safe to
+// share across threads and to send between threads.
 unsafe impl Send for DispatchGroup {}
 unsafe impl Sync for DispatchGroup {}
 
@@ -315,6 +321,8 @@ pub struct DispatchSemaphore {
     ptr: *mut c_void,
 }
 
+// SAFETY: `dispatch_semaphore_t` is a thread-safe GCD primitive designed
+// explicitly for cross-thread signalling.
 unsafe impl Send for DispatchSemaphore {}
 unsafe impl Sync for DispatchSemaphore {}
 
@@ -368,6 +376,9 @@ pub struct DispatchSource {
     ptr: *mut c_void,
 }
 
+// SAFETY: `dispatch_source_t` is a thread-safe GCD primitive.  The bridge
+// wraps the opaque pointer without interior mutation; GCD ensures safe
+// cross-thread access.
 unsafe impl Send for DispatchSource {}
 unsafe impl Sync for DispatchSource {}
 

@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] — 2026-05-20
+
+### Changed
+
+- Added `// SAFETY:` justification comments to every bare `unsafe impl Send`
+  and `unsafe impl Sync` declaration across `iosurface`, `cv`, `cm`, `cg`, and
+  `dispatch_queue` modules.  All Apple Core Foundation / Core Media / Core Video
+  / GCD opaque-pointer types are documented as thread-safe by Apple; the
+  comments now make this contract explicit in source.
+- Normalised `Drop` implementations: `IOSurface`, `CVPixelBuffer`,
+  `CVPixelBufferPool`, and `CVMetalTextureCache` now null-guard their release
+  calls, matching the convention already in place for `CFType` and
+  `CMSampleBuffer`.
+- Updated `doom-fish-utils` version constraint from `"0.1"` to `">=0.1, <0.3"`
+  following the crate-family `>=X.Y, <X.(Y+2)` convention.
+- README installation snippet updated to reflect the current `0.7` line.
+
 ## [0.7.0] — 2026-05-17
 
 ### Changed

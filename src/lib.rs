@@ -3,7 +3,7 @@
 //!
 //! This crate is the foundation of the doom-fish macOS Rust suite. It exists
 //! so framework-agnostic types like [`cg::CGRect`], [`iosurface::IOSurface`],
-//! and [`DispatchQueue`] don't have to be re-vendored by every crate that
+//! and [`dispatch_queue::DispatchQueue`] don't have to be re-vendored by every crate that
 //! builds on top of `CMSampleBuffer`/`CVPixelBuffer`/etc.
 //!
 //! # Modules

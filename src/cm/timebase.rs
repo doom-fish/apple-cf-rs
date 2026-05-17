@@ -148,5 +148,8 @@ impl fmt::Debug for CMTimebase {
     }
 }
 
+// SAFETY: `CMTimebaseRef` is a Core Foundation type; Apple documents its
+// retain/release as thread-safe.  The wrapper only holds the opaque pointer and
+// delegates all mutations through the Core Media API.
 unsafe impl Send for CMTimebase {}
 unsafe impl Sync for CMTimebase {}

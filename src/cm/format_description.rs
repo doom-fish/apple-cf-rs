@@ -400,6 +400,9 @@ impl Drop for CMFormatDescription {
     }
 }
 
+// SAFETY: `CMFormatDescriptionRef` is a Core Foundation type; Apple documents
+// its retain/release as thread-safe and the description data is immutable after
+// creation.
 unsafe impl Send for CMFormatDescription {}
 unsafe impl Sync for CMFormatDescription {}
 
