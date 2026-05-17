@@ -4,7 +4,7 @@ import Foundation
 
 // MARK: - Dispatch Queue Management
 
-@_cdecl("dispatch_queue_create")
+@_cdecl("acf_dispatch_queue_create")
 public func createDispatchQueue(_ label: UnsafePointer<CChar>, _ qos: Int32) -> UnsafeMutableRawPointer {
     let labelStr = String(cString: label)
     let qosClass: DispatchQoS = switch qos {

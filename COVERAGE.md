@@ -1,81 +1,39 @@
 # COVERAGE
 
-Wave-C audit for `apple-cf` `v0.6.1` against the active macOS SDK headers (`MacOSX26.2.sdk`).
+Wave-C audit for `apple-cf` `v0.6.2` against the active macOS SDK headers (`MacOSX26.2.sdk`).
+
+## Summary
+
+- `VERIFIED`: 2727 symbols
+- `EXEMPT`: 138 symbols
+- `GAPS`: 0 symbols
+- `COVERAGE_PCT`: 95.18% of all audited public declarations
+- `COVERABLE_COVERAGE_PCT`: 100.00% of non-exempt declarations
 
 Legend:
 
-- ✅ implemented — ergonomic safe Rust wrapper present, with examples/tests
-- 🟡 partial — intentionally narrow wrapper around a broader Apple surface
-- ⏭️ skipped — deprecated / legacy / platform-specific API family not exposed by this crate
+- ✅ implemented — ergonomic safe Rust wrapper or exhaustive raw binding present
+- ⏭️ exempt — deprecated / unavailable declaration, private inline helper, or Objective-C protocol marker without a standalone C ABI
 
-## CoreFoundation logical areas
+## What v0.6.2 covers
 
-| Area | Headers | Status | Notes |
+| Surface | Headers | Status | Notes |
 |---|---|---:|---|
-| `CFType` | `CFBase.h` | ✅ | Type-erased wrapper with retain/release/hash/equality/description. |
-| `CFString` | `CFString.h` | ✅ | UTF-8 construction, length, Rust string conversion. |
-| `CFNumber` | `CFNumber.h` | ✅ | `i64` / `u64` / `f64` creation and conversion helpers. |
-| `CFData` | `CFData.h` | ✅ | Byte-copy construction and extraction. |
-| `CFDate` | `CFDate.h` | ✅ | Absolute time + `SystemTime` conversion. |
-| `CFUUID` | `CFUUID.h` | ✅ | Random generation, parse, string, bytes. |
-| `CFError` | `CFError.h` | ✅ | Domain/code/description/failure-reason helpers. |
-| `CFArray` | `CFArray.h` | ✅ | Typed construction, count, retained element access. |
-| `CFDictionary` / `CFDict` | `CFDictionary.h` | ✅ | Pair construction, lookup, keys/values arrays. |
-| `CFBag` | `CFBag.h` | ✅ | Construction, count, contains, multiplicity. |
-| `CFSet` | `CFSet.h` | ✅ | Immutable + mutable set wrappers with membership, retained element access, and apply helpers. |
-| `CFPropertyList` | `CFPropertyList.h` | ✅ | Parse, serialize, deep-copy, validate, and stream/write helpers. |
-| `CFTree` | `CFTree.h` | ✅ | Tree nodes with payload + child append/access. |
-| `CFAttributedString` | `CFAttributedString.h` | ✅ | Plain-string construction and string/length access. |
-| `CFURL` | `CFURL.h` | ✅ | URL-string and file-path constructors, string/path accessors. |
-| `CFBundle` | `CFBundle.h` | ✅ | Main/from-URL bundle wrappers, identifier/resource lookup. |
-| `CFLocale` | `CFLocale.h` | ✅ | Current/custom locale + identifier access. |
-| `CFCalendar` | `CFCalendar.h` | ✅ | Current/custom calendar + time-zone management. |
-| `CFTimeZone` | `CFTimeZone.h` | ✅ | Current/custom time zone + GMT offset. |
-| `CFCharacterSet` | `CFCharacterSet.h` | ✅ | Create from string, invert, membership tests. |
-| `CFNumberFormatter` | `CFNumberFormatter.h` | ✅ | Format/parse numbers with locale/style. |
-| `CFDateFormatter` | `CFDateFormatter.h` | ✅ | Format dates with locale/style. |
-| `CFPreferences` | `CFPreferences.h` | ✅ | App-scoped get/set/synchronize helpers. |
-| `CFFileSecurity` | `CFFileSecurity.h` | ✅ | Owner UUID + mode accessors. |
-| `CFXML` | `CFXMLNode.h`, `CFXMLParser.h` | ✅ | Entity escape/unescape helpers retained as the still-useful non-parser surface. |
-| `CFNotificationCenter` | `CFNotificationCenter.h` | ✅ | Local/distributed/Darwin centers + post helpers. |
-| `CFRunLoop` | `CFRunLoop.h` | ✅ | Current/main loop access, default-mode run, stop/wake, add timer. |
-| `CFTimer` | `CFRunLoop.h` | ✅ | No-op callback timer creation + validity/invalidate/fire. |
-| `CFMessagePort` | `CFMessagePort.h` | ✅ | Echo-local port helper, remote connect, request/reply bytes. |
-| `CFStream` | `CFStream.h` | ✅ | Bound read/write stream pair (`CFStreamPair`) with open/read/write/close. |
-| `CFSocket` | `CFSocket.h` | ✅ | UDP/IPv4 socket creation, native descriptor, invalidate/validity. |
-| `CFFileDescriptor` | `CFFileDescriptor.h` | ✅ | Native descriptor wrapper with invalidate. |
+| Ergonomic `cf` wrappers | `CFBase.h`, `CFString.h`, `CFNumber.h`, `CFData.h`, `CFDate.h`, `CFUUID.h`, `CFError.h`, `CFArray.h`, `CFDictionary.h`, `CFBag.h`, `CFSet.h`, `CFPropertyList.h`, `CFTree.h`, `CFAttributedString.h`, `CFURL.h`, `CFBundle.h`, `CFLocale.h`, `CFCalendar.h`, `CFTimeZone.h`, `CFCharacterSet.h`, `CFNumberFormatter.h`, `CFDateFormatter.h`, `CFPreferences.h`, `CFFileSecurity.h`, `CFXMLNode.h`, `CFXMLParser.h`, `CFNotificationCenter.h`, `CFRunLoop.h`, `CFMessagePort.h`, `CFStream.h`, `CFSocket.h`, `CFFileDescriptor.h` | ✅ | Existing safe wrappers remain the primary API, with examples and smoke tests. |
+| Ergonomic `cm` wrappers | `CMSampleBuffer.h`, `CMBlockBuffer.h`, `CMFormatDescription.h`, `CMTime.h`, `CMTimeRange.h`, `CMSync.h`, `CMMetadata.h` | ✅ | Safe wrappers cover the common media stack (`CMSampleBuffer`, `CMBlockBuffer`, `CMFormatDescription`, `CMMetadataFormatDescription`, `CMTime`, `CMTimebase`). |
+| Ergonomic `cv` / `iosurface` wrappers | `CVBuffer.h`, `CVImageBuffer.h`, `CVPixelBuffer.h`, `CVPixelBufferPool.h`, `CVMetalTextureCache.h`, `IOSurfaceRef.h` | ✅ | Existing safe wrappers remain available for the common image-buffer / surface paths. |
+| Ergonomic `dispatch_queue` wrappers | `dispatch/queue.h`, `dispatch/group.h`, `dispatch/semaphore.h`, `dispatch/source.h` | ✅ | Safe queue, async/apply, group, semaphore, and timer-source helpers remain available. |
+| Exhaustive `raw` module | CoreFoundation / CoreMedia / CoreVideo / IOSurface / Dispatch umbrella headers | ✅ | New `apple_cf::raw` exposes the full audited low-level surface, including long-tail constants, inline helpers, CMTag/CMSync compatibility helpers, CVMetal, and dispatch main-queue access. |
 
-## CoreMedia / CoreVideo / IOSurface / Dispatch logical areas
-
-| Area | Headers | Status | Notes |
-|---|---|---:|---|
-| `CMSampleBuffer` | `CMSampleBuffer.h` | ✅ | Existing safe wrapper + smoke example + coverage harness. |
-| `CMBlockBuffer` | `CMBlockBuffer.h` | ✅ | Existing wrapper + coverage harness. |
-| `CMFormatDescription` | `CMFormatDescription.h` | ✅ | Existing wrapper + coverage harness. |
-| `CMMetadataFormatDescription` | `CMFormatDescription.h` | ✅ | Metadata-specific constructors, extension constants, identifier/key lookup, and merge/extend helpers. |
-| `CMTime` | `CMTime.h` | ✅ | Existing value-type wrapper. |
-| `CMTimeRange` | `CMTimeRange.h` | ✅ | Added range helpers (`end`, containment, intersection, union). |
-| `CMTimebase` | `CMTimebase.h` | ✅ | Added timebase wrapper with master clock, time, rate. |
-| `CVPixelBuffer` | `CVPixelBuffer.h` | ✅ | Existing safe wrapper + coverage harness. |
-| `CVBuffer` | `CVBuffer.h` | ✅ | Added attachment helpers. |
-| `CVImageBuffer` | `CVImageBuffer.h` | ✅ | Added encoded/display size + clean-rect helpers. |
-| `CVMetalTextureCache` | `CVMetalTextureCache.h` | ✅ | Added system-default cache creation + flush wrapper. |
-| `IOSurface` | `IOSurfaceRef.h` | ✅ | Existing wrapper + coverage harness. |
-| `DispatchQueue` | `dispatch/queue.h` | ✅ | Existing queue wrapper. |
-| `dispatch_async` / `dispatch_async_and_wait` / `dispatch_apply` | `dispatch/queue.h`, `dispatch/apply.h` | ✅ | Safe closure-based helpers bridged through Swift queue equivalents because the direct `_f` entry points are unavailable to Swift. |
-| `DispatchGroup` | `dispatch/group.h` | ✅ | Added group creation/enter/leave/wait wrapper. |
-| `DispatchSemaphore` | `dispatch/semaphore.h` | ✅ | Added semaphore create/signal/wait wrapper. |
-| `DispatchSource` | `dispatch/source.h` | ✅ | Timer-backed source wrapper with resume/cancel/fire-count. |
-
-## Skipped / deferred Apple API families
+## Remaining exempt families
 
 | API family | Headers | Status | Reason |
 |---|---|---:|---|
-| Carbon resource-map bundle APIs (`CFBundleOpenBundleResourceMap`, etc.) | `CFBundle.h` | ⏭️ | Deprecated Carbon-era surface; not useful for modern media crates. |
+| Carbon resource-map bundle APIs (`CFBundleOpenBundleResourceMap`, etc.) | `CFBundle.h` | ⏭️ | Deprecated Carbon-era surface. |
 | `CFURLAccess.h` helpers | `CFURLAccess.h` | ⏭️ | Deprecated file-URL access layer. |
-| Legacy XML parser / document-node graph beyond entity helpers | `CFXMLNode.h`, `CFXMLParser.h` | ⏭️ | Deprecated XML parser surface; only entity helpers retained. |
-| IOSurface Mach-port / property-dictionary families | `IOSurfaceRef.h` | ⏭️ | Already intentionally omitted by the coverage harness as legacy / niche IPC surface. |
-| `CMSampleBufferCreate*`, `CMBlockBufferAppend*`, `CMFormatDescriptionCreate*` heavy constructors | `CMSampleBuffer.h`, `CMBlockBuffer.h`, `CMFormatDescription.h` | ⏭️ | Existing harness intentionally omits these constructor-heavy / legacy callback entry points; safe read-side coverage remains 100% for the crate surface. |
-| `CVMetalTextureCacheCreateTextureFromImage` | `CVMetalTextureCache.h` | ⏭️ | Requires public Metal texture wrapper surface that still lives in `apple-metal`; cache creation/flush covered here. |
-| `CVDisplayLink` family | `CVDisplayLink.h` | ⏭️ | Deprecated on macOS 15; tracked as exempt in `COVERAGE_AUDIT.md` instead of adding new wrappers. |
-| Non-timer dispatch sources | `dispatch/source.h` | ⏭️ | Timer source covered here; file, process, signal, mach, and vnode source flavors remain for a future dedicated surface. |
+| Legacy XML parser / document-node graph beyond entity helpers | `CFXMLNode.h`, `CFXMLParser.h` | ⏭️ | Deprecated XML parser/document graph. |
+| `CVDisplayLink` family | `CVDisplayLink.h` | ⏭️ | Deprecated on macOS 15. |
+| Objective-C `OS_dispatch_*` protocol markers | `dispatch/object.h` | ⏭️ | Header-only ObjC protocol declarations; Rust binds the usable C ABI via `dispatch_*_t` aliases in `apple_cf::raw`. |
+| Private `CFSwap` helper union | `CFByteOrder.h` | ⏭️ | Inline implementation detail, not a standalone public API surface. |
+
+See [`COVERAGE_AUDIT.md`](COVERAGE_AUDIT.md) for the full symbol-by-symbol audit.

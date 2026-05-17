@@ -103,7 +103,7 @@ impl DispatchQueue {
     #[must_use]
     pub fn new(label: &str, qos: DispatchQoS) -> Self {
         let c_label = CString::new(label).expect("Label contains null byte");
-        let ptr = unsafe { crate::ffi::dispatch_queue_create(c_label.as_ptr(), qos as i32) };
+        let ptr = unsafe { crate::ffi::acf_dispatch_queue_create(c_label.as_ptr(), qos as i32) };
         assert!(!ptr.is_null(), "Failed to create dispatch queue");
         Self { ptr }
     }

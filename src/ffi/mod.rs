@@ -32,7 +32,7 @@ extern "C" {
     pub fn acf_free_string(s: *mut c_char);
 
     // ---- dispatch ----
-    pub fn dispatch_queue_create(label: *const c_char, qos: i32) -> *const c_void;
+    pub fn acf_dispatch_queue_create(label: *const c_char, qos: i32) -> *const c_void;
     pub fn dispatch_queue_release(queue: *const c_void);
     pub fn dispatch_queue_retain(queue: *const c_void) -> *const c_void;
 

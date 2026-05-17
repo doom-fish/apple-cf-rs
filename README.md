@@ -2,13 +2,14 @@
 
 Safe, dependency-free Rust bindings for Apple's shared **Core\*** frameworks — the foundation underneath the [doom-fish](https://github.com/doom-fish) macOS Rust suite.
 
-> **Status:** `v0.6.1` closes the highest-value audit gaps with `CFSet`, `CFPropertyList`, `CMMetadataFormatDescription`, and dispatch async/apply helpers. See [`COVERAGE.md`](COVERAGE.md) for the framework summary and [`COVERAGE_AUDIT.md`](COVERAGE_AUDIT.md) for the full symbol audit and deferred long tail.
+> **Status:** `v0.6.2` adds an exhaustive `raw` module alongside the ergonomic safe wrappers, closing the remaining audited gaps across CoreFoundation, CoreMedia, CoreVideo, IOSurface, and Dispatch. See [`COVERAGE.md`](COVERAGE.md) for the framework summary and [`COVERAGE_AUDIT.md`](COVERAGE_AUDIT.md) for the full symbol audit.
 
 ## What's in the box
 
 | Module | Framework | Feature flag | Status |
 |---|---|---|---|
 | [`cf`](src/cf) | CoreFoundation values, collections, property lists, locale/formatter helpers, runtime primitives | — | ✅ |
+| [`raw`](src/raw) | Exhaustive low-level CoreFoundation/CoreMedia/CoreVideo/IOSurface/Dispatch bindings | — | ✅ |
 | [`cg`](src/cg) | CoreGraphics value types + bitmap drawing wrappers | `cg` | ✅ |
 | [`iosurface`](src/iosurface) | IOSurface (zero-copy GPU buffers, multi-planar formats) | `iosurface` | ✅ |
 | [`dispatch_queue`](src/dispatch_queue.rs) | Dispatch queues, async/apply helpers, groups, semaphores, timer sources | `dispatch` | ✅ |
@@ -23,6 +24,7 @@ Every doom-fish crate that wraps a media-adjacent Apple framework needs the same
 ```text
 Safe Rust wrappers
     ├── CoreFoundation / Dispatch / CoreMedia / CoreVideo ergonomic APIs
+    ├── exhaustive raw C bindings in `apple_cf::raw`
     ├── direct C FFI for value-only primitives where appropriate
     └── Swift @_cdecl bridge for reference-counted / callback-heavy surfaces
 ```
@@ -37,14 +39,14 @@ Safe Rust wrappers
 
 ```toml
 [dependencies]
-apple-cf = "0.6.1"
+apple-cf = "0.6.2"
 ```
 
 Or pick only the frameworks you need:
 
 ```toml
 [dependencies]
-apple-cf = { version = ">=0.6.1, <0.7", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
+apple-cf = { version = ">=0.6.2, <0.7", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
 ```
 
 ## Quick examples
@@ -96,14 +98,15 @@ The Rust crate has **zero runtime dependencies**.
 
 ## Examples and tests
 
-This release ships 14 numbered examples plus dedicated smoke tests for:
+This release ships 15 numbered examples plus dedicated smoke tests for:
 
 - CoreFoundation primitives, collections, property lists, resources, runtime helpers
-- Dispatch queues, `dispatch_async`, `dispatch_async_and_wait`, `dispatch_apply`, groups, semaphores, and timer sources
-- `CMTimeRange`, `CMTimebase`, and `CMMetadataFormatDescription`
-- `CVBuffer`, `CVImageBuffer`, `CVPixelBuffer`, and `CVMetalTextureCache`
+- Dispatch queues, `dispatch_async`, `dispatch_async_and_wait`, `dispatch_apply`, groups, semaphores, timer sources, and raw main-queue access
+- `CMTimeRange`, `CMTimebase`, `CMMetadataFormatDescription`, and low-level `CMTag`/`CMSync` coverage through `apple_cf::raw`
+- `CVBuffer`, `CVImageBuffer`, `CVPixelBuffer`, `CVMetalTextureCache`, and the remaining CVMetal entry points through `apple_cf::raw`
+- Exhaustive low-level constants / inline helpers surfaced by `apple_cf::raw`
 
-`CVDisplayLink` remains out of scope and is tracked as exempt in the audit because Apple deprecated the family on macOS 15.
+`CVDisplayLink` remains exempt in the audit because Apple deprecated the family on macOS 15.
 
 ## License
 

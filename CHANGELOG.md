@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.2]
+
+### Added
+
+- New `raw` module with exhaustive low-level CoreFoundation / CoreMedia / CoreVideo / IOSurface / Dispatch bindings generated from the active macOS SDK, plus hand-written coverage for inline helpers like `CFByteOrder*`, `CFString*InlineBuffer`, `CMTag*`, `CMTimebase*` compatibility shims, `dispatch_get_main_queue`, and the remaining CVMetal declarations.
+- Smoke example `15_raw_bindings` and matching `raw_bindings_tests` coverage harness for the new exhaustive raw surface.
+
+### Changed
+
+- `COVERAGE_AUDIT.md` now reports `0` remaining gaps and `100.00%` coverable coverage (`95.18%` overall once deprecated / unavailable exemptions are included).
+- README / COVERAGE docs refreshed for the new `apple_cf::raw` module.
+- Dispatch queue creation bridge renamed to `acf_dispatch_queue_create` to avoid colliding with the system `dispatch_queue_create` symbol now exposed through `apple_cf::raw`.
+- `Cargo.toml` version bumped to `0.6.2`.
+
 ## [0.6.1]
 
 ### Added

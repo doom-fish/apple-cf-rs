@@ -11,6 +11,7 @@
 //! | Module | Framework | Feature flag |
 //! |---|---|---|
 //! | [`cf`] | Core Foundation value, collection, locale, formatter, and runtime wrappers | — |
+//! | [`raw`] | Exhaustive low-level CoreFoundation/CoreMedia/CoreVideo/IOSurface/Dispatch bindings | — |
 //! | [`cg`] | CoreGraphics value types + bitmap drawing wrappers | `cg` |
 //! | [`iosurface`] | `IOSurface` (zero-copy GPU buffers) | `iosurface` |
 //! | [`dispatch_queue`] | Grand Central Dispatch | `dispatch` |
@@ -22,6 +23,7 @@
 //!
 //! ```text
 //! Safe Rust API (CGRect, CGContext, IOSurface, DispatchQueue, ...)
+//!     ├── exhaustive raw bindings (src/raw)
 //!     ├── direct Apple framework FFI (src/cg/mod.rs)
 //!     └── Swift @_cdecl bridge FFI (src/ffi/mod.rs)
 //!             └── swift-bridge/Sources/...
@@ -29,11 +31,13 @@
 //! ```
 
 #![cfg_attr(docsrs, feature(doc_cfg))]
+#![allow(clashing_extern_declarations)]
 
 mod error;
 
 pub mod cf;
 pub mod ffi;
+pub mod raw;
 pub mod utils;
 
 pub use error::CFError;
