@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-05-18
+
+### Changed
+
+- **BREAKING**: `CGRect` now matches Apple's `CGGeometry.h` definition with nested `origin: CGPoint` and `size: CGSize` fields. The previous flat `{ x, y, width, height }` layout had the same byte ordering, so FFI compatibility is preserved, but field access must change: `rect.x` → `rect.origin.x`, `rect.y` → `rect.origin.y`, `rect.width` → `rect.size.width`, and `rect.height` → `rect.size.height`.
+- `CGRect::new(x, y, width, height)` is unchanged and still takes four `f64` values.
+- Added `CGRect::from_origin_size(origin, size)`.
+- Added `CGRect::is_empty()` and `CGRect::contains_point()`.
+
 ## [0.7.2] - 2026-05-18
 
 ### Changed
