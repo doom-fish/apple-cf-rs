@@ -482,6 +482,18 @@ pub unsafe fn CMTimebaseSetMasterTimebase(
     unsafe { CMTimebaseSetSourceTimebase(timebase, newMasterTimebase) }
 }
 
+/// Opaque tag for `CGContextRef`.
+pub enum __CGContext {}
+
+/// CoreGraphics drawing context (`CGContextRef` in CoreGraphics).
+pub type CGContextRef = *mut __CGContext;
+
+/// CoreGraphics 16-bit Unicode character code (`CGCharCode` in CoreGraphics).
+pub type CGCharCode = u16;
+
+/// CoreGraphics 16-bit virtual key code (`CGKeyCode` in CoreGraphics).
+pub type CGKeyCode = u16;
+
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 /// Opaque Apple SDK type `__CVMetalTextureCache`.

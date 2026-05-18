@@ -141,6 +141,12 @@ pub use drawing::{CGColorSpace, CGImage};
 pub use point::CGPoint;
 pub use rect::CGRect;
 pub use size::CGSize;
+#[doc(inline)]
+pub use crate::raw::CGCharCode;
+#[doc(inline)]
+pub use crate::raw::CGContextRef;
+#[doc(inline)]
+pub use crate::raw::CGKeyCode;
 
 /// `CGDisplayID` type alias
 pub type CGDisplayID = u32;
