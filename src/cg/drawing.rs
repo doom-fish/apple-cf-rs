@@ -42,6 +42,14 @@ impl Clone for CGColorSpace {
     }
 }
 
+impl std::fmt::Debug for CGColorSpace {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("CGColorSpace")
+            .field("ptr", &self.ptr)
+            .finish()
+    }
+}
+
 impl CGColorSpace {
     /// Wrap a raw `CGColorSpaceRef` pointer — takes ownership without retaining.
     ///
@@ -129,6 +137,12 @@ impl Clone for CGImage {
     fn clone(&self) -> Self {
         let p = unsafe { cg_ffi::CGImageRetain(self.ptr) };
         Self { ptr: p }
+    }
+}
+
+impl std::fmt::Debug for CGImage {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("CGImage").field("ptr", &self.ptr).finish()
     }
 }
 

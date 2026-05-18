@@ -123,6 +123,7 @@ fn property_list_format(raw: isize) -> CFPropertyListFormat {
 }
 
 /// Namespace for property-list parse / serialize helpers.
+#[derive(Debug)]
 pub struct CFPropertyList;
 
 impl CFPropertyList {

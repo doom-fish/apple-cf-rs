@@ -388,6 +388,7 @@ impl Default for CFFileSecurity {
 }
 
 /// Core Foundation preferences helpers.
+#[derive(Debug)]
 pub struct CFPreferences;
 
 impl CFPreferences {
@@ -417,6 +418,7 @@ impl CFPreferences {
 }
 
 /// Tiny wrapper around the remaining useful `CFXML` helpers.
+#[derive(Debug)]
 pub struct CFXML;
 
 impl CFXML {
