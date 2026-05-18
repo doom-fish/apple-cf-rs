@@ -65,6 +65,7 @@ impl From<CVPixelBufferLockFlags> for u32 {
 }
 
 #[derive(Debug)]
+/// Owned wrapper around Apple's `CVPixelBufferRef`.
 pub struct CVPixelBuffer(*mut std::ffi::c_void);
 
 impl PartialEq for CVPixelBuffer {
@@ -85,6 +86,7 @@ impl std::hash::Hash for CVPixelBuffer {
 }
 
 impl CVPixelBuffer {
+    /// Wraps a +1 retained `CVPixelBufferRef` and returns `None` for null.
     pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         if ptr.is_null() {
             None
@@ -93,12 +95,15 @@ impl CVPixelBuffer {
         }
     }
 
+    /// Wraps a raw `CVPixelBufferRef` by taking ownership without retaining it.
+    ///
     /// # Safety
-    /// The caller must ensure the pointer is a valid `CVPixelBuffer` pointer.
+    /// The caller must ensure `ptr` is a valid +1 retained `CVPixelBufferRef`.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
+    /// Returns the wrapped raw `CVPixelBufferRef`.
     #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
@@ -401,16 +406,19 @@ impl CVPixelBuffer {
         unsafe { ffi::cv_pixel_buffer_get_width(self.0) }
     }
 
+    /// Returns the height of the pixel buffer in pixels.
     #[must_use]
     pub fn height(&self) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_height(self.0) }
     }
 
+    /// Returns the Core Video pixel format type.
     #[must_use]
     pub fn pixel_format(&self) -> u32 {
         unsafe { ffi::cv_pixel_buffer_get_pixel_format_type(self.0) }
     }
 
+    /// Returns the number of bytes in each row.
     #[must_use]
     pub fn bytes_per_row(&self) -> usize {
         unsafe { ffi::cv_pixel_buffer_get_bytes_per_row(self.0) }
@@ -845,6 +853,7 @@ impl std::hash::Hash for CVPixelBufferPool {
 }
 
 impl CVPixelBufferPool {
+    /// Wraps a +1 retained `CVPixelBufferPoolRef` and returns `None` for null.
     pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         if ptr.is_null() {
             None
@@ -853,12 +862,15 @@ impl CVPixelBufferPool {
         }
     }
 
+    /// Wraps a raw `CVPixelBufferPoolRef` by taking ownership without retaining it.
+    ///
     /// # Safety
-    /// The caller must ensure the pointer is a valid `CVPixelBufferPool` pointer.
+    /// The caller must ensure `ptr` is a valid +1 retained `CVPixelBufferPoolRef`.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
+    /// Returns the wrapped raw `CVPixelBufferPoolRef`.
     #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0

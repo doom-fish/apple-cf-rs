@@ -130,8 +130,11 @@ impl std::fmt::Debug for AudioBuffer {
 #[repr(C)]
 #[derive(Debug)]
 pub struct AudioBufferListRaw {
+    /// Number of `AudioBuffer` entries referenced by `buffers_ptr`.
     pub(crate) num_buffers: u32,
+    /// Pointer to the contiguous `AudioBuffer` entries.
     pub(crate) buffers_ptr: *mut AudioBuffer,
+    /// Cached Rust length for `buffers_ptr`.
     pub(crate) buffers_len: usize,
 }
 
@@ -140,6 +143,7 @@ pub struct AudioBufferListRaw {
 /// Contains one or more [`AudioBuffer`]s, typically one per audio channel.
 /// Use [`iter()`](Self::iter) to iterate over the buffers.
 pub struct AudioBufferList {
+    /// Borrowed raw audio-buffer-list storage.
     pub(crate) inner: AudioBufferListRaw,
     /// Block buffer that owns the audio data - must be kept alive
     pub(crate) block_buffer_ptr: *mut std::ffi::c_void,

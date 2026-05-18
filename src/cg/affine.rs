@@ -22,6 +22,7 @@ pub struct CGVector {
 }
 
 impl CGVector {
+    /// Creates a Core Graphics vector with the supplied components.
     #[must_use]
     pub const fn new(dx: f64, dy: f64) -> Self {
         Self { dx, dy }

@@ -19,7 +19,7 @@ pub trait AsCFType {
 pub struct CFType(*mut c_void);
 
 impl CFType {
-    /// Adopt a retained `CFTypeRef`.
+    /// Wraps a +1 retained `CFTypeRef` and returns `None` for null.
     #[must_use]
     pub fn from_raw(ptr: *mut c_void) -> Option<Self> {
         if ptr.is_null() {
@@ -29,7 +29,7 @@ impl CFType {
         }
     }
 
-    /// Retain a borrowed `CFTypeRef` and wrap it.
+    /// Retains a +0 borrowed `CFTypeRef` and wraps the resulting +1 reference.
     ///
     /// # Safety
     ///
@@ -132,6 +132,7 @@ impl fmt::Display for CFType {
 pub struct SwiftObject(*mut c_void);
 
 impl SwiftObject {
+    /// Wraps a +1 retained bridge object pointer and returns `None` for null.
     #[must_use]
     pub(crate) fn from_raw(ptr: *mut c_void) -> Option<Self> {
         if ptr.is_null() {
@@ -141,6 +142,7 @@ impl SwiftObject {
         }
     }
 
+    /// Returns the wrapped raw bridge object pointer.
     #[must_use]
     pub(crate) const fn as_ptr(&self) -> *mut c_void {
         self.0
@@ -185,34 +187,39 @@ impl fmt::Debug for SwiftObject {
 macro_rules! impl_cf_type_wrapper {
     ($name:ident, $type_id_fn:ident) => {
         #[derive(Clone, PartialEq, Eq, Hash)]
+        #[doc = concat!("Safe wrapper around a retained Core Foundation `", stringify!($name), "` reference.")]
         pub struct $name(pub(crate) crate::cf::base::CFType);
 
         impl $name {
+            #[doc = concat!("Wraps a +1 retained `", stringify!($name), "` pointer and returns `None` for null.")]
             #[must_use]
             pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
                 crate::cf::base::CFType::from_raw(ptr).map(Self)
             }
 
-            /// Retain a borrowed pointer before wrapping it.
+            #[doc = concat!("Retains a +0 borrowed `", stringify!($name), "` pointer and wraps the resulting +1 reference.")]
             ///
             /// # Safety
             ///
-            /// `ptr` must be NULL or a valid pointer of the expected Core Foundation type.
+            #[doc = concat!("`ptr` must be NULL or a valid `", stringify!($name), "` pointer.")]
             #[must_use]
             pub unsafe fn from_raw_retained(ptr: *mut std::ffi::c_void) -> Option<Self> {
                 unsafe { crate::cf::base::CFType::from_raw_retained(ptr) }.map(Self)
             }
 
+            /// Returns the wrapped raw Core Foundation pointer.
             #[must_use]
             pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
                 self.0.as_ptr()
             }
 
+            #[doc = concat!("Returns the Core Foundation type ID for `", stringify!($name), "`.")]
             #[must_use]
             pub fn type_id() -> usize {
                 unsafe { crate::ffi::$type_id_fn() }
             }
 
+            /// Consumes this wrapper and returns the erased `CFType`.
             #[must_use]
             pub fn into_cf_type(self) -> crate::cf::base::CFType {
                 self.0
@@ -236,4 +243,5 @@ macro_rules! impl_cf_type_wrapper {
     };
 }
 
+/// Re-exports the wrapper-generation macro within this crate.
 pub(crate) use impl_cf_type_wrapper;

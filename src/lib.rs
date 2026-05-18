@@ -35,31 +35,40 @@
 
 mod error;
 
+/// Core Foundation value, collection, and runtime wrappers.
 pub mod cf;
+/// Low-level FFI declarations used by the safe wrappers.
 pub mod ffi;
+/// Exhaustive low-level Apple SDK bindings.
 pub mod raw;
+/// Shared helper utilities and FFI shims.
 pub mod utils;
 
 pub use error::CFError;
 
 #[cfg(feature = "cg")]
 #[cfg_attr(docsrs, doc(cfg(feature = "cg")))]
+/// Core Graphics geometry and bitmap-drawing wrappers.
 pub mod cg;
 
 #[cfg(feature = "iosurface")]
 #[cfg_attr(docsrs, doc(cfg(feature = "iosurface")))]
+/// IOSurface ownership and access wrappers.
 pub mod iosurface;
 
 #[cfg(feature = "dispatch")]
 #[cfg_attr(docsrs, doc(cfg(feature = "dispatch")))]
+/// Grand Central Dispatch queue and synchronization wrappers.
 pub mod dispatch_queue;
 
 #[cfg(feature = "cm")]
 #[cfg_attr(docsrs, doc(cfg(feature = "cm")))]
+/// Core Media time, buffer, and format-description wrappers.
 pub mod cm;
 
 #[cfg(feature = "cv")]
 #[cfg_attr(docsrs, doc(cfg(feature = "cv")))]
+/// Core Video buffer and pixel-buffer wrappers.
 pub mod cv;
 
 pub use utils::FourCharCode;

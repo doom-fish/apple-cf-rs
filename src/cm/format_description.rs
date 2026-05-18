@@ -8,6 +8,7 @@ use crate::{
 };
 use std::{fmt, ops::Deref};
 
+/// Owned wrapper around `CMFormatDescriptionRef`.
 pub struct CMFormatDescription(*mut std::ffi::c_void);
 
 impl PartialEq for CMFormatDescription {
@@ -143,6 +144,7 @@ pub mod metadata_structural_dependency_keys {
 }
 
 impl CMFormatDescription {
+    /// Wraps a +1 retained `CMFormatDescriptionRef` and returns `None` for null.
     pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         if ptr.is_null() {
             None
@@ -151,12 +153,15 @@ impl CMFormatDescription {
         }
     }
 
+    /// Wraps a raw `CMFormatDescriptionRef` by taking ownership without retaining it.
+    ///
     /// # Safety
-    /// The caller must ensure the pointer is a valid `CMFormatDescription` pointer.
+    /// The caller must ensure `ptr` is a valid +1 retained `CMFormatDescriptionRef`.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
+    /// Returns the wrapped raw `CMFormatDescriptionRef`.
     #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
@@ -431,18 +436,21 @@ impl fmt::Display for CMFormatDescription {
 pub struct CMMetadataFormatDescription(CMFormatDescription);
 
 impl CMMetadataFormatDescription {
-    /// Adopt a retained raw metadata format-description pointer.
+    /// Wraps a +1 retained raw metadata format-description pointer and returns `None` for null.
     #[must_use]
     pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         CMFormatDescription::from_raw(ptr).map(Self)
     }
 
+    /// Wraps a raw metadata `CMFormatDescriptionRef` by taking ownership without retaining it.
+    ///
     /// # Safety
-    /// The caller must ensure the pointer is a valid metadata `CMFormatDescription` pointer.
+    /// The caller must ensure `ptr` is a valid +1 retained metadata `CMFormatDescriptionRef`.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(CMFormatDescription::from_ptr(ptr))
     }
 
+    /// Returns the wrapped raw metadata format-description pointer.
     #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0.as_ptr()

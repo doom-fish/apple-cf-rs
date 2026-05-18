@@ -111,6 +111,7 @@ impl CMSampleTimingInfo {
     }
 
     /// Check if all timing fields are valid
+    /// Returns whether this time carries Core Media's valid flag.
     #[must_use]
     pub const fn is_valid(&self) -> bool {
         self.duration.is_valid()
@@ -172,6 +173,7 @@ impl fmt::Display for CMSampleTimingInfo {
 }
 
 impl CMTime {
+    /// Core Media's zero time value (`kCMTimeZero`).
     pub const ZERO: Self = Self {
         value: 0,
         timescale: 0,
@@ -179,6 +181,7 @@ impl CMTime {
         epoch: 0,
     };
 
+    /// Core Media's invalid time sentinel (`kCMTimeInvalid`).
     pub const INVALID: Self = Self {
         value: 0,
         timescale: 0,
@@ -186,6 +189,7 @@ impl CMTime {
         epoch: 0,
     };
 
+    /// Creates a valid `CMTime` with the supplied value and timescale.
     #[must_use]
     pub const fn new(value: i64, timescale: i32) -> Self {
         Self {
@@ -196,6 +200,7 @@ impl CMTime {
         }
     }
 
+    /// Returns whether this time carries Core Media's valid flag.
     #[must_use]
     pub const fn is_valid(&self) -> bool {
         self.flags & 0x1 != 0
@@ -273,6 +278,7 @@ impl CMTime {
         }
     }
 
+    /// Converts this time to seconds when it is valid and has a non-zero timescale.
     #[must_use]
     pub fn as_seconds(&self) -> Option<f64> {
         if self.is_valid() && self.timescale != 0 {
@@ -391,16 +397,19 @@ pub struct CMTimeRange {
 }
 
 impl CMTimeRange {
+    /// Core Media's invalid time-range sentinel (`kCMTimeRangeInvalid`).
     pub const INVALID: Self = Self {
         start: CMTime::INVALID,
         duration: CMTime::INVALID,
     };
 
+    /// Creates a Core Media time range from a start time and duration.
     #[must_use]
     pub const fn new(start: CMTime, duration: CMTime) -> Self {
         Self { start, duration }
     }
 
+    /// Returns the range end time via `CMTimeRangeGetEnd`.
     #[must_use]
     pub fn end(&self) -> CMTime {
         extern "C" {
@@ -409,11 +418,13 @@ impl CMTimeRange {
         unsafe { CMTimeRangeGetEnd(*self) }
     }
 
+    /// Returns whether both the start and duration are valid `CMTime` values.
     #[must_use]
     pub const fn is_valid(&self) -> bool {
         self.start.is_valid() && self.duration.is_valid()
     }
 
+    /// Returns whether this range contains the supplied `CMTime`.
     #[must_use]
     pub fn contains_time(&self, time: CMTime) -> bool {
         extern "C" {
@@ -422,6 +433,7 @@ impl CMTimeRange {
         unsafe { CMTimeRangeContainsTime(*self, time) }
     }
 
+    /// Returns whether this range fully contains `other`.
     #[must_use]
     pub fn contains_range(&self, other: Self) -> bool {
         extern "C" {
@@ -430,6 +442,7 @@ impl CMTimeRange {
         unsafe { CMTimeRangeContainsTimeRange(*self, other) }
     }
 
+    /// Returns the intersection of this range and `other`.
     #[must_use]
     pub fn intersection(&self, other: Self) -> Self {
         extern "C" {
@@ -441,6 +454,7 @@ impl CMTimeRange {
         unsafe { CMTimeRangeGetIntersection(*self, other) }
     }
 
+    /// Returns the union of this range and `other`.
     #[must_use]
     pub fn union(&self, other: Self) -> Self {
         extern "C" {
@@ -483,7 +497,7 @@ impl std::hash::Hash for CMClock {
 }
 
 impl CMClock {
-    /// Create from raw pointer, returning None if null
+    /// Wraps a +1 retained `CMClockRef` and returns `None` for null.
     #[must_use]
     pub fn from_raw(ptr: *const c_void) -> Option<Self> {
         if ptr.is_null() {
@@ -506,10 +520,10 @@ impl CMClock {
         Self { ptr: retained }
     }
 
-    /// Create from raw pointer (used internally)
+    /// Wraps a raw `CMClockRef` by taking ownership without retaining it.
     ///
     /// # Safety
-    /// The caller must ensure the pointer is a valid, retained `CMClock` pointer.
+    /// The caller must ensure `ptr` is a valid +1 retained `CMClockRef`.
     #[allow(dead_code)]
     pub(crate) const fn from_ptr(ptr: *const c_void) -> Self {
         Self { ptr }

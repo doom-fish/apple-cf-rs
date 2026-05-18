@@ -30,6 +30,7 @@ impl CVMetalTextureCache {
         Self::from_raw(ptr)
     }
 
+    /// Wraps a +1 retained `CVMetalTextureCacheRef` and returns `None` for null.
     #[must_use]
     pub fn from_raw(ptr: *mut c_void) -> Option<Self> {
         if ptr.is_null() {

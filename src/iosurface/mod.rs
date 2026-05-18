@@ -374,7 +374,7 @@ impl IOSurface {
         }
     }
 
-    /// Create from raw pointer
+    /// Wraps a +1 retained `IOSurfaceRef` and returns `None` for null.
     pub fn from_raw(ptr: *mut c_void) -> Option<Self> {
         if ptr.is_null() {
             None
@@ -383,8 +383,10 @@ impl IOSurface {
         }
     }
 
+    /// Wraps a raw `IOSurfaceRef` by taking ownership without retaining it.
+    ///
     /// # Safety
-    /// The caller must ensure the pointer is a valid `IOSurface` pointer.
+    /// The caller must ensure `ptr` is a valid +1 retained `IOSurfaceRef`.
     pub const unsafe fn from_ptr(ptr: *mut c_void) -> Self {
         Self(ptr)
     }

@@ -121,7 +121,7 @@ impl CMBlockBuffer {
         }
     }
 
-    /// Create from a raw pointer, returning `None` if null
+    /// Wraps a +1 retained `CMBlockBufferRef` and returns `None` for null.
     pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         if ptr.is_null() {
             None
@@ -130,8 +130,10 @@ impl CMBlockBuffer {
         }
     }
 
+    /// Wraps a raw `CMBlockBufferRef` by taking ownership without retaining it.
+    ///
     /// # Safety
-    /// The caller must ensure the pointer is a valid `CMBlockBuffer` pointer.
+    /// The caller must ensure `ptr` is a valid +1 retained `CMBlockBufferRef`.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }

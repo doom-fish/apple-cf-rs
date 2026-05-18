@@ -139,6 +139,7 @@ impl CGRect {
         self.y + self.height / 2.0
     }
 
+    /// Returns whether the rectangle has a non-positive width or height.
     #[must_use]
     pub fn is_empty(&self) -> bool {
         self.width <= 0.0 || self.height <= 0.0

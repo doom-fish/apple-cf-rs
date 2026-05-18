@@ -13,10 +13,15 @@
 //! since they're tied to `ScreenCaptureKit`'s specific attachment keys.
 
 pub mod audio;
+/// Core Media block-buffer wrappers.
 pub mod block_buffer;
+/// Core Media format-description wrappers.
 pub mod format_description;
+/// Core Media sample-buffer wrappers.
 pub mod sample_buffer;
+/// Core Media time and time-range wrappers.
 pub mod time;
+/// Core Media timebase wrappers.
 pub mod timebase;
 
 pub use audio::{AudioBuffer, AudioBufferList, AudioBufferListRaw};

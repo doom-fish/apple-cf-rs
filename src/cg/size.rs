@@ -86,6 +86,7 @@ impl CGSize {
         self.width == self.height
     }
 
+    /// Returns whether the size has a non-positive width or height.
     #[must_use]
     pub fn is_empty(&self) -> bool {
         self.width <= 0.0 || self.height <= 0.0

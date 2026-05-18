@@ -42,7 +42,7 @@ impl CMTimebase {
         }
     }
 
-    /// Adopt a retained raw pointer.
+    /// Wraps a +1 retained `CMTimebaseRef` and returns `None` for null.
     #[must_use]
     pub fn from_raw(ptr: *const c_void) -> Option<Self> {
         if ptr.is_null() {

@@ -70,6 +70,7 @@ pub struct CVImageRect {
 pub struct CVBuffer(*mut c_void);
 
 impl CVBuffer {
+    /// Wraps a +1 retained `CVBufferRef` and returns `None` for null.
     #[must_use]
     pub fn from_raw(ptr: *mut c_void) -> Option<Self> {
         if ptr.is_null() {
@@ -79,7 +80,7 @@ impl CVBuffer {
         }
     }
 
-    /// Retain a borrowed Core Video buffer.
+    /// Retains a +0 borrowed `CVBufferRef` and wraps the resulting +1 reference.
     ///
     /// # Safety
     ///
@@ -169,6 +170,7 @@ impl fmt::Debug for CVBuffer {
 pub struct CVImageBuffer(*mut c_void);
 
 impl CVImageBuffer {
+    /// Wraps a +1 retained `CVImageBufferRef` and returns `None` for null.
     #[must_use]
     pub fn from_raw(ptr: *mut c_void) -> Option<Self> {
         if ptr.is_null() {

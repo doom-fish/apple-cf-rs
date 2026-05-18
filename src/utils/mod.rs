@@ -12,4 +12,5 @@ pub use doom_fish_utils::four_char_code;
 pub use doom_fish_utils::four_char_code::FourCharCode;
 pub use doom_fish_utils::panic_safe;
 
+/// FFI string helpers that free bridge-owned strings.
 pub mod ffi_string;

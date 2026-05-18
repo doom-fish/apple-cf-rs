@@ -44,6 +44,7 @@ use std::fmt;
 
 impl_cf_type_wrapper!(CFArray, cf_array_get_type_id);
 impl_cf_type_wrapper!(CFDictionary, cf_dictionary_get_type_id);
+/// Alias for `CFDictionary`.
 pub type CFDict = CFDictionary;
 impl_cf_type_wrapper!(CFBag, cf_bag_get_type_id);
 impl_cf_type_wrapper!(CFSet, cf_set_get_type_id);
@@ -469,6 +470,7 @@ impl CFTree {
         Self(SwiftObject::from_raw(ptr).expect("tree bridge returned NULL"))
     }
 
+    /// Wraps a +1 retained tree helper pointer and returns `None` for null.
     #[must_use]
     pub(crate) fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         SwiftObject::from_raw(ptr).map(Self)
