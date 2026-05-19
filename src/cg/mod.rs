@@ -19,35 +19,35 @@ pub(crate) mod ffi {
 
     #[link(name = "ApplicationServices", kind = "framework")]
     extern "C" {
-/// Apple SDK function `CGColorSpaceCreateDeviceRGB`.
+        /// Apple SDK function `CGColorSpaceCreateDeviceRGB`.
         pub(crate) fn CGColorSpaceCreateDeviceRGB() -> *mut c_void;
-/// Apple SDK function `CGColorSpaceCreateDeviceGray`.
+        /// Apple SDK function `CGColorSpaceCreateDeviceGray`.
         pub(crate) fn CGColorSpaceCreateDeviceGray() -> *mut c_void;
-/// Apple SDK function `CGColorSpaceCreateWithName`.
+        /// Apple SDK function `CGColorSpaceCreateWithName`.
         pub(crate) fn CGColorSpaceCreateWithName(name: *const c_void) -> *mut c_void;
-/// Apple SDK function `CGColorSpaceRelease`.
+        /// Apple SDK function `CGColorSpaceRelease`.
         pub(crate) fn CGColorSpaceRelease(cs: *mut c_void);
-/// Apple SDK function `CGColorSpaceRetain`.
+        /// Apple SDK function `CGColorSpaceRetain`.
         pub(crate) fn CGColorSpaceRetain(cs: *mut c_void) -> *mut c_void;
-/// Apple SDK function `CGColorSpaceGetNumberOfComponents`.
+        /// Apple SDK function `CGColorSpaceGetNumberOfComponents`.
         pub(crate) fn CGColorSpaceGetNumberOfComponents(cs: *mut c_void) -> usize;
 
-/// Apple SDK function `CGImageGetWidth`.
+        /// Apple SDK function `CGImageGetWidth`.
         pub(crate) fn CGImageGetWidth(image: *mut c_void) -> usize;
-/// Apple SDK function `CGImageGetHeight`.
+        /// Apple SDK function `CGImageGetHeight`.
         pub(crate) fn CGImageGetHeight(image: *mut c_void) -> usize;
-/// Apple SDK function `CGImageGetBitsPerComponent`.
+        /// Apple SDK function `CGImageGetBitsPerComponent`.
         pub(crate) fn CGImageGetBitsPerComponent(image: *mut c_void) -> usize;
-/// Apple SDK function `CGImageGetBitsPerPixel`.
+        /// Apple SDK function `CGImageGetBitsPerPixel`.
         pub(crate) fn CGImageGetBitsPerPixel(image: *mut c_void) -> usize;
-/// Apple SDK function `CGImageGetBytesPerRow`.
+        /// Apple SDK function `CGImageGetBytesPerRow`.
         pub(crate) fn CGImageGetBytesPerRow(image: *mut c_void) -> usize;
-/// Apple SDK function `CGImageRelease`.
+        /// Apple SDK function `CGImageRelease`.
         pub(crate) fn CGImageRelease(image: *mut c_void);
-/// Apple SDK function `CGImageRetain`.
+        /// Apple SDK function `CGImageRetain`.
         pub(crate) fn CGImageRetain(image: *mut c_void) -> *mut c_void;
 
-/// Apple SDK function `CGBitmapContextCreate`.
+        /// Apple SDK function `CGBitmapContextCreate`.
         pub(crate) fn CGBitmapContextCreate(
             data: *mut c_void,
             width: usize,
@@ -57,30 +57,30 @@ pub(crate) mod ffi {
             space: *mut c_void,
             bitmap_info: u32,
         ) -> *mut c_void;
-/// Apple SDK function `CGBitmapContextGetData`.
+        /// Apple SDK function `CGBitmapContextGetData`.
         pub(crate) fn CGBitmapContextGetData(context: *mut c_void) -> *mut c_void;
-/// Apple SDK function `CGBitmapContextGetWidth`.
+        /// Apple SDK function `CGBitmapContextGetWidth`.
         pub(crate) fn CGBitmapContextGetWidth(context: *mut c_void) -> usize;
-/// Apple SDK function `CGBitmapContextGetHeight`.
+        /// Apple SDK function `CGBitmapContextGetHeight`.
         pub(crate) fn CGBitmapContextGetHeight(context: *mut c_void) -> usize;
-/// Apple SDK function `CGBitmapContextGetBitsPerComponent`.
+        /// Apple SDK function `CGBitmapContextGetBitsPerComponent`.
         pub(crate) fn CGBitmapContextGetBitsPerComponent(context: *mut c_void) -> usize;
-/// Apple SDK function `CGBitmapContextGetBitsPerPixel`.
+        /// Apple SDK function `CGBitmapContextGetBitsPerPixel`.
         pub(crate) fn CGBitmapContextGetBitsPerPixel(context: *mut c_void) -> usize;
-/// Apple SDK function `CGBitmapContextGetBytesPerRow`.
+        /// Apple SDK function `CGBitmapContextGetBytesPerRow`.
         pub(crate) fn CGBitmapContextGetBytesPerRow(context: *mut c_void) -> usize;
-/// Apple SDK function `CGBitmapContextGetColorSpace`.
+        /// Apple SDK function `CGBitmapContextGetColorSpace`.
         pub(crate) fn CGBitmapContextGetColorSpace(context: *mut c_void) -> *mut c_void;
-/// Apple SDK function `CGBitmapContextGetAlphaInfo`.
+        /// Apple SDK function `CGBitmapContextGetAlphaInfo`.
         pub(crate) fn CGBitmapContextGetAlphaInfo(context: *mut c_void) -> u32;
-/// Apple SDK function `CGBitmapContextCreateImage`.
+        /// Apple SDK function `CGBitmapContextCreateImage`.
         pub(crate) fn CGBitmapContextCreateImage(context: *mut c_void) -> *mut c_void;
 
-/// Apple SDK function `CGContextRetain`.
+        /// Apple SDK function `CGContextRetain`.
         pub(crate) fn CGContextRetain(context: *mut c_void) -> *mut c_void;
-/// Apple SDK function `CGContextRelease`.
+        /// Apple SDK function `CGContextRelease`.
         pub(crate) fn CGContextRelease(context: *mut c_void);
-/// Apple SDK function `CGContextSetRGBFillColor`.
+        /// Apple SDK function `CGContextSetRGBFillColor`.
         pub(crate) fn CGContextSetRGBFillColor(
             context: *mut c_void,
             red: f64,
@@ -88,7 +88,7 @@ pub(crate) mod ffi {
             blue: f64,
             alpha: f64,
         );
-/// Apple SDK function `CGContextSetRGBStrokeColor`.
+        /// Apple SDK function `CGContextSetRGBStrokeColor`.
         pub(crate) fn CGContextSetRGBStrokeColor(
             context: *mut c_void,
             red: f64,
@@ -96,57 +96,57 @@ pub(crate) mod ffi {
             blue: f64,
             alpha: f64,
         );
-/// Apple SDK function `CGContextSetLineWidth`.
+        /// Apple SDK function `CGContextSetLineWidth`.
         pub(crate) fn CGContextSetLineWidth(context: *mut c_void, width: f64);
-/// Apple SDK function `CGContextFillRect`.
+        /// Apple SDK function `CGContextFillRect`.
         pub(crate) fn CGContextFillRect(context: *mut c_void, rect: CGRect);
-/// Apple SDK function `CGContextStrokeRect`.
+        /// Apple SDK function `CGContextStrokeRect`.
         pub(crate) fn CGContextStrokeRect(context: *mut c_void, rect: CGRect);
-/// Apple SDK function `CGContextFillPath`.
+        /// Apple SDK function `CGContextFillPath`.
         pub(crate) fn CGContextFillPath(context: *mut c_void);
-/// Apple SDK function `CGContextStrokePath`.
+        /// Apple SDK function `CGContextStrokePath`.
         pub(crate) fn CGContextStrokePath(context: *mut c_void);
-/// Apple SDK function `CGContextClearRect`.
+        /// Apple SDK function `CGContextClearRect`.
         pub(crate) fn CGContextClearRect(context: *mut c_void, rect: CGRect);
-/// Apple SDK function `CGContextMoveToPoint`.
+        /// Apple SDK function `CGContextMoveToPoint`.
         pub(crate) fn CGContextMoveToPoint(context: *mut c_void, x: f64, y: f64);
-/// Apple SDK function `CGContextAddLineToPoint`.
+        /// Apple SDK function `CGContextAddLineToPoint`.
         pub(crate) fn CGContextAddLineToPoint(context: *mut c_void, x: f64, y: f64);
-/// Apple SDK function `CGContextAddRect`.
+        /// Apple SDK function `CGContextAddRect`.
         pub(crate) fn CGContextAddRect(context: *mut c_void, rect: CGRect);
-/// Apple SDK function `CGContextAddEllipseInRect`.
+        /// Apple SDK function `CGContextAddEllipseInRect`.
         pub(crate) fn CGContextAddEllipseInRect(context: *mut c_void, rect: CGRect);
-/// Apple SDK function `CGContextBeginPath`.
+        /// Apple SDK function `CGContextBeginPath`.
         pub(crate) fn CGContextBeginPath(context: *mut c_void);
-/// Apple SDK function `CGContextClosePath`.
+        /// Apple SDK function `CGContextClosePath`.
         pub(crate) fn CGContextClosePath(context: *mut c_void);
-/// Apple SDK function `CGContextDrawImage`.
+        /// Apple SDK function `CGContextDrawImage`.
         pub(crate) fn CGContextDrawImage(context: *mut c_void, rect: CGRect, image: *mut c_void);
-/// Apple SDK function `CGContextTranslateCTM`.
+        /// Apple SDK function `CGContextTranslateCTM`.
         pub(crate) fn CGContextTranslateCTM(context: *mut c_void, tx: f64, ty: f64);
-/// Apple SDK function `CGContextScaleCTM`.
+        /// Apple SDK function `CGContextScaleCTM`.
         pub(crate) fn CGContextScaleCTM(context: *mut c_void, sx: f64, sy: f64);
-/// Apple SDK function `CGContextRotateCTM`.
+        /// Apple SDK function `CGContextRotateCTM`.
         pub(crate) fn CGContextRotateCTM(context: *mut c_void, radians: f64);
-/// Apple SDK function `CGContextSaveGState`.
+        /// Apple SDK function `CGContextSaveGState`.
         pub(crate) fn CGContextSaveGState(context: *mut c_void);
-/// Apple SDK function `CGContextRestoreGState`.
+        /// Apple SDK function `CGContextRestoreGState`.
         pub(crate) fn CGContextRestoreGState(context: *mut c_void);
     }
 }
 
-pub use affine::{CGAffineTransform, CGVector};
-pub use context::CGContext;
-pub use drawing::{CGColorSpace, CGImage};
-pub use point::CGPoint;
-pub use rect::CGRect;
-pub use size::CGSize;
 #[doc(inline)]
 pub use crate::raw::CGCharCode;
 #[doc(inline)]
 pub use crate::raw::CGContextRef;
 #[doc(inline)]
 pub use crate::raw::CGKeyCode;
+pub use affine::{CGAffineTransform, CGVector};
+pub use context::CGContext;
+pub use drawing::{CGColorSpace, CGImage};
+pub use point::CGPoint;
+pub use rect::CGRect;
+pub use size::CGSize;
 
 /// `CGDisplayID` type alias
 pub type CGDisplayID = u32;

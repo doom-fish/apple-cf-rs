@@ -347,7 +347,7 @@ pub type ConstStr255Param = *const ::core::ffi::c_uchar;
 /// Apple SDK type alias `CFAllocatorTypeID`.
 pub type CFAllocatorTypeID = ::core::ffi::c_ulonglong;
 extern "C" {
-/// Apple SDK exported static `kCFCoreFoundationVersionNumber`.
+    /// Apple SDK exported static `kCFCoreFoundationVersionNumber`.
     pub static mut kCFCoreFoundationVersionNumber: f64;
 }
 /// Apple SDK type alias `CFTypeID`.
@@ -408,11 +408,11 @@ pub struct __CFNull {
 /// Apple SDK type alias `CFNullRef`.
 pub type CFNullRef = *const __CFNull;
 extern "C" {
-/// Apple SDK function `CFNullGetTypeID`.
+    /// Apple SDK function `CFNullGetTypeID`.
     pub fn CFNullGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNull`.
+    /// Apple SDK exported static `kCFNull`.
     pub static kCFNull: CFNullRef;
 }
 #[repr(C)]
@@ -424,27 +424,27 @@ pub struct __CFAllocator {
 /// Apple SDK type alias `CFAllocatorRef`.
 pub type CFAllocatorRef = *const __CFAllocator;
 extern "C" {
-/// Apple SDK exported static `kCFAllocatorDefault`.
+    /// Apple SDK exported static `kCFAllocatorDefault`.
     pub static kCFAllocatorDefault: CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFAllocatorSystemDefault`.
+    /// Apple SDK exported static `kCFAllocatorSystemDefault`.
     pub static kCFAllocatorSystemDefault: CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFAllocatorMalloc`.
+    /// Apple SDK exported static `kCFAllocatorMalloc`.
     pub static kCFAllocatorMalloc: CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFAllocatorMallocZone`.
+    /// Apple SDK exported static `kCFAllocatorMallocZone`.
     pub static kCFAllocatorMallocZone: CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFAllocatorNull`.
+    /// Apple SDK exported static `kCFAllocatorNull`.
     pub static kCFAllocatorNull: CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFAllocatorUseContext`.
+    /// Apple SDK exported static `kCFAllocatorUseContext`.
     pub static kCFAllocatorUseContext: CFAllocatorRef;
 }
 /// Apple SDK type alias `CFAllocatorRetainCallBack`.
@@ -501,33 +501,33 @@ pub struct CFAllocatorContext {
     pub preferredSize: CFAllocatorPreferredSizeCallBack,
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorGetTypeID`.
+    /// Apple SDK function `CFAllocatorGetTypeID`.
     pub fn CFAllocatorGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorSetDefault`.
+    /// Apple SDK function `CFAllocatorSetDefault`.
     pub fn CFAllocatorSetDefault(allocator: CFAllocatorRef);
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorGetDefault`.
+    /// Apple SDK function `CFAllocatorGetDefault`.
     pub fn CFAllocatorGetDefault() -> CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorCreate`.
+    /// Apple SDK function `CFAllocatorCreate`.
     pub fn CFAllocatorCreate(
         allocator: CFAllocatorRef,
         context: *mut CFAllocatorContext,
     ) -> CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorCreateWithZone`.
+    /// Apple SDK function `CFAllocatorCreateWithZone`.
     pub fn CFAllocatorCreateWithZone(
         allocator: CFAllocatorRef,
         zone: *mut _malloc_zone_t,
     ) -> CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorAllocateTyped`.
+    /// Apple SDK function `CFAllocatorAllocateTyped`.
     pub fn CFAllocatorAllocateTyped(
         allocator: CFAllocatorRef,
         size: CFIndex,
@@ -536,7 +536,7 @@ extern "C" {
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorReallocateTyped`.
+    /// Apple SDK function `CFAllocatorReallocateTyped`.
     pub fn CFAllocatorReallocateTyped(
         allocator: CFAllocatorRef,
         ptr: *mut ::core::ffi::c_void,
@@ -546,7 +546,7 @@ extern "C" {
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorAllocateBytes`.
+    /// Apple SDK function `CFAllocatorAllocateBytes`.
     pub fn CFAllocatorAllocateBytes(
         allocator: CFAllocatorRef,
         size: CFIndex,
@@ -554,7 +554,7 @@ extern "C" {
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorReallocateBytes`.
+    /// Apple SDK function `CFAllocatorReallocateBytes`.
     pub fn CFAllocatorReallocateBytes(
         allocator: CFAllocatorRef,
         ptr: *mut ::core::ffi::c_void,
@@ -563,7 +563,7 @@ extern "C" {
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorAllocate`.
+    /// Apple SDK function `CFAllocatorAllocate`.
     pub fn CFAllocatorAllocate(
         allocator: CFAllocatorRef,
         size: CFIndex,
@@ -571,7 +571,7 @@ extern "C" {
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorReallocate`.
+    /// Apple SDK function `CFAllocatorReallocate`.
     pub fn CFAllocatorReallocate(
         allocator: CFAllocatorRef,
         ptr: *mut ::core::ffi::c_void,
@@ -580,11 +580,11 @@ extern "C" {
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorDeallocate`.
+    /// Apple SDK function `CFAllocatorDeallocate`.
     pub fn CFAllocatorDeallocate(allocator: CFAllocatorRef, ptr: *mut ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorGetPreferredSizeForSize`.
+    /// Apple SDK function `CFAllocatorGetPreferredSizeForSize`.
     pub fn CFAllocatorGetPreferredSizeForSize(
         allocator: CFAllocatorRef,
         size: CFIndex,
@@ -592,51 +592,51 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFAllocatorGetContext`.
+    /// Apple SDK function `CFAllocatorGetContext`.
     pub fn CFAllocatorGetContext(allocator: CFAllocatorRef, context: *mut CFAllocatorContext);
 }
 extern "C" {
-/// Apple SDK function `CFGetTypeID`.
+    /// Apple SDK function `CFGetTypeID`.
     pub fn CFGetTypeID(cf: CFTypeRef) -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFCopyTypeIDDescription`.
+    /// Apple SDK function `CFCopyTypeIDDescription`.
     pub fn CFCopyTypeIDDescription(type_id: CFTypeID) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFRetain`.
+    /// Apple SDK function `CFRetain`.
     pub fn CFRetain(cf: CFTypeRef) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFRelease`.
+    /// Apple SDK function `CFRelease`.
     pub fn CFRelease(cf: CFTypeRef);
 }
 extern "C" {
-/// Apple SDK function `CFAutorelease`.
+    /// Apple SDK function `CFAutorelease`.
     pub fn CFAutorelease(arg: CFTypeRef) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFGetRetainCount`.
+    /// Apple SDK function `CFGetRetainCount`.
     pub fn CFGetRetainCount(cf: CFTypeRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFEqual`.
+    /// Apple SDK function `CFEqual`.
     pub fn CFEqual(cf1: CFTypeRef, cf2: CFTypeRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHash`.
+    /// Apple SDK function `CFHash`.
     pub fn CFHash(cf: CFTypeRef) -> CFHashCode;
 }
 extern "C" {
-/// Apple SDK function `CFCopyDescription`.
+    /// Apple SDK function `CFCopyDescription`.
     pub fn CFCopyDescription(cf: CFTypeRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFGetAllocator`.
+    /// Apple SDK function `CFGetAllocator`.
     pub fn CFGetAllocator(cf: CFTypeRef) -> CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK function `CFMakeCollectable`.
+    /// Apple SDK function `CFMakeCollectable`.
     pub fn CFMakeCollectable(cf: CFTypeRef) -> CFTypeRef;
 }
 /// Apple SDK type alias `CFArrayRetainCallBack`.
@@ -671,7 +671,7 @@ pub struct CFArrayCallBacks {
     pub equal: CFArrayEqualCallBack,
 }
 extern "C" {
-/// Apple SDK exported static `kCFTypeArrayCallBacks`.
+    /// Apple SDK exported static `kCFTypeArrayCallBacks`.
     pub static kCFTypeArrayCallBacks: CFArrayCallBacks;
 }
 /// Apple SDK type alias `CFArrayApplierFunction`.
@@ -689,11 +689,11 @@ pub type CFArrayRef = *const __CFArray;
 /// Apple SDK type alias `CFMutableArrayRef`.
 pub type CFMutableArrayRef = *mut __CFArray;
 extern "C" {
-/// Apple SDK function `CFArrayGetTypeID`.
+    /// Apple SDK function `CFArrayGetTypeID`.
     pub fn CFArrayGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFArrayCreate`.
+    /// Apple SDK function `CFArrayCreate`.
     pub fn CFArrayCreate(
         allocator: CFAllocatorRef,
         values: *mut *const ::core::ffi::c_void,
@@ -702,11 +702,11 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFArrayCreateCopy`.
+    /// Apple SDK function `CFArrayCreateCopy`.
     pub fn CFArrayCreateCopy(allocator: CFAllocatorRef, theArray: CFArrayRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFArrayCreateMutable`.
+    /// Apple SDK function `CFArrayCreateMutable`.
     pub fn CFArrayCreateMutable(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -714,7 +714,7 @@ extern "C" {
     ) -> CFMutableArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFArrayCreateMutableCopy`.
+    /// Apple SDK function `CFArrayCreateMutableCopy`.
     pub fn CFArrayCreateMutableCopy(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -722,11 +722,11 @@ extern "C" {
     ) -> CFMutableArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFArrayGetCount`.
+    /// Apple SDK function `CFArrayGetCount`.
     pub fn CFArrayGetCount(theArray: CFArrayRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFArrayGetCountOfValue`.
+    /// Apple SDK function `CFArrayGetCountOfValue`.
     pub fn CFArrayGetCountOfValue(
         theArray: CFArrayRef,
         range: CFRange,
@@ -734,7 +734,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFArrayContainsValue`.
+    /// Apple SDK function `CFArrayContainsValue`.
     pub fn CFArrayContainsValue(
         theArray: CFArrayRef,
         range: CFRange,
@@ -742,12 +742,12 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFArrayGetValueAtIndex`.
+    /// Apple SDK function `CFArrayGetValueAtIndex`.
     pub fn CFArrayGetValueAtIndex(theArray: CFArrayRef, idx: CFIndex)
         -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFArrayGetValues`.
+    /// Apple SDK function `CFArrayGetValues`.
     pub fn CFArrayGetValues(
         theArray: CFArrayRef,
         range: CFRange,
@@ -755,7 +755,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFArrayApplyFunction`.
+    /// Apple SDK function `CFArrayApplyFunction`.
     pub fn CFArrayApplyFunction(
         theArray: CFArrayRef,
         range: CFRange,
@@ -764,7 +764,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFArrayGetFirstIndexOfValue`.
+    /// Apple SDK function `CFArrayGetFirstIndexOfValue`.
     pub fn CFArrayGetFirstIndexOfValue(
         theArray: CFArrayRef,
         range: CFRange,
@@ -772,7 +772,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFArrayGetLastIndexOfValue`.
+    /// Apple SDK function `CFArrayGetLastIndexOfValue`.
     pub fn CFArrayGetLastIndexOfValue(
         theArray: CFArrayRef,
         range: CFRange,
@@ -780,7 +780,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFArrayBSearchValues`.
+    /// Apple SDK function `CFArrayBSearchValues`.
     pub fn CFArrayBSearchValues(
         theArray: CFArrayRef,
         range: CFRange,
@@ -790,11 +790,11 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFArrayAppendValue`.
+    /// Apple SDK function `CFArrayAppendValue`.
     pub fn CFArrayAppendValue(theArray: CFMutableArrayRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFArrayInsertValueAtIndex`.
+    /// Apple SDK function `CFArrayInsertValueAtIndex`.
     pub fn CFArrayInsertValueAtIndex(
         theArray: CFMutableArrayRef,
         idx: CFIndex,
@@ -802,7 +802,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFArraySetValueAtIndex`.
+    /// Apple SDK function `CFArraySetValueAtIndex`.
     pub fn CFArraySetValueAtIndex(
         theArray: CFMutableArrayRef,
         idx: CFIndex,
@@ -810,15 +810,15 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFArrayRemoveValueAtIndex`.
+    /// Apple SDK function `CFArrayRemoveValueAtIndex`.
     pub fn CFArrayRemoveValueAtIndex(theArray: CFMutableArrayRef, idx: CFIndex);
 }
 extern "C" {
-/// Apple SDK function `CFArrayRemoveAllValues`.
+    /// Apple SDK function `CFArrayRemoveAllValues`.
     pub fn CFArrayRemoveAllValues(theArray: CFMutableArrayRef);
 }
 extern "C" {
-/// Apple SDK function `CFArrayReplaceValues`.
+    /// Apple SDK function `CFArrayReplaceValues`.
     pub fn CFArrayReplaceValues(
         theArray: CFMutableArrayRef,
         range: CFRange,
@@ -827,7 +827,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFArrayExchangeValuesAtIndices`.
+    /// Apple SDK function `CFArrayExchangeValuesAtIndices`.
     pub fn CFArrayExchangeValuesAtIndices(
         theArray: CFMutableArrayRef,
         idx1: CFIndex,
@@ -835,7 +835,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFArraySortValues`.
+    /// Apple SDK function `CFArraySortValues`.
     pub fn CFArraySortValues(
         theArray: CFMutableArrayRef,
         range: CFRange,
@@ -844,7 +844,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFArrayAppendArray`.
+    /// Apple SDK function `CFArrayAppendArray`.
     pub fn CFArrayAppendArray(
         theArray: CFMutableArrayRef,
         otherArray: CFArrayRef,
@@ -887,11 +887,11 @@ pub struct CFBagCallBacks {
     pub hash: CFBagHashCallBack,
 }
 extern "C" {
-/// Apple SDK exported static `kCFTypeBagCallBacks`.
+    /// Apple SDK exported static `kCFTypeBagCallBacks`.
     pub static kCFTypeBagCallBacks: CFBagCallBacks;
 }
 extern "C" {
-/// Apple SDK exported static `kCFCopyStringBagCallBacks`.
+    /// Apple SDK exported static `kCFCopyStringBagCallBacks`.
     pub static kCFCopyStringBagCallBacks: CFBagCallBacks;
 }
 /// Apple SDK type alias `CFBagApplierFunction`.
@@ -909,11 +909,11 @@ pub type CFBagRef = *const __CFBag;
 /// Apple SDK type alias `CFMutableBagRef`.
 pub type CFMutableBagRef = *mut __CFBag;
 extern "C" {
-/// Apple SDK function `CFBagGetTypeID`.
+    /// Apple SDK function `CFBagGetTypeID`.
     pub fn CFBagGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFBagCreate`.
+    /// Apple SDK function `CFBagCreate`.
     pub fn CFBagCreate(
         allocator: CFAllocatorRef,
         values: *mut *const ::core::ffi::c_void,
@@ -922,11 +922,11 @@ extern "C" {
     ) -> CFBagRef;
 }
 extern "C" {
-/// Apple SDK function `CFBagCreateCopy`.
+    /// Apple SDK function `CFBagCreateCopy`.
     pub fn CFBagCreateCopy(allocator: CFAllocatorRef, theBag: CFBagRef) -> CFBagRef;
 }
 extern "C" {
-/// Apple SDK function `CFBagCreateMutable`.
+    /// Apple SDK function `CFBagCreateMutable`.
     pub fn CFBagCreateMutable(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -934,7 +934,7 @@ extern "C" {
     ) -> CFMutableBagRef;
 }
 extern "C" {
-/// Apple SDK function `CFBagCreateMutableCopy`.
+    /// Apple SDK function `CFBagCreateMutableCopy`.
     pub fn CFBagCreateMutableCopy(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -942,26 +942,26 @@ extern "C" {
     ) -> CFMutableBagRef;
 }
 extern "C" {
-/// Apple SDK function `CFBagGetCount`.
+    /// Apple SDK function `CFBagGetCount`.
     pub fn CFBagGetCount(theBag: CFBagRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBagGetCountOfValue`.
+    /// Apple SDK function `CFBagGetCountOfValue`.
     pub fn CFBagGetCountOfValue(theBag: CFBagRef, value: *const ::core::ffi::c_void) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBagContainsValue`.
+    /// Apple SDK function `CFBagContainsValue`.
     pub fn CFBagContainsValue(theBag: CFBagRef, value: *const ::core::ffi::c_void) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBagGetValue`.
+    /// Apple SDK function `CFBagGetValue`.
     pub fn CFBagGetValue(
         theBag: CFBagRef,
         value: *const ::core::ffi::c_void,
     ) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFBagGetValueIfPresent`.
+    /// Apple SDK function `CFBagGetValueIfPresent`.
     pub fn CFBagGetValueIfPresent(
         theBag: CFBagRef,
         candidate: *const ::core::ffi::c_void,
@@ -969,11 +969,11 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBagGetValues`.
+    /// Apple SDK function `CFBagGetValues`.
     pub fn CFBagGetValues(theBag: CFBagRef, values: *mut *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFBagApplyFunction`.
+    /// Apple SDK function `CFBagApplyFunction`.
     pub fn CFBagApplyFunction(
         theBag: CFBagRef,
         applier: CFBagApplierFunction,
@@ -981,23 +981,23 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFBagAddValue`.
+    /// Apple SDK function `CFBagAddValue`.
     pub fn CFBagAddValue(theBag: CFMutableBagRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFBagReplaceValue`.
+    /// Apple SDK function `CFBagReplaceValue`.
     pub fn CFBagReplaceValue(theBag: CFMutableBagRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFBagSetValue`.
+    /// Apple SDK function `CFBagSetValue`.
     pub fn CFBagSetValue(theBag: CFMutableBagRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFBagRemoveValue`.
+    /// Apple SDK function `CFBagRemoveValue`.
     pub fn CFBagRemoveValue(theBag: CFMutableBagRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFBagRemoveAllValues`.
+    /// Apple SDK function `CFBagRemoveAllValues`.
     pub fn CFBagRemoveAllValues(theBag: CFMutableBagRef);
 }
 #[repr(C)]
@@ -1040,7 +1040,7 @@ pub struct CFBinaryHeapCallBacks {
     >,
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringBinaryHeapCallBacks`.
+    /// Apple SDK exported static `kCFStringBinaryHeapCallBacks`.
     pub static kCFStringBinaryHeapCallBacks: CFBinaryHeapCallBacks;
 }
 /// Apple SDK type alias `CFBinaryHeapApplierFunction`.
@@ -1056,11 +1056,11 @@ pub struct __CFBinaryHeap {
 /// Apple SDK type alias `CFBinaryHeapRef`.
 pub type CFBinaryHeapRef = *mut __CFBinaryHeap;
 extern "C" {
-/// Apple SDK function `CFBinaryHeapGetTypeID`.
+    /// Apple SDK function `CFBinaryHeapGetTypeID`.
     pub fn CFBinaryHeapGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapCreate`.
+    /// Apple SDK function `CFBinaryHeapCreate`.
     pub fn CFBinaryHeapCreate(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -1069,7 +1069,7 @@ extern "C" {
     ) -> CFBinaryHeapRef;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapCreateCopy`.
+    /// Apple SDK function `CFBinaryHeapCreateCopy`.
     pub fn CFBinaryHeapCreateCopy(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -1077,40 +1077,40 @@ extern "C" {
     ) -> CFBinaryHeapRef;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapGetCount`.
+    /// Apple SDK function `CFBinaryHeapGetCount`.
     pub fn CFBinaryHeapGetCount(heap: CFBinaryHeapRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapGetCountOfValue`.
+    /// Apple SDK function `CFBinaryHeapGetCountOfValue`.
     pub fn CFBinaryHeapGetCountOfValue(
         heap: CFBinaryHeapRef,
         value: *const ::core::ffi::c_void,
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapContainsValue`.
+    /// Apple SDK function `CFBinaryHeapContainsValue`.
     pub fn CFBinaryHeapContainsValue(
         heap: CFBinaryHeapRef,
         value: *const ::core::ffi::c_void,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapGetMinimum`.
+    /// Apple SDK function `CFBinaryHeapGetMinimum`.
     pub fn CFBinaryHeapGetMinimum(heap: CFBinaryHeapRef) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapGetMinimumIfPresent`.
+    /// Apple SDK function `CFBinaryHeapGetMinimumIfPresent`.
     pub fn CFBinaryHeapGetMinimumIfPresent(
         heap: CFBinaryHeapRef,
         value: *mut *const ::core::ffi::c_void,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapGetValues`.
+    /// Apple SDK function `CFBinaryHeapGetValues`.
     pub fn CFBinaryHeapGetValues(heap: CFBinaryHeapRef, values: *mut *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapApplyFunction`.
+    /// Apple SDK function `CFBinaryHeapApplyFunction`.
     pub fn CFBinaryHeapApplyFunction(
         heap: CFBinaryHeapRef,
         applier: CFBinaryHeapApplierFunction,
@@ -1118,15 +1118,15 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapAddValue`.
+    /// Apple SDK function `CFBinaryHeapAddValue`.
     pub fn CFBinaryHeapAddValue(heap: CFBinaryHeapRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapRemoveMinimumValue`.
+    /// Apple SDK function `CFBinaryHeapRemoveMinimumValue`.
     pub fn CFBinaryHeapRemoveMinimumValue(heap: CFBinaryHeapRef);
 }
 extern "C" {
-/// Apple SDK function `CFBinaryHeapRemoveAllValues`.
+    /// Apple SDK function `CFBinaryHeapRemoveAllValues`.
     pub fn CFBinaryHeapRemoveAllValues(heap: CFBinaryHeapRef);
 }
 /// Apple SDK type alias `CFBit`.
@@ -1142,11 +1142,11 @@ pub type CFBitVectorRef = *const __CFBitVector;
 /// Apple SDK type alias `CFMutableBitVectorRef`.
 pub type CFMutableBitVectorRef = *mut __CFBitVector;
 extern "C" {
-/// Apple SDK function `CFBitVectorGetTypeID`.
+    /// Apple SDK function `CFBitVectorGetTypeID`.
     pub fn CFBitVectorGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorCreate`.
+    /// Apple SDK function `CFBitVectorCreate`.
     pub fn CFBitVectorCreate(
         allocator: CFAllocatorRef,
         bytes: *const UInt8,
@@ -1154,18 +1154,18 @@ extern "C" {
     ) -> CFBitVectorRef;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorCreateCopy`.
+    /// Apple SDK function `CFBitVectorCreateCopy`.
     pub fn CFBitVectorCreateCopy(allocator: CFAllocatorRef, bv: CFBitVectorRef) -> CFBitVectorRef;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorCreateMutable`.
+    /// Apple SDK function `CFBitVectorCreateMutable`.
     pub fn CFBitVectorCreateMutable(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
     ) -> CFMutableBitVectorRef;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorCreateMutableCopy`.
+    /// Apple SDK function `CFBitVectorCreateMutableCopy`.
     pub fn CFBitVectorCreateMutableCopy(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -1173,27 +1173,27 @@ extern "C" {
     ) -> CFMutableBitVectorRef;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorGetCount`.
+    /// Apple SDK function `CFBitVectorGetCount`.
     pub fn CFBitVectorGetCount(bv: CFBitVectorRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorGetCountOfBit`.
+    /// Apple SDK function `CFBitVectorGetCountOfBit`.
     pub fn CFBitVectorGetCountOfBit(bv: CFBitVectorRef, range: CFRange, value: CFBit) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorContainsBit`.
+    /// Apple SDK function `CFBitVectorContainsBit`.
     pub fn CFBitVectorContainsBit(bv: CFBitVectorRef, range: CFRange, value: CFBit) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorGetBitAtIndex`.
+    /// Apple SDK function `CFBitVectorGetBitAtIndex`.
     pub fn CFBitVectorGetBitAtIndex(bv: CFBitVectorRef, idx: CFIndex) -> CFBit;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorGetBits`.
+    /// Apple SDK function `CFBitVectorGetBits`.
     pub fn CFBitVectorGetBits(bv: CFBitVectorRef, range: CFRange, bytes: *mut UInt8);
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorGetFirstIndexOfBit`.
+    /// Apple SDK function `CFBitVectorGetFirstIndexOfBit`.
     pub fn CFBitVectorGetFirstIndexOfBit(
         bv: CFBitVectorRef,
         range: CFRange,
@@ -1201,7 +1201,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorGetLastIndexOfBit`.
+    /// Apple SDK function `CFBitVectorGetLastIndexOfBit`.
     pub fn CFBitVectorGetLastIndexOfBit(
         bv: CFBitVectorRef,
         range: CFRange,
@@ -1209,27 +1209,27 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorSetCount`.
+    /// Apple SDK function `CFBitVectorSetCount`.
     pub fn CFBitVectorSetCount(bv: CFMutableBitVectorRef, count: CFIndex);
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorFlipBitAtIndex`.
+    /// Apple SDK function `CFBitVectorFlipBitAtIndex`.
     pub fn CFBitVectorFlipBitAtIndex(bv: CFMutableBitVectorRef, idx: CFIndex);
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorFlipBits`.
+    /// Apple SDK function `CFBitVectorFlipBits`.
     pub fn CFBitVectorFlipBits(bv: CFMutableBitVectorRef, range: CFRange);
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorSetBitAtIndex`.
+    /// Apple SDK function `CFBitVectorSetBitAtIndex`.
     pub fn CFBitVectorSetBitAtIndex(bv: CFMutableBitVectorRef, idx: CFIndex, value: CFBit);
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorSetBits`.
+    /// Apple SDK function `CFBitVectorSetBits`.
     pub fn CFBitVectorSetBits(bv: CFMutableBitVectorRef, range: CFRange, value: CFBit);
 }
 extern "C" {
-/// Apple SDK function `CFBitVectorSetAllBits`.
+    /// Apple SDK function `CFBitVectorSetAllBits`.
     pub fn CFBitVectorSetAllBits(bv: CFMutableBitVectorRef, value: CFBit);
 }
 /// Apple SDK type alias `CFByteOrder`.
@@ -1282,11 +1282,11 @@ pub struct CFDictionaryKeyCallBacks {
     pub hash: CFDictionaryHashCallBack,
 }
 extern "C" {
-/// Apple SDK exported static `kCFTypeDictionaryKeyCallBacks`.
+    /// Apple SDK exported static `kCFTypeDictionaryKeyCallBacks`.
     pub static kCFTypeDictionaryKeyCallBacks: CFDictionaryKeyCallBacks;
 }
 extern "C" {
-/// Apple SDK exported static `kCFCopyStringDictionaryKeyCallBacks`.
+    /// Apple SDK exported static `kCFCopyStringDictionaryKeyCallBacks`.
     pub static kCFCopyStringDictionaryKeyCallBacks: CFDictionaryKeyCallBacks;
 }
 #[repr(C)]
@@ -1300,7 +1300,7 @@ pub struct CFDictionaryValueCallBacks {
     pub equal: CFDictionaryEqualCallBack,
 }
 extern "C" {
-/// Apple SDK exported static `kCFTypeDictionaryValueCallBacks`.
+    /// Apple SDK exported static `kCFTypeDictionaryValueCallBacks`.
     pub static kCFTypeDictionaryValueCallBacks: CFDictionaryValueCallBacks;
 }
 /// Apple SDK type alias `CFDictionaryApplierFunction`.
@@ -1322,11 +1322,11 @@ pub type CFDictionaryRef = *const __CFDictionary;
 /// Apple SDK type alias `CFMutableDictionaryRef`.
 pub type CFMutableDictionaryRef = *mut __CFDictionary;
 extern "C" {
-/// Apple SDK function `CFDictionaryGetTypeID`.
+    /// Apple SDK function `CFDictionaryGetTypeID`.
     pub fn CFDictionaryGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryCreate`.
+    /// Apple SDK function `CFDictionaryCreate`.
     pub fn CFDictionaryCreate(
         allocator: CFAllocatorRef,
         keys: *mut *const ::core::ffi::c_void,
@@ -1337,14 +1337,14 @@ extern "C" {
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryCreateCopy`.
+    /// Apple SDK function `CFDictionaryCreateCopy`.
     pub fn CFDictionaryCreateCopy(
         allocator: CFAllocatorRef,
         theDict: CFDictionaryRef,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryCreateMutable`.
+    /// Apple SDK function `CFDictionaryCreateMutable`.
     pub fn CFDictionaryCreateMutable(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -1353,7 +1353,7 @@ extern "C" {
     ) -> CFMutableDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryCreateMutableCopy`.
+    /// Apple SDK function `CFDictionaryCreateMutableCopy`.
     pub fn CFDictionaryCreateMutableCopy(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -1361,46 +1361,46 @@ extern "C" {
     ) -> CFMutableDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryGetCount`.
+    /// Apple SDK function `CFDictionaryGetCount`.
     pub fn CFDictionaryGetCount(theDict: CFDictionaryRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryGetCountOfKey`.
+    /// Apple SDK function `CFDictionaryGetCountOfKey`.
     pub fn CFDictionaryGetCountOfKey(
         theDict: CFDictionaryRef,
         key: *const ::core::ffi::c_void,
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryGetCountOfValue`.
+    /// Apple SDK function `CFDictionaryGetCountOfValue`.
     pub fn CFDictionaryGetCountOfValue(
         theDict: CFDictionaryRef,
         value: *const ::core::ffi::c_void,
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryContainsKey`.
+    /// Apple SDK function `CFDictionaryContainsKey`.
     pub fn CFDictionaryContainsKey(
         theDict: CFDictionaryRef,
         key: *const ::core::ffi::c_void,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryContainsValue`.
+    /// Apple SDK function `CFDictionaryContainsValue`.
     pub fn CFDictionaryContainsValue(
         theDict: CFDictionaryRef,
         value: *const ::core::ffi::c_void,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryGetValue`.
+    /// Apple SDK function `CFDictionaryGetValue`.
     pub fn CFDictionaryGetValue(
         theDict: CFDictionaryRef,
         key: *const ::core::ffi::c_void,
     ) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryGetValueIfPresent`.
+    /// Apple SDK function `CFDictionaryGetValueIfPresent`.
     pub fn CFDictionaryGetValueIfPresent(
         theDict: CFDictionaryRef,
         key: *const ::core::ffi::c_void,
@@ -1408,7 +1408,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryGetKeysAndValues`.
+    /// Apple SDK function `CFDictionaryGetKeysAndValues`.
     pub fn CFDictionaryGetKeysAndValues(
         theDict: CFDictionaryRef,
         keys: *mut *const ::core::ffi::c_void,
@@ -1416,7 +1416,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryApplyFunction`.
+    /// Apple SDK function `CFDictionaryApplyFunction`.
     pub fn CFDictionaryApplyFunction(
         theDict: CFDictionaryRef,
         applier: CFDictionaryApplierFunction,
@@ -1424,7 +1424,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryAddValue`.
+    /// Apple SDK function `CFDictionaryAddValue`.
     pub fn CFDictionaryAddValue(
         theDict: CFMutableDictionaryRef,
         key: *const ::core::ffi::c_void,
@@ -1432,7 +1432,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFDictionarySetValue`.
+    /// Apple SDK function `CFDictionarySetValue`.
     pub fn CFDictionarySetValue(
         theDict: CFMutableDictionaryRef,
         key: *const ::core::ffi::c_void,
@@ -1440,7 +1440,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryReplaceValue`.
+    /// Apple SDK function `CFDictionaryReplaceValue`.
     pub fn CFDictionaryReplaceValue(
         theDict: CFMutableDictionaryRef,
         key: *const ::core::ffi::c_void,
@@ -1448,14 +1448,14 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryRemoveValue`.
+    /// Apple SDK function `CFDictionaryRemoveValue`.
     pub fn CFDictionaryRemoveValue(
         theDict: CFMutableDictionaryRef,
         key: *const ::core::ffi::c_void,
     );
 }
 extern "C" {
-/// Apple SDK function `CFDictionaryRemoveAllValues`.
+    /// Apple SDK function `CFDictionaryRemoveAllValues`.
     pub fn CFDictionaryRemoveAllValues(theDict: CFMutableDictionaryRef);
 }
 /// Apple SDK type alias `CFNotificationName`.
@@ -1481,23 +1481,23 @@ pub type CFNotificationCallback = ::core::option::Option<
 /// Apple SDK type alias `CFNotificationSuspensionBehavior`.
 pub type CFNotificationSuspensionBehavior = CFIndex;
 extern "C" {
-/// Apple SDK function `CFNotificationCenterGetTypeID`.
+    /// Apple SDK function `CFNotificationCenterGetTypeID`.
     pub fn CFNotificationCenterGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFNotificationCenterGetLocalCenter`.
+    /// Apple SDK function `CFNotificationCenterGetLocalCenter`.
     pub fn CFNotificationCenterGetLocalCenter() -> CFNotificationCenterRef;
 }
 extern "C" {
-/// Apple SDK function `CFNotificationCenterGetDistributedCenter`.
+    /// Apple SDK function `CFNotificationCenterGetDistributedCenter`.
     pub fn CFNotificationCenterGetDistributedCenter() -> CFNotificationCenterRef;
 }
 extern "C" {
-/// Apple SDK function `CFNotificationCenterGetDarwinNotifyCenter`.
+    /// Apple SDK function `CFNotificationCenterGetDarwinNotifyCenter`.
     pub fn CFNotificationCenterGetDarwinNotifyCenter() -> CFNotificationCenterRef;
 }
 extern "C" {
-/// Apple SDK function `CFNotificationCenterAddObserver`.
+    /// Apple SDK function `CFNotificationCenterAddObserver`.
     pub fn CFNotificationCenterAddObserver(
         center: CFNotificationCenterRef,
         observer: *const ::core::ffi::c_void,
@@ -1508,7 +1508,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNotificationCenterRemoveObserver`.
+    /// Apple SDK function `CFNotificationCenterRemoveObserver`.
     pub fn CFNotificationCenterRemoveObserver(
         center: CFNotificationCenterRef,
         observer: *const ::core::ffi::c_void,
@@ -1517,14 +1517,14 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNotificationCenterRemoveEveryObserver`.
+    /// Apple SDK function `CFNotificationCenterRemoveEveryObserver`.
     pub fn CFNotificationCenterRemoveEveryObserver(
         center: CFNotificationCenterRef,
         observer: *const ::core::ffi::c_void,
     );
 }
 extern "C" {
-/// Apple SDK function `CFNotificationCenterPostNotification`.
+    /// Apple SDK function `CFNotificationCenterPostNotification`.
     pub fn CFNotificationCenterPostNotification(
         center: CFNotificationCenterRef,
         name: CFNotificationName,
@@ -1540,7 +1540,7 @@ pub const kCFNotificationPostToAllSessions: _bindgen_ty_10 = 2;
 /// Apple SDK type alias `_bindgen_ty_10`.
 pub type _bindgen_ty_10 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFNotificationCenterPostNotificationWithOptions`.
+    /// Apple SDK function `CFNotificationCenterPostNotificationWithOptions`.
     pub fn CFNotificationCenterPostNotificationWithOptions(
         center: CFNotificationCenterRef,
         name: CFNotificationName,
@@ -1562,57 +1562,57 @@ pub struct __CFLocale {
 /// Apple SDK type alias `CFLocaleRef`.
 pub type CFLocaleRef = *const __CFLocale;
 extern "C" {
-/// Apple SDK function `CFLocaleGetTypeID`.
+    /// Apple SDK function `CFLocaleGetTypeID`.
     pub fn CFLocaleGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleGetSystem`.
+    /// Apple SDK function `CFLocaleGetSystem`.
     pub fn CFLocaleGetSystem() -> CFLocaleRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyCurrent`.
+    /// Apple SDK function `CFLocaleCopyCurrent`.
     pub fn CFLocaleCopyCurrent() -> CFLocaleRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyAvailableLocaleIdentifiers`.
+    /// Apple SDK function `CFLocaleCopyAvailableLocaleIdentifiers`.
     pub fn CFLocaleCopyAvailableLocaleIdentifiers() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyISOLanguageCodes`.
+    /// Apple SDK function `CFLocaleCopyISOLanguageCodes`.
     pub fn CFLocaleCopyISOLanguageCodes() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyISOCountryCodes`.
+    /// Apple SDK function `CFLocaleCopyISOCountryCodes`.
     pub fn CFLocaleCopyISOCountryCodes() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyISOCurrencyCodes`.
+    /// Apple SDK function `CFLocaleCopyISOCurrencyCodes`.
     pub fn CFLocaleCopyISOCurrencyCodes() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyCommonISOCurrencyCodes`.
+    /// Apple SDK function `CFLocaleCopyCommonISOCurrencyCodes`.
     pub fn CFLocaleCopyCommonISOCurrencyCodes() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyPreferredLanguages`.
+    /// Apple SDK function `CFLocaleCopyPreferredLanguages`.
     pub fn CFLocaleCopyPreferredLanguages() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreateCanonicalLanguageIdentifierFromString`.
+    /// Apple SDK function `CFLocaleCreateCanonicalLanguageIdentifierFromString`.
     pub fn CFLocaleCreateCanonicalLanguageIdentifierFromString(
         allocator: CFAllocatorRef,
         localeIdentifier: CFStringRef,
     ) -> CFLocaleIdentifier;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreateCanonicalLocaleIdentifierFromString`.
+    /// Apple SDK function `CFLocaleCreateCanonicalLocaleIdentifierFromString`.
     pub fn CFLocaleCreateCanonicalLocaleIdentifierFromString(
         allocator: CFAllocatorRef,
         localeIdentifier: CFStringRef,
     ) -> CFLocaleIdentifier;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes`.
+    /// Apple SDK function `CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes`.
     pub fn CFLocaleCreateCanonicalLocaleIdentifierFromScriptManagerCodes(
         allocator: CFAllocatorRef,
         lcode: LangCode,
@@ -1620,14 +1620,14 @@ extern "C" {
     ) -> CFLocaleIdentifier;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode`.
+    /// Apple SDK function `CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode`.
     pub fn CFLocaleCreateLocaleIdentifierFromWindowsLocaleCode(
         allocator: CFAllocatorRef,
         lcid: u32,
     ) -> CFLocaleIdentifier;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier`.
+    /// Apple SDK function `CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier`.
     pub fn CFLocaleGetWindowsLocaleCodeFromLocaleIdentifier(
         localeIdentifier: CFLocaleIdentifier,
     ) -> u32;
@@ -1647,50 +1647,50 @@ pub const kCFLocaleLanguageDirectionBottomToTop: _bindgen_ty_11 = 4;
 /// Apple SDK type alias `_bindgen_ty_11`.
 pub type _bindgen_ty_11 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFLocaleGetLanguageCharacterDirection`.
+    /// Apple SDK function `CFLocaleGetLanguageCharacterDirection`.
     pub fn CFLocaleGetLanguageCharacterDirection(
         isoLangCode: CFStringRef,
     ) -> CFLocaleLanguageDirection;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleGetLanguageLineDirection`.
+    /// Apple SDK function `CFLocaleGetLanguageLineDirection`.
     pub fn CFLocaleGetLanguageLineDirection(isoLangCode: CFStringRef) -> CFLocaleLanguageDirection;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreateComponentsFromLocaleIdentifier`.
+    /// Apple SDK function `CFLocaleCreateComponentsFromLocaleIdentifier`.
     pub fn CFLocaleCreateComponentsFromLocaleIdentifier(
         allocator: CFAllocatorRef,
         localeID: CFLocaleIdentifier,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreateLocaleIdentifierFromComponents`.
+    /// Apple SDK function `CFLocaleCreateLocaleIdentifierFromComponents`.
     pub fn CFLocaleCreateLocaleIdentifierFromComponents(
         allocator: CFAllocatorRef,
         dictionary: CFDictionaryRef,
     ) -> CFLocaleIdentifier;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreate`.
+    /// Apple SDK function `CFLocaleCreate`.
     pub fn CFLocaleCreate(
         allocator: CFAllocatorRef,
         localeIdentifier: CFLocaleIdentifier,
     ) -> CFLocaleRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCreateCopy`.
+    /// Apple SDK function `CFLocaleCreateCopy`.
     pub fn CFLocaleCreateCopy(allocator: CFAllocatorRef, locale: CFLocaleRef) -> CFLocaleRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleGetIdentifier`.
+    /// Apple SDK function `CFLocaleGetIdentifier`.
     pub fn CFLocaleGetIdentifier(locale: CFLocaleRef) -> CFLocaleIdentifier;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleGetValue`.
+    /// Apple SDK function `CFLocaleGetValue`.
     pub fn CFLocaleGetValue(locale: CFLocaleRef, key: CFLocaleKey) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFLocaleCopyDisplayNameForPropertyValue`.
+    /// Apple SDK function `CFLocaleCopyDisplayNameForPropertyValue`.
     pub fn CFLocaleCopyDisplayNameForPropertyValue(
         displayLocale: CFLocaleRef,
         key: CFLocaleKey,
@@ -1698,185 +1698,185 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCurrentLocaleDidChangeNotification`.
+    /// Apple SDK exported static `kCFLocaleCurrentLocaleDidChangeNotification`.
     pub static kCFLocaleCurrentLocaleDidChangeNotification: CFNotificationName;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleIdentifier`.
+    /// Apple SDK exported static `kCFLocaleIdentifier`.
     pub static kCFLocaleIdentifier: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleLanguageCode`.
+    /// Apple SDK exported static `kCFLocaleLanguageCode`.
     pub static kCFLocaleLanguageCode: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCountryCode`.
+    /// Apple SDK exported static `kCFLocaleCountryCode`.
     pub static kCFLocaleCountryCode: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleScriptCode`.
+    /// Apple SDK exported static `kCFLocaleScriptCode`.
     pub static kCFLocaleScriptCode: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleVariantCode`.
+    /// Apple SDK exported static `kCFLocaleVariantCode`.
     pub static kCFLocaleVariantCode: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleExemplarCharacterSet`.
+    /// Apple SDK exported static `kCFLocaleExemplarCharacterSet`.
     pub static kCFLocaleExemplarCharacterSet: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCalendarIdentifier`.
+    /// Apple SDK exported static `kCFLocaleCalendarIdentifier`.
     pub static kCFLocaleCalendarIdentifier: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCalendar`.
+    /// Apple SDK exported static `kCFLocaleCalendar`.
     pub static kCFLocaleCalendar: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCollationIdentifier`.
+    /// Apple SDK exported static `kCFLocaleCollationIdentifier`.
     pub static kCFLocaleCollationIdentifier: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleUsesMetricSystem`.
+    /// Apple SDK exported static `kCFLocaleUsesMetricSystem`.
     pub static kCFLocaleUsesMetricSystem: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleMeasurementSystem`.
+    /// Apple SDK exported static `kCFLocaleMeasurementSystem`.
     pub static kCFLocaleMeasurementSystem: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleDecimalSeparator`.
+    /// Apple SDK exported static `kCFLocaleDecimalSeparator`.
     pub static kCFLocaleDecimalSeparator: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleGroupingSeparator`.
+    /// Apple SDK exported static `kCFLocaleGroupingSeparator`.
     pub static kCFLocaleGroupingSeparator: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCurrencySymbol`.
+    /// Apple SDK exported static `kCFLocaleCurrencySymbol`.
     pub static kCFLocaleCurrencySymbol: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCurrencyCode`.
+    /// Apple SDK exported static `kCFLocaleCurrencyCode`.
     pub static kCFLocaleCurrencyCode: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleCollatorIdentifier`.
+    /// Apple SDK exported static `kCFLocaleCollatorIdentifier`.
     pub static kCFLocaleCollatorIdentifier: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleQuotationBeginDelimiterKey`.
+    /// Apple SDK exported static `kCFLocaleQuotationBeginDelimiterKey`.
     pub static kCFLocaleQuotationBeginDelimiterKey: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleQuotationEndDelimiterKey`.
+    /// Apple SDK exported static `kCFLocaleQuotationEndDelimiterKey`.
     pub static kCFLocaleQuotationEndDelimiterKey: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleAlternateQuotationBeginDelimiterKey`.
+    /// Apple SDK exported static `kCFLocaleAlternateQuotationBeginDelimiterKey`.
     pub static kCFLocaleAlternateQuotationBeginDelimiterKey: CFLocaleKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFLocaleAlternateQuotationEndDelimiterKey`.
+    /// Apple SDK exported static `kCFLocaleAlternateQuotationEndDelimiterKey`.
     pub static kCFLocaleAlternateQuotationEndDelimiterKey: CFLocaleKey;
 }
 /// Apple SDK type alias `CFCalendarIdentifier`.
 pub type CFCalendarIdentifier = CFStringRef;
 extern "C" {
-/// Apple SDK exported static `kCFGregorianCalendar`.
+    /// Apple SDK exported static `kCFGregorianCalendar`.
     pub static kCFGregorianCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBuddhistCalendar`.
+    /// Apple SDK exported static `kCFBuddhistCalendar`.
     pub static kCFBuddhistCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFChineseCalendar`.
+    /// Apple SDK exported static `kCFChineseCalendar`.
     pub static kCFChineseCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHebrewCalendar`.
+    /// Apple SDK exported static `kCFHebrewCalendar`.
     pub static kCFHebrewCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFIslamicCalendar`.
+    /// Apple SDK exported static `kCFIslamicCalendar`.
     pub static kCFIslamicCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFIslamicCivilCalendar`.
+    /// Apple SDK exported static `kCFIslamicCivilCalendar`.
     pub static kCFIslamicCivilCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFJapaneseCalendar`.
+    /// Apple SDK exported static `kCFJapaneseCalendar`.
     pub static kCFJapaneseCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFRepublicOfChinaCalendar`.
+    /// Apple SDK exported static `kCFRepublicOfChinaCalendar`.
     pub static kCFRepublicOfChinaCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPersianCalendar`.
+    /// Apple SDK exported static `kCFPersianCalendar`.
     pub static kCFPersianCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFIndianCalendar`.
+    /// Apple SDK exported static `kCFIndianCalendar`.
     pub static kCFIndianCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFISO8601Calendar`.
+    /// Apple SDK exported static `kCFISO8601Calendar`.
     pub static kCFISO8601Calendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFIslamicTabularCalendar`.
+    /// Apple SDK exported static `kCFIslamicTabularCalendar`.
     pub static kCFIslamicTabularCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFIslamicUmmAlQuraCalendar`.
+    /// Apple SDK exported static `kCFIslamicUmmAlQuraCalendar`.
     pub static kCFIslamicUmmAlQuraCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBanglaCalendar`.
+    /// Apple SDK exported static `kCFBanglaCalendar`.
     pub static kCFBanglaCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFGujaratiCalendar`.
+    /// Apple SDK exported static `kCFGujaratiCalendar`.
     pub static kCFGujaratiCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFKannadaCalendar`.
+    /// Apple SDK exported static `kCFKannadaCalendar`.
     pub static kCFKannadaCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFMalayalamCalendar`.
+    /// Apple SDK exported static `kCFMalayalamCalendar`.
     pub static kCFMalayalamCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFMarathiCalendar`.
+    /// Apple SDK exported static `kCFMarathiCalendar`.
     pub static kCFMarathiCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFOdiaCalendar`.
+    /// Apple SDK exported static `kCFOdiaCalendar`.
     pub static kCFOdiaCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFTamilCalendar`.
+    /// Apple SDK exported static `kCFTamilCalendar`.
     pub static kCFTamilCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFTeluguCalendar`.
+    /// Apple SDK exported static `kCFTeluguCalendar`.
     pub static kCFTeluguCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFVikramCalendar`.
+    /// Apple SDK exported static `kCFVikramCalendar`.
     pub static kCFVikramCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDangiCalendar`.
+    /// Apple SDK exported static `kCFDangiCalendar`.
     pub static kCFDangiCalendar: CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK exported static `kCFVietnameseCalendar`.
+    /// Apple SDK exported static `kCFVietnameseCalendar`.
     pub static kCFVietnameseCalendar: CFCalendarIdentifier;
 }
 /// Apple SDK type alias `CFTimeInterval`.
@@ -1884,15 +1884,15 @@ pub type CFTimeInterval = f64;
 /// Apple SDK type alias `CFAbsoluteTime`.
 pub type CFAbsoluteTime = CFTimeInterval;
 extern "C" {
-/// Apple SDK function `CFAbsoluteTimeGetCurrent`.
+    /// Apple SDK function `CFAbsoluteTimeGetCurrent`.
     pub fn CFAbsoluteTimeGetCurrent() -> CFAbsoluteTime;
 }
 extern "C" {
-/// Apple SDK exported static `kCFAbsoluteTimeIntervalSince1970`.
+    /// Apple SDK exported static `kCFAbsoluteTimeIntervalSince1970`.
     pub static kCFAbsoluteTimeIntervalSince1970: CFTimeInterval;
 }
 extern "C" {
-/// Apple SDK exported static `kCFAbsoluteTimeIntervalSince1904`.
+    /// Apple SDK exported static `kCFAbsoluteTimeIntervalSince1904`.
     pub static kCFAbsoluteTimeIntervalSince1904: CFTimeInterval;
 }
 #[repr(C)]
@@ -1904,26 +1904,26 @@ pub struct __CFDate {
 /// Apple SDK type alias `CFDateRef`.
 pub type CFDateRef = *const __CFDate;
 extern "C" {
-/// Apple SDK function `CFDateGetTypeID`.
+    /// Apple SDK function `CFDateGetTypeID`.
     pub fn CFDateGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFDateCreate`.
+    /// Apple SDK function `CFDateCreate`.
     pub fn CFDateCreate(allocator: CFAllocatorRef, at: CFAbsoluteTime) -> CFDateRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateGetAbsoluteTime`.
+    /// Apple SDK function `CFDateGetAbsoluteTime`.
     pub fn CFDateGetAbsoluteTime(theDate: CFDateRef) -> CFAbsoluteTime;
 }
 extern "C" {
-/// Apple SDK function `CFDateGetTimeIntervalSinceDate`.
+    /// Apple SDK function `CFDateGetTimeIntervalSinceDate`.
     pub fn CFDateGetTimeIntervalSinceDate(
         theDate: CFDateRef,
         otherDate: CFDateRef,
     ) -> CFTimeInterval;
 }
 extern "C" {
-/// Apple SDK function `CFDateCompare`.
+    /// Apple SDK function `CFDateCompare`.
     pub fn CFDateCompare(
         theDate: CFDateRef,
         otherDate: CFDateRef,
@@ -1979,23 +1979,23 @@ pub const kCFGregorianAllUnits: _bindgen_ty_12 = 16777215;
 /// Apple SDK type alias `_bindgen_ty_12`.
 pub type _bindgen_ty_12 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFGregorianDateIsValid`.
+    /// Apple SDK function `CFGregorianDateIsValid`.
     pub fn CFGregorianDateIsValid(gdate: CFGregorianDate, unitFlags: CFOptionFlags) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFGregorianDateGetAbsoluteTime`.
+    /// Apple SDK function `CFGregorianDateGetAbsoluteTime`.
     pub fn CFGregorianDateGetAbsoluteTime(
         gdate: CFGregorianDate,
         tz: CFTimeZoneRef,
     ) -> CFAbsoluteTime;
 }
 extern "C" {
-/// Apple SDK function `CFAbsoluteTimeGetGregorianDate`.
+    /// Apple SDK function `CFAbsoluteTimeGetGregorianDate`.
     pub fn CFAbsoluteTimeGetGregorianDate(at: CFAbsoluteTime, tz: CFTimeZoneRef)
         -> CFGregorianDate;
 }
 extern "C" {
-/// Apple SDK function `CFAbsoluteTimeAddGregorianUnits`.
+    /// Apple SDK function `CFAbsoluteTimeAddGregorianUnits`.
     pub fn CFAbsoluteTimeAddGregorianUnits(
         at: CFAbsoluteTime,
         tz: CFTimeZoneRef,
@@ -2003,7 +2003,7 @@ extern "C" {
     ) -> CFAbsoluteTime;
 }
 extern "C" {
-/// Apple SDK function `CFAbsoluteTimeGetDifferenceAsGregorianUnits`.
+    /// Apple SDK function `CFAbsoluteTimeGetDifferenceAsGregorianUnits`.
     pub fn CFAbsoluteTimeGetDifferenceAsGregorianUnits(
         at1: CFAbsoluteTime,
         at2: CFAbsoluteTime,
@@ -2012,15 +2012,15 @@ extern "C" {
     ) -> CFGregorianUnits;
 }
 extern "C" {
-/// Apple SDK function `CFAbsoluteTimeGetDayOfWeek`.
+    /// Apple SDK function `CFAbsoluteTimeGetDayOfWeek`.
     pub fn CFAbsoluteTimeGetDayOfWeek(at: CFAbsoluteTime, tz: CFTimeZoneRef) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFAbsoluteTimeGetDayOfYear`.
+    /// Apple SDK function `CFAbsoluteTimeGetDayOfYear`.
     pub fn CFAbsoluteTimeGetDayOfYear(at: CFAbsoluteTime, tz: CFTimeZoneRef) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFAbsoluteTimeGetWeekOfYear`.
+    /// Apple SDK function `CFAbsoluteTimeGetWeekOfYear`.
     pub fn CFAbsoluteTimeGetWeekOfYear(at: CFAbsoluteTime, tz: CFTimeZoneRef) -> SInt32;
 }
 #[repr(C)]
@@ -2034,11 +2034,11 @@ pub type CFDataRef = *const __CFData;
 /// Apple SDK type alias `CFMutableDataRef`.
 pub type CFMutableDataRef = *mut __CFData;
 extern "C" {
-/// Apple SDK function `CFDataGetTypeID`.
+    /// Apple SDK function `CFDataGetTypeID`.
     pub fn CFDataGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFDataCreate`.
+    /// Apple SDK function `CFDataCreate`.
     pub fn CFDataCreate(
         allocator: CFAllocatorRef,
         bytes: *const UInt8,
@@ -2046,7 +2046,7 @@ extern "C" {
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFDataCreateWithBytesNoCopy`.
+    /// Apple SDK function `CFDataCreateWithBytesNoCopy`.
     pub fn CFDataCreateWithBytesNoCopy(
         allocator: CFAllocatorRef,
         bytes: *const UInt8,
@@ -2055,15 +2055,15 @@ extern "C" {
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFDataCreateCopy`.
+    /// Apple SDK function `CFDataCreateCopy`.
     pub fn CFDataCreateCopy(allocator: CFAllocatorRef, theData: CFDataRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFDataCreateMutable`.
+    /// Apple SDK function `CFDataCreateMutable`.
     pub fn CFDataCreateMutable(allocator: CFAllocatorRef, capacity: CFIndex) -> CFMutableDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFDataCreateMutableCopy`.
+    /// Apple SDK function `CFDataCreateMutableCopy`.
     pub fn CFDataCreateMutableCopy(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -2071,35 +2071,35 @@ extern "C" {
     ) -> CFMutableDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFDataGetLength`.
+    /// Apple SDK function `CFDataGetLength`.
     pub fn CFDataGetLength(theData: CFDataRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFDataGetBytePtr`.
+    /// Apple SDK function `CFDataGetBytePtr`.
     pub fn CFDataGetBytePtr(theData: CFDataRef) -> *const UInt8;
 }
 extern "C" {
-/// Apple SDK function `CFDataGetMutableBytePtr`.
+    /// Apple SDK function `CFDataGetMutableBytePtr`.
     pub fn CFDataGetMutableBytePtr(theData: CFMutableDataRef) -> *mut UInt8;
 }
 extern "C" {
-/// Apple SDK function `CFDataGetBytes`.
+    /// Apple SDK function `CFDataGetBytes`.
     pub fn CFDataGetBytes(theData: CFDataRef, range: CFRange, buffer: *mut UInt8);
 }
 extern "C" {
-/// Apple SDK function `CFDataSetLength`.
+    /// Apple SDK function `CFDataSetLength`.
     pub fn CFDataSetLength(theData: CFMutableDataRef, length: CFIndex);
 }
 extern "C" {
-/// Apple SDK function `CFDataIncreaseLength`.
+    /// Apple SDK function `CFDataIncreaseLength`.
     pub fn CFDataIncreaseLength(theData: CFMutableDataRef, extraLength: CFIndex);
 }
 extern "C" {
-/// Apple SDK function `CFDataAppendBytes`.
+    /// Apple SDK function `CFDataAppendBytes`.
     pub fn CFDataAppendBytes(theData: CFMutableDataRef, bytes: *const UInt8, length: CFIndex);
 }
 extern "C" {
-/// Apple SDK function `CFDataReplaceBytes`.
+    /// Apple SDK function `CFDataReplaceBytes`.
     pub fn CFDataReplaceBytes(
         theData: CFMutableDataRef,
         range: CFRange,
@@ -2108,7 +2108,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFDataDeleteBytes`.
+    /// Apple SDK function `CFDataDeleteBytes`.
     pub fn CFDataDeleteBytes(theData: CFMutableDataRef, range: CFRange);
 }
 /// Apple SDK type alias `CFDataSearchFlags`.
@@ -2120,7 +2120,7 @@ pub const kCFDataSearchAnchored: _bindgen_ty_13 = 2;
 /// Apple SDK type alias `_bindgen_ty_13`.
 pub type _bindgen_ty_13 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFDataFind`.
+    /// Apple SDK function `CFDataFind`.
     pub fn CFDataFind(
         theData: CFDataRef,
         dataToFind: CFDataRef,
@@ -2173,128 +2173,128 @@ pub const kCFCharacterSetIllegal: _bindgen_ty_14 = 12;
 /// Apple SDK type alias `_bindgen_ty_14`.
 pub type _bindgen_ty_14 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFCharacterSetGetTypeID`.
+    /// Apple SDK function `CFCharacterSetGetTypeID`.
     pub fn CFCharacterSetGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetGetPredefined`.
+    /// Apple SDK function `CFCharacterSetGetPredefined`.
     pub fn CFCharacterSetGetPredefined(
         theSetIdentifier: CFCharacterSetPredefinedSet,
     ) -> CFCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateWithCharactersInRange`.
+    /// Apple SDK function `CFCharacterSetCreateWithCharactersInRange`.
     pub fn CFCharacterSetCreateWithCharactersInRange(
         alloc: CFAllocatorRef,
         theRange: CFRange,
     ) -> CFCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateWithCharactersInString`.
+    /// Apple SDK function `CFCharacterSetCreateWithCharactersInString`.
     pub fn CFCharacterSetCreateWithCharactersInString(
         alloc: CFAllocatorRef,
         theString: CFStringRef,
     ) -> CFCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateWithBitmapRepresentation`.
+    /// Apple SDK function `CFCharacterSetCreateWithBitmapRepresentation`.
     pub fn CFCharacterSetCreateWithBitmapRepresentation(
         alloc: CFAllocatorRef,
         theData: CFDataRef,
     ) -> CFCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateInvertedSet`.
+    /// Apple SDK function `CFCharacterSetCreateInvertedSet`.
     pub fn CFCharacterSetCreateInvertedSet(
         alloc: CFAllocatorRef,
         theSet: CFCharacterSetRef,
     ) -> CFCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetIsSupersetOfSet`.
+    /// Apple SDK function `CFCharacterSetIsSupersetOfSet`.
     pub fn CFCharacterSetIsSupersetOfSet(
         theSet: CFCharacterSetRef,
         theOtherset: CFCharacterSetRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetHasMemberInPlane`.
+    /// Apple SDK function `CFCharacterSetHasMemberInPlane`.
     pub fn CFCharacterSetHasMemberInPlane(theSet: CFCharacterSetRef, thePlane: CFIndex) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateMutable`.
+    /// Apple SDK function `CFCharacterSetCreateMutable`.
     pub fn CFCharacterSetCreateMutable(alloc: CFAllocatorRef) -> CFMutableCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateCopy`.
+    /// Apple SDK function `CFCharacterSetCreateCopy`.
     pub fn CFCharacterSetCreateCopy(
         alloc: CFAllocatorRef,
         theSet: CFCharacterSetRef,
     ) -> CFCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateMutableCopy`.
+    /// Apple SDK function `CFCharacterSetCreateMutableCopy`.
     pub fn CFCharacterSetCreateMutableCopy(
         alloc: CFAllocatorRef,
         theSet: CFCharacterSetRef,
     ) -> CFMutableCharacterSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetIsCharacterMember`.
+    /// Apple SDK function `CFCharacterSetIsCharacterMember`.
     pub fn CFCharacterSetIsCharacterMember(theSet: CFCharacterSetRef, theChar: UniChar) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetIsLongCharacterMember`.
+    /// Apple SDK function `CFCharacterSetIsLongCharacterMember`.
     pub fn CFCharacterSetIsLongCharacterMember(
         theSet: CFCharacterSetRef,
         theChar: UTF32Char,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetCreateBitmapRepresentation`.
+    /// Apple SDK function `CFCharacterSetCreateBitmapRepresentation`.
     pub fn CFCharacterSetCreateBitmapRepresentation(
         alloc: CFAllocatorRef,
         theSet: CFCharacterSetRef,
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetAddCharactersInRange`.
+    /// Apple SDK function `CFCharacterSetAddCharactersInRange`.
     pub fn CFCharacterSetAddCharactersInRange(theSet: CFMutableCharacterSetRef, theRange: CFRange);
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetRemoveCharactersInRange`.
+    /// Apple SDK function `CFCharacterSetRemoveCharactersInRange`.
     pub fn CFCharacterSetRemoveCharactersInRange(
         theSet: CFMutableCharacterSetRef,
         theRange: CFRange,
     );
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetAddCharactersInString`.
+    /// Apple SDK function `CFCharacterSetAddCharactersInString`.
     pub fn CFCharacterSetAddCharactersInString(
         theSet: CFMutableCharacterSetRef,
         theString: CFStringRef,
     );
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetRemoveCharactersInString`.
+    /// Apple SDK function `CFCharacterSetRemoveCharactersInString`.
     pub fn CFCharacterSetRemoveCharactersInString(
         theSet: CFMutableCharacterSetRef,
         theString: CFStringRef,
     );
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetUnion`.
+    /// Apple SDK function `CFCharacterSetUnion`.
     pub fn CFCharacterSetUnion(theSet: CFMutableCharacterSetRef, theOtherSet: CFCharacterSetRef);
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetIntersect`.
+    /// Apple SDK function `CFCharacterSetIntersect`.
     pub fn CFCharacterSetIntersect(
         theSet: CFMutableCharacterSetRef,
         theOtherSet: CFCharacterSetRef,
     );
 }
 extern "C" {
-/// Apple SDK function `CFCharacterSetInvert`.
+    /// Apple SDK function `CFCharacterSetInvert`.
     pub fn CFCharacterSetInvert(theSet: CFMutableCharacterSetRef);
 }
 /// Apple SDK type alias `CFErrorDomain`.
@@ -2308,59 +2308,59 @@ pub struct __CFError {
 /// Apple SDK type alias `CFErrorRef`.
 pub type CFErrorRef = *mut __CFError;
 extern "C" {
-/// Apple SDK function `CFErrorGetTypeID`.
+    /// Apple SDK function `CFErrorGetTypeID`.
     pub fn CFErrorGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorDomainPOSIX`.
+    /// Apple SDK exported static `kCFErrorDomainPOSIX`.
     pub static kCFErrorDomainPOSIX: CFErrorDomain;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorDomainOSStatus`.
+    /// Apple SDK exported static `kCFErrorDomainOSStatus`.
     pub static kCFErrorDomainOSStatus: CFErrorDomain;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorDomainMach`.
+    /// Apple SDK exported static `kCFErrorDomainMach`.
     pub static kCFErrorDomainMach: CFErrorDomain;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorDomainCocoa`.
+    /// Apple SDK exported static `kCFErrorDomainCocoa`.
     pub static kCFErrorDomainCocoa: CFErrorDomain;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorLocalizedDescriptionKey`.
+    /// Apple SDK exported static `kCFErrorLocalizedDescriptionKey`.
     pub static kCFErrorLocalizedDescriptionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorLocalizedFailureKey`.
+    /// Apple SDK exported static `kCFErrorLocalizedFailureKey`.
     pub static kCFErrorLocalizedFailureKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorLocalizedFailureReasonKey`.
+    /// Apple SDK exported static `kCFErrorLocalizedFailureReasonKey`.
     pub static kCFErrorLocalizedFailureReasonKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorLocalizedRecoverySuggestionKey`.
+    /// Apple SDK exported static `kCFErrorLocalizedRecoverySuggestionKey`.
     pub static kCFErrorLocalizedRecoverySuggestionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorDescriptionKey`.
+    /// Apple SDK exported static `kCFErrorDescriptionKey`.
     pub static kCFErrorDescriptionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorUnderlyingErrorKey`.
+    /// Apple SDK exported static `kCFErrorUnderlyingErrorKey`.
     pub static kCFErrorUnderlyingErrorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorURLKey`.
+    /// Apple SDK exported static `kCFErrorURLKey`.
     pub static kCFErrorURLKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorFilePathKey`.
+    /// Apple SDK exported static `kCFErrorFilePathKey`.
     pub static kCFErrorFilePathKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFErrorCreate`.
+    /// Apple SDK function `CFErrorCreate`.
     pub fn CFErrorCreate(
         allocator: CFAllocatorRef,
         domain: CFErrorDomain,
@@ -2369,7 +2369,7 @@ extern "C" {
     ) -> CFErrorRef;
 }
 extern "C" {
-/// Apple SDK function `CFErrorCreateWithUserInfoKeysAndValues`.
+    /// Apple SDK function `CFErrorCreateWithUserInfoKeysAndValues`.
     pub fn CFErrorCreateWithUserInfoKeysAndValues(
         allocator: CFAllocatorRef,
         domain: CFErrorDomain,
@@ -2380,27 +2380,27 @@ extern "C" {
     ) -> CFErrorRef;
 }
 extern "C" {
-/// Apple SDK function `CFErrorGetDomain`.
+    /// Apple SDK function `CFErrorGetDomain`.
     pub fn CFErrorGetDomain(err: CFErrorRef) -> CFErrorDomain;
 }
 extern "C" {
-/// Apple SDK function `CFErrorGetCode`.
+    /// Apple SDK function `CFErrorGetCode`.
     pub fn CFErrorGetCode(err: CFErrorRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFErrorCopyUserInfo`.
+    /// Apple SDK function `CFErrorCopyUserInfo`.
     pub fn CFErrorCopyUserInfo(err: CFErrorRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFErrorCopyDescription`.
+    /// Apple SDK function `CFErrorCopyDescription`.
     pub fn CFErrorCopyDescription(err: CFErrorRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFErrorCopyFailureReason`.
+    /// Apple SDK function `CFErrorCopyFailureReason`.
     pub fn CFErrorCopyFailureReason(err: CFErrorRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFErrorCopyRecoverySuggestion`.
+    /// Apple SDK function `CFErrorCopyRecoverySuggestion`.
     pub fn CFErrorCopyRecoverySuggestion(err: CFErrorRef) -> CFStringRef;
 }
 /// Apple SDK type alias `CFStringEncoding`.
@@ -2438,11 +2438,11 @@ pub const kCFStringEncodingUTF32LE: _bindgen_ty_15 = 469762304;
 /// Apple SDK type alias `_bindgen_ty_15`.
 pub type _bindgen_ty_15 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFStringGetTypeID`.
+    /// Apple SDK function `CFStringGetTypeID`.
     pub fn CFStringGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithPascalString`.
+    /// Apple SDK function `CFStringCreateWithPascalString`.
     pub fn CFStringCreateWithPascalString(
         alloc: CFAllocatorRef,
         pStr: ConstStr255Param,
@@ -2450,7 +2450,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithCString`.
+    /// Apple SDK function `CFStringCreateWithCString`.
     pub fn CFStringCreateWithCString(
         alloc: CFAllocatorRef,
         cStr: *const ::core::ffi::c_char,
@@ -2458,7 +2458,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithBytes`.
+    /// Apple SDK function `CFStringCreateWithBytes`.
     pub fn CFStringCreateWithBytes(
         alloc: CFAllocatorRef,
         bytes: *const UInt8,
@@ -2468,7 +2468,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithCharacters`.
+    /// Apple SDK function `CFStringCreateWithCharacters`.
     pub fn CFStringCreateWithCharacters(
         alloc: CFAllocatorRef,
         chars: *const UniChar,
@@ -2476,7 +2476,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithPascalStringNoCopy`.
+    /// Apple SDK function `CFStringCreateWithPascalStringNoCopy`.
     pub fn CFStringCreateWithPascalStringNoCopy(
         alloc: CFAllocatorRef,
         pStr: ConstStr255Param,
@@ -2485,7 +2485,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithCStringNoCopy`.
+    /// Apple SDK function `CFStringCreateWithCStringNoCopy`.
     pub fn CFStringCreateWithCStringNoCopy(
         alloc: CFAllocatorRef,
         cStr: *const ::core::ffi::c_char,
@@ -2494,7 +2494,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithBytesNoCopy`.
+    /// Apple SDK function `CFStringCreateWithBytesNoCopy`.
     pub fn CFStringCreateWithBytesNoCopy(
         alloc: CFAllocatorRef,
         bytes: *const UInt8,
@@ -2505,7 +2505,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithCharactersNoCopy`.
+    /// Apple SDK function `CFStringCreateWithCharactersNoCopy`.
     pub fn CFStringCreateWithCharactersNoCopy(
         alloc: CFAllocatorRef,
         chars: *const UniChar,
@@ -2514,7 +2514,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithSubstring`.
+    /// Apple SDK function `CFStringCreateWithSubstring`.
     pub fn CFStringCreateWithSubstring(
         alloc: CFAllocatorRef,
         str_: CFStringRef,
@@ -2522,11 +2522,11 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateCopy`.
+    /// Apple SDK function `CFStringCreateCopy`.
     pub fn CFStringCreateCopy(alloc: CFAllocatorRef, theString: CFStringRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithFormat`.
+    /// Apple SDK function `CFStringCreateWithFormat`.
     pub fn CFStringCreateWithFormat(
         alloc: CFAllocatorRef,
         formatOptions: CFDictionaryRef,
@@ -2535,7 +2535,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithFormatAndArguments`.
+    /// Apple SDK function `CFStringCreateWithFormatAndArguments`.
     pub fn CFStringCreateWithFormatAndArguments(
         alloc: CFAllocatorRef,
         formatOptions: CFDictionaryRef,
@@ -2544,7 +2544,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateStringWithValidatedFormat`.
+    /// Apple SDK function `CFStringCreateStringWithValidatedFormat`.
     pub fn CFStringCreateStringWithValidatedFormat(
         alloc: CFAllocatorRef,
         formatOptions: CFDictionaryRef,
@@ -2555,7 +2555,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateStringWithValidatedFormatAndArguments`.
+    /// Apple SDK function `CFStringCreateStringWithValidatedFormatAndArguments`.
     pub fn CFStringCreateStringWithValidatedFormatAndArguments(
         alloc: CFAllocatorRef,
         formatOptions: CFDictionaryRef,
@@ -2566,11 +2566,11 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateMutable`.
+    /// Apple SDK function `CFStringCreateMutable`.
     pub fn CFStringCreateMutable(alloc: CFAllocatorRef, maxLength: CFIndex) -> CFMutableStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateMutableCopy`.
+    /// Apple SDK function `CFStringCreateMutableCopy`.
     pub fn CFStringCreateMutableCopy(
         alloc: CFAllocatorRef,
         maxLength: CFIndex,
@@ -2578,7 +2578,7 @@ extern "C" {
     ) -> CFMutableStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateMutableWithExternalCharactersNoCopy`.
+    /// Apple SDK function `CFStringCreateMutableWithExternalCharactersNoCopy`.
     pub fn CFStringCreateMutableWithExternalCharactersNoCopy(
         alloc: CFAllocatorRef,
         chars: *mut UniChar,
@@ -2588,19 +2588,19 @@ extern "C" {
     ) -> CFMutableStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetLength`.
+    /// Apple SDK function `CFStringGetLength`.
     pub fn CFStringGetLength(theString: CFStringRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetCharacterAtIndex`.
+    /// Apple SDK function `CFStringGetCharacterAtIndex`.
     pub fn CFStringGetCharacterAtIndex(theString: CFStringRef, idx: CFIndex) -> UniChar;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetCharacters`.
+    /// Apple SDK function `CFStringGetCharacters`.
     pub fn CFStringGetCharacters(theString: CFStringRef, range: CFRange, buffer: *mut UniChar);
 }
 extern "C" {
-/// Apple SDK function `CFStringGetPascalString`.
+    /// Apple SDK function `CFStringGetPascalString`.
     pub fn CFStringGetPascalString(
         theString: CFStringRef,
         buffer: StringPtr,
@@ -2609,7 +2609,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetCString`.
+    /// Apple SDK function `CFStringGetCString`.
     pub fn CFStringGetCString(
         theString: CFStringRef,
         buffer: *mut ::core::ffi::c_char,
@@ -2618,25 +2618,25 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetPascalStringPtr`.
+    /// Apple SDK function `CFStringGetPascalStringPtr`.
     pub fn CFStringGetPascalStringPtr(
         theString: CFStringRef,
         encoding: CFStringEncoding,
     ) -> ConstStringPtr;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetCStringPtr`.
+    /// Apple SDK function `CFStringGetCStringPtr`.
     pub fn CFStringGetCStringPtr(
         theString: CFStringRef,
         encoding: CFStringEncoding,
     ) -> *const ::core::ffi::c_char;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetCharactersPtr`.
+    /// Apple SDK function `CFStringGetCharactersPtr`.
     pub fn CFStringGetCharactersPtr(theString: CFStringRef) -> *const UniChar;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetBytes`.
+    /// Apple SDK function `CFStringGetBytes`.
     pub fn CFStringGetBytes(
         theString: CFStringRef,
         range: CFRange,
@@ -2649,7 +2649,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateFromExternalRepresentation`.
+    /// Apple SDK function `CFStringCreateFromExternalRepresentation`.
     pub fn CFStringCreateFromExternalRepresentation(
         alloc: CFAllocatorRef,
         data: CFDataRef,
@@ -2657,7 +2657,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateExternalRepresentation`.
+    /// Apple SDK function `CFStringCreateExternalRepresentation`.
     pub fn CFStringCreateExternalRepresentation(
         alloc: CFAllocatorRef,
         theString: CFStringRef,
@@ -2666,26 +2666,26 @@ extern "C" {
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetSmallestEncoding`.
+    /// Apple SDK function `CFStringGetSmallestEncoding`.
     pub fn CFStringGetSmallestEncoding(theString: CFStringRef) -> CFStringEncoding;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetFastestEncoding`.
+    /// Apple SDK function `CFStringGetFastestEncoding`.
     pub fn CFStringGetFastestEncoding(theString: CFStringRef) -> CFStringEncoding;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetSystemEncoding`.
+    /// Apple SDK function `CFStringGetSystemEncoding`.
     pub fn CFStringGetSystemEncoding() -> CFStringEncoding;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetMaximumSizeForEncoding`.
+    /// Apple SDK function `CFStringGetMaximumSizeForEncoding`.
     pub fn CFStringGetMaximumSizeForEncoding(
         length: CFIndex,
         encoding: CFStringEncoding,
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetFileSystemRepresentation`.
+    /// Apple SDK function `CFStringGetFileSystemRepresentation`.
     pub fn CFStringGetFileSystemRepresentation(
         string: CFStringRef,
         buffer: *mut ::core::ffi::c_char,
@@ -2693,11 +2693,11 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetMaximumSizeOfFileSystemRepresentation`.
+    /// Apple SDK function `CFStringGetMaximumSizeOfFileSystemRepresentation`.
     pub fn CFStringGetMaximumSizeOfFileSystemRepresentation(string: CFStringRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateWithFileSystemRepresentation`.
+    /// Apple SDK function `CFStringCreateWithFileSystemRepresentation`.
     pub fn CFStringCreateWithFileSystemRepresentation(
         alloc: CFAllocatorRef,
         buffer: *const ::core::ffi::c_char,
@@ -2726,7 +2726,7 @@ pub const kCFCompareForcedOrdering: _bindgen_ty_16 = 512;
 /// Apple SDK type alias `_bindgen_ty_16`.
 pub type _bindgen_ty_16 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFStringCompareWithOptionsAndLocale`.
+    /// Apple SDK function `CFStringCompareWithOptionsAndLocale`.
     pub fn CFStringCompareWithOptionsAndLocale(
         theString1: CFStringRef,
         theString2: CFStringRef,
@@ -2736,7 +2736,7 @@ extern "C" {
     ) -> CFComparisonResult;
 }
 extern "C" {
-/// Apple SDK function `CFStringCompareWithOptions`.
+    /// Apple SDK function `CFStringCompareWithOptions`.
     pub fn CFStringCompareWithOptions(
         theString1: CFStringRef,
         theString2: CFStringRef,
@@ -2745,7 +2745,7 @@ extern "C" {
     ) -> CFComparisonResult;
 }
 extern "C" {
-/// Apple SDK function `CFStringCompare`.
+    /// Apple SDK function `CFStringCompare`.
     pub fn CFStringCompare(
         theString1: CFStringRef,
         theString2: CFStringRef,
@@ -2753,7 +2753,7 @@ extern "C" {
     ) -> CFComparisonResult;
 }
 extern "C" {
-/// Apple SDK function `CFStringFindWithOptionsAndLocale`.
+    /// Apple SDK function `CFStringFindWithOptionsAndLocale`.
     pub fn CFStringFindWithOptionsAndLocale(
         theString: CFStringRef,
         stringToFind: CFStringRef,
@@ -2764,7 +2764,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringFindWithOptions`.
+    /// Apple SDK function `CFStringFindWithOptions`.
     pub fn CFStringFindWithOptions(
         theString: CFStringRef,
         stringToFind: CFStringRef,
@@ -2774,7 +2774,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateArrayWithFindResults`.
+    /// Apple SDK function `CFStringCreateArrayWithFindResults`.
     pub fn CFStringCreateArrayWithFindResults(
         alloc: CFAllocatorRef,
         theString: CFStringRef,
@@ -2784,7 +2784,7 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringFind`.
+    /// Apple SDK function `CFStringFind`.
     pub fn CFStringFind(
         theString: CFStringRef,
         stringToFind: CFStringRef,
@@ -2792,22 +2792,22 @@ extern "C" {
     ) -> CFRange;
 }
 extern "C" {
-/// Apple SDK function `CFStringHasPrefix`.
+    /// Apple SDK function `CFStringHasPrefix`.
     pub fn CFStringHasPrefix(theString: CFStringRef, prefix: CFStringRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringHasSuffix`.
+    /// Apple SDK function `CFStringHasSuffix`.
     pub fn CFStringHasSuffix(theString: CFStringRef, suffix: CFStringRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetRangeOfComposedCharactersAtIndex`.
+    /// Apple SDK function `CFStringGetRangeOfComposedCharactersAtIndex`.
     pub fn CFStringGetRangeOfComposedCharactersAtIndex(
         theString: CFStringRef,
         theIndex: CFIndex,
     ) -> CFRange;
 }
 extern "C" {
-/// Apple SDK function `CFStringFindCharacterFromSet`.
+    /// Apple SDK function `CFStringFindCharacterFromSet`.
     pub fn CFStringFindCharacterFromSet(
         theString: CFStringRef,
         theSet: CFCharacterSetRef,
@@ -2817,7 +2817,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetLineBounds`.
+    /// Apple SDK function `CFStringGetLineBounds`.
     pub fn CFStringGetLineBounds(
         theString: CFStringRef,
         range: CFRange,
@@ -2827,7 +2827,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringGetParagraphBounds`.
+    /// Apple SDK function `CFStringGetParagraphBounds`.
     pub fn CFStringGetParagraphBounds(
         string: CFStringRef,
         range: CFRange,
@@ -2837,7 +2837,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringGetHyphenationLocationBeforeIndex`.
+    /// Apple SDK function `CFStringGetHyphenationLocationBeforeIndex`.
     pub fn CFStringGetHyphenationLocationBeforeIndex(
         string: CFStringRef,
         location: CFIndex,
@@ -2848,11 +2848,11 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFStringIsHyphenationAvailableForLocale`.
+    /// Apple SDK function `CFStringIsHyphenationAvailableForLocale`.
     pub fn CFStringIsHyphenationAvailableForLocale(locale: CFLocaleRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateByCombiningStrings`.
+    /// Apple SDK function `CFStringCreateByCombiningStrings`.
     pub fn CFStringCreateByCombiningStrings(
         alloc: CFAllocatorRef,
         theArray: CFArrayRef,
@@ -2860,7 +2860,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringCreateArrayBySeparatingStrings`.
+    /// Apple SDK function `CFStringCreateArrayBySeparatingStrings`.
     pub fn CFStringCreateArrayBySeparatingStrings(
         alloc: CFAllocatorRef,
         theString: CFStringRef,
@@ -2868,19 +2868,19 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetIntValue`.
+    /// Apple SDK function `CFStringGetIntValue`.
     pub fn CFStringGetIntValue(str_: CFStringRef) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetDoubleValue`.
+    /// Apple SDK function `CFStringGetDoubleValue`.
     pub fn CFStringGetDoubleValue(str_: CFStringRef) -> f64;
 }
 extern "C" {
-/// Apple SDK function `CFStringAppend`.
+    /// Apple SDK function `CFStringAppend`.
     pub fn CFStringAppend(theString: CFMutableStringRef, appendedString: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringAppendCharacters`.
+    /// Apple SDK function `CFStringAppendCharacters`.
     pub fn CFStringAppendCharacters(
         theString: CFMutableStringRef,
         chars: *const UniChar,
@@ -2888,7 +2888,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringAppendPascalString`.
+    /// Apple SDK function `CFStringAppendPascalString`.
     pub fn CFStringAppendPascalString(
         theString: CFMutableStringRef,
         pStr: ConstStr255Param,
@@ -2896,7 +2896,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringAppendCString`.
+    /// Apple SDK function `CFStringAppendCString`.
     pub fn CFStringAppendCString(
         theString: CFMutableStringRef,
         cStr: *const ::core::ffi::c_char,
@@ -2904,7 +2904,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringAppendFormat`.
+    /// Apple SDK function `CFStringAppendFormat`.
     pub fn CFStringAppendFormat(
         theString: CFMutableStringRef,
         formatOptions: CFDictionaryRef,
@@ -2913,7 +2913,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringAppendFormatAndArguments`.
+    /// Apple SDK function `CFStringAppendFormatAndArguments`.
     pub fn CFStringAppendFormatAndArguments(
         theString: CFMutableStringRef,
         formatOptions: CFDictionaryRef,
@@ -2922,23 +2922,23 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringInsert`.
+    /// Apple SDK function `CFStringInsert`.
     pub fn CFStringInsert(str_: CFMutableStringRef, idx: CFIndex, insertedStr: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringDelete`.
+    /// Apple SDK function `CFStringDelete`.
     pub fn CFStringDelete(theString: CFMutableStringRef, range: CFRange);
 }
 extern "C" {
-/// Apple SDK function `CFStringReplace`.
+    /// Apple SDK function `CFStringReplace`.
     pub fn CFStringReplace(theString: CFMutableStringRef, range: CFRange, replacement: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringReplaceAll`.
+    /// Apple SDK function `CFStringReplaceAll`.
     pub fn CFStringReplaceAll(theString: CFMutableStringRef, replacement: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringFindAndReplace`.
+    /// Apple SDK function `CFStringFindAndReplace`.
     pub fn CFStringFindAndReplace(
         theString: CFMutableStringRef,
         stringToFind: CFStringRef,
@@ -2948,7 +2948,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFStringSetExternalCharactersNoCopy`.
+    /// Apple SDK function `CFStringSetExternalCharactersNoCopy`.
     pub fn CFStringSetExternalCharactersNoCopy(
         theString: CFMutableStringRef,
         chars: *mut UniChar,
@@ -2957,7 +2957,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringPad`.
+    /// Apple SDK function `CFStringPad`.
     pub fn CFStringPad(
         theString: CFMutableStringRef,
         padString: CFStringRef,
@@ -2966,23 +2966,23 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringTrim`.
+    /// Apple SDK function `CFStringTrim`.
     pub fn CFStringTrim(theString: CFMutableStringRef, trimString: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringTrimWhitespace`.
+    /// Apple SDK function `CFStringTrimWhitespace`.
     pub fn CFStringTrimWhitespace(theString: CFMutableStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringLowercase`.
+    /// Apple SDK function `CFStringLowercase`.
     pub fn CFStringLowercase(theString: CFMutableStringRef, locale: CFLocaleRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringUppercase`.
+    /// Apple SDK function `CFStringUppercase`.
     pub fn CFStringUppercase(theString: CFMutableStringRef, locale: CFLocaleRef);
 }
 extern "C" {
-/// Apple SDK function `CFStringCapitalize`.
+    /// Apple SDK function `CFStringCapitalize`.
     pub fn CFStringCapitalize(theString: CFMutableStringRef, locale: CFLocaleRef);
 }
 /// Apple SDK type alias `CFStringNormalizationForm`.
@@ -2998,11 +2998,11 @@ pub const kCFStringNormalizationFormKC: _bindgen_ty_17 = 3;
 /// Apple SDK type alias `_bindgen_ty_17`.
 pub type _bindgen_ty_17 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFStringNormalize`.
+    /// Apple SDK function `CFStringNormalize`.
     pub fn CFStringNormalize(theString: CFMutableStringRef, theForm: CFStringNormalizationForm);
 }
 extern "C" {
-/// Apple SDK function `CFStringFold`.
+    /// Apple SDK function `CFStringFold`.
     pub fn CFStringFold(
         theString: CFMutableStringRef,
         theFlags: CFStringCompareFlags,
@@ -3010,7 +3010,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringTransform`.
+    /// Apple SDK function `CFStringTransform`.
     pub fn CFStringTransform(
         string: CFMutableStringRef,
         range: *mut CFRange,
@@ -3019,111 +3019,111 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformStripCombiningMarks`.
+    /// Apple SDK exported static `kCFStringTransformStripCombiningMarks`.
     pub static kCFStringTransformStripCombiningMarks: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformToLatin`.
+    /// Apple SDK exported static `kCFStringTransformToLatin`.
     pub static kCFStringTransformToLatin: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformFullwidthHalfwidth`.
+    /// Apple SDK exported static `kCFStringTransformFullwidthHalfwidth`.
     pub static kCFStringTransformFullwidthHalfwidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinKatakana`.
+    /// Apple SDK exported static `kCFStringTransformLatinKatakana`.
     pub static kCFStringTransformLatinKatakana: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinHiragana`.
+    /// Apple SDK exported static `kCFStringTransformLatinHiragana`.
     pub static kCFStringTransformLatinHiragana: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformHiraganaKatakana`.
+    /// Apple SDK exported static `kCFStringTransformHiraganaKatakana`.
     pub static kCFStringTransformHiraganaKatakana: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformMandarinLatin`.
+    /// Apple SDK exported static `kCFStringTransformMandarinLatin`.
     pub static kCFStringTransformMandarinLatin: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinHangul`.
+    /// Apple SDK exported static `kCFStringTransformLatinHangul`.
     pub static kCFStringTransformLatinHangul: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinArabic`.
+    /// Apple SDK exported static `kCFStringTransformLatinArabic`.
     pub static kCFStringTransformLatinArabic: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinHebrew`.
+    /// Apple SDK exported static `kCFStringTransformLatinHebrew`.
     pub static kCFStringTransformLatinHebrew: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinThai`.
+    /// Apple SDK exported static `kCFStringTransformLatinThai`.
     pub static kCFStringTransformLatinThai: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinCyrillic`.
+    /// Apple SDK exported static `kCFStringTransformLatinCyrillic`.
     pub static kCFStringTransformLatinCyrillic: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformLatinGreek`.
+    /// Apple SDK exported static `kCFStringTransformLatinGreek`.
     pub static kCFStringTransformLatinGreek: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformToXMLHex`.
+    /// Apple SDK exported static `kCFStringTransformToXMLHex`.
     pub static kCFStringTransformToXMLHex: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformToUnicodeName`.
+    /// Apple SDK exported static `kCFStringTransformToUnicodeName`.
     pub static kCFStringTransformToUnicodeName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStringTransformStripDiacritics`.
+    /// Apple SDK exported static `kCFStringTransformStripDiacritics`.
     pub static kCFStringTransformStripDiacritics: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringIsEncodingAvailable`.
+    /// Apple SDK function `CFStringIsEncodingAvailable`.
     pub fn CFStringIsEncodingAvailable(encoding: CFStringEncoding) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetListOfAvailableEncodings`.
+    /// Apple SDK function `CFStringGetListOfAvailableEncodings`.
     pub fn CFStringGetListOfAvailableEncodings() -> *const CFStringEncoding;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetNameOfEncoding`.
+    /// Apple SDK function `CFStringGetNameOfEncoding`.
     pub fn CFStringGetNameOfEncoding(encoding: CFStringEncoding) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringConvertEncodingToNSStringEncoding`.
+    /// Apple SDK function `CFStringConvertEncodingToNSStringEncoding`.
     pub fn CFStringConvertEncodingToNSStringEncoding(
         encoding: CFStringEncoding,
     ) -> ::core::ffi::c_ulong;
 }
 extern "C" {
-/// Apple SDK function `CFStringConvertNSStringEncodingToEncoding`.
+    /// Apple SDK function `CFStringConvertNSStringEncodingToEncoding`.
     pub fn CFStringConvertNSStringEncodingToEncoding(
         encoding: ::core::ffi::c_ulong,
     ) -> CFStringEncoding;
 }
 extern "C" {
-/// Apple SDK function `CFStringConvertEncodingToWindowsCodepage`.
+    /// Apple SDK function `CFStringConvertEncodingToWindowsCodepage`.
     pub fn CFStringConvertEncodingToWindowsCodepage(encoding: CFStringEncoding) -> UInt32;
 }
 extern "C" {
-/// Apple SDK function `CFStringConvertWindowsCodepageToEncoding`.
+    /// Apple SDK function `CFStringConvertWindowsCodepageToEncoding`.
     pub fn CFStringConvertWindowsCodepageToEncoding(codepage: UInt32) -> CFStringEncoding;
 }
 extern "C" {
-/// Apple SDK function `CFStringConvertIANACharSetNameToEncoding`.
+    /// Apple SDK function `CFStringConvertIANACharSetNameToEncoding`.
     pub fn CFStringConvertIANACharSetNameToEncoding(theString: CFStringRef) -> CFStringEncoding;
 }
 extern "C" {
-/// Apple SDK function `CFStringConvertEncodingToIANACharSetName`.
+    /// Apple SDK function `CFStringConvertEncodingToIANACharSetName`.
     pub fn CFStringConvertEncodingToIANACharSetName(encoding: CFStringEncoding) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringGetMostCompatibleMacStringEncoding`.
+    /// Apple SDK function `CFStringGetMostCompatibleMacStringEncoding`.
     pub fn CFStringGetMostCompatibleMacStringEncoding(
         encoding: CFStringEncoding,
     ) -> CFStringEncoding;
@@ -3141,47 +3141,47 @@ pub struct CFStringInlineBuffer {
     pub bufferedRangeEnd: CFIndex,
 }
 extern "C" {
-/// Apple SDK function `CFShow`.
+    /// Apple SDK function `CFShow`.
     pub fn CFShow(obj: CFTypeRef);
 }
 extern "C" {
-/// Apple SDK function `CFShowStr`.
+    /// Apple SDK function `CFShowStr`.
     pub fn CFShowStr(str_: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneGetTypeID`.
+    /// Apple SDK function `CFTimeZoneGetTypeID`.
     pub fn CFTimeZoneGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCopySystem`.
+    /// Apple SDK function `CFTimeZoneCopySystem`.
     pub fn CFTimeZoneCopySystem() -> CFTimeZoneRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneResetSystem`.
+    /// Apple SDK function `CFTimeZoneResetSystem`.
     pub fn CFTimeZoneResetSystem();
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCopyDefault`.
+    /// Apple SDK function `CFTimeZoneCopyDefault`.
     pub fn CFTimeZoneCopyDefault() -> CFTimeZoneRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneSetDefault`.
+    /// Apple SDK function `CFTimeZoneSetDefault`.
     pub fn CFTimeZoneSetDefault(tz: CFTimeZoneRef);
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCopyKnownNames`.
+    /// Apple SDK function `CFTimeZoneCopyKnownNames`.
     pub fn CFTimeZoneCopyKnownNames() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCopyAbbreviationDictionary`.
+    /// Apple SDK function `CFTimeZoneCopyAbbreviationDictionary`.
     pub fn CFTimeZoneCopyAbbreviationDictionary() -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneSetAbbreviationDictionary`.
+    /// Apple SDK function `CFTimeZoneSetAbbreviationDictionary`.
     pub fn CFTimeZoneSetAbbreviationDictionary(dict: CFDictionaryRef);
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCreate`.
+    /// Apple SDK function `CFTimeZoneCreate`.
     pub fn CFTimeZoneCreate(
         allocator: CFAllocatorRef,
         name: CFStringRef,
@@ -3189,14 +3189,14 @@ extern "C" {
     ) -> CFTimeZoneRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCreateWithTimeIntervalFromGMT`.
+    /// Apple SDK function `CFTimeZoneCreateWithTimeIntervalFromGMT`.
     pub fn CFTimeZoneCreateWithTimeIntervalFromGMT(
         allocator: CFAllocatorRef,
         ti: CFTimeInterval,
     ) -> CFTimeZoneRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCreateWithName`.
+    /// Apple SDK function `CFTimeZoneCreateWithName`.
     pub fn CFTimeZoneCreateWithName(
         allocator: CFAllocatorRef,
         name: CFStringRef,
@@ -3204,34 +3204,34 @@ extern "C" {
     ) -> CFTimeZoneRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneGetName`.
+    /// Apple SDK function `CFTimeZoneGetName`.
     pub fn CFTimeZoneGetName(tz: CFTimeZoneRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneGetData`.
+    /// Apple SDK function `CFTimeZoneGetData`.
     pub fn CFTimeZoneGetData(tz: CFTimeZoneRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneGetSecondsFromGMT`.
+    /// Apple SDK function `CFTimeZoneGetSecondsFromGMT`.
     pub fn CFTimeZoneGetSecondsFromGMT(tz: CFTimeZoneRef, at: CFAbsoluteTime) -> CFTimeInterval;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneCopyAbbreviation`.
+    /// Apple SDK function `CFTimeZoneCopyAbbreviation`.
     pub fn CFTimeZoneCopyAbbreviation(tz: CFTimeZoneRef, at: CFAbsoluteTime) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneIsDaylightSavingTime`.
+    /// Apple SDK function `CFTimeZoneIsDaylightSavingTime`.
     pub fn CFTimeZoneIsDaylightSavingTime(tz: CFTimeZoneRef, at: CFAbsoluteTime) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneGetDaylightSavingTimeOffset`.
+    /// Apple SDK function `CFTimeZoneGetDaylightSavingTimeOffset`.
     pub fn CFTimeZoneGetDaylightSavingTimeOffset(
         tz: CFTimeZoneRef,
         at: CFAbsoluteTime,
     ) -> CFTimeInterval;
 }
 extern "C" {
-/// Apple SDK function `CFTimeZoneGetNextDaylightSavingTimeTransition`.
+    /// Apple SDK function `CFTimeZoneGetNextDaylightSavingTimeTransition`.
     pub fn CFTimeZoneGetNextDaylightSavingTimeTransition(
         tz: CFTimeZoneRef,
         at: CFAbsoluteTime,
@@ -3254,7 +3254,7 @@ pub const kCFTimeZoneNameStyleShortGeneric: _bindgen_ty_18 = 5;
 /// Apple SDK type alias `_bindgen_ty_18`.
 pub type _bindgen_ty_18 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFTimeZoneCopyLocalizedName`.
+    /// Apple SDK function `CFTimeZoneCopyLocalizedName`.
     pub fn CFTimeZoneCopyLocalizedName(
         tz: CFTimeZoneRef,
         style: CFTimeZoneNameStyle,
@@ -3262,7 +3262,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFTimeZoneSystemTimeZoneDidChangeNotification`.
+    /// Apple SDK exported static `kCFTimeZoneSystemTimeZoneDidChangeNotification`.
     pub static kCFTimeZoneSystemTimeZoneDidChangeNotification: CFNotificationName;
 }
 #[repr(C)]
@@ -3274,54 +3274,54 @@ pub struct __CFCalendar {
 /// Apple SDK type alias `CFCalendarRef`.
 pub type CFCalendarRef = *mut __CFCalendar;
 extern "C" {
-/// Apple SDK function `CFCalendarGetTypeID`.
+    /// Apple SDK function `CFCalendarGetTypeID`.
     pub fn CFCalendarGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarCopyCurrent`.
+    /// Apple SDK function `CFCalendarCopyCurrent`.
     pub fn CFCalendarCopyCurrent() -> CFCalendarRef;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarCreateWithIdentifier`.
+    /// Apple SDK function `CFCalendarCreateWithIdentifier`.
     pub fn CFCalendarCreateWithIdentifier(
         allocator: CFAllocatorRef,
         identifier: CFCalendarIdentifier,
     ) -> CFCalendarRef;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetIdentifier`.
+    /// Apple SDK function `CFCalendarGetIdentifier`.
     pub fn CFCalendarGetIdentifier(calendar: CFCalendarRef) -> CFCalendarIdentifier;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarCopyLocale`.
+    /// Apple SDK function `CFCalendarCopyLocale`.
     pub fn CFCalendarCopyLocale(calendar: CFCalendarRef) -> CFLocaleRef;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarSetLocale`.
+    /// Apple SDK function `CFCalendarSetLocale`.
     pub fn CFCalendarSetLocale(calendar: CFCalendarRef, locale: CFLocaleRef);
 }
 extern "C" {
-/// Apple SDK function `CFCalendarCopyTimeZone`.
+    /// Apple SDK function `CFCalendarCopyTimeZone`.
     pub fn CFCalendarCopyTimeZone(calendar: CFCalendarRef) -> CFTimeZoneRef;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarSetTimeZone`.
+    /// Apple SDK function `CFCalendarSetTimeZone`.
     pub fn CFCalendarSetTimeZone(calendar: CFCalendarRef, tz: CFTimeZoneRef);
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetFirstWeekday`.
+    /// Apple SDK function `CFCalendarGetFirstWeekday`.
     pub fn CFCalendarGetFirstWeekday(calendar: CFCalendarRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarSetFirstWeekday`.
+    /// Apple SDK function `CFCalendarSetFirstWeekday`.
     pub fn CFCalendarSetFirstWeekday(calendar: CFCalendarRef, wkdy: CFIndex);
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetMinimumDaysInFirstWeek`.
+    /// Apple SDK function `CFCalendarGetMinimumDaysInFirstWeek`.
     pub fn CFCalendarGetMinimumDaysInFirstWeek(calendar: CFCalendarRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarSetMinimumDaysInFirstWeek`.
+    /// Apple SDK function `CFCalendarSetMinimumDaysInFirstWeek`.
     pub fn CFCalendarSetMinimumDaysInFirstWeek(calendar: CFCalendarRef, mwd: CFIndex);
 }
 /// Apple SDK type alias `CFCalendarUnit`.
@@ -3359,21 +3359,21 @@ pub const kCFCalendarUnitDayOfYear: _bindgen_ty_19 = 65536;
 /// Apple SDK type alias `_bindgen_ty_19`.
 pub type _bindgen_ty_19 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFCalendarGetMinimumRangeOfUnit`.
+    /// Apple SDK function `CFCalendarGetMinimumRangeOfUnit`.
     pub fn CFCalendarGetMinimumRangeOfUnit(
         calendar: CFCalendarRef,
         unit: CFCalendarUnit,
     ) -> CFRange;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetMaximumRangeOfUnit`.
+    /// Apple SDK function `CFCalendarGetMaximumRangeOfUnit`.
     pub fn CFCalendarGetMaximumRangeOfUnit(
         calendar: CFCalendarRef,
         unit: CFCalendarUnit,
     ) -> CFRange;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetRangeOfUnit`.
+    /// Apple SDK function `CFCalendarGetRangeOfUnit`.
     pub fn CFCalendarGetRangeOfUnit(
         calendar: CFCalendarRef,
         smallerUnit: CFCalendarUnit,
@@ -3382,7 +3382,7 @@ extern "C" {
     ) -> CFRange;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetOrdinalityOfUnit`.
+    /// Apple SDK function `CFCalendarGetOrdinalityOfUnit`.
     pub fn CFCalendarGetOrdinalityOfUnit(
         calendar: CFCalendarRef,
         smallerUnit: CFCalendarUnit,
@@ -3391,7 +3391,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetTimeRangeOfUnit`.
+    /// Apple SDK function `CFCalendarGetTimeRangeOfUnit`.
     pub fn CFCalendarGetTimeRangeOfUnit(
         calendar: CFCalendarRef,
         unit: CFCalendarUnit,
@@ -3401,7 +3401,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarComposeAbsoluteTime`.
+    /// Apple SDK function `CFCalendarComposeAbsoluteTime`.
     pub fn CFCalendarComposeAbsoluteTime(
         calendar: CFCalendarRef,
         at: *mut CFAbsoluteTime,
@@ -3410,7 +3410,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarDecomposeAbsoluteTime`.
+    /// Apple SDK function `CFCalendarDecomposeAbsoluteTime`.
     pub fn CFCalendarDecomposeAbsoluteTime(
         calendar: CFCalendarRef,
         at: CFAbsoluteTime,
@@ -3423,7 +3423,7 @@ pub const kCFCalendarComponentsWrap: _bindgen_ty_20 = 1;
 /// Apple SDK type alias `_bindgen_ty_20`.
 pub type _bindgen_ty_20 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFCalendarAddComponents`.
+    /// Apple SDK function `CFCalendarAddComponents`.
     pub fn CFCalendarAddComponents(
         calendar: CFCalendarRef,
         at: *mut CFAbsoluteTime,
@@ -3433,7 +3433,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFCalendarGetComponentDifference`.
+    /// Apple SDK function `CFCalendarGetComponentDifference`.
     pub fn CFCalendarGetComponentDifference(
         calendar: CFCalendarRef,
         startingAT: CFAbsoluteTime,
@@ -3477,7 +3477,7 @@ pub struct __CFDateFormatter {
 /// Apple SDK type alias `CFDateFormatterRef`.
 pub type CFDateFormatterRef = *mut __CFDateFormatter;
 extern "C" {
-/// Apple SDK function `CFDateFormatterCreateDateFormatFromTemplate`.
+    /// Apple SDK function `CFDateFormatterCreateDateFormatFromTemplate`.
     pub fn CFDateFormatterCreateDateFormatFromTemplate(
         allocator: CFAllocatorRef,
         tmplate: CFStringRef,
@@ -3486,7 +3486,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterGetTypeID`.
+    /// Apple SDK function `CFDateFormatterGetTypeID`.
     pub fn CFDateFormatterGetTypeID() -> CFTypeID;
 }
 /// Apple SDK type alias `CFDateFormatterStyle`.
@@ -3536,14 +3536,14 @@ pub const kCFISO8601DateFormatWithInternetDateTime: _bindgen_ty_23 = 1907;
 /// Apple SDK type alias `_bindgen_ty_23`.
 pub type _bindgen_ty_23 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFDateFormatterCreateISO8601Formatter`.
+    /// Apple SDK function `CFDateFormatterCreateISO8601Formatter`.
     pub fn CFDateFormatterCreateISO8601Formatter(
         allocator: CFAllocatorRef,
         formatOptions: CFISO8601DateFormatOptions,
     ) -> CFDateFormatterRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterCreate`.
+    /// Apple SDK function `CFDateFormatterCreate`.
     pub fn CFDateFormatterCreate(
         allocator: CFAllocatorRef,
         locale: CFLocaleRef,
@@ -3552,27 +3552,27 @@ extern "C" {
     ) -> CFDateFormatterRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterGetLocale`.
+    /// Apple SDK function `CFDateFormatterGetLocale`.
     pub fn CFDateFormatterGetLocale(formatter: CFDateFormatterRef) -> CFLocaleRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterGetDateStyle`.
+    /// Apple SDK function `CFDateFormatterGetDateStyle`.
     pub fn CFDateFormatterGetDateStyle(formatter: CFDateFormatterRef) -> CFDateFormatterStyle;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterGetTimeStyle`.
+    /// Apple SDK function `CFDateFormatterGetTimeStyle`.
     pub fn CFDateFormatterGetTimeStyle(formatter: CFDateFormatterRef) -> CFDateFormatterStyle;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterGetFormat`.
+    /// Apple SDK function `CFDateFormatterGetFormat`.
     pub fn CFDateFormatterGetFormat(formatter: CFDateFormatterRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterSetFormat`.
+    /// Apple SDK function `CFDateFormatterSetFormat`.
     pub fn CFDateFormatterSetFormat(formatter: CFDateFormatterRef, formatString: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterCreateStringWithDate`.
+    /// Apple SDK function `CFDateFormatterCreateStringWithDate`.
     pub fn CFDateFormatterCreateStringWithDate(
         allocator: CFAllocatorRef,
         formatter: CFDateFormatterRef,
@@ -3580,7 +3580,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterCreateStringWithAbsoluteTime`.
+    /// Apple SDK function `CFDateFormatterCreateStringWithAbsoluteTime`.
     pub fn CFDateFormatterCreateStringWithAbsoluteTime(
         allocator: CFAllocatorRef,
         formatter: CFDateFormatterRef,
@@ -3588,7 +3588,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterCreateDateFromString`.
+    /// Apple SDK function `CFDateFormatterCreateDateFromString`.
     pub fn CFDateFormatterCreateDateFromString(
         allocator: CFAllocatorRef,
         formatter: CFDateFormatterRef,
@@ -3597,7 +3597,7 @@ extern "C" {
     ) -> CFDateRef;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterGetAbsoluteTimeFromString`.
+    /// Apple SDK function `CFDateFormatterGetAbsoluteTimeFromString`.
     pub fn CFDateFormatterGetAbsoluteTimeFromString(
         formatter: CFDateFormatterRef,
         string: CFStringRef,
@@ -3606,7 +3606,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterSetProperty`.
+    /// Apple SDK function `CFDateFormatterSetProperty`.
     pub fn CFDateFormatterSetProperty(
         formatter: CFDateFormatterRef,
         key: CFStringRef,
@@ -3614,126 +3614,126 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFDateFormatterCopyProperty`.
+    /// Apple SDK function `CFDateFormatterCopyProperty`.
     pub fn CFDateFormatterCopyProperty(
         formatter: CFDateFormatterRef,
         key: CFDateFormatterKey,
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterIsLenient`.
+    /// Apple SDK exported static `kCFDateFormatterIsLenient`.
     pub static kCFDateFormatterIsLenient: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterTimeZone`.
+    /// Apple SDK exported static `kCFDateFormatterTimeZone`.
     pub static kCFDateFormatterTimeZone: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterCalendarName`.
+    /// Apple SDK exported static `kCFDateFormatterCalendarName`.
     pub static kCFDateFormatterCalendarName: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterDefaultFormat`.
+    /// Apple SDK exported static `kCFDateFormatterDefaultFormat`.
     pub static kCFDateFormatterDefaultFormat: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterTwoDigitStartDate`.
+    /// Apple SDK exported static `kCFDateFormatterTwoDigitStartDate`.
     pub static kCFDateFormatterTwoDigitStartDate: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterDefaultDate`.
+    /// Apple SDK exported static `kCFDateFormatterDefaultDate`.
     pub static kCFDateFormatterDefaultDate: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterCalendar`.
+    /// Apple SDK exported static `kCFDateFormatterCalendar`.
     pub static kCFDateFormatterCalendar: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterEraSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterEraSymbols`.
     pub static kCFDateFormatterEraSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterMonthSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterMonthSymbols`.
     pub static kCFDateFormatterMonthSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterShortMonthSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterShortMonthSymbols`.
     pub static kCFDateFormatterShortMonthSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterWeekdaySymbols`.
+    /// Apple SDK exported static `kCFDateFormatterWeekdaySymbols`.
     pub static kCFDateFormatterWeekdaySymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterShortWeekdaySymbols`.
+    /// Apple SDK exported static `kCFDateFormatterShortWeekdaySymbols`.
     pub static kCFDateFormatterShortWeekdaySymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterAMSymbol`.
+    /// Apple SDK exported static `kCFDateFormatterAMSymbol`.
     pub static kCFDateFormatterAMSymbol: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterPMSymbol`.
+    /// Apple SDK exported static `kCFDateFormatterPMSymbol`.
     pub static kCFDateFormatterPMSymbol: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterLongEraSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterLongEraSymbols`.
     pub static kCFDateFormatterLongEraSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterVeryShortMonthSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterVeryShortMonthSymbols`.
     pub static kCFDateFormatterVeryShortMonthSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterStandaloneMonthSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterStandaloneMonthSymbols`.
     pub static kCFDateFormatterStandaloneMonthSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterShortStandaloneMonthSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterShortStandaloneMonthSymbols`.
     pub static kCFDateFormatterShortStandaloneMonthSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterVeryShortStandaloneMonthSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterVeryShortStandaloneMonthSymbols`.
     pub static kCFDateFormatterVeryShortStandaloneMonthSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterVeryShortWeekdaySymbols`.
+    /// Apple SDK exported static `kCFDateFormatterVeryShortWeekdaySymbols`.
     pub static kCFDateFormatterVeryShortWeekdaySymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterStandaloneWeekdaySymbols`.
+    /// Apple SDK exported static `kCFDateFormatterStandaloneWeekdaySymbols`.
     pub static kCFDateFormatterStandaloneWeekdaySymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterShortStandaloneWeekdaySymbols`.
+    /// Apple SDK exported static `kCFDateFormatterShortStandaloneWeekdaySymbols`.
     pub static kCFDateFormatterShortStandaloneWeekdaySymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterVeryShortStandaloneWeekdaySymbols`.
+    /// Apple SDK exported static `kCFDateFormatterVeryShortStandaloneWeekdaySymbols`.
     pub static kCFDateFormatterVeryShortStandaloneWeekdaySymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterQuarterSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterQuarterSymbols`.
     pub static kCFDateFormatterQuarterSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterShortQuarterSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterShortQuarterSymbols`.
     pub static kCFDateFormatterShortQuarterSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterStandaloneQuarterSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterStandaloneQuarterSymbols`.
     pub static kCFDateFormatterStandaloneQuarterSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterShortStandaloneQuarterSymbols`.
+    /// Apple SDK exported static `kCFDateFormatterShortStandaloneQuarterSymbols`.
     pub static kCFDateFormatterShortStandaloneQuarterSymbols: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterGregorianStartDate`.
+    /// Apple SDK exported static `kCFDateFormatterGregorianStartDate`.
     pub static kCFDateFormatterGregorianStartDate: CFDateFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDateFormatterDoesRelativeDateFormattingKey`.
+    /// Apple SDK exported static `kCFDateFormatterDoesRelativeDateFormattingKey`.
     pub static kCFDateFormatterDoesRelativeDateFormattingKey: CFDateFormatterKey;
 }
 #[repr(C)]
@@ -3745,19 +3745,19 @@ pub struct __CFBoolean {
 /// Apple SDK type alias `CFBooleanRef`.
 pub type CFBooleanRef = *const __CFBoolean;
 extern "C" {
-/// Apple SDK exported static `kCFBooleanTrue`.
+    /// Apple SDK exported static `kCFBooleanTrue`.
     pub static kCFBooleanTrue: CFBooleanRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBooleanFalse`.
+    /// Apple SDK exported static `kCFBooleanFalse`.
     pub static kCFBooleanFalse: CFBooleanRef;
 }
 extern "C" {
-/// Apple SDK function `CFBooleanGetTypeID`.
+    /// Apple SDK function `CFBooleanGetTypeID`.
     pub fn CFBooleanGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFBooleanGetValue`.
+    /// Apple SDK function `CFBooleanGetValue`.
     pub fn CFBooleanGetValue(boolean: CFBooleanRef) -> Boolean;
 }
 /// Apple SDK type alias `CFNumberType`.
@@ -3807,23 +3807,23 @@ pub struct __CFNumber {
 /// Apple SDK type alias `CFNumberRef`.
 pub type CFNumberRef = *const __CFNumber;
 extern "C" {
-/// Apple SDK exported static `kCFNumberPositiveInfinity`.
+    /// Apple SDK exported static `kCFNumberPositiveInfinity`.
     pub static kCFNumberPositiveInfinity: CFNumberRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberNegativeInfinity`.
+    /// Apple SDK exported static `kCFNumberNegativeInfinity`.
     pub static kCFNumberNegativeInfinity: CFNumberRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberNaN`.
+    /// Apple SDK exported static `kCFNumberNaN`.
     pub static kCFNumberNaN: CFNumberRef;
 }
 extern "C" {
-/// Apple SDK function `CFNumberGetTypeID`.
+    /// Apple SDK function `CFNumberGetTypeID`.
     pub fn CFNumberGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFNumberCreate`.
+    /// Apple SDK function `CFNumberCreate`.
     pub fn CFNumberCreate(
         allocator: CFAllocatorRef,
         theType: CFNumberType,
@@ -3831,19 +3831,19 @@ extern "C" {
     ) -> CFNumberRef;
 }
 extern "C" {
-/// Apple SDK function `CFNumberGetType`.
+    /// Apple SDK function `CFNumberGetType`.
     pub fn CFNumberGetType(number: CFNumberRef) -> CFNumberType;
 }
 extern "C" {
-/// Apple SDK function `CFNumberGetByteSize`.
+    /// Apple SDK function `CFNumberGetByteSize`.
     pub fn CFNumberGetByteSize(number: CFNumberRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFNumberIsFloatType`.
+    /// Apple SDK function `CFNumberIsFloatType`.
     pub fn CFNumberIsFloatType(number: CFNumberRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNumberGetValue`.
+    /// Apple SDK function `CFNumberGetValue`.
     pub fn CFNumberGetValue(
         number: CFNumberRef,
         theType: CFNumberType,
@@ -3851,7 +3851,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNumberCompare`.
+    /// Apple SDK function `CFNumberCompare`.
     pub fn CFNumberCompare(
         number: CFNumberRef,
         otherNumber: CFNumberRef,
@@ -3869,7 +3869,7 @@ pub struct __CFNumberFormatter {
 /// Apple SDK type alias `CFNumberFormatterRef`.
 pub type CFNumberFormatterRef = *mut __CFNumberFormatter;
 extern "C" {
-/// Apple SDK function `CFNumberFormatterGetTypeID`.
+    /// Apple SDK function `CFNumberFormatterGetTypeID`.
     pub fn CFNumberFormatterGetTypeID() -> CFTypeID;
 }
 /// Apple SDK type alias `CFNumberFormatterStyle`.
@@ -3897,7 +3897,7 @@ pub const kCFNumberFormatterCurrencyAccountingStyle: _bindgen_ty_25 = 10;
 /// Apple SDK type alias `_bindgen_ty_25`.
 pub type _bindgen_ty_25 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFNumberFormatterCreate`.
+    /// Apple SDK function `CFNumberFormatterCreate`.
     pub fn CFNumberFormatterCreate(
         allocator: CFAllocatorRef,
         locale: CFLocaleRef,
@@ -3905,23 +3905,23 @@ extern "C" {
     ) -> CFNumberFormatterRef;
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterGetLocale`.
+    /// Apple SDK function `CFNumberFormatterGetLocale`.
     pub fn CFNumberFormatterGetLocale(formatter: CFNumberFormatterRef) -> CFLocaleRef;
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterGetStyle`.
+    /// Apple SDK function `CFNumberFormatterGetStyle`.
     pub fn CFNumberFormatterGetStyle(formatter: CFNumberFormatterRef) -> CFNumberFormatterStyle;
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterGetFormat`.
+    /// Apple SDK function `CFNumberFormatterGetFormat`.
     pub fn CFNumberFormatterGetFormat(formatter: CFNumberFormatterRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterSetFormat`.
+    /// Apple SDK function `CFNumberFormatterSetFormat`.
     pub fn CFNumberFormatterSetFormat(formatter: CFNumberFormatterRef, formatString: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterCreateStringWithNumber`.
+    /// Apple SDK function `CFNumberFormatterCreateStringWithNumber`.
     pub fn CFNumberFormatterCreateStringWithNumber(
         allocator: CFAllocatorRef,
         formatter: CFNumberFormatterRef,
@@ -3929,7 +3929,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterCreateStringWithValue`.
+    /// Apple SDK function `CFNumberFormatterCreateStringWithValue`.
     pub fn CFNumberFormatterCreateStringWithValue(
         allocator: CFAllocatorRef,
         formatter: CFNumberFormatterRef,
@@ -3944,7 +3944,7 @@ pub const kCFNumberFormatterParseIntegersOnly: _bindgen_ty_26 = 1;
 /// Apple SDK type alias `_bindgen_ty_26`.
 pub type _bindgen_ty_26 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFNumberFormatterCreateNumberFromString`.
+    /// Apple SDK function `CFNumberFormatterCreateNumberFromString`.
     pub fn CFNumberFormatterCreateNumberFromString(
         allocator: CFAllocatorRef,
         formatter: CFNumberFormatterRef,
@@ -3954,7 +3954,7 @@ extern "C" {
     ) -> CFNumberRef;
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterGetValueFromString`.
+    /// Apple SDK function `CFNumberFormatterGetValueFromString`.
     pub fn CFNumberFormatterGetValueFromString(
         formatter: CFNumberFormatterRef,
         string: CFStringRef,
@@ -3964,7 +3964,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterSetProperty`.
+    /// Apple SDK function `CFNumberFormatterSetProperty`.
     pub fn CFNumberFormatterSetProperty(
         formatter: CFNumberFormatterRef,
         key: CFNumberFormatterKey,
@@ -3972,166 +3972,166 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNumberFormatterCopyProperty`.
+    /// Apple SDK function `CFNumberFormatterCopyProperty`.
     pub fn CFNumberFormatterCopyProperty(
         formatter: CFNumberFormatterRef,
         key: CFNumberFormatterKey,
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterCurrencyCode`.
+    /// Apple SDK exported static `kCFNumberFormatterCurrencyCode`.
     pub static kCFNumberFormatterCurrencyCode: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterDecimalSeparator`.
+    /// Apple SDK exported static `kCFNumberFormatterDecimalSeparator`.
     pub static kCFNumberFormatterDecimalSeparator: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterCurrencyDecimalSeparator`.
+    /// Apple SDK exported static `kCFNumberFormatterCurrencyDecimalSeparator`.
     pub static kCFNumberFormatterCurrencyDecimalSeparator: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterAlwaysShowDecimalSeparator`.
+    /// Apple SDK exported static `kCFNumberFormatterAlwaysShowDecimalSeparator`.
     pub static kCFNumberFormatterAlwaysShowDecimalSeparator: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterGroupingSeparator`.
+    /// Apple SDK exported static `kCFNumberFormatterGroupingSeparator`.
     pub static kCFNumberFormatterGroupingSeparator: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterUseGroupingSeparator`.
+    /// Apple SDK exported static `kCFNumberFormatterUseGroupingSeparator`.
     pub static kCFNumberFormatterUseGroupingSeparator: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterPercentSymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterPercentSymbol`.
     pub static kCFNumberFormatterPercentSymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterZeroSymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterZeroSymbol`.
     pub static kCFNumberFormatterZeroSymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterNaNSymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterNaNSymbol`.
     pub static kCFNumberFormatterNaNSymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterInfinitySymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterInfinitySymbol`.
     pub static kCFNumberFormatterInfinitySymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMinusSign`.
+    /// Apple SDK exported static `kCFNumberFormatterMinusSign`.
     pub static kCFNumberFormatterMinusSign: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterPlusSign`.
+    /// Apple SDK exported static `kCFNumberFormatterPlusSign`.
     pub static kCFNumberFormatterPlusSign: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterCurrencySymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterCurrencySymbol`.
     pub static kCFNumberFormatterCurrencySymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterExponentSymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterExponentSymbol`.
     pub static kCFNumberFormatterExponentSymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMinIntegerDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterMinIntegerDigits`.
     pub static kCFNumberFormatterMinIntegerDigits: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMaxIntegerDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterMaxIntegerDigits`.
     pub static kCFNumberFormatterMaxIntegerDigits: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMinFractionDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterMinFractionDigits`.
     pub static kCFNumberFormatterMinFractionDigits: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMaxFractionDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterMaxFractionDigits`.
     pub static kCFNumberFormatterMaxFractionDigits: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterGroupingSize`.
+    /// Apple SDK exported static `kCFNumberFormatterGroupingSize`.
     pub static kCFNumberFormatterGroupingSize: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterSecondaryGroupingSize`.
+    /// Apple SDK exported static `kCFNumberFormatterSecondaryGroupingSize`.
     pub static kCFNumberFormatterSecondaryGroupingSize: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterRoundingMode`.
+    /// Apple SDK exported static `kCFNumberFormatterRoundingMode`.
     pub static kCFNumberFormatterRoundingMode: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterRoundingIncrement`.
+    /// Apple SDK exported static `kCFNumberFormatterRoundingIncrement`.
     pub static kCFNumberFormatterRoundingIncrement: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterFormatWidth`.
+    /// Apple SDK exported static `kCFNumberFormatterFormatWidth`.
     pub static kCFNumberFormatterFormatWidth: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterPaddingPosition`.
+    /// Apple SDK exported static `kCFNumberFormatterPaddingPosition`.
     pub static kCFNumberFormatterPaddingPosition: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterPaddingCharacter`.
+    /// Apple SDK exported static `kCFNumberFormatterPaddingCharacter`.
     pub static kCFNumberFormatterPaddingCharacter: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterDefaultFormat`.
+    /// Apple SDK exported static `kCFNumberFormatterDefaultFormat`.
     pub static kCFNumberFormatterDefaultFormat: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMultiplier`.
+    /// Apple SDK exported static `kCFNumberFormatterMultiplier`.
     pub static kCFNumberFormatterMultiplier: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterPositivePrefix`.
+    /// Apple SDK exported static `kCFNumberFormatterPositivePrefix`.
     pub static kCFNumberFormatterPositivePrefix: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterPositiveSuffix`.
+    /// Apple SDK exported static `kCFNumberFormatterPositiveSuffix`.
     pub static kCFNumberFormatterPositiveSuffix: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterNegativePrefix`.
+    /// Apple SDK exported static `kCFNumberFormatterNegativePrefix`.
     pub static kCFNumberFormatterNegativePrefix: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterNegativeSuffix`.
+    /// Apple SDK exported static `kCFNumberFormatterNegativeSuffix`.
     pub static kCFNumberFormatterNegativeSuffix: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterPerMillSymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterPerMillSymbol`.
     pub static kCFNumberFormatterPerMillSymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterInternationalCurrencySymbol`.
+    /// Apple SDK exported static `kCFNumberFormatterInternationalCurrencySymbol`.
     pub static kCFNumberFormatterInternationalCurrencySymbol: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterCurrencyGroupingSeparator`.
+    /// Apple SDK exported static `kCFNumberFormatterCurrencyGroupingSeparator`.
     pub static kCFNumberFormatterCurrencyGroupingSeparator: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterIsLenient`.
+    /// Apple SDK exported static `kCFNumberFormatterIsLenient`.
     pub static kCFNumberFormatterIsLenient: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterUseSignificantDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterUseSignificantDigits`.
     pub static kCFNumberFormatterUseSignificantDigits: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMinSignificantDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterMinSignificantDigits`.
     pub static kCFNumberFormatterMinSignificantDigits: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMaxSignificantDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterMaxSignificantDigits`.
     pub static kCFNumberFormatterMaxSignificantDigits: CFNumberFormatterKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNumberFormatterMinGroupingDigits`.
+    /// Apple SDK exported static `kCFNumberFormatterMinGroupingDigits`.
     pub static kCFNumberFormatterMinGroupingDigits: CFNumberFormatterKey;
 }
 /// Apple SDK type alias `CFNumberFormatterRoundingMode`.
@@ -4165,7 +4165,7 @@ pub const kCFNumberFormatterPadAfterSuffix: _bindgen_ty_28 = 3;
 /// Apple SDK type alias `_bindgen_ty_28`.
 pub type _bindgen_ty_28 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFNumberFormatterGetDecimalInfoForCurrencyCode`.
+    /// Apple SDK function `CFNumberFormatterGetDecimalInfoForCurrencyCode`.
     pub fn CFNumberFormatterGetDecimalInfoForCurrencyCode(
         currencyCode: CFStringRef,
         defaultFractionDigits: *mut i32,
@@ -4173,38 +4173,38 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPreferencesAnyApplication`.
+    /// Apple SDK exported static `kCFPreferencesAnyApplication`.
     pub static kCFPreferencesAnyApplication: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPreferencesCurrentApplication`.
+    /// Apple SDK exported static `kCFPreferencesCurrentApplication`.
     pub static kCFPreferencesCurrentApplication: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPreferencesAnyHost`.
+    /// Apple SDK exported static `kCFPreferencesAnyHost`.
     pub static kCFPreferencesAnyHost: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPreferencesCurrentHost`.
+    /// Apple SDK exported static `kCFPreferencesCurrentHost`.
     pub static kCFPreferencesCurrentHost: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPreferencesAnyUser`.
+    /// Apple SDK exported static `kCFPreferencesAnyUser`.
     pub static kCFPreferencesAnyUser: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPreferencesCurrentUser`.
+    /// Apple SDK exported static `kCFPreferencesCurrentUser`.
     pub static kCFPreferencesCurrentUser: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesCopyAppValue`.
+    /// Apple SDK function `CFPreferencesCopyAppValue`.
     pub fn CFPreferencesCopyAppValue(
         key: CFStringRef,
         applicationID: CFStringRef,
     ) -> CFPropertyListRef;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesGetAppBooleanValue`.
+    /// Apple SDK function `CFPreferencesGetAppBooleanValue`.
     pub fn CFPreferencesGetAppBooleanValue(
         key: CFStringRef,
         applicationID: CFStringRef,
@@ -4212,7 +4212,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesGetAppIntegerValue`.
+    /// Apple SDK function `CFPreferencesGetAppIntegerValue`.
     pub fn CFPreferencesGetAppIntegerValue(
         key: CFStringRef,
         applicationID: CFStringRef,
@@ -4220,7 +4220,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesSetAppValue`.
+    /// Apple SDK function `CFPreferencesSetAppValue`.
     pub fn CFPreferencesSetAppValue(
         key: CFStringRef,
         value: CFPropertyListRef,
@@ -4228,22 +4228,22 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesAddSuitePreferencesToApp`.
+    /// Apple SDK function `CFPreferencesAddSuitePreferencesToApp`.
     pub fn CFPreferencesAddSuitePreferencesToApp(applicationID: CFStringRef, suiteID: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesRemoveSuitePreferencesFromApp`.
+    /// Apple SDK function `CFPreferencesRemoveSuitePreferencesFromApp`.
     pub fn CFPreferencesRemoveSuitePreferencesFromApp(
         applicationID: CFStringRef,
         suiteID: CFStringRef,
     );
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesAppSynchronize`.
+    /// Apple SDK function `CFPreferencesAppSynchronize`.
     pub fn CFPreferencesAppSynchronize(applicationID: CFStringRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesCopyValue`.
+    /// Apple SDK function `CFPreferencesCopyValue`.
     pub fn CFPreferencesCopyValue(
         key: CFStringRef,
         applicationID: CFStringRef,
@@ -4252,7 +4252,7 @@ extern "C" {
     ) -> CFPropertyListRef;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesCopyMultiple`.
+    /// Apple SDK function `CFPreferencesCopyMultiple`.
     pub fn CFPreferencesCopyMultiple(
         keysToFetch: CFArrayRef,
         applicationID: CFStringRef,
@@ -4261,7 +4261,7 @@ extern "C" {
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesSetValue`.
+    /// Apple SDK function `CFPreferencesSetValue`.
     pub fn CFPreferencesSetValue(
         key: CFStringRef,
         value: CFPropertyListRef,
@@ -4271,7 +4271,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesSetMultiple`.
+    /// Apple SDK function `CFPreferencesSetMultiple`.
     pub fn CFPreferencesSetMultiple(
         keysToSet: CFDictionaryRef,
         keysToRemove: CFArrayRef,
@@ -4281,7 +4281,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesSynchronize`.
+    /// Apple SDK function `CFPreferencesSynchronize`.
     pub fn CFPreferencesSynchronize(
         applicationID: CFStringRef,
         userName: CFStringRef,
@@ -4289,14 +4289,14 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesCopyApplicationList`.
+    /// Apple SDK function `CFPreferencesCopyApplicationList`.
     pub fn CFPreferencesCopyApplicationList(
         userName: CFStringRef,
         hostName: CFStringRef,
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesCopyKeyList`.
+    /// Apple SDK function `CFPreferencesCopyKeyList`.
     pub fn CFPreferencesCopyKeyList(
         applicationID: CFStringRef,
         userName: CFStringRef,
@@ -4304,7 +4304,7 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFPreferencesAppValueIsForced`.
+    /// Apple SDK function `CFPreferencesAppValueIsForced`.
     pub fn CFPreferencesAppValueIsForced(key: CFStringRef, applicationID: CFStringRef) -> Boolean;
 }
 /// Apple SDK type alias `CFURLPathStyle`.
@@ -4326,11 +4326,11 @@ pub struct __CFURL {
 /// Apple SDK type alias `CFURLRef`.
 pub type CFURLRef = *const __CFURL;
 extern "C" {
-/// Apple SDK function `CFURLGetTypeID`.
+    /// Apple SDK function `CFURLGetTypeID`.
     pub fn CFURLGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateWithBytes`.
+    /// Apple SDK function `CFURLCreateWithBytes`.
     pub fn CFURLCreateWithBytes(
         allocator: CFAllocatorRef,
         URLBytes: *const UInt8,
@@ -4340,7 +4340,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateData`.
+    /// Apple SDK function `CFURLCreateData`.
     pub fn CFURLCreateData(
         allocator: CFAllocatorRef,
         url: CFURLRef,
@@ -4349,7 +4349,7 @@ extern "C" {
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateWithString`.
+    /// Apple SDK function `CFURLCreateWithString`.
     pub fn CFURLCreateWithString(
         allocator: CFAllocatorRef,
         URLString: CFStringRef,
@@ -4357,7 +4357,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateAbsoluteURLWithBytes`.
+    /// Apple SDK function `CFURLCreateAbsoluteURLWithBytes`.
     pub fn CFURLCreateAbsoluteURLWithBytes(
         alloc: CFAllocatorRef,
         relativeURLBytes: *const UInt8,
@@ -4368,7 +4368,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateWithFileSystemPath`.
+    /// Apple SDK function `CFURLCreateWithFileSystemPath`.
     pub fn CFURLCreateWithFileSystemPath(
         allocator: CFAllocatorRef,
         filePath: CFStringRef,
@@ -4377,7 +4377,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateFromFileSystemRepresentation`.
+    /// Apple SDK function `CFURLCreateFromFileSystemRepresentation`.
     pub fn CFURLCreateFromFileSystemRepresentation(
         allocator: CFAllocatorRef,
         buffer: *const UInt8,
@@ -4386,7 +4386,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateWithFileSystemPathRelativeToBase`.
+    /// Apple SDK function `CFURLCreateWithFileSystemPathRelativeToBase`.
     pub fn CFURLCreateWithFileSystemPathRelativeToBase(
         allocator: CFAllocatorRef,
         filePath: CFStringRef,
@@ -4396,7 +4396,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateFromFileSystemRepresentationRelativeToBase`.
+    /// Apple SDK function `CFURLCreateFromFileSystemRepresentationRelativeToBase`.
     pub fn CFURLCreateFromFileSystemRepresentationRelativeToBase(
         allocator: CFAllocatorRef,
         buffer: *const UInt8,
@@ -4406,7 +4406,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLGetFileSystemRepresentation`.
+    /// Apple SDK function `CFURLGetFileSystemRepresentation`.
     pub fn CFURLGetFileSystemRepresentation(
         url: CFURLRef,
         resolveAgainstBase: Boolean,
@@ -4415,94 +4415,94 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyAbsoluteURL`.
+    /// Apple SDK function `CFURLCopyAbsoluteURL`.
     pub fn CFURLCopyAbsoluteURL(relativeURL: CFURLRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLGetString`.
+    /// Apple SDK function `CFURLGetString`.
     pub fn CFURLGetString(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLGetBaseURL`.
+    /// Apple SDK function `CFURLGetBaseURL`.
     pub fn CFURLGetBaseURL(anURL: CFURLRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCanBeDecomposed`.
+    /// Apple SDK function `CFURLCanBeDecomposed`.
     pub fn CFURLCanBeDecomposed(anURL: CFURLRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyScheme`.
+    /// Apple SDK function `CFURLCopyScheme`.
     pub fn CFURLCopyScheme(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyNetLocation`.
+    /// Apple SDK function `CFURLCopyNetLocation`.
     pub fn CFURLCopyNetLocation(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyPath`.
+    /// Apple SDK function `CFURLCopyPath`.
     pub fn CFURLCopyPath(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyStrictPath`.
+    /// Apple SDK function `CFURLCopyStrictPath`.
     pub fn CFURLCopyStrictPath(anURL: CFURLRef, isAbsolute: *mut Boolean) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyFileSystemPath`.
+    /// Apple SDK function `CFURLCopyFileSystemPath`.
     pub fn CFURLCopyFileSystemPath(anURL: CFURLRef, pathStyle: CFURLPathStyle) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLHasDirectoryPath`.
+    /// Apple SDK function `CFURLHasDirectoryPath`.
     pub fn CFURLHasDirectoryPath(anURL: CFURLRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyResourceSpecifier`.
+    /// Apple SDK function `CFURLCopyResourceSpecifier`.
     pub fn CFURLCopyResourceSpecifier(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyHostName`.
+    /// Apple SDK function `CFURLCopyHostName`.
     pub fn CFURLCopyHostName(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLGetPortNumber`.
+    /// Apple SDK function `CFURLGetPortNumber`.
     pub fn CFURLGetPortNumber(anURL: CFURLRef) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyUserName`.
+    /// Apple SDK function `CFURLCopyUserName`.
     pub fn CFURLCopyUserName(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyPassword`.
+    /// Apple SDK function `CFURLCopyPassword`.
     pub fn CFURLCopyPassword(anURL: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyParameterString`.
+    /// Apple SDK function `CFURLCopyParameterString`.
     pub fn CFURLCopyParameterString(
         anURL: CFURLRef,
         charactersToLeaveEscaped: CFStringRef,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyQueryString`.
+    /// Apple SDK function `CFURLCopyQueryString`.
     pub fn CFURLCopyQueryString(
         anURL: CFURLRef,
         charactersToLeaveEscaped: CFStringRef,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyFragment`.
+    /// Apple SDK function `CFURLCopyFragment`.
     pub fn CFURLCopyFragment(anURL: CFURLRef, charactersToLeaveEscaped: CFStringRef)
         -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyLastPathComponent`.
+    /// Apple SDK function `CFURLCopyLastPathComponent`.
     pub fn CFURLCopyLastPathComponent(url: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyPathExtension`.
+    /// Apple SDK function `CFURLCopyPathExtension`.
     pub fn CFURLCopyPathExtension(url: CFURLRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateCopyAppendingPathComponent`.
+    /// Apple SDK function `CFURLCreateCopyAppendingPathComponent`.
     pub fn CFURLCreateCopyAppendingPathComponent(
         allocator: CFAllocatorRef,
         url: CFURLRef,
@@ -4511,14 +4511,14 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateCopyDeletingLastPathComponent`.
+    /// Apple SDK function `CFURLCreateCopyDeletingLastPathComponent`.
     pub fn CFURLCreateCopyDeletingLastPathComponent(
         allocator: CFAllocatorRef,
         url: CFURLRef,
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateCopyAppendingPathExtension`.
+    /// Apple SDK function `CFURLCreateCopyAppendingPathExtension`.
     pub fn CFURLCreateCopyAppendingPathExtension(
         allocator: CFAllocatorRef,
         url: CFURLRef,
@@ -4526,14 +4526,14 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateCopyDeletingPathExtension`.
+    /// Apple SDK function `CFURLCreateCopyDeletingPathExtension`.
     pub fn CFURLCreateCopyDeletingPathExtension(
         allocator: CFAllocatorRef,
         url: CFURLRef,
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLGetBytes`.
+    /// Apple SDK function `CFURLGetBytes`.
     pub fn CFURLGetBytes(url: CFURLRef, buffer: *mut UInt8, bufferLength: CFIndex) -> CFIndex;
 }
 /// Apple SDK type alias `CFURLComponentType`.
@@ -4565,7 +4565,7 @@ pub const kCFURLComponentFragment: _bindgen_ty_30 = 12;
 /// Apple SDK type alias `_bindgen_ty_30`.
 pub type _bindgen_ty_30 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFURLGetByteRangeForComponent`.
+    /// Apple SDK function `CFURLGetByteRangeForComponent`.
     pub fn CFURLGetByteRangeForComponent(
         url: CFURLRef,
         component: CFURLComponentType,
@@ -4573,7 +4573,7 @@ extern "C" {
     ) -> CFRange;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateStringByReplacingPercentEscapes`.
+    /// Apple SDK function `CFURLCreateStringByReplacingPercentEscapes`.
     pub fn CFURLCreateStringByReplacingPercentEscapes(
         allocator: CFAllocatorRef,
         originalString: CFStringRef,
@@ -4581,7 +4581,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateStringByReplacingPercentEscapesUsingEncoding`.
+    /// Apple SDK function `CFURLCreateStringByReplacingPercentEscapesUsingEncoding`.
     pub fn CFURLCreateStringByReplacingPercentEscapesUsingEncoding(
         allocator: CFAllocatorRef,
         origString: CFStringRef,
@@ -4590,7 +4590,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateStringByAddingPercentEscapes`.
+    /// Apple SDK function `CFURLCreateStringByAddingPercentEscapes`.
     pub fn CFURLCreateStringByAddingPercentEscapes(
         allocator: CFAllocatorRef,
         originalString: CFStringRef,
@@ -4600,11 +4600,11 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLIsFileReferenceURL`.
+    /// Apple SDK function `CFURLIsFileReferenceURL`.
     pub fn CFURLIsFileReferenceURL(url: CFURLRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateFileReferenceURL`.
+    /// Apple SDK function `CFURLCreateFileReferenceURL`.
     pub fn CFURLCreateFileReferenceURL(
         allocator: CFAllocatorRef,
         url: CFURLRef,
@@ -4612,7 +4612,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateFilePathURL`.
+    /// Apple SDK function `CFURLCreateFilePathURL`.
     pub fn CFURLCreateFilePathURL(
         allocator: CFAllocatorRef,
         url: CFURLRef,
@@ -4620,15 +4620,15 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateFromFSRef`.
+    /// Apple SDK function `CFURLCreateFromFSRef`.
     pub fn CFURLCreateFromFSRef(allocator: CFAllocatorRef, fsRef: *const FSRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLGetFSRef`.
+    /// Apple SDK function `CFURLGetFSRef`.
     pub fn CFURLGetFSRef(url: CFURLRef, fsRef: *mut FSRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyResourcePropertyForKey`.
+    /// Apple SDK function `CFURLCopyResourcePropertyForKey`.
     pub fn CFURLCopyResourcePropertyForKey(
         url: CFURLRef,
         key: CFStringRef,
@@ -4637,7 +4637,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCopyResourcePropertiesForKeys`.
+    /// Apple SDK function `CFURLCopyResourcePropertiesForKeys`.
     pub fn CFURLCopyResourcePropertiesForKeys(
         url: CFURLRef,
         keys: CFArrayRef,
@@ -4645,7 +4645,7 @@ extern "C" {
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLSetResourcePropertyForKey`.
+    /// Apple SDK function `CFURLSetResourcePropertyForKey`.
     pub fn CFURLSetResourcePropertyForKey(
         url: CFURLRef,
         key: CFStringRef,
@@ -4654,7 +4654,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLSetResourcePropertiesForKeys`.
+    /// Apple SDK function `CFURLSetResourcePropertiesForKeys`.
     pub fn CFURLSetResourcePropertiesForKeys(
         url: CFURLRef,
         keyedPropertyValues: CFDictionaryRef,
@@ -4662,19 +4662,19 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLKeysOfUnsetValuesKey`.
+    /// Apple SDK exported static `kCFURLKeysOfUnsetValuesKey`.
     pub static kCFURLKeysOfUnsetValuesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLClearResourcePropertyCacheForKey`.
+    /// Apple SDK function `CFURLClearResourcePropertyCacheForKey`.
     pub fn CFURLClearResourcePropertyCacheForKey(url: CFURLRef, key: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFURLClearResourcePropertyCache`.
+    /// Apple SDK function `CFURLClearResourcePropertyCache`.
     pub fn CFURLClearResourcePropertyCache(url: CFURLRef);
 }
 extern "C" {
-/// Apple SDK function `CFURLSetTemporaryResourcePropertyForKey`.
+    /// Apple SDK function `CFURLSetTemporaryResourcePropertyForKey`.
     pub fn CFURLSetTemporaryResourcePropertyForKey(
         url: CFURLRef,
         key: CFStringRef,
@@ -4682,535 +4682,535 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFURLResourceIsReachable`.
+    /// Apple SDK function `CFURLResourceIsReachable`.
     pub fn CFURLResourceIsReachable(url: CFURLRef, error: *mut CFErrorRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLNameKey`.
+    /// Apple SDK exported static `kCFURLNameKey`.
     pub static kCFURLNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLLocalizedNameKey`.
+    /// Apple SDK exported static `kCFURLLocalizedNameKey`.
     pub static kCFURLLocalizedNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsRegularFileKey`.
+    /// Apple SDK exported static `kCFURLIsRegularFileKey`.
     pub static kCFURLIsRegularFileKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsDirectoryKey`.
+    /// Apple SDK exported static `kCFURLIsDirectoryKey`.
     pub static kCFURLIsDirectoryKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsSymbolicLinkKey`.
+    /// Apple SDK exported static `kCFURLIsSymbolicLinkKey`.
     pub static kCFURLIsSymbolicLinkKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsVolumeKey`.
+    /// Apple SDK exported static `kCFURLIsVolumeKey`.
     pub static kCFURLIsVolumeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsPackageKey`.
+    /// Apple SDK exported static `kCFURLIsPackageKey`.
     pub static kCFURLIsPackageKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsApplicationKey`.
+    /// Apple SDK exported static `kCFURLIsApplicationKey`.
     pub static kCFURLIsApplicationKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLApplicationIsScriptableKey`.
+    /// Apple SDK exported static `kCFURLApplicationIsScriptableKey`.
     pub static kCFURLApplicationIsScriptableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsSystemImmutableKey`.
+    /// Apple SDK exported static `kCFURLIsSystemImmutableKey`.
     pub static kCFURLIsSystemImmutableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsUserImmutableKey`.
+    /// Apple SDK exported static `kCFURLIsUserImmutableKey`.
     pub static kCFURLIsUserImmutableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsHiddenKey`.
+    /// Apple SDK exported static `kCFURLIsHiddenKey`.
     pub static kCFURLIsHiddenKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLHasHiddenExtensionKey`.
+    /// Apple SDK exported static `kCFURLHasHiddenExtensionKey`.
     pub static kCFURLHasHiddenExtensionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLCreationDateKey`.
+    /// Apple SDK exported static `kCFURLCreationDateKey`.
     pub static kCFURLCreationDateKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLContentAccessDateKey`.
+    /// Apple SDK exported static `kCFURLContentAccessDateKey`.
     pub static kCFURLContentAccessDateKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLContentModificationDateKey`.
+    /// Apple SDK exported static `kCFURLContentModificationDateKey`.
     pub static kCFURLContentModificationDateKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLAttributeModificationDateKey`.
+    /// Apple SDK exported static `kCFURLAttributeModificationDateKey`.
     pub static kCFURLAttributeModificationDateKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileIdentifierKey`.
+    /// Apple SDK exported static `kCFURLFileIdentifierKey`.
     pub static kCFURLFileIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileContentIdentifierKey`.
+    /// Apple SDK exported static `kCFURLFileContentIdentifierKey`.
     pub static kCFURLFileContentIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLMayShareFileContentKey`.
+    /// Apple SDK exported static `kCFURLMayShareFileContentKey`.
     pub static kCFURLMayShareFileContentKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLMayHaveExtendedAttributesKey`.
+    /// Apple SDK exported static `kCFURLMayHaveExtendedAttributesKey`.
     pub static kCFURLMayHaveExtendedAttributesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsPurgeableKey`.
+    /// Apple SDK exported static `kCFURLIsPurgeableKey`.
     pub static kCFURLIsPurgeableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsSparseKey`.
+    /// Apple SDK exported static `kCFURLIsSparseKey`.
     pub static kCFURLIsSparseKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLLinkCountKey`.
+    /// Apple SDK exported static `kCFURLLinkCountKey`.
     pub static kCFURLLinkCountKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLParentDirectoryURLKey`.
+    /// Apple SDK exported static `kCFURLParentDirectoryURLKey`.
     pub static kCFURLParentDirectoryURLKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeURLKey`.
+    /// Apple SDK exported static `kCFURLVolumeURLKey`.
     pub static kCFURLVolumeURLKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLTypeIdentifierKey`.
+    /// Apple SDK exported static `kCFURLTypeIdentifierKey`.
     pub static kCFURLTypeIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLLocalizedTypeDescriptionKey`.
+    /// Apple SDK exported static `kCFURLLocalizedTypeDescriptionKey`.
     pub static kCFURLLocalizedTypeDescriptionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLLabelNumberKey`.
+    /// Apple SDK exported static `kCFURLLabelNumberKey`.
     pub static kCFURLLabelNumberKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLLabelColorKey`.
+    /// Apple SDK exported static `kCFURLLabelColorKey`.
     pub static kCFURLLabelColorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLLocalizedLabelKey`.
+    /// Apple SDK exported static `kCFURLLocalizedLabelKey`.
     pub static kCFURLLocalizedLabelKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLEffectiveIconKey`.
+    /// Apple SDK exported static `kCFURLEffectiveIconKey`.
     pub static kCFURLEffectiveIconKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLCustomIconKey`.
+    /// Apple SDK exported static `kCFURLCustomIconKey`.
     pub static kCFURLCustomIconKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceIdentifierKey`.
+    /// Apple SDK exported static `kCFURLFileResourceIdentifierKey`.
     pub static kCFURLFileResourceIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIdentifierKey`.
+    /// Apple SDK exported static `kCFURLVolumeIdentifierKey`.
     pub static kCFURLVolumeIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLPreferredIOBlockSizeKey`.
+    /// Apple SDK exported static `kCFURLPreferredIOBlockSizeKey`.
     pub static kCFURLPreferredIOBlockSizeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsReadableKey`.
+    /// Apple SDK exported static `kCFURLIsReadableKey`.
     pub static kCFURLIsReadableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsWritableKey`.
+    /// Apple SDK exported static `kCFURLIsWritableKey`.
     pub static kCFURLIsWritableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsExecutableKey`.
+    /// Apple SDK exported static `kCFURLIsExecutableKey`.
     pub static kCFURLIsExecutableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileSecurityKey`.
+    /// Apple SDK exported static `kCFURLFileSecurityKey`.
     pub static kCFURLFileSecurityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsExcludedFromBackupKey`.
+    /// Apple SDK exported static `kCFURLIsExcludedFromBackupKey`.
     pub static kCFURLIsExcludedFromBackupKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLTagNamesKey`.
+    /// Apple SDK exported static `kCFURLTagNamesKey`.
     pub static kCFURLTagNamesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLPathKey`.
+    /// Apple SDK exported static `kCFURLPathKey`.
     pub static kCFURLPathKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLCanonicalPathKey`.
+    /// Apple SDK exported static `kCFURLCanonicalPathKey`.
     pub static kCFURLCanonicalPathKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsMountTriggerKey`.
+    /// Apple SDK exported static `kCFURLIsMountTriggerKey`.
     pub static kCFURLIsMountTriggerKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLGenerationIdentifierKey`.
+    /// Apple SDK exported static `kCFURLGenerationIdentifierKey`.
     pub static kCFURLGenerationIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLDocumentIdentifierKey`.
+    /// Apple SDK exported static `kCFURLDocumentIdentifierKey`.
     pub static kCFURLDocumentIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLAddedToDirectoryDateKey`.
+    /// Apple SDK exported static `kCFURLAddedToDirectoryDateKey`.
     pub static kCFURLAddedToDirectoryDateKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLQuarantinePropertiesKey`.
+    /// Apple SDK exported static `kCFURLQuarantinePropertiesKey`.
     pub static kCFURLQuarantinePropertiesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeKey`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeKey`.
     pub static kCFURLFileResourceTypeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeNamedPipe`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeNamedPipe`.
     pub static kCFURLFileResourceTypeNamedPipe: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeCharacterSpecial`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeCharacterSpecial`.
     pub static kCFURLFileResourceTypeCharacterSpecial: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeDirectory`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeDirectory`.
     pub static kCFURLFileResourceTypeDirectory: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeBlockSpecial`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeBlockSpecial`.
     pub static kCFURLFileResourceTypeBlockSpecial: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeRegular`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeRegular`.
     pub static kCFURLFileResourceTypeRegular: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeSymbolicLink`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeSymbolicLink`.
     pub static kCFURLFileResourceTypeSymbolicLink: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeSocket`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeSocket`.
     pub static kCFURLFileResourceTypeSocket: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileResourceTypeUnknown`.
+    /// Apple SDK exported static `kCFURLFileResourceTypeUnknown`.
     pub static kCFURLFileResourceTypeUnknown: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileSizeKey`.
+    /// Apple SDK exported static `kCFURLFileSizeKey`.
     pub static kCFURLFileSizeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileAllocatedSizeKey`.
+    /// Apple SDK exported static `kCFURLFileAllocatedSizeKey`.
     pub static kCFURLFileAllocatedSizeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLTotalFileSizeKey`.
+    /// Apple SDK exported static `kCFURLTotalFileSizeKey`.
     pub static kCFURLTotalFileSizeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLTotalFileAllocatedSizeKey`.
+    /// Apple SDK exported static `kCFURLTotalFileAllocatedSizeKey`.
     pub static kCFURLTotalFileAllocatedSizeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsAliasFileKey`.
+    /// Apple SDK exported static `kCFURLIsAliasFileKey`.
     pub static kCFURLIsAliasFileKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileProtectionKey`.
+    /// Apple SDK exported static `kCFURLFileProtectionKey`.
     pub static kCFURLFileProtectionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileProtectionNone`.
+    /// Apple SDK exported static `kCFURLFileProtectionNone`.
     pub static kCFURLFileProtectionNone: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileProtectionComplete`.
+    /// Apple SDK exported static `kCFURLFileProtectionComplete`.
     pub static kCFURLFileProtectionComplete: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileProtectionCompleteUnlessOpen`.
+    /// Apple SDK exported static `kCFURLFileProtectionCompleteUnlessOpen`.
     pub static kCFURLFileProtectionCompleteUnlessOpen: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileProtectionCompleteUntilFirstUserAuthentication`.
+    /// Apple SDK exported static `kCFURLFileProtectionCompleteUntilFirstUserAuthentication`.
     pub static kCFURLFileProtectionCompleteUntilFirstUserAuthentication: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileProtectionCompleteWhenUserInactive`.
+    /// Apple SDK exported static `kCFURLFileProtectionCompleteWhenUserInactive`.
     pub static kCFURLFileProtectionCompleteWhenUserInactive: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLDirectoryEntryCountKey`.
+    /// Apple SDK exported static `kCFURLDirectoryEntryCountKey`.
     pub static kCFURLDirectoryEntryCountKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeLocalizedFormatDescriptionKey`.
+    /// Apple SDK exported static `kCFURLVolumeLocalizedFormatDescriptionKey`.
     pub static kCFURLVolumeLocalizedFormatDescriptionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeTotalCapacityKey`.
+    /// Apple SDK exported static `kCFURLVolumeTotalCapacityKey`.
     pub static kCFURLVolumeTotalCapacityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeAvailableCapacityKey`.
+    /// Apple SDK exported static `kCFURLVolumeAvailableCapacityKey`.
     pub static kCFURLVolumeAvailableCapacityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeAvailableCapacityForImportantUsageKey`.
+    /// Apple SDK exported static `kCFURLVolumeAvailableCapacityForImportantUsageKey`.
     pub static kCFURLVolumeAvailableCapacityForImportantUsageKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeAvailableCapacityForOpportunisticUsageKey`.
+    /// Apple SDK exported static `kCFURLVolumeAvailableCapacityForOpportunisticUsageKey`.
     pub static kCFURLVolumeAvailableCapacityForOpportunisticUsageKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeResourceCountKey`.
+    /// Apple SDK exported static `kCFURLVolumeResourceCountKey`.
     pub static kCFURLVolumeResourceCountKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsPersistentIDsKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsPersistentIDsKey`.
     pub static kCFURLVolumeSupportsPersistentIDsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsSymbolicLinksKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsSymbolicLinksKey`.
     pub static kCFURLVolumeSupportsSymbolicLinksKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsHardLinksKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsHardLinksKey`.
     pub static kCFURLVolumeSupportsHardLinksKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsJournalingKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsJournalingKey`.
     pub static kCFURLVolumeSupportsJournalingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsJournalingKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsJournalingKey`.
     pub static kCFURLVolumeIsJournalingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsSparseFilesKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsSparseFilesKey`.
     pub static kCFURLVolumeSupportsSparseFilesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsZeroRunsKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsZeroRunsKey`.
     pub static kCFURLVolumeSupportsZeroRunsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsCaseSensitiveNamesKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsCaseSensitiveNamesKey`.
     pub static kCFURLVolumeSupportsCaseSensitiveNamesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsCasePreservedNamesKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsCasePreservedNamesKey`.
     pub static kCFURLVolumeSupportsCasePreservedNamesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsRootDirectoryDatesKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsRootDirectoryDatesKey`.
     pub static kCFURLVolumeSupportsRootDirectoryDatesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsVolumeSizesKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsVolumeSizesKey`.
     pub static kCFURLVolumeSupportsVolumeSizesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsRenamingKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsRenamingKey`.
     pub static kCFURLVolumeSupportsRenamingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsAdvisoryFileLockingKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsAdvisoryFileLockingKey`.
     pub static kCFURLVolumeSupportsAdvisoryFileLockingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsExtendedSecurityKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsExtendedSecurityKey`.
     pub static kCFURLVolumeSupportsExtendedSecurityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsBrowsableKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsBrowsableKey`.
     pub static kCFURLVolumeIsBrowsableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeMaximumFileSizeKey`.
+    /// Apple SDK exported static `kCFURLVolumeMaximumFileSizeKey`.
     pub static kCFURLVolumeMaximumFileSizeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsEjectableKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsEjectableKey`.
     pub static kCFURLVolumeIsEjectableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsRemovableKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsRemovableKey`.
     pub static kCFURLVolumeIsRemovableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsInternalKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsInternalKey`.
     pub static kCFURLVolumeIsInternalKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsAutomountedKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsAutomountedKey`.
     pub static kCFURLVolumeIsAutomountedKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsLocalKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsLocalKey`.
     pub static kCFURLVolumeIsLocalKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsReadOnlyKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsReadOnlyKey`.
     pub static kCFURLVolumeIsReadOnlyKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeCreationDateKey`.
+    /// Apple SDK exported static `kCFURLVolumeCreationDateKey`.
     pub static kCFURLVolumeCreationDateKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeURLForRemountingKey`.
+    /// Apple SDK exported static `kCFURLVolumeURLForRemountingKey`.
     pub static kCFURLVolumeURLForRemountingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeUUIDStringKey`.
+    /// Apple SDK exported static `kCFURLVolumeUUIDStringKey`.
     pub static kCFURLVolumeUUIDStringKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeNameKey`.
+    /// Apple SDK exported static `kCFURLVolumeNameKey`.
     pub static kCFURLVolumeNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeLocalizedNameKey`.
+    /// Apple SDK exported static `kCFURLVolumeLocalizedNameKey`.
     pub static kCFURLVolumeLocalizedNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsEncryptedKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsEncryptedKey`.
     pub static kCFURLVolumeIsEncryptedKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeIsRootFileSystemKey`.
+    /// Apple SDK exported static `kCFURLVolumeIsRootFileSystemKey`.
     pub static kCFURLVolumeIsRootFileSystemKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsCompressionKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsCompressionKey`.
     pub static kCFURLVolumeSupportsCompressionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsFileCloningKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsFileCloningKey`.
     pub static kCFURLVolumeSupportsFileCloningKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsSwapRenamingKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsSwapRenamingKey`.
     pub static kCFURLVolumeSupportsSwapRenamingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsExclusiveRenamingKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsExclusiveRenamingKey`.
     pub static kCFURLVolumeSupportsExclusiveRenamingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsImmutableFilesKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsImmutableFilesKey`.
     pub static kCFURLVolumeSupportsImmutableFilesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsAccessPermissionsKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsAccessPermissionsKey`.
     pub static kCFURLVolumeSupportsAccessPermissionsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSupportsFileProtectionKey`.
+    /// Apple SDK exported static `kCFURLVolumeSupportsFileProtectionKey`.
     pub static kCFURLVolumeSupportsFileProtectionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeTypeNameKey`.
+    /// Apple SDK exported static `kCFURLVolumeTypeNameKey`.
     pub static kCFURLVolumeTypeNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeSubtypeKey`.
+    /// Apple SDK exported static `kCFURLVolumeSubtypeKey`.
     pub static kCFURLVolumeSubtypeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLVolumeMountFromLocationKey`.
+    /// Apple SDK exported static `kCFURLVolumeMountFromLocationKey`.
     pub static kCFURLVolumeMountFromLocationKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLIsUbiquitousItemKey`.
+    /// Apple SDK exported static `kCFURLIsUbiquitousItemKey`.
     pub static kCFURLIsUbiquitousItemKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemHasUnresolvedConflictsKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemHasUnresolvedConflictsKey`.
     pub static kCFURLUbiquitousItemHasUnresolvedConflictsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemIsDownloadedKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemIsDownloadedKey`.
     pub static kCFURLUbiquitousItemIsDownloadedKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemIsDownloadingKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemIsDownloadingKey`.
     pub static kCFURLUbiquitousItemIsDownloadingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemIsUploadedKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemIsUploadedKey`.
     pub static kCFURLUbiquitousItemIsUploadedKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemIsUploadingKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemIsUploadingKey`.
     pub static kCFURLUbiquitousItemIsUploadingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemPercentDownloadedKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemPercentDownloadedKey`.
     pub static kCFURLUbiquitousItemPercentDownloadedKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemPercentUploadedKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemPercentUploadedKey`.
     pub static kCFURLUbiquitousItemPercentUploadedKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusKey`.
     pub static kCFURLUbiquitousItemDownloadingStatusKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemDownloadingErrorKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemDownloadingErrorKey`.
     pub static kCFURLUbiquitousItemDownloadingErrorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemUploadingErrorKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemUploadingErrorKey`.
     pub static kCFURLUbiquitousItemUploadingErrorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemIsExcludedFromSyncKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemIsExcludedFromSyncKey`.
     pub static kCFURLUbiquitousItemIsExcludedFromSyncKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusNotDownloaded`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusNotDownloaded`.
     pub static kCFURLUbiquitousItemDownloadingStatusNotDownloaded: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusDownloaded`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusDownloaded`.
     pub static kCFURLUbiquitousItemDownloadingStatusDownloaded: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusCurrent`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemDownloadingStatusCurrent`.
     pub static kCFURLUbiquitousItemDownloadingStatusCurrent: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemSupportedSyncControlsKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemSupportedSyncControlsKey`.
     pub static kCFURLUbiquitousItemSupportedSyncControlsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLUbiquitousItemIsSyncPausedKey`.
+    /// Apple SDK exported static `kCFURLUbiquitousItemIsSyncPausedKey`.
     pub static kCFURLUbiquitousItemIsSyncPausedKey: CFStringRef;
 }
 /// Apple SDK type alias `CFURLBookmarkCreationOptions`.
@@ -5248,7 +5248,7 @@ pub type _bindgen_ty_32 = ::core::ffi::c_uint;
 /// Apple SDK type alias `CFURLBookmarkFileCreationOptions`.
 pub type CFURLBookmarkFileCreationOptions = CFOptionFlags;
 extern "C" {
-/// Apple SDK function `CFURLCreateBookmarkData`.
+    /// Apple SDK function `CFURLCreateBookmarkData`.
     pub fn CFURLCreateBookmarkData(
         allocator: CFAllocatorRef,
         url: CFURLRef,
@@ -5259,7 +5259,7 @@ extern "C" {
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateByResolvingBookmarkData`.
+    /// Apple SDK function `CFURLCreateByResolvingBookmarkData`.
     pub fn CFURLCreateByResolvingBookmarkData(
         allocator: CFAllocatorRef,
         bookmark: CFDataRef,
@@ -5271,7 +5271,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateResourcePropertiesForKeysFromBookmarkData`.
+    /// Apple SDK function `CFURLCreateResourcePropertiesForKeysFromBookmarkData`.
     pub fn CFURLCreateResourcePropertiesForKeysFromBookmarkData(
         allocator: CFAllocatorRef,
         resourcePropertiesToReturn: CFArrayRef,
@@ -5279,7 +5279,7 @@ extern "C" {
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateResourcePropertyForKeyFromBookmarkData`.
+    /// Apple SDK function `CFURLCreateResourcePropertyForKeyFromBookmarkData`.
     pub fn CFURLCreateResourcePropertyForKeyFromBookmarkData(
         allocator: CFAllocatorRef,
         resourcePropertyKey: CFStringRef,
@@ -5287,7 +5287,7 @@ extern "C" {
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateBookmarkDataFromFile`.
+    /// Apple SDK function `CFURLCreateBookmarkDataFromFile`.
     pub fn CFURLCreateBookmarkDataFromFile(
         allocator: CFAllocatorRef,
         fileURL: CFURLRef,
@@ -5295,7 +5295,7 @@ extern "C" {
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLWriteBookmarkDataToFile`.
+    /// Apple SDK function `CFURLWriteBookmarkDataToFile`.
     pub fn CFURLWriteBookmarkDataToFile(
         bookmarkRef: CFDataRef,
         fileURL: CFURLRef,
@@ -5304,18 +5304,18 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateBookmarkDataFromAliasRecord`.
+    /// Apple SDK function `CFURLCreateBookmarkDataFromAliasRecord`.
     pub fn CFURLCreateBookmarkDataFromAliasRecord(
         allocatorRef: CFAllocatorRef,
         aliasRecordDataRef: CFDataRef,
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLStartAccessingSecurityScopedResource`.
+    /// Apple SDK function `CFURLStartAccessingSecurityScopedResource`.
     pub fn CFURLStartAccessingSecurityScopedResource(url: CFURLRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLStopAccessingSecurityScopedResource`.
+    /// Apple SDK function `CFURLStopAccessingSecurityScopedResource`.
     pub fn CFURLStopAccessingSecurityScopedResource(url: CFURLRef);
 }
 /// Apple SDK type alias `integer_t`.
@@ -5387,47 +5387,47 @@ pub const kCFRunLoopAllActivities: _bindgen_ty_34 = 268435455;
 /// Apple SDK type alias `_bindgen_ty_34`.
 pub type _bindgen_ty_34 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCFRunLoopDefaultMode`.
+    /// Apple SDK exported static `kCFRunLoopDefaultMode`.
     pub static kCFRunLoopDefaultMode: CFRunLoopMode;
 }
 extern "C" {
-/// Apple SDK exported static `kCFRunLoopCommonModes`.
+    /// Apple SDK exported static `kCFRunLoopCommonModes`.
     pub static kCFRunLoopCommonModes: CFRunLoopMode;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopGetTypeID`.
+    /// Apple SDK function `CFRunLoopGetTypeID`.
     pub fn CFRunLoopGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopGetCurrent`.
+    /// Apple SDK function `CFRunLoopGetCurrent`.
     pub fn CFRunLoopGetCurrent() -> CFRunLoopRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopGetMain`.
+    /// Apple SDK function `CFRunLoopGetMain`.
     pub fn CFRunLoopGetMain() -> CFRunLoopRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopCopyCurrentMode`.
+    /// Apple SDK function `CFRunLoopCopyCurrentMode`.
     pub fn CFRunLoopCopyCurrentMode(rl: CFRunLoopRef) -> CFRunLoopMode;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopCopyAllModes`.
+    /// Apple SDK function `CFRunLoopCopyAllModes`.
     pub fn CFRunLoopCopyAllModes(rl: CFRunLoopRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopAddCommonMode`.
+    /// Apple SDK function `CFRunLoopAddCommonMode`.
     pub fn CFRunLoopAddCommonMode(rl: CFRunLoopRef, mode: CFRunLoopMode);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopGetNextTimerFireDate`.
+    /// Apple SDK function `CFRunLoopGetNextTimerFireDate`.
     pub fn CFRunLoopGetNextTimerFireDate(rl: CFRunLoopRef, mode: CFRunLoopMode) -> CFAbsoluteTime;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopRun`.
+    /// Apple SDK function `CFRunLoopRun`.
     pub fn CFRunLoopRun();
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopRunInMode`.
+    /// Apple SDK function `CFRunLoopRunInMode`.
     pub fn CFRunLoopRunInMode(
         mode: CFRunLoopMode,
         seconds: CFTimeInterval,
@@ -5435,19 +5435,19 @@ extern "C" {
     ) -> CFRunLoopRunResult;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopIsWaiting`.
+    /// Apple SDK function `CFRunLoopIsWaiting`.
     pub fn CFRunLoopIsWaiting(rl: CFRunLoopRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopWakeUp`.
+    /// Apple SDK function `CFRunLoopWakeUp`.
     pub fn CFRunLoopWakeUp(rl: CFRunLoopRef);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopStop`.
+    /// Apple SDK function `CFRunLoopStop`.
     pub fn CFRunLoopStop(rl: CFRunLoopRef);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopPerformBlock`.
+    /// Apple SDK function `CFRunLoopPerformBlock`.
     pub fn CFRunLoopPerformBlock(
         rl: CFRunLoopRef,
         mode: CFTypeRef,
@@ -5455,7 +5455,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopContainsSource`.
+    /// Apple SDK function `CFRunLoopContainsSource`.
     pub fn CFRunLoopContainsSource(
         rl: CFRunLoopRef,
         source: CFRunLoopSourceRef,
@@ -5463,15 +5463,15 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopAddSource`.
+    /// Apple SDK function `CFRunLoopAddSource`.
     pub fn CFRunLoopAddSource(rl: CFRunLoopRef, source: CFRunLoopSourceRef, mode: CFRunLoopMode);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopRemoveSource`.
+    /// Apple SDK function `CFRunLoopRemoveSource`.
     pub fn CFRunLoopRemoveSource(rl: CFRunLoopRef, source: CFRunLoopSourceRef, mode: CFRunLoopMode);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopContainsObserver`.
+    /// Apple SDK function `CFRunLoopContainsObserver`.
     pub fn CFRunLoopContainsObserver(
         rl: CFRunLoopRef,
         observer: CFRunLoopObserverRef,
@@ -5479,7 +5479,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopAddObserver`.
+    /// Apple SDK function `CFRunLoopAddObserver`.
     pub fn CFRunLoopAddObserver(
         rl: CFRunLoopRef,
         observer: CFRunLoopObserverRef,
@@ -5487,7 +5487,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopRemoveObserver`.
+    /// Apple SDK function `CFRunLoopRemoveObserver`.
     pub fn CFRunLoopRemoveObserver(
         rl: CFRunLoopRef,
         observer: CFRunLoopObserverRef,
@@ -5495,7 +5495,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopContainsTimer`.
+    /// Apple SDK function `CFRunLoopContainsTimer`.
     pub fn CFRunLoopContainsTimer(
         rl: CFRunLoopRef,
         timer: CFRunLoopTimerRef,
@@ -5503,11 +5503,11 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopAddTimer`.
+    /// Apple SDK function `CFRunLoopAddTimer`.
     pub fn CFRunLoopAddTimer(rl: CFRunLoopRef, timer: CFRunLoopTimerRef, mode: CFRunLoopMode);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopRemoveTimer`.
+    /// Apple SDK function `CFRunLoopRemoveTimer`.
     pub fn CFRunLoopRemoveTimer(rl: CFRunLoopRef, timer: CFRunLoopTimerRef, mode: CFRunLoopMode);
 }
 #[repr(C)]
@@ -5574,11 +5574,11 @@ pub struct CFRunLoopSourceContext1 {
     >,
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopSourceGetTypeID`.
+    /// Apple SDK function `CFRunLoopSourceGetTypeID`.
     pub fn CFRunLoopSourceGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopSourceCreate`.
+    /// Apple SDK function `CFRunLoopSourceCreate`.
     pub fn CFRunLoopSourceCreate(
         allocator: CFAllocatorRef,
         order: CFIndex,
@@ -5586,26 +5586,26 @@ extern "C" {
     ) -> CFRunLoopSourceRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopSourceGetOrder`.
+    /// Apple SDK function `CFRunLoopSourceGetOrder`.
     pub fn CFRunLoopSourceGetOrder(source: CFRunLoopSourceRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopSourceInvalidate`.
+    /// Apple SDK function `CFRunLoopSourceInvalidate`.
     pub fn CFRunLoopSourceInvalidate(source: CFRunLoopSourceRef);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopSourceIsValid`.
+    /// Apple SDK function `CFRunLoopSourceIsValid`.
     pub fn CFRunLoopSourceIsValid(source: CFRunLoopSourceRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopSourceGetContext`.
+    /// Apple SDK function `CFRunLoopSourceGetContext`.
     pub fn CFRunLoopSourceGetContext(
         source: CFRunLoopSourceRef,
         context: *mut CFRunLoopSourceContext,
     );
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopSourceSignal`.
+    /// Apple SDK function `CFRunLoopSourceSignal`.
     pub fn CFRunLoopSourceSignal(source: CFRunLoopSourceRef);
 }
 #[repr(C)]
@@ -5631,11 +5631,11 @@ pub type CFRunLoopObserverCallBack = ::core::option::Option<
     ),
 >;
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverGetTypeID`.
+    /// Apple SDK function `CFRunLoopObserverGetTypeID`.
     pub fn CFRunLoopObserverGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverCreate`.
+    /// Apple SDK function `CFRunLoopObserverCreate`.
     pub fn CFRunLoopObserverCreate(
         allocator: CFAllocatorRef,
         activities: CFOptionFlags,
@@ -5646,7 +5646,7 @@ extern "C" {
     ) -> CFRunLoopObserverRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverCreateWithHandler`.
+    /// Apple SDK function `CFRunLoopObserverCreateWithHandler`.
     pub fn CFRunLoopObserverCreateWithHandler(
         allocator: CFAllocatorRef,
         activities: CFOptionFlags,
@@ -5656,27 +5656,27 @@ extern "C" {
     ) -> CFRunLoopObserverRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverGetActivities`.
+    /// Apple SDK function `CFRunLoopObserverGetActivities`.
     pub fn CFRunLoopObserverGetActivities(observer: CFRunLoopObserverRef) -> CFOptionFlags;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverDoesRepeat`.
+    /// Apple SDK function `CFRunLoopObserverDoesRepeat`.
     pub fn CFRunLoopObserverDoesRepeat(observer: CFRunLoopObserverRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverGetOrder`.
+    /// Apple SDK function `CFRunLoopObserverGetOrder`.
     pub fn CFRunLoopObserverGetOrder(observer: CFRunLoopObserverRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverInvalidate`.
+    /// Apple SDK function `CFRunLoopObserverInvalidate`.
     pub fn CFRunLoopObserverInvalidate(observer: CFRunLoopObserverRef);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverIsValid`.
+    /// Apple SDK function `CFRunLoopObserverIsValid`.
     pub fn CFRunLoopObserverIsValid(observer: CFRunLoopObserverRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopObserverGetContext`.
+    /// Apple SDK function `CFRunLoopObserverGetContext`.
     pub fn CFRunLoopObserverGetContext(
         observer: CFRunLoopObserverRef,
         context: *mut CFRunLoopObserverContext,
@@ -5701,11 +5701,11 @@ pub type CFRunLoopTimerCallBack = ::core::option::Option<
     unsafe extern "C" fn(timer: CFRunLoopTimerRef, info: *mut ::core::ffi::c_void),
 >;
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerGetTypeID`.
+    /// Apple SDK function `CFRunLoopTimerGetTypeID`.
     pub fn CFRunLoopTimerGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerCreate`.
+    /// Apple SDK function `CFRunLoopTimerCreate`.
     pub fn CFRunLoopTimerCreate(
         allocator: CFAllocatorRef,
         fireDate: CFAbsoluteTime,
@@ -5717,7 +5717,7 @@ extern "C" {
     ) -> CFRunLoopTimerRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerCreateWithHandler`.
+    /// Apple SDK function `CFRunLoopTimerCreateWithHandler`.
     pub fn CFRunLoopTimerCreateWithHandler(
         allocator: CFAllocatorRef,
         fireDate: CFAbsoluteTime,
@@ -5728,43 +5728,43 @@ extern "C" {
     ) -> CFRunLoopTimerRef;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerGetNextFireDate`.
+    /// Apple SDK function `CFRunLoopTimerGetNextFireDate`.
     pub fn CFRunLoopTimerGetNextFireDate(timer: CFRunLoopTimerRef) -> CFAbsoluteTime;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerSetNextFireDate`.
+    /// Apple SDK function `CFRunLoopTimerSetNextFireDate`.
     pub fn CFRunLoopTimerSetNextFireDate(timer: CFRunLoopTimerRef, fireDate: CFAbsoluteTime);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerGetInterval`.
+    /// Apple SDK function `CFRunLoopTimerGetInterval`.
     pub fn CFRunLoopTimerGetInterval(timer: CFRunLoopTimerRef) -> CFTimeInterval;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerDoesRepeat`.
+    /// Apple SDK function `CFRunLoopTimerDoesRepeat`.
     pub fn CFRunLoopTimerDoesRepeat(timer: CFRunLoopTimerRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerGetOrder`.
+    /// Apple SDK function `CFRunLoopTimerGetOrder`.
     pub fn CFRunLoopTimerGetOrder(timer: CFRunLoopTimerRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerInvalidate`.
+    /// Apple SDK function `CFRunLoopTimerInvalidate`.
     pub fn CFRunLoopTimerInvalidate(timer: CFRunLoopTimerRef);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerIsValid`.
+    /// Apple SDK function `CFRunLoopTimerIsValid`.
     pub fn CFRunLoopTimerIsValid(timer: CFRunLoopTimerRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerGetContext`.
+    /// Apple SDK function `CFRunLoopTimerGetContext`.
     pub fn CFRunLoopTimerGetContext(timer: CFRunLoopTimerRef, context: *mut CFRunLoopTimerContext);
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerGetTolerance`.
+    /// Apple SDK function `CFRunLoopTimerGetTolerance`.
     pub fn CFRunLoopTimerGetTolerance(timer: CFRunLoopTimerRef) -> CFTimeInterval;
 }
 extern "C" {
-/// Apple SDK function `CFRunLoopTimerSetTolerance`.
+    /// Apple SDK function `CFRunLoopTimerSetTolerance`.
     pub fn CFRunLoopTimerSetTolerance(timer: CFRunLoopTimerRef, tolerance: CFTimeInterval);
 }
 #[repr(C)]
@@ -5851,11 +5851,11 @@ pub struct CFSocketContext {
 /// Apple SDK type alias `CFSocketNativeHandle`.
 pub type CFSocketNativeHandle = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK function `CFSocketGetTypeID`.
+    /// Apple SDK function `CFSocketGetTypeID`.
     pub fn CFSocketGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCreate`.
+    /// Apple SDK function `CFSocketCreate`.
     pub fn CFSocketCreate(
         allocator: CFAllocatorRef,
         protocolFamily: SInt32,
@@ -5867,7 +5867,7 @@ extern "C" {
     ) -> CFSocketRef;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCreateWithNative`.
+    /// Apple SDK function `CFSocketCreateWithNative`.
     pub fn CFSocketCreateWithNative(
         allocator: CFAllocatorRef,
         sock: CFSocketNativeHandle,
@@ -5877,7 +5877,7 @@ extern "C" {
     ) -> CFSocketRef;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCreateWithSocketSignature`.
+    /// Apple SDK function `CFSocketCreateWithSocketSignature`.
     pub fn CFSocketCreateWithSocketSignature(
         allocator: CFAllocatorRef,
         signature: *const CFSocketSignature,
@@ -5887,7 +5887,7 @@ extern "C" {
     ) -> CFSocketRef;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCreateConnectedToSocketSignature`.
+    /// Apple SDK function `CFSocketCreateConnectedToSocketSignature`.
     pub fn CFSocketCreateConnectedToSocketSignature(
         allocator: CFAllocatorRef,
         signature: *const CFSocketSignature,
@@ -5898,11 +5898,11 @@ extern "C" {
     ) -> CFSocketRef;
 }
 extern "C" {
-/// Apple SDK function `CFSocketSetAddress`.
+    /// Apple SDK function `CFSocketSetAddress`.
     pub fn CFSocketSetAddress(s: CFSocketRef, address: CFDataRef) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketConnectToAddress`.
+    /// Apple SDK function `CFSocketConnectToAddress`.
     pub fn CFSocketConnectToAddress(
         s: CFSocketRef,
         address: CFDataRef,
@@ -5910,31 +5910,31 @@ extern "C" {
     ) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketInvalidate`.
+    /// Apple SDK function `CFSocketInvalidate`.
     pub fn CFSocketInvalidate(s: CFSocketRef);
 }
 extern "C" {
-/// Apple SDK function `CFSocketIsValid`.
+    /// Apple SDK function `CFSocketIsValid`.
     pub fn CFSocketIsValid(s: CFSocketRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCopyAddress`.
+    /// Apple SDK function `CFSocketCopyAddress`.
     pub fn CFSocketCopyAddress(s: CFSocketRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCopyPeerAddress`.
+    /// Apple SDK function `CFSocketCopyPeerAddress`.
     pub fn CFSocketCopyPeerAddress(s: CFSocketRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFSocketGetContext`.
+    /// Apple SDK function `CFSocketGetContext`.
     pub fn CFSocketGetContext(s: CFSocketRef, context: *mut CFSocketContext);
 }
 extern "C" {
-/// Apple SDK function `CFSocketGetNative`.
+    /// Apple SDK function `CFSocketGetNative`.
     pub fn CFSocketGetNative(s: CFSocketRef) -> CFSocketNativeHandle;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCreateRunLoopSource`.
+    /// Apple SDK function `CFSocketCreateRunLoopSource`.
     pub fn CFSocketCreateRunLoopSource(
         allocator: CFAllocatorRef,
         s: CFSocketRef,
@@ -5942,23 +5942,23 @@ extern "C" {
     ) -> CFRunLoopSourceRef;
 }
 extern "C" {
-/// Apple SDK function `CFSocketGetSocketFlags`.
+    /// Apple SDK function `CFSocketGetSocketFlags`.
     pub fn CFSocketGetSocketFlags(s: CFSocketRef) -> CFOptionFlags;
 }
 extern "C" {
-/// Apple SDK function `CFSocketSetSocketFlags`.
+    /// Apple SDK function `CFSocketSetSocketFlags`.
     pub fn CFSocketSetSocketFlags(s: CFSocketRef, flags: CFOptionFlags);
 }
 extern "C" {
-/// Apple SDK function `CFSocketDisableCallBacks`.
+    /// Apple SDK function `CFSocketDisableCallBacks`.
     pub fn CFSocketDisableCallBacks(s: CFSocketRef, callBackTypes: CFOptionFlags);
 }
 extern "C" {
-/// Apple SDK function `CFSocketEnableCallBacks`.
+    /// Apple SDK function `CFSocketEnableCallBacks`.
     pub fn CFSocketEnableCallBacks(s: CFSocketRef, callBackTypes: CFOptionFlags);
 }
 extern "C" {
-/// Apple SDK function `CFSocketSendData`.
+    /// Apple SDK function `CFSocketSendData`.
     pub fn CFSocketSendData(
         s: CFSocketRef,
         address: CFDataRef,
@@ -5967,7 +5967,7 @@ extern "C" {
     ) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketRegisterValue`.
+    /// Apple SDK function `CFSocketRegisterValue`.
     pub fn CFSocketRegisterValue(
         nameServerSignature: *const CFSocketSignature,
         timeout: CFTimeInterval,
@@ -5976,7 +5976,7 @@ extern "C" {
     ) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCopyRegisteredValue`.
+    /// Apple SDK function `CFSocketCopyRegisteredValue`.
     pub fn CFSocketCopyRegisteredValue(
         nameServerSignature: *const CFSocketSignature,
         timeout: CFTimeInterval,
@@ -5986,7 +5986,7 @@ extern "C" {
     ) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketRegisterSocketSignature`.
+    /// Apple SDK function `CFSocketRegisterSocketSignature`.
     pub fn CFSocketRegisterSocketSignature(
         nameServerSignature: *const CFSocketSignature,
         timeout: CFTimeInterval,
@@ -5995,7 +5995,7 @@ extern "C" {
     ) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketCopyRegisteredSocketSignature`.
+    /// Apple SDK function `CFSocketCopyRegisteredSocketSignature`.
     pub fn CFSocketCopyRegisteredSocketSignature(
         nameServerSignature: *const CFSocketSignature,
         timeout: CFTimeInterval,
@@ -6005,7 +6005,7 @@ extern "C" {
     ) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketUnregister`.
+    /// Apple SDK function `CFSocketUnregister`.
     pub fn CFSocketUnregister(
         nameServerSignature: *const CFSocketSignature,
         timeout: CFTimeInterval,
@@ -6013,39 +6013,39 @@ extern "C" {
     ) -> CFSocketError;
 }
 extern "C" {
-/// Apple SDK function `CFSocketSetDefaultNameRegistryPortNumber`.
+    /// Apple SDK function `CFSocketSetDefaultNameRegistryPortNumber`.
     pub fn CFSocketSetDefaultNameRegistryPortNumber(port: UInt16);
 }
 extern "C" {
-/// Apple SDK function `CFSocketGetDefaultNameRegistryPortNumber`.
+    /// Apple SDK function `CFSocketGetDefaultNameRegistryPortNumber`.
     pub fn CFSocketGetDefaultNameRegistryPortNumber() -> UInt16;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSocketCommandKey`.
+    /// Apple SDK exported static `kCFSocketCommandKey`.
     pub static kCFSocketCommandKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSocketNameKey`.
+    /// Apple SDK exported static `kCFSocketNameKey`.
     pub static kCFSocketNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSocketValueKey`.
+    /// Apple SDK exported static `kCFSocketValueKey`.
     pub static kCFSocketValueKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSocketResultKey`.
+    /// Apple SDK exported static `kCFSocketResultKey`.
     pub static kCFSocketResultKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSocketErrorKey`.
+    /// Apple SDK exported static `kCFSocketErrorKey`.
     pub static kCFSocketErrorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSocketRegisterCommand`.
+    /// Apple SDK exported static `kCFSocketRegisterCommand`.
     pub static kCFSocketRegisterCommand: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSocketRetrieveCommand`.
+    /// Apple SDK exported static `kCFSocketRetrieveCommand`.
     pub static kCFSocketRetrieveCommand: CFStringRef;
 }
 #[repr(C)]
@@ -6066,11 +6066,11 @@ pub const DISPATCH_WALLTIME_NOW: _bindgen_ty_1801 = 18446744073709551614;
 /// Apple SDK type alias `_bindgen_ty_1801`.
 pub type _bindgen_ty_1801 = ::core::ffi::c_ulong;
 extern "C" {
-/// Apple SDK function `dispatch_time`.
+    /// Apple SDK function `dispatch_time`.
     pub fn dispatch_time(when: dispatch_time_t, delta: i64) -> dispatch_time_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_walltime`.
+    /// Apple SDK function `dispatch_walltime`.
     pub fn dispatch_walltime(when: *const timespec, delta: i64) -> dispatch_time_t;
 }
 /// Apple SDK type alias `qos_class_t`.
@@ -6096,39 +6096,39 @@ pub type dispatch_block_t = *mut ::core::ffi::c_void;
 /// Apple SDK type alias `dispatch_qos_class_t`.
 pub type dispatch_qos_class_t = qos_class_t;
 extern "C" {
-/// Apple SDK function `dispatch_retain`.
+    /// Apple SDK function `dispatch_retain`.
     pub fn dispatch_retain(object: dispatch_object_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_release`.
+    /// Apple SDK function `dispatch_release`.
     pub fn dispatch_release(object: dispatch_object_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_get_context`.
+    /// Apple SDK function `dispatch_get_context`.
     pub fn dispatch_get_context(object: dispatch_object_t) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `dispatch_set_context`.
+    /// Apple SDK function `dispatch_set_context`.
     pub fn dispatch_set_context(object: dispatch_object_t, context: *mut ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `dispatch_set_finalizer_f`.
+    /// Apple SDK function `dispatch_set_finalizer_f`.
     pub fn dispatch_set_finalizer_f(object: dispatch_object_t, finalizer: dispatch_function_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_activate`.
+    /// Apple SDK function `dispatch_activate`.
     pub fn dispatch_activate(object: dispatch_object_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_suspend`.
+    /// Apple SDK function `dispatch_suspend`.
     pub fn dispatch_suspend(object: dispatch_object_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_resume`.
+    /// Apple SDK function `dispatch_resume`.
     pub fn dispatch_resume(object: dispatch_object_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_set_qos_class_floor`.
+    /// Apple SDK function `dispatch_set_qos_class_floor`.
     pub fn dispatch_set_qos_class_floor(
         object: dispatch_object_t,
         qos_class: dispatch_qos_class_t,
@@ -6136,11 +6136,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_wait`.
+    /// Apple SDK function `dispatch_wait`.
     pub fn dispatch_wait(object: *mut ::core::ffi::c_void, timeout: dispatch_time_t) -> isize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_notify`.
+    /// Apple SDK function `dispatch_notify`.
     pub fn dispatch_notify(
         object: *mut ::core::ffi::c_void,
         queue: dispatch_object_t,
@@ -6148,19 +6148,19 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_cancel`.
+    /// Apple SDK function `dispatch_cancel`.
     pub fn dispatch_cancel(object: *mut ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `dispatch_testcancel`.
+    /// Apple SDK function `dispatch_testcancel`.
     pub fn dispatch_testcancel(object: *mut ::core::ffi::c_void) -> isize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_debug`.
+    /// Apple SDK function `dispatch_debug`.
     pub fn dispatch_debug(object: dispatch_object_t, message: *const ::core::ffi::c_char, ...);
 }
 extern "C" {
-/// Apple SDK function `dispatch_debugv`.
+    /// Apple SDK function `dispatch_debugv`.
     pub fn dispatch_debugv(
         object: dispatch_object_t,
         message: *const ::core::ffi::c_char,
@@ -6180,11 +6180,11 @@ pub type dispatch_queue_main_t = dispatch_queue_serial_t;
 /// Apple SDK type alias `dispatch_queue_concurrent_t`.
 pub type dispatch_queue_concurrent_t = dispatch_queue_t;
 extern "C" {
-/// Apple SDK function `dispatch_async`.
+    /// Apple SDK function `dispatch_async`.
     pub fn dispatch_async(queue: dispatch_queue_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_async_f`.
+    /// Apple SDK function `dispatch_async_f`.
     pub fn dispatch_async_f(
         queue: dispatch_queue_t,
         context: *mut ::core::ffi::c_void,
@@ -6192,11 +6192,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_sync`.
+    /// Apple SDK function `dispatch_sync`.
     pub fn dispatch_sync(queue: dispatch_queue_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_sync_f`.
+    /// Apple SDK function `dispatch_sync_f`.
     pub fn dispatch_sync_f(
         queue: dispatch_queue_t,
         context: *mut ::core::ffi::c_void,
@@ -6204,11 +6204,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_async_and_wait`.
+    /// Apple SDK function `dispatch_async_and_wait`.
     pub fn dispatch_async_and_wait(queue: dispatch_queue_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_async_and_wait_f`.
+    /// Apple SDK function `dispatch_async_and_wait_f`.
     pub fn dispatch_async_and_wait_f(
         queue: dispatch_queue_t,
         context: *mut ::core::ffi::c_void,
@@ -6216,7 +6216,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_apply`.
+    /// Apple SDK function `dispatch_apply`.
     pub fn dispatch_apply(
         iterations: usize,
         queue: dispatch_queue_t,
@@ -6224,7 +6224,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_apply_f`.
+    /// Apple SDK function `dispatch_apply_f`.
     pub fn dispatch_apply_f(
         iterations: usize,
         queue: dispatch_queue_t,
@@ -6235,7 +6235,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_get_current_queue`.
+    /// Apple SDK function `dispatch_get_current_queue`.
     pub fn dispatch_get_current_queue() -> dispatch_queue_t;
 }
 #[repr(C)]
@@ -6245,13 +6245,13 @@ pub struct dispatch_queue_s {
     pub _address: u8,
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_main_q`.
+    /// Apple SDK exported static `_dispatch_main_q`.
     pub static mut _dispatch_main_q: dispatch_queue_s;
 }
 /// Apple SDK type alias `dispatch_queue_priority_t`.
 pub type dispatch_queue_priority_t = ::core::ffi::c_long;
 extern "C" {
-/// Apple SDK function `dispatch_get_global_queue`.
+    /// Apple SDK function `dispatch_get_global_queue`.
     pub fn dispatch_get_global_queue(identifier: isize, flags: usize) -> dispatch_queue_global_t;
 }
 /// Apple SDK type alias `dispatch_queue_attr_t`.
@@ -6263,11 +6263,11 @@ pub struct dispatch_queue_attr_s {
     pub _address: u8,
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_queue_attr_concurrent`.
+    /// Apple SDK exported static `_dispatch_queue_attr_concurrent`.
     pub static mut _dispatch_queue_attr_concurrent: dispatch_queue_attr_s;
 }
 extern "C" {
-/// Apple SDK function `dispatch_queue_attr_make_initially_inactive`.
+    /// Apple SDK function `dispatch_queue_attr_make_initially_inactive`.
     pub fn dispatch_queue_attr_make_initially_inactive(
         attr: dispatch_queue_attr_t,
     ) -> dispatch_queue_attr_t;
@@ -6284,14 +6284,14 @@ pub const dispatch_autorelease_frequency_t_DISPATCH_AUTORELEASE_FREQUENCY_NEVER:
 /// Apple SDK type alias `dispatch_autorelease_frequency_t`.
 pub type dispatch_autorelease_frequency_t = ::core::ffi::c_ulong;
 extern "C" {
-/// Apple SDK function `dispatch_queue_attr_make_with_autorelease_frequency`.
+    /// Apple SDK function `dispatch_queue_attr_make_with_autorelease_frequency`.
     pub fn dispatch_queue_attr_make_with_autorelease_frequency(
         attr: dispatch_queue_attr_t,
         frequency: dispatch_autorelease_frequency_t,
     ) -> dispatch_queue_attr_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_queue_attr_make_with_qos_class`.
+    /// Apple SDK function `dispatch_queue_attr_make_with_qos_class`.
     pub fn dispatch_queue_attr_make_with_qos_class(
         attr: dispatch_queue_attr_t,
         qos_class: dispatch_qos_class_t,
@@ -6300,7 +6300,7 @@ extern "C" {
 }
 extern "C" {
     #[link_name = "\u{1}_dispatch_queue_create_with_target$V2"]
-/// Apple SDK function `dispatch_queue_create_with_target`.
+    /// Apple SDK function `dispatch_queue_create_with_target`.
     pub fn dispatch_queue_create_with_target(
         label: *const ::core::ffi::c_char,
         attr: dispatch_queue_attr_t,
@@ -6308,37 +6308,37 @@ extern "C" {
     ) -> dispatch_queue_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_queue_create`.
+    /// Apple SDK function `dispatch_queue_create`.
     pub fn dispatch_queue_create(
         label: *const ::core::ffi::c_char,
         attr: dispatch_queue_attr_t,
     ) -> dispatch_queue_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_queue_get_label`.
+    /// Apple SDK function `dispatch_queue_get_label`.
     pub fn dispatch_queue_get_label(queue: dispatch_queue_t) -> *const ::core::ffi::c_char;
 }
 extern "C" {
-/// Apple SDK function `dispatch_queue_get_qos_class`.
+    /// Apple SDK function `dispatch_queue_get_qos_class`.
     pub fn dispatch_queue_get_qos_class(
         queue: dispatch_queue_t,
         relative_priority_ptr: *mut ::core::ffi::c_int,
     ) -> dispatch_qos_class_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_set_target_queue`.
+    /// Apple SDK function `dispatch_set_target_queue`.
     pub fn dispatch_set_target_queue(object: dispatch_object_t, queue: dispatch_queue_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_main`.
+    /// Apple SDK function `dispatch_main`.
     pub fn dispatch_main() -> !;
 }
 extern "C" {
-/// Apple SDK function `dispatch_after`.
+    /// Apple SDK function `dispatch_after`.
     pub fn dispatch_after(when: dispatch_time_t, queue: dispatch_queue_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_after_f`.
+    /// Apple SDK function `dispatch_after_f`.
     pub fn dispatch_after_f(
         when: dispatch_time_t,
         queue: dispatch_queue_t,
@@ -6347,11 +6347,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_barrier_async`.
+    /// Apple SDK function `dispatch_barrier_async`.
     pub fn dispatch_barrier_async(queue: dispatch_queue_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_barrier_async_f`.
+    /// Apple SDK function `dispatch_barrier_async_f`.
     pub fn dispatch_barrier_async_f(
         queue: dispatch_queue_t,
         context: *mut ::core::ffi::c_void,
@@ -6359,11 +6359,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_barrier_sync`.
+    /// Apple SDK function `dispatch_barrier_sync`.
     pub fn dispatch_barrier_sync(queue: dispatch_queue_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_barrier_sync_f`.
+    /// Apple SDK function `dispatch_barrier_sync_f`.
     pub fn dispatch_barrier_sync_f(
         queue: dispatch_queue_t,
         context: *mut ::core::ffi::c_void,
@@ -6371,11 +6371,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_barrier_async_and_wait`.
+    /// Apple SDK function `dispatch_barrier_async_and_wait`.
     pub fn dispatch_barrier_async_and_wait(queue: dispatch_queue_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_barrier_async_and_wait_f`.
+    /// Apple SDK function `dispatch_barrier_async_and_wait_f`.
     pub fn dispatch_barrier_async_and_wait_f(
         queue: dispatch_queue_t,
         context: *mut ::core::ffi::c_void,
@@ -6383,7 +6383,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_queue_set_specific`.
+    /// Apple SDK function `dispatch_queue_set_specific`.
     pub fn dispatch_queue_set_specific(
         queue: dispatch_queue_t,
         key: *const ::core::ffi::c_void,
@@ -6392,32 +6392,32 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_queue_get_specific`.
+    /// Apple SDK function `dispatch_queue_get_specific`.
     pub fn dispatch_queue_get_specific(
         queue: dispatch_queue_t,
         key: *const ::core::ffi::c_void,
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `dispatch_get_specific`.
+    /// Apple SDK function `dispatch_get_specific`.
     pub fn dispatch_get_specific(key: *const ::core::ffi::c_void) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
     #[link_name = "\u{1}_dispatch_assert_queue$V2"]
-/// Apple SDK function `dispatch_assert_queue`.
+    /// Apple SDK function `dispatch_assert_queue`.
     pub fn dispatch_assert_queue(queue: dispatch_queue_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_assert_queue_barrier`.
+    /// Apple SDK function `dispatch_assert_queue_barrier`.
     pub fn dispatch_assert_queue_barrier(queue: dispatch_queue_t);
 }
 extern "C" {
     #[link_name = "\u{1}_dispatch_assert_queue_not$V2"]
-/// Apple SDK function `dispatch_assert_queue_not`.
+    /// Apple SDK function `dispatch_assert_queue_not`.
     pub fn dispatch_assert_queue_not(queue: dispatch_queue_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_allow_send_signals`.
+    /// Apple SDK function `dispatch_allow_send_signals`.
     pub fn dispatch_allow_send_signals(preserve_signum: ::core::ffi::c_int) -> ::core::ffi::c_int;
 }
 /// Apple SDK constant `dispatch_block_flags_t_DISPATCH_BLOCK_BARRIER`.
@@ -6435,14 +6435,14 @@ pub const dispatch_block_flags_t_DISPATCH_BLOCK_ENFORCE_QOS_CLASS: dispatch_bloc
 /// Apple SDK type alias `dispatch_block_flags_t`.
 pub type dispatch_block_flags_t = ::core::ffi::c_ulong;
 extern "C" {
-/// Apple SDK function `dispatch_block_create`.
+    /// Apple SDK function `dispatch_block_create`.
     pub fn dispatch_block_create(
         flags: dispatch_block_flags_t,
         block: dispatch_block_t,
     ) -> dispatch_block_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_block_create_with_qos_class`.
+    /// Apple SDK function `dispatch_block_create_with_qos_class`.
     pub fn dispatch_block_create_with_qos_class(
         flags: dispatch_block_flags_t,
         qos_class: dispatch_qos_class_t,
@@ -6451,15 +6451,15 @@ extern "C" {
     ) -> dispatch_block_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_block_perform`.
+    /// Apple SDK function `dispatch_block_perform`.
     pub fn dispatch_block_perform(flags: dispatch_block_flags_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_block_wait`.
+    /// Apple SDK function `dispatch_block_wait`.
     pub fn dispatch_block_wait(block: dispatch_block_t, timeout: dispatch_time_t) -> isize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_block_notify`.
+    /// Apple SDK function `dispatch_block_notify`.
     pub fn dispatch_block_notify(
         block: dispatch_block_t,
         queue: dispatch_queue_t,
@@ -6467,11 +6467,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_block_cancel`.
+    /// Apple SDK function `dispatch_block_cancel`.
     pub fn dispatch_block_cancel(block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_block_testcancel`.
+    /// Apple SDK function `dispatch_block_testcancel`.
     pub fn dispatch_block_testcancel(block: dispatch_block_t) -> isize;
 }
 /// Apple SDK type alias `kern_return_t`.
@@ -6487,51 +6487,51 @@ pub struct dispatch_source_type_s {
 /// Apple SDK type alias `dispatch_source_type_t`.
 pub type dispatch_source_type_t = *const dispatch_source_type_s;
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_data_add`.
+    /// Apple SDK exported static `_dispatch_source_type_data_add`.
     pub static _dispatch_source_type_data_add: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_data_or`.
+    /// Apple SDK exported static `_dispatch_source_type_data_or`.
     pub static _dispatch_source_type_data_or: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_data_replace`.
+    /// Apple SDK exported static `_dispatch_source_type_data_replace`.
     pub static _dispatch_source_type_data_replace: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_mach_send`.
+    /// Apple SDK exported static `_dispatch_source_type_mach_send`.
     pub static _dispatch_source_type_mach_send: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_mach_recv`.
+    /// Apple SDK exported static `_dispatch_source_type_mach_recv`.
     pub static _dispatch_source_type_mach_recv: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_memorypressure`.
+    /// Apple SDK exported static `_dispatch_source_type_memorypressure`.
     pub static _dispatch_source_type_memorypressure: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_proc`.
+    /// Apple SDK exported static `_dispatch_source_type_proc`.
     pub static _dispatch_source_type_proc: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_read`.
+    /// Apple SDK exported static `_dispatch_source_type_read`.
     pub static _dispatch_source_type_read: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_signal`.
+    /// Apple SDK exported static `_dispatch_source_type_signal`.
     pub static _dispatch_source_type_signal: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_timer`.
+    /// Apple SDK exported static `_dispatch_source_type_timer`.
     pub static _dispatch_source_type_timer: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_vnode`.
+    /// Apple SDK exported static `_dispatch_source_type_vnode`.
     pub static _dispatch_source_type_vnode: dispatch_source_type_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_source_type_write`.
+    /// Apple SDK exported static `_dispatch_source_type_write`.
     pub static _dispatch_source_type_write: dispatch_source_type_s;
 }
 /// Apple SDK type alias `dispatch_source_mach_send_flags_t`.
@@ -6547,7 +6547,7 @@ pub type dispatch_source_vnode_flags_t = ::core::ffi::c_ulong;
 /// Apple SDK type alias `dispatch_source_timer_flags_t`.
 pub type dispatch_source_timer_flags_t = ::core::ffi::c_ulong;
 extern "C" {
-/// Apple SDK function `dispatch_source_create`.
+    /// Apple SDK function `dispatch_source_create`.
     pub fn dispatch_source_create(
         type_: dispatch_source_type_t,
         handle: usize,
@@ -6556,53 +6556,53 @@ extern "C" {
     ) -> dispatch_source_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_set_event_handler`.
+    /// Apple SDK function `dispatch_source_set_event_handler`.
     pub fn dispatch_source_set_event_handler(source: dispatch_source_t, handler: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_set_event_handler_f`.
+    /// Apple SDK function `dispatch_source_set_event_handler_f`.
     pub fn dispatch_source_set_event_handler_f(
         source: dispatch_source_t,
         handler: dispatch_function_t,
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_set_cancel_handler`.
+    /// Apple SDK function `dispatch_source_set_cancel_handler`.
     pub fn dispatch_source_set_cancel_handler(source: dispatch_source_t, handler: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_set_cancel_handler_f`.
+    /// Apple SDK function `dispatch_source_set_cancel_handler_f`.
     pub fn dispatch_source_set_cancel_handler_f(
         source: dispatch_source_t,
         handler: dispatch_function_t,
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_cancel`.
+    /// Apple SDK function `dispatch_source_cancel`.
     pub fn dispatch_source_cancel(source: dispatch_source_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_testcancel`.
+    /// Apple SDK function `dispatch_source_testcancel`.
     pub fn dispatch_source_testcancel(source: dispatch_source_t) -> isize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_get_handle`.
+    /// Apple SDK function `dispatch_source_get_handle`.
     pub fn dispatch_source_get_handle(source: dispatch_source_t) -> usize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_get_mask`.
+    /// Apple SDK function `dispatch_source_get_mask`.
     pub fn dispatch_source_get_mask(source: dispatch_source_t) -> usize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_get_data`.
+    /// Apple SDK function `dispatch_source_get_data`.
     pub fn dispatch_source_get_data(source: dispatch_source_t) -> usize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_merge_data`.
+    /// Apple SDK function `dispatch_source_merge_data`.
     pub fn dispatch_source_merge_data(source: dispatch_source_t, value: usize);
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_set_timer`.
+    /// Apple SDK function `dispatch_source_set_timer`.
     pub fn dispatch_source_set_timer(
         source: dispatch_source_t,
         start: dispatch_time_t,
@@ -6611,14 +6611,14 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_set_registration_handler`.
+    /// Apple SDK function `dispatch_source_set_registration_handler`.
     pub fn dispatch_source_set_registration_handler(
         source: dispatch_source_t,
         handler: dispatch_block_t,
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_source_set_registration_handler_f`.
+    /// Apple SDK function `dispatch_source_set_registration_handler_f`.
     pub fn dispatch_source_set_registration_handler_f(
         source: dispatch_source_t,
         handler: dispatch_function_t,
@@ -6627,11 +6627,11 @@ extern "C" {
 /// Apple SDK type alias `dispatch_group_t`.
 pub type dispatch_group_t = *mut dispatch_group_s;
 extern "C" {
-/// Apple SDK function `dispatch_group_create`.
+    /// Apple SDK function `dispatch_group_create`.
     pub fn dispatch_group_create() -> dispatch_group_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_group_async`.
+    /// Apple SDK function `dispatch_group_async`.
     pub fn dispatch_group_async(
         group: dispatch_group_t,
         queue: dispatch_queue_t,
@@ -6639,7 +6639,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_group_async_f`.
+    /// Apple SDK function `dispatch_group_async_f`.
     pub fn dispatch_group_async_f(
         group: dispatch_group_t,
         queue: dispatch_queue_t,
@@ -6648,11 +6648,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_group_wait`.
+    /// Apple SDK function `dispatch_group_wait`.
     pub fn dispatch_group_wait(group: dispatch_group_t, timeout: dispatch_time_t) -> isize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_group_notify`.
+    /// Apple SDK function `dispatch_group_notify`.
     pub fn dispatch_group_notify(
         group: dispatch_group_t,
         queue: dispatch_queue_t,
@@ -6660,7 +6660,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_group_notify_f`.
+    /// Apple SDK function `dispatch_group_notify_f`.
     pub fn dispatch_group_notify_f(
         group: dispatch_group_t,
         queue: dispatch_queue_t,
@@ -6669,35 +6669,35 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_group_enter`.
+    /// Apple SDK function `dispatch_group_enter`.
     pub fn dispatch_group_enter(group: dispatch_group_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_group_leave`.
+    /// Apple SDK function `dispatch_group_leave`.
     pub fn dispatch_group_leave(group: dispatch_group_t);
 }
 /// Apple SDK type alias `dispatch_semaphore_t`.
 pub type dispatch_semaphore_t = *mut dispatch_semaphore_s;
 extern "C" {
-/// Apple SDK function `dispatch_semaphore_create`.
+    /// Apple SDK function `dispatch_semaphore_create`.
     pub fn dispatch_semaphore_create(value: isize) -> dispatch_semaphore_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_semaphore_wait`.
+    /// Apple SDK function `dispatch_semaphore_wait`.
     pub fn dispatch_semaphore_wait(dsema: dispatch_semaphore_t, timeout: dispatch_time_t) -> isize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_semaphore_signal`.
+    /// Apple SDK function `dispatch_semaphore_signal`.
     pub fn dispatch_semaphore_signal(dsema: dispatch_semaphore_t) -> isize;
 }
 /// Apple SDK type alias `dispatch_once_t`.
 pub type dispatch_once_t = isize;
 extern "C" {
-/// Apple SDK function `dispatch_once`.
+    /// Apple SDK function `dispatch_once`.
     pub fn dispatch_once(predicate: *mut dispatch_once_t, block: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_once_f`.
+    /// Apple SDK function `dispatch_once_f`.
     pub fn dispatch_once_f(
         predicate: *mut dispatch_once_t,
         context: *mut ::core::ffi::c_void,
@@ -6713,19 +6713,19 @@ pub struct dispatch_data_s {
     pub _address: u8,
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_data_empty`.
+    /// Apple SDK exported static `_dispatch_data_empty`.
     pub static mut _dispatch_data_empty: dispatch_data_s;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_data_destructor_free`.
+    /// Apple SDK exported static `_dispatch_data_destructor_free`.
     pub static _dispatch_data_destructor_free: dispatch_block_t;
 }
 extern "C" {
-/// Apple SDK exported static `_dispatch_data_destructor_munmap`.
+    /// Apple SDK exported static `_dispatch_data_destructor_munmap`.
     pub static _dispatch_data_destructor_munmap: dispatch_block_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_data_create`.
+    /// Apple SDK function `dispatch_data_create`.
     pub fn dispatch_data_create(
         buffer: *const ::core::ffi::c_void,
         size: usize,
@@ -6734,11 +6734,11 @@ extern "C" {
     ) -> dispatch_data_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_data_get_size`.
+    /// Apple SDK function `dispatch_data_get_size`.
     pub fn dispatch_data_get_size(data: dispatch_data_t) -> usize;
 }
 extern "C" {
-/// Apple SDK function `dispatch_data_create_map`.
+    /// Apple SDK function `dispatch_data_create_map`.
     pub fn dispatch_data_create_map(
         data: dispatch_data_t,
         buffer_ptr: *mut *const ::core::ffi::c_void,
@@ -6746,14 +6746,14 @@ extern "C" {
     ) -> dispatch_data_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_data_create_concat`.
+    /// Apple SDK function `dispatch_data_create_concat`.
     pub fn dispatch_data_create_concat(
         data1: dispatch_data_t,
         data2: dispatch_data_t,
     ) -> dispatch_data_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_data_create_subrange`.
+    /// Apple SDK function `dispatch_data_create_subrange`.
     pub fn dispatch_data_create_subrange(
         data: dispatch_data_t,
         offset: usize,
@@ -6763,11 +6763,11 @@ extern "C" {
 /// Apple SDK type alias `dispatch_data_applier_t`.
 pub type dispatch_data_applier_t = *mut ::core::ffi::c_void;
 extern "C" {
-/// Apple SDK function `dispatch_data_apply`.
+    /// Apple SDK function `dispatch_data_apply`.
     pub fn dispatch_data_apply(data: dispatch_data_t, applier: dispatch_data_applier_t) -> bool;
 }
 extern "C" {
-/// Apple SDK function `dispatch_data_copy_region`.
+    /// Apple SDK function `dispatch_data_copy_region`.
     pub fn dispatch_data_copy_region(
         data: dispatch_data_t,
         location: usize,
@@ -6777,7 +6777,7 @@ extern "C" {
 /// Apple SDK type alias `dispatch_fd_t`.
 pub type dispatch_fd_t = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK function `dispatch_read`.
+    /// Apple SDK function `dispatch_read`.
     pub fn dispatch_read(
         fd: dispatch_fd_t,
         length: usize,
@@ -6786,7 +6786,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_write`.
+    /// Apple SDK function `dispatch_write`.
     pub fn dispatch_write(
         fd: dispatch_fd_t,
         data: dispatch_data_t,
@@ -6799,7 +6799,7 @@ pub type dispatch_io_t = *mut dispatch_io_s;
 /// Apple SDK type alias `dispatch_io_type_t`.
 pub type dispatch_io_type_t = ::core::ffi::c_ulong;
 extern "C" {
-/// Apple SDK function `dispatch_io_create`.
+    /// Apple SDK function `dispatch_io_create`.
     pub fn dispatch_io_create(
         type_: dispatch_io_type_t,
         fd: dispatch_fd_t,
@@ -6808,7 +6808,7 @@ extern "C" {
     ) -> dispatch_io_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_io_create_with_path`.
+    /// Apple SDK function `dispatch_io_create_with_path`.
     pub fn dispatch_io_create_with_path(
         type_: dispatch_io_type_t,
         path: *const ::core::ffi::c_char,
@@ -6819,7 +6819,7 @@ extern "C" {
     ) -> dispatch_io_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_io_create_with_io`.
+    /// Apple SDK function `dispatch_io_create_with_io`.
     pub fn dispatch_io_create_with_io(
         type_: dispatch_io_type_t,
         io: dispatch_io_t,
@@ -6830,7 +6830,7 @@ extern "C" {
 /// Apple SDK type alias `dispatch_io_handler_t`.
 pub type dispatch_io_handler_t = *mut ::core::ffi::c_void;
 extern "C" {
-/// Apple SDK function `dispatch_io_read`.
+    /// Apple SDK function `dispatch_io_read`.
     pub fn dispatch_io_read(
         channel: dispatch_io_t,
         offset: off_t,
@@ -6840,7 +6840,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_io_write`.
+    /// Apple SDK function `dispatch_io_write`.
     pub fn dispatch_io_write(
         channel: dispatch_io_t,
         offset: off_t,
@@ -6852,29 +6852,29 @@ extern "C" {
 /// Apple SDK type alias `dispatch_io_close_flags_t`.
 pub type dispatch_io_close_flags_t = ::core::ffi::c_ulong;
 extern "C" {
-/// Apple SDK function `dispatch_io_close`.
+    /// Apple SDK function `dispatch_io_close`.
     pub fn dispatch_io_close(channel: dispatch_io_t, flags: dispatch_io_close_flags_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_io_barrier`.
+    /// Apple SDK function `dispatch_io_barrier`.
     pub fn dispatch_io_barrier(channel: dispatch_io_t, barrier: dispatch_block_t);
 }
 extern "C" {
-/// Apple SDK function `dispatch_io_get_descriptor`.
+    /// Apple SDK function `dispatch_io_get_descriptor`.
     pub fn dispatch_io_get_descriptor(channel: dispatch_io_t) -> dispatch_fd_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_io_set_high_water`.
+    /// Apple SDK function `dispatch_io_set_high_water`.
     pub fn dispatch_io_set_high_water(channel: dispatch_io_t, high_water: usize);
 }
 extern "C" {
-/// Apple SDK function `dispatch_io_set_low_water`.
+    /// Apple SDK function `dispatch_io_set_low_water`.
     pub fn dispatch_io_set_low_water(channel: dispatch_io_t, low_water: usize);
 }
 /// Apple SDK type alias `dispatch_io_interval_flags_t`.
 pub type dispatch_io_interval_flags_t = ::core::ffi::c_ulong;
 extern "C" {
-/// Apple SDK function `dispatch_io_set_interval`.
+    /// Apple SDK function `dispatch_io_set_interval`.
     pub fn dispatch_io_set_interval(
         channel: dispatch_io_t,
         interval: u64,
@@ -6884,24 +6884,24 @@ extern "C" {
 /// Apple SDK type alias `dispatch_workloop_t`.
 pub type dispatch_workloop_t = dispatch_queue_t;
 extern "C" {
-/// Apple SDK function `dispatch_workloop_create`.
+    /// Apple SDK function `dispatch_workloop_create`.
     pub fn dispatch_workloop_create(label: *const ::core::ffi::c_char) -> dispatch_workloop_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_workloop_create_inactive`.
+    /// Apple SDK function `dispatch_workloop_create_inactive`.
     pub fn dispatch_workloop_create_inactive(
         label: *const ::core::ffi::c_char,
     ) -> dispatch_workloop_t;
 }
 extern "C" {
-/// Apple SDK function `dispatch_workloop_set_autorelease_frequency`.
+    /// Apple SDK function `dispatch_workloop_set_autorelease_frequency`.
     pub fn dispatch_workloop_set_autorelease_frequency(
         workloop: dispatch_workloop_t,
         frequency: dispatch_autorelease_frequency_t,
     );
 }
 extern "C" {
-/// Apple SDK function `dispatch_workloop_set_os_workgroup`.
+    /// Apple SDK function `dispatch_workloop_set_os_workgroup`.
     pub fn dispatch_workloop_set_os_workgroup(
         workloop: dispatch_workloop_t,
         workgroup: os_workgroup_t,
@@ -6998,19 +6998,19 @@ pub type CFWriteStreamClientCallBack = ::core::option::Option<
     ),
 >;
 extern "C" {
-/// Apple SDK function `CFReadStreamGetTypeID`.
+    /// Apple SDK function `CFReadStreamGetTypeID`.
     pub fn CFReadStreamGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamGetTypeID`.
+    /// Apple SDK function `CFWriteStreamGetTypeID`.
     pub fn CFWriteStreamGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyDataWritten`.
+    /// Apple SDK exported static `kCFStreamPropertyDataWritten`.
     pub static mut kCFStreamPropertyDataWritten: CFStreamPropertyKey;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCreateWithBytesNoCopy`.
+    /// Apple SDK function `CFReadStreamCreateWithBytesNoCopy`.
     pub fn CFReadStreamCreateWithBytesNoCopy(
         alloc: CFAllocatorRef,
         bytes: *const UInt8,
@@ -7019,7 +7019,7 @@ extern "C" {
     ) -> CFReadStreamRef;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCreateWithBuffer`.
+    /// Apple SDK function `CFWriteStreamCreateWithBuffer`.
     pub fn CFWriteStreamCreateWithBuffer(
         alloc: CFAllocatorRef,
         buffer: *mut UInt8,
@@ -7027,25 +7027,25 @@ extern "C" {
     ) -> CFWriteStreamRef;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCreateWithAllocatedBuffers`.
+    /// Apple SDK function `CFWriteStreamCreateWithAllocatedBuffers`.
     pub fn CFWriteStreamCreateWithAllocatedBuffers(
         alloc: CFAllocatorRef,
         bufferAllocator: CFAllocatorRef,
     ) -> CFWriteStreamRef;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCreateWithFile`.
+    /// Apple SDK function `CFReadStreamCreateWithFile`.
     pub fn CFReadStreamCreateWithFile(alloc: CFAllocatorRef, fileURL: CFURLRef) -> CFReadStreamRef;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCreateWithFile`.
+    /// Apple SDK function `CFWriteStreamCreateWithFile`.
     pub fn CFWriteStreamCreateWithFile(
         alloc: CFAllocatorRef,
         fileURL: CFURLRef,
     ) -> CFWriteStreamRef;
 }
 extern "C" {
-/// Apple SDK function `CFStreamCreateBoundPair`.
+    /// Apple SDK function `CFStreamCreateBoundPair`.
     pub fn CFStreamCreateBoundPair(
         alloc: CFAllocatorRef,
         readStream: *mut CFReadStreamRef,
@@ -7054,95 +7054,95 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyAppendToFile`.
+    /// Apple SDK exported static `kCFStreamPropertyAppendToFile`.
     pub static mut kCFStreamPropertyAppendToFile: CFStreamPropertyKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFileCurrentOffset`.
+    /// Apple SDK exported static `kCFStreamPropertyFileCurrentOffset`.
     pub static mut kCFStreamPropertyFileCurrentOffset: CFStreamPropertyKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySocketNativeHandle`.
+    /// Apple SDK exported static `kCFStreamPropertySocketNativeHandle`.
     pub static mut kCFStreamPropertySocketNativeHandle: CFStreamPropertyKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySocketRemoteHostName`.
+    /// Apple SDK exported static `kCFStreamPropertySocketRemoteHostName`.
     pub static mut kCFStreamPropertySocketRemoteHostName: CFStreamPropertyKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySocketRemotePortNumber`.
+    /// Apple SDK exported static `kCFStreamPropertySocketRemotePortNumber`.
     pub static mut kCFStreamPropertySocketRemotePortNumber: CFStreamPropertyKey;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainSOCKS`.
+    /// Apple SDK exported static `kCFStreamErrorDomainSOCKS`.
     pub static kCFStreamErrorDomainSOCKS: ::core::ffi::c_int;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySOCKSProxy`.
+    /// Apple SDK exported static `kCFStreamPropertySOCKSProxy`.
     pub static mut kCFStreamPropertySOCKSProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySOCKSProxyHost`.
+    /// Apple SDK exported static `kCFStreamPropertySOCKSProxyHost`.
     pub static mut kCFStreamPropertySOCKSProxyHost: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySOCKSProxyPort`.
+    /// Apple SDK exported static `kCFStreamPropertySOCKSProxyPort`.
     pub static mut kCFStreamPropertySOCKSProxyPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySOCKSVersion`.
+    /// Apple SDK exported static `kCFStreamPropertySOCKSVersion`.
     pub static mut kCFStreamPropertySOCKSVersion: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSocketSOCKSVersion4`.
+    /// Apple SDK exported static `kCFStreamSocketSOCKSVersion4`.
     pub static mut kCFStreamSocketSOCKSVersion4: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSocketSOCKSVersion5`.
+    /// Apple SDK exported static `kCFStreamSocketSOCKSVersion5`.
     pub static mut kCFStreamSocketSOCKSVersion5: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySOCKSUser`.
+    /// Apple SDK exported static `kCFStreamPropertySOCKSUser`.
     pub static mut kCFStreamPropertySOCKSUser: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySOCKSPassword`.
+    /// Apple SDK exported static `kCFStreamPropertySOCKSPassword`.
     pub static mut kCFStreamPropertySOCKSPassword: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainSSL`.
+    /// Apple SDK exported static `kCFStreamErrorDomainSSL`.
     pub static kCFStreamErrorDomainSSL: ::core::ffi::c_int;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySocketSecurityLevel`.
+    /// Apple SDK exported static `kCFStreamPropertySocketSecurityLevel`.
     pub static mut kCFStreamPropertySocketSecurityLevel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSocketSecurityLevelNone`.
+    /// Apple SDK exported static `kCFStreamSocketSecurityLevelNone`.
     pub static mut kCFStreamSocketSecurityLevelNone: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSocketSecurityLevelSSLv2`.
+    /// Apple SDK exported static `kCFStreamSocketSecurityLevelSSLv2`.
     pub static mut kCFStreamSocketSecurityLevelSSLv2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSocketSecurityLevelSSLv3`.
+    /// Apple SDK exported static `kCFStreamSocketSecurityLevelSSLv3`.
     pub static mut kCFStreamSocketSecurityLevelSSLv3: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSocketSecurityLevelTLSv1`.
+    /// Apple SDK exported static `kCFStreamSocketSecurityLevelTLSv1`.
     pub static mut kCFStreamSocketSecurityLevelTLSv1: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSocketSecurityLevelNegotiatedSSL`.
+    /// Apple SDK exported static `kCFStreamSocketSecurityLevelNegotiatedSSL`.
     pub static mut kCFStreamSocketSecurityLevelNegotiatedSSL: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyShouldCloseNativeSocket`.
+    /// Apple SDK exported static `kCFStreamPropertyShouldCloseNativeSocket`.
     pub static mut kCFStreamPropertyShouldCloseNativeSocket: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStreamCreatePairWithSocket`.
+    /// Apple SDK function `CFStreamCreatePairWithSocket`.
     pub fn CFStreamCreatePairWithSocket(
         alloc: CFAllocatorRef,
         sock: CFSocketNativeHandle,
@@ -7151,7 +7151,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStreamCreatePairWithSocketToHost`.
+    /// Apple SDK function `CFStreamCreatePairWithSocketToHost`.
     pub fn CFStreamCreatePairWithSocketToHost(
         alloc: CFAllocatorRef,
         host: CFStringRef,
@@ -7161,7 +7161,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStreamCreatePairWithPeerSocketSignature`.
+    /// Apple SDK function `CFStreamCreatePairWithPeerSocketSignature`.
     pub fn CFStreamCreatePairWithPeerSocketSignature(
         alloc: CFAllocatorRef,
         signature: *const CFSocketSignature,
@@ -7170,43 +7170,43 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamGetStatus`.
+    /// Apple SDK function `CFReadStreamGetStatus`.
     pub fn CFReadStreamGetStatus(stream: CFReadStreamRef) -> CFStreamStatus;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamGetStatus`.
+    /// Apple SDK function `CFWriteStreamGetStatus`.
     pub fn CFWriteStreamGetStatus(stream: CFWriteStreamRef) -> CFStreamStatus;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCopyError`.
+    /// Apple SDK function `CFReadStreamCopyError`.
     pub fn CFReadStreamCopyError(stream: CFReadStreamRef) -> CFErrorRef;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCopyError`.
+    /// Apple SDK function `CFWriteStreamCopyError`.
     pub fn CFWriteStreamCopyError(stream: CFWriteStreamRef) -> CFErrorRef;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamOpen`.
+    /// Apple SDK function `CFReadStreamOpen`.
     pub fn CFReadStreamOpen(stream: CFReadStreamRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamOpen`.
+    /// Apple SDK function `CFWriteStreamOpen`.
     pub fn CFWriteStreamOpen(stream: CFWriteStreamRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamClose`.
+    /// Apple SDK function `CFReadStreamClose`.
     pub fn CFReadStreamClose(stream: CFReadStreamRef);
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamClose`.
+    /// Apple SDK function `CFWriteStreamClose`.
     pub fn CFWriteStreamClose(stream: CFWriteStreamRef);
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamHasBytesAvailable`.
+    /// Apple SDK function `CFReadStreamHasBytesAvailable`.
     pub fn CFReadStreamHasBytesAvailable(stream: CFReadStreamRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamRead`.
+    /// Apple SDK function `CFReadStreamRead`.
     pub fn CFReadStreamRead(
         stream: CFReadStreamRef,
         buffer: *mut UInt8,
@@ -7214,7 +7214,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamGetBuffer`.
+    /// Apple SDK function `CFReadStreamGetBuffer`.
     pub fn CFReadStreamGetBuffer(
         stream: CFReadStreamRef,
         maxBytesToRead: CFIndex,
@@ -7222,11 +7222,11 @@ extern "C" {
     ) -> *const UInt8;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCanAcceptBytes`.
+    /// Apple SDK function `CFWriteStreamCanAcceptBytes`.
     pub fn CFWriteStreamCanAcceptBytes(stream: CFWriteStreamRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamWrite`.
+    /// Apple SDK function `CFWriteStreamWrite`.
     pub fn CFWriteStreamWrite(
         stream: CFWriteStreamRef,
         buffer: *const UInt8,
@@ -7234,21 +7234,21 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCopyProperty`.
+    /// Apple SDK function `CFReadStreamCopyProperty`.
     pub fn CFReadStreamCopyProperty(
         stream: CFReadStreamRef,
         propertyName: CFStreamPropertyKey,
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCopyProperty`.
+    /// Apple SDK function `CFWriteStreamCopyProperty`.
     pub fn CFWriteStreamCopyProperty(
         stream: CFWriteStreamRef,
         propertyName: CFStreamPropertyKey,
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamSetProperty`.
+    /// Apple SDK function `CFReadStreamSetProperty`.
     pub fn CFReadStreamSetProperty(
         stream: CFReadStreamRef,
         propertyName: CFStreamPropertyKey,
@@ -7256,7 +7256,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamSetProperty`.
+    /// Apple SDK function `CFWriteStreamSetProperty`.
     pub fn CFWriteStreamSetProperty(
         stream: CFWriteStreamRef,
         propertyName: CFStreamPropertyKey,
@@ -7264,7 +7264,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamSetClient`.
+    /// Apple SDK function `CFReadStreamSetClient`.
     pub fn CFReadStreamSetClient(
         stream: CFReadStreamRef,
         streamEvents: CFOptionFlags,
@@ -7273,7 +7273,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamSetClient`.
+    /// Apple SDK function `CFWriteStreamSetClient`.
     pub fn CFWriteStreamSetClient(
         stream: CFWriteStreamRef,
         streamEvents: CFOptionFlags,
@@ -7282,7 +7282,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamScheduleWithRunLoop`.
+    /// Apple SDK function `CFReadStreamScheduleWithRunLoop`.
     pub fn CFReadStreamScheduleWithRunLoop(
         stream: CFReadStreamRef,
         runLoop: CFRunLoopRef,
@@ -7290,7 +7290,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamScheduleWithRunLoop`.
+    /// Apple SDK function `CFWriteStreamScheduleWithRunLoop`.
     pub fn CFWriteStreamScheduleWithRunLoop(
         stream: CFWriteStreamRef,
         runLoop: CFRunLoopRef,
@@ -7298,7 +7298,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamUnscheduleFromRunLoop`.
+    /// Apple SDK function `CFReadStreamUnscheduleFromRunLoop`.
     pub fn CFReadStreamUnscheduleFromRunLoop(
         stream: CFReadStreamRef,
         runLoop: CFRunLoopRef,
@@ -7306,7 +7306,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamUnscheduleFromRunLoop`.
+    /// Apple SDK function `CFWriteStreamUnscheduleFromRunLoop`.
     pub fn CFWriteStreamUnscheduleFromRunLoop(
         stream: CFWriteStreamRef,
         runLoop: CFRunLoopRef,
@@ -7314,19 +7314,19 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamSetDispatchQueue`.
+    /// Apple SDK function `CFReadStreamSetDispatchQueue`.
     pub fn CFReadStreamSetDispatchQueue(stream: CFReadStreamRef, q: dispatch_queue_t);
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamSetDispatchQueue`.
+    /// Apple SDK function `CFWriteStreamSetDispatchQueue`.
     pub fn CFWriteStreamSetDispatchQueue(stream: CFWriteStreamRef, q: dispatch_queue_t);
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCopyDispatchQueue`.
+    /// Apple SDK function `CFReadStreamCopyDispatchQueue`.
     pub fn CFReadStreamCopyDispatchQueue(stream: CFReadStreamRef) -> dispatch_queue_t;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCopyDispatchQueue`.
+    /// Apple SDK function `CFWriteStreamCopyDispatchQueue`.
     pub fn CFWriteStreamCopyDispatchQueue(stream: CFWriteStreamRef) -> dispatch_queue_t;
 }
 /// Apple SDK type alias `CFStreamErrorDomain`.
@@ -7340,11 +7340,11 @@ pub const kCFStreamErrorDomainMacOSStatus: _bindgen_ty_41 = 2;
 /// Apple SDK type alias `_bindgen_ty_41`.
 pub type _bindgen_ty_41 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK function `CFReadStreamGetError`.
+    /// Apple SDK function `CFReadStreamGetError`.
     pub fn CFReadStreamGetError(stream: CFReadStreamRef) -> CFStreamError;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamGetError`.
+    /// Apple SDK function `CFWriteStreamGetError`.
     pub fn CFWriteStreamGetError(stream: CFWriteStreamRef) -> CFStreamError;
 }
 /// Apple SDK type alias `CFPropertyListMutabilityOptions`.
@@ -7358,7 +7358,7 @@ pub const kCFPropertyListMutableContainersAndLeaves: _bindgen_ty_42 = 2;
 /// Apple SDK type alias `_bindgen_ty_42`.
 pub type _bindgen_ty_42 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFPropertyListCreateFromXMLData`.
+    /// Apple SDK function `CFPropertyListCreateFromXMLData`.
     pub fn CFPropertyListCreateFromXMLData(
         allocator: CFAllocatorRef,
         xmlData: CFDataRef,
@@ -7367,14 +7367,14 @@ extern "C" {
     ) -> CFPropertyListRef;
 }
 extern "C" {
-/// Apple SDK function `CFPropertyListCreateXMLData`.
+    /// Apple SDK function `CFPropertyListCreateXMLData`.
     pub fn CFPropertyListCreateXMLData(
         allocator: CFAllocatorRef,
         propertyList: CFPropertyListRef,
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFPropertyListCreateDeepCopy`.
+    /// Apple SDK function `CFPropertyListCreateDeepCopy`.
     pub fn CFPropertyListCreateDeepCopy(
         allocator: CFAllocatorRef,
         propertyList: CFPropertyListRef,
@@ -7392,12 +7392,12 @@ pub const kCFPropertyListBinaryFormat_v1_0: _bindgen_ty_43 = 200;
 /// Apple SDK type alias `_bindgen_ty_43`.
 pub type _bindgen_ty_43 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFPropertyListIsValid`.
+    /// Apple SDK function `CFPropertyListIsValid`.
     pub fn CFPropertyListIsValid(plist: CFPropertyListRef, format: CFPropertyListFormat)
         -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPropertyListWriteToStream`.
+    /// Apple SDK function `CFPropertyListWriteToStream`.
     pub fn CFPropertyListWriteToStream(
         propertyList: CFPropertyListRef,
         stream: CFWriteStreamRef,
@@ -7406,7 +7406,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFPropertyListCreateFromStream`.
+    /// Apple SDK function `CFPropertyListCreateFromStream`.
     pub fn CFPropertyListCreateFromStream(
         allocator: CFAllocatorRef,
         stream: CFReadStreamRef,
@@ -7427,7 +7427,7 @@ pub const kCFPropertyListWriteStreamError: _bindgen_ty_44 = 3851;
 /// Apple SDK type alias `_bindgen_ty_44`.
 pub type _bindgen_ty_44 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFPropertyListCreateWithData`.
+    /// Apple SDK function `CFPropertyListCreateWithData`.
     pub fn CFPropertyListCreateWithData(
         allocator: CFAllocatorRef,
         data: CFDataRef,
@@ -7437,7 +7437,7 @@ extern "C" {
     ) -> CFPropertyListRef;
 }
 extern "C" {
-/// Apple SDK function `CFPropertyListCreateWithStream`.
+    /// Apple SDK function `CFPropertyListCreateWithStream`.
     pub fn CFPropertyListCreateWithStream(
         allocator: CFAllocatorRef,
         stream: CFReadStreamRef,
@@ -7448,7 +7448,7 @@ extern "C" {
     ) -> CFPropertyListRef;
 }
 extern "C" {
-/// Apple SDK function `CFPropertyListWrite`.
+    /// Apple SDK function `CFPropertyListWrite`.
     pub fn CFPropertyListWrite(
         propertyList: CFPropertyListRef,
         stream: CFWriteStreamRef,
@@ -7458,7 +7458,7 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFPropertyListCreateData`.
+    /// Apple SDK function `CFPropertyListCreateData`.
     pub fn CFPropertyListCreateData(
         allocator: CFAllocatorRef,
         propertyList: CFPropertyListRef,
@@ -7503,11 +7503,11 @@ pub struct CFSetCallBacks {
     pub hash: CFSetHashCallBack,
 }
 extern "C" {
-/// Apple SDK exported static `kCFTypeSetCallBacks`.
+    /// Apple SDK exported static `kCFTypeSetCallBacks`.
     pub static kCFTypeSetCallBacks: CFSetCallBacks;
 }
 extern "C" {
-/// Apple SDK exported static `kCFCopyStringSetCallBacks`.
+    /// Apple SDK exported static `kCFCopyStringSetCallBacks`.
     pub static kCFCopyStringSetCallBacks: CFSetCallBacks;
 }
 /// Apple SDK type alias `CFSetApplierFunction`.
@@ -7525,11 +7525,11 @@ pub type CFSetRef = *const __CFSet;
 /// Apple SDK type alias `CFMutableSetRef`.
 pub type CFMutableSetRef = *mut __CFSet;
 extern "C" {
-/// Apple SDK function `CFSetGetTypeID`.
+    /// Apple SDK function `CFSetGetTypeID`.
     pub fn CFSetGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFSetCreate`.
+    /// Apple SDK function `CFSetCreate`.
     pub fn CFSetCreate(
         allocator: CFAllocatorRef,
         values: *mut *const ::core::ffi::c_void,
@@ -7538,11 +7538,11 @@ extern "C" {
     ) -> CFSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFSetCreateCopy`.
+    /// Apple SDK function `CFSetCreateCopy`.
     pub fn CFSetCreateCopy(allocator: CFAllocatorRef, theSet: CFSetRef) -> CFSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFSetCreateMutable`.
+    /// Apple SDK function `CFSetCreateMutable`.
     pub fn CFSetCreateMutable(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -7550,7 +7550,7 @@ extern "C" {
     ) -> CFMutableSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFSetCreateMutableCopy`.
+    /// Apple SDK function `CFSetCreateMutableCopy`.
     pub fn CFSetCreateMutableCopy(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -7558,26 +7558,26 @@ extern "C" {
     ) -> CFMutableSetRef;
 }
 extern "C" {
-/// Apple SDK function `CFSetGetCount`.
+    /// Apple SDK function `CFSetGetCount`.
     pub fn CFSetGetCount(theSet: CFSetRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFSetGetCountOfValue`.
+    /// Apple SDK function `CFSetGetCountOfValue`.
     pub fn CFSetGetCountOfValue(theSet: CFSetRef, value: *const ::core::ffi::c_void) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFSetContainsValue`.
+    /// Apple SDK function `CFSetContainsValue`.
     pub fn CFSetContainsValue(theSet: CFSetRef, value: *const ::core::ffi::c_void) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFSetGetValue`.
+    /// Apple SDK function `CFSetGetValue`.
     pub fn CFSetGetValue(
         theSet: CFSetRef,
         value: *const ::core::ffi::c_void,
     ) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFSetGetValueIfPresent`.
+    /// Apple SDK function `CFSetGetValueIfPresent`.
     pub fn CFSetGetValueIfPresent(
         theSet: CFSetRef,
         candidate: *const ::core::ffi::c_void,
@@ -7585,11 +7585,11 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFSetGetValues`.
+    /// Apple SDK function `CFSetGetValues`.
     pub fn CFSetGetValues(theSet: CFSetRef, values: *mut *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFSetApplyFunction`.
+    /// Apple SDK function `CFSetApplyFunction`.
     pub fn CFSetApplyFunction(
         theSet: CFSetRef,
         applier: CFSetApplierFunction,
@@ -7597,23 +7597,23 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFSetAddValue`.
+    /// Apple SDK function `CFSetAddValue`.
     pub fn CFSetAddValue(theSet: CFMutableSetRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFSetReplaceValue`.
+    /// Apple SDK function `CFSetReplaceValue`.
     pub fn CFSetReplaceValue(theSet: CFMutableSetRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFSetSetValue`.
+    /// Apple SDK function `CFSetSetValue`.
     pub fn CFSetSetValue(theSet: CFMutableSetRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFSetRemoveValue`.
+    /// Apple SDK function `CFSetRemoveValue`.
     pub fn CFSetRemoveValue(theSet: CFMutableSetRef, value: *const ::core::ffi::c_void);
 }
 extern "C" {
-/// Apple SDK function `CFSetRemoveAllValues`.
+    /// Apple SDK function `CFSetRemoveAllValues`.
     pub fn CFSetRemoveAllValues(theSet: CFMutableSetRef);
 }
 /// Apple SDK type alias `CFStringEncodings`.
@@ -7911,43 +7911,43 @@ pub struct __CFTree {
 /// Apple SDK type alias `CFTreeRef`.
 pub type CFTreeRef = *mut __CFTree;
 extern "C" {
-/// Apple SDK function `CFTreeGetTypeID`.
+    /// Apple SDK function `CFTreeGetTypeID`.
     pub fn CFTreeGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFTreeCreate`.
+    /// Apple SDK function `CFTreeCreate`.
     pub fn CFTreeCreate(allocator: CFAllocatorRef, context: *const CFTreeContext) -> CFTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFTreeGetParent`.
+    /// Apple SDK function `CFTreeGetParent`.
     pub fn CFTreeGetParent(tree: CFTreeRef) -> CFTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFTreeGetNextSibling`.
+    /// Apple SDK function `CFTreeGetNextSibling`.
     pub fn CFTreeGetNextSibling(tree: CFTreeRef) -> CFTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFTreeGetFirstChild`.
+    /// Apple SDK function `CFTreeGetFirstChild`.
     pub fn CFTreeGetFirstChild(tree: CFTreeRef) -> CFTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFTreeGetContext`.
+    /// Apple SDK function `CFTreeGetContext`.
     pub fn CFTreeGetContext(tree: CFTreeRef, context: *mut CFTreeContext);
 }
 extern "C" {
-/// Apple SDK function `CFTreeGetChildCount`.
+    /// Apple SDK function `CFTreeGetChildCount`.
     pub fn CFTreeGetChildCount(tree: CFTreeRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFTreeGetChildAtIndex`.
+    /// Apple SDK function `CFTreeGetChildAtIndex`.
     pub fn CFTreeGetChildAtIndex(tree: CFTreeRef, idx: CFIndex) -> CFTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFTreeGetChildren`.
+    /// Apple SDK function `CFTreeGetChildren`.
     pub fn CFTreeGetChildren(tree: CFTreeRef, children: *mut CFTreeRef);
 }
 extern "C" {
-/// Apple SDK function `CFTreeApplyFunctionToChildren`.
+    /// Apple SDK function `CFTreeApplyFunctionToChildren`.
     pub fn CFTreeApplyFunctionToChildren(
         tree: CFTreeRef,
         applier: CFTreeApplierFunction,
@@ -7955,35 +7955,35 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFTreeFindRoot`.
+    /// Apple SDK function `CFTreeFindRoot`.
     pub fn CFTreeFindRoot(tree: CFTreeRef) -> CFTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFTreeSetContext`.
+    /// Apple SDK function `CFTreeSetContext`.
     pub fn CFTreeSetContext(tree: CFTreeRef, context: *const CFTreeContext);
 }
 extern "C" {
-/// Apple SDK function `CFTreePrependChild`.
+    /// Apple SDK function `CFTreePrependChild`.
     pub fn CFTreePrependChild(tree: CFTreeRef, newChild: CFTreeRef);
 }
 extern "C" {
-/// Apple SDK function `CFTreeAppendChild`.
+    /// Apple SDK function `CFTreeAppendChild`.
     pub fn CFTreeAppendChild(tree: CFTreeRef, newChild: CFTreeRef);
 }
 extern "C" {
-/// Apple SDK function `CFTreeInsertSibling`.
+    /// Apple SDK function `CFTreeInsertSibling`.
     pub fn CFTreeInsertSibling(tree: CFTreeRef, newSibling: CFTreeRef);
 }
 extern "C" {
-/// Apple SDK function `CFTreeRemove`.
+    /// Apple SDK function `CFTreeRemove`.
     pub fn CFTreeRemove(tree: CFTreeRef);
 }
 extern "C" {
-/// Apple SDK function `CFTreeRemoveAllChildren`.
+    /// Apple SDK function `CFTreeRemoveAllChildren`.
     pub fn CFTreeRemoveAllChildren(tree: CFTreeRef);
 }
 extern "C" {
-/// Apple SDK function `CFTreeSortChildren`.
+    /// Apple SDK function `CFTreeSortChildren`.
     pub fn CFTreeSortChildren(
         tree: CFTreeRef,
         comparator: CFComparatorFunction,
@@ -7991,7 +7991,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFURLCreateDataAndPropertiesFromResource`.
+    /// Apple SDK function `CFURLCreateDataAndPropertiesFromResource`.
     pub fn CFURLCreateDataAndPropertiesFromResource(
         alloc: CFAllocatorRef,
         url: CFURLRef,
@@ -8002,7 +8002,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLWriteDataAndPropertiesToResource`.
+    /// Apple SDK function `CFURLWriteDataAndPropertiesToResource`.
     pub fn CFURLWriteDataAndPropertiesToResource(
         url: CFURLRef,
         dataToWrite: CFDataRef,
@@ -8011,11 +8011,11 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLDestroyResource`.
+    /// Apple SDK function `CFURLDestroyResource`.
     pub fn CFURLDestroyResource(url: CFURLRef, errorCode: *mut SInt32) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFURLCreatePropertyFromResource`.
+    /// Apple SDK function `CFURLCreatePropertyFromResource`.
     pub fn CFURLCreatePropertyFromResource(
         alloc: CFAllocatorRef,
         url: CFURLRef,
@@ -8046,35 +8046,35 @@ pub const kCFURLTimeoutError: _bindgen_ty_46 = -18;
 /// Apple SDK type alias `_bindgen_ty_46`.
 pub type _bindgen_ty_46 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK exported static `kCFURLFileExists`.
+    /// Apple SDK exported static `kCFURLFileExists`.
     pub static kCFURLFileExists: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileDirectoryContents`.
+    /// Apple SDK exported static `kCFURLFileDirectoryContents`.
     pub static kCFURLFileDirectoryContents: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileLength`.
+    /// Apple SDK exported static `kCFURLFileLength`.
     pub static kCFURLFileLength: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileLastModificationTime`.
+    /// Apple SDK exported static `kCFURLFileLastModificationTime`.
     pub static kCFURLFileLastModificationTime: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFilePOSIXMode`.
+    /// Apple SDK exported static `kCFURLFilePOSIXMode`.
     pub static kCFURLFilePOSIXMode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLFileOwnerID`.
+    /// Apple SDK exported static `kCFURLFileOwnerID`.
     pub static kCFURLFileOwnerID: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLHTTPStatusCode`.
+    /// Apple SDK exported static `kCFURLHTTPStatusCode`.
     pub static kCFURLHTTPStatusCode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLHTTPStatusLine`.
+    /// Apple SDK exported static `kCFURLHTTPStatusLine`.
     pub static kCFURLHTTPStatusLine: CFStringRef;
 }
 #[repr(C)]
@@ -8107,15 +8107,15 @@ pub struct CFUUIDBytes {
     pub byte15: UInt8,
 }
 extern "C" {
-/// Apple SDK function `CFUUIDGetTypeID`.
+    /// Apple SDK function `CFUUIDGetTypeID`.
     pub fn CFUUIDGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFUUIDCreate`.
+    /// Apple SDK function `CFUUIDCreate`.
     pub fn CFUUIDCreate(alloc: CFAllocatorRef) -> CFUUIDRef;
 }
 extern "C" {
-/// Apple SDK function `CFUUIDCreateWithBytes`.
+    /// Apple SDK function `CFUUIDCreateWithBytes`.
     pub fn CFUUIDCreateWithBytes(
         alloc: CFAllocatorRef,
         byte0: UInt8,
@@ -8137,15 +8137,15 @@ extern "C" {
     ) -> CFUUIDRef;
 }
 extern "C" {
-/// Apple SDK function `CFUUIDCreateFromString`.
+    /// Apple SDK function `CFUUIDCreateFromString`.
     pub fn CFUUIDCreateFromString(alloc: CFAllocatorRef, uuidStr: CFStringRef) -> CFUUIDRef;
 }
 extern "C" {
-/// Apple SDK function `CFUUIDCreateString`.
+    /// Apple SDK function `CFUUIDCreateString`.
     pub fn CFUUIDCreateString(alloc: CFAllocatorRef, uuid: CFUUIDRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFUUIDGetConstantUUIDWithBytes`.
+    /// Apple SDK function `CFUUIDGetConstantUUIDWithBytes`.
     pub fn CFUUIDGetConstantUUIDWithBytes(
         alloc: CFAllocatorRef,
         byte0: UInt8,
@@ -8167,15 +8167,15 @@ extern "C" {
     ) -> CFUUIDRef;
 }
 extern "C" {
-/// Apple SDK function `CFUUIDGetUUIDBytes`.
+    /// Apple SDK function `CFUUIDGetUUIDBytes`.
     pub fn CFUUIDGetUUIDBytes(uuid: CFUUIDRef) -> CFUUIDBytes;
 }
 extern "C" {
-/// Apple SDK function `CFUUIDCreateFromUUIDBytes`.
+    /// Apple SDK function `CFUUIDCreateFromUUIDBytes`.
     pub fn CFUUIDCreateFromUUIDBytes(alloc: CFAllocatorRef, bytes: CFUUIDBytes) -> CFUUIDRef;
 }
 extern "C" {
-/// Apple SDK function `CFCopyHomeDirectoryURL`.
+    /// Apple SDK function `CFCopyHomeDirectoryURL`.
     pub fn CFCopyHomeDirectoryURL() -> CFURLRef;
 }
 /// Apple SDK type alias `cpu_type_t`.
@@ -8191,55 +8191,55 @@ pub type CFBundleRef = *mut __CFBundle;
 /// Apple SDK type alias `CFPlugInRef`.
 pub type CFPlugInRef = *mut __CFBundle;
 extern "C" {
-/// Apple SDK exported static `kCFBundleInfoDictionaryVersionKey`.
+    /// Apple SDK exported static `kCFBundleInfoDictionaryVersionKey`.
     pub static kCFBundleInfoDictionaryVersionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBundleExecutableKey`.
+    /// Apple SDK exported static `kCFBundleExecutableKey`.
     pub static kCFBundleExecutableKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBundleIdentifierKey`.
+    /// Apple SDK exported static `kCFBundleIdentifierKey`.
     pub static kCFBundleIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBundleVersionKey`.
+    /// Apple SDK exported static `kCFBundleVersionKey`.
     pub static kCFBundleVersionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBundleDevelopmentRegionKey`.
+    /// Apple SDK exported static `kCFBundleDevelopmentRegionKey`.
     pub static kCFBundleDevelopmentRegionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBundleNameKey`.
+    /// Apple SDK exported static `kCFBundleNameKey`.
     pub static kCFBundleNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFBundleLocalizationsKey`.
+    /// Apple SDK exported static `kCFBundleLocalizationsKey`.
     pub static kCFBundleLocalizationsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetMainBundle`.
+    /// Apple SDK function `CFBundleGetMainBundle`.
     pub fn CFBundleGetMainBundle() -> CFBundleRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetBundleWithIdentifier`.
+    /// Apple SDK function `CFBundleGetBundleWithIdentifier`.
     pub fn CFBundleGetBundleWithIdentifier(bundleID: CFStringRef) -> CFBundleRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetAllBundles`.
+    /// Apple SDK function `CFBundleGetAllBundles`.
     pub fn CFBundleGetAllBundles() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetTypeID`.
+    /// Apple SDK function `CFBundleGetTypeID`.
     pub fn CFBundleGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCreate`.
+    /// Apple SDK function `CFBundleCreate`.
     pub fn CFBundleCreate(allocator: CFAllocatorRef, bundleURL: CFURLRef) -> CFBundleRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCreateBundlesFromDirectory`.
+    /// Apple SDK function `CFBundleCreateBundlesFromDirectory`.
     pub fn CFBundleCreateBundlesFromDirectory(
         allocator: CFAllocatorRef,
         directoryURL: CFURLRef,
@@ -8247,24 +8247,24 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyBundleURL`.
+    /// Apple SDK function `CFBundleCopyBundleURL`.
     pub fn CFBundleCopyBundleURL(bundle: CFBundleRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetValueForInfoDictionaryKey`.
+    /// Apple SDK function `CFBundleGetValueForInfoDictionaryKey`.
     pub fn CFBundleGetValueForInfoDictionaryKey(bundle: CFBundleRef, key: CFStringRef)
         -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetInfoDictionary`.
+    /// Apple SDK function `CFBundleGetInfoDictionary`.
     pub fn CFBundleGetInfoDictionary(bundle: CFBundleRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetLocalInfoDictionary`.
+    /// Apple SDK function `CFBundleGetLocalInfoDictionary`.
     pub fn CFBundleGetLocalInfoDictionary(bundle: CFBundleRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetPackageInfo`.
+    /// Apple SDK function `CFBundleGetPackageInfo`.
     pub fn CFBundleGetPackageInfo(
         bundle: CFBundleRef,
         packageType: *mut UInt32,
@@ -8272,47 +8272,47 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetIdentifier`.
+    /// Apple SDK function `CFBundleGetIdentifier`.
     pub fn CFBundleGetIdentifier(bundle: CFBundleRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetVersionNumber`.
+    /// Apple SDK function `CFBundleGetVersionNumber`.
     pub fn CFBundleGetVersionNumber(bundle: CFBundleRef) -> UInt32;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetDevelopmentRegion`.
+    /// Apple SDK function `CFBundleGetDevelopmentRegion`.
     pub fn CFBundleGetDevelopmentRegion(bundle: CFBundleRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopySupportFilesDirectoryURL`.
+    /// Apple SDK function `CFBundleCopySupportFilesDirectoryURL`.
     pub fn CFBundleCopySupportFilesDirectoryURL(bundle: CFBundleRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyResourcesDirectoryURL`.
+    /// Apple SDK function `CFBundleCopyResourcesDirectoryURL`.
     pub fn CFBundleCopyResourcesDirectoryURL(bundle: CFBundleRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyPrivateFrameworksURL`.
+    /// Apple SDK function `CFBundleCopyPrivateFrameworksURL`.
     pub fn CFBundleCopyPrivateFrameworksURL(bundle: CFBundleRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopySharedFrameworksURL`.
+    /// Apple SDK function `CFBundleCopySharedFrameworksURL`.
     pub fn CFBundleCopySharedFrameworksURL(bundle: CFBundleRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopySharedSupportURL`.
+    /// Apple SDK function `CFBundleCopySharedSupportURL`.
     pub fn CFBundleCopySharedSupportURL(bundle: CFBundleRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyBuiltInPlugInsURL`.
+    /// Apple SDK function `CFBundleCopyBuiltInPlugInsURL`.
     pub fn CFBundleCopyBuiltInPlugInsURL(bundle: CFBundleRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyInfoDictionaryInDirectory`.
+    /// Apple SDK function `CFBundleCopyInfoDictionaryInDirectory`.
     pub fn CFBundleCopyInfoDictionaryInDirectory(bundleURL: CFURLRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetPackageInfoInDirectory`.
+    /// Apple SDK function `CFBundleGetPackageInfoInDirectory`.
     pub fn CFBundleGetPackageInfoInDirectory(
         url: CFURLRef,
         packageType: *mut UInt32,
@@ -8320,7 +8320,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyResourceURL`.
+    /// Apple SDK function `CFBundleCopyResourceURL`.
     pub fn CFBundleCopyResourceURL(
         bundle: CFBundleRef,
         resourceName: CFStringRef,
@@ -8329,7 +8329,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyResourceURLsOfType`.
+    /// Apple SDK function `CFBundleCopyResourceURLsOfType`.
     pub fn CFBundleCopyResourceURLsOfType(
         bundle: CFBundleRef,
         resourceType: CFStringRef,
@@ -8337,7 +8337,7 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyLocalizedString`.
+    /// Apple SDK function `CFBundleCopyLocalizedString`.
     pub fn CFBundleCopyLocalizedString(
         bundle: CFBundleRef,
         key: CFStringRef,
@@ -8346,7 +8346,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyLocalizedStringForLocalizations`.
+    /// Apple SDK function `CFBundleCopyLocalizedStringForLocalizations`.
     pub fn CFBundleCopyLocalizedStringForLocalizations(
         bundle: CFBundleRef,
         key: CFStringRef,
@@ -8356,7 +8356,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyResourceURLInDirectory`.
+    /// Apple SDK function `CFBundleCopyResourceURLInDirectory`.
     pub fn CFBundleCopyResourceURLInDirectory(
         bundleURL: CFURLRef,
         resourceName: CFStringRef,
@@ -8365,7 +8365,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyResourceURLsOfTypeInDirectory`.
+    /// Apple SDK function `CFBundleCopyResourceURLsOfTypeInDirectory`.
     pub fn CFBundleCopyResourceURLsOfTypeInDirectory(
         bundleURL: CFURLRef,
         resourceType: CFStringRef,
@@ -8373,22 +8373,22 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyBundleLocalizations`.
+    /// Apple SDK function `CFBundleCopyBundleLocalizations`.
     pub fn CFBundleCopyBundleLocalizations(bundle: CFBundleRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyPreferredLocalizationsFromArray`.
+    /// Apple SDK function `CFBundleCopyPreferredLocalizationsFromArray`.
     pub fn CFBundleCopyPreferredLocalizationsFromArray(locArray: CFArrayRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyLocalizationsForPreferences`.
+    /// Apple SDK function `CFBundleCopyLocalizationsForPreferences`.
     pub fn CFBundleCopyLocalizationsForPreferences(
         locArray: CFArrayRef,
         prefArray: CFArrayRef,
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyResourceURLForLocalization`.
+    /// Apple SDK function `CFBundleCopyResourceURLForLocalization`.
     pub fn CFBundleCopyResourceURLForLocalization(
         bundle: CFBundleRef,
         resourceName: CFStringRef,
@@ -8398,7 +8398,7 @@ extern "C" {
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyResourceURLsOfTypeForLocalization`.
+    /// Apple SDK function `CFBundleCopyResourceURLsOfTypeForLocalization`.
     pub fn CFBundleCopyResourceURLsOfTypeForLocalization(
         bundle: CFBundleRef,
         resourceType: CFStringRef,
@@ -8407,19 +8407,19 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyInfoDictionaryForURL`.
+    /// Apple SDK function `CFBundleCopyInfoDictionaryForURL`.
     pub fn CFBundleCopyInfoDictionaryForURL(url: CFURLRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyLocalizationsForURL`.
+    /// Apple SDK function `CFBundleCopyLocalizationsForURL`.
     pub fn CFBundleCopyLocalizationsForURL(url: CFURLRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyExecutableArchitecturesForURL`.
+    /// Apple SDK function `CFBundleCopyExecutableArchitecturesForURL`.
     pub fn CFBundleCopyExecutableArchitecturesForURL(url: CFURLRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyExecutableURL`.
+    /// Apple SDK function `CFBundleCopyExecutableURL`.
     pub fn CFBundleCopyExecutableURL(bundle: CFBundleRef) -> CFURLRef;
 }
 /// Apple SDK constant `kCFBundleExecutableArchitectureI386`.
@@ -8435,41 +8435,41 @@ pub const kCFBundleExecutableArchitectureARM64: _bindgen_ty_47 = 16777228;
 /// Apple SDK type alias `_bindgen_ty_47`.
 pub type _bindgen_ty_47 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFBundleCopyExecutableArchitectures`.
+    /// Apple SDK function `CFBundleCopyExecutableArchitectures`.
     pub fn CFBundleCopyExecutableArchitectures(bundle: CFBundleRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundlePreflightExecutable`.
+    /// Apple SDK function `CFBundlePreflightExecutable`.
     pub fn CFBundlePreflightExecutable(bundle: CFBundleRef, error: *mut CFErrorRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleLoadExecutableAndReturnError`.
+    /// Apple SDK function `CFBundleLoadExecutableAndReturnError`.
     pub fn CFBundleLoadExecutableAndReturnError(
         bundle: CFBundleRef,
         error: *mut CFErrorRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleLoadExecutable`.
+    /// Apple SDK function `CFBundleLoadExecutable`.
     pub fn CFBundleLoadExecutable(bundle: CFBundleRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleIsExecutableLoaded`.
+    /// Apple SDK function `CFBundleIsExecutableLoaded`.
     pub fn CFBundleIsExecutableLoaded(bundle: CFBundleRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleUnloadExecutable`.
+    /// Apple SDK function `CFBundleUnloadExecutable`.
     pub fn CFBundleUnloadExecutable(bundle: CFBundleRef);
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetFunctionPointerForName`.
+    /// Apple SDK function `CFBundleGetFunctionPointerForName`.
     pub fn CFBundleGetFunctionPointerForName(
         bundle: CFBundleRef,
         functionName: CFStringRef,
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetFunctionPointersForNames`.
+    /// Apple SDK function `CFBundleGetFunctionPointersForNames`.
     pub fn CFBundleGetFunctionPointersForNames(
         bundle: CFBundleRef,
         functionNames: CFArrayRef,
@@ -8477,14 +8477,14 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetDataPointerForName`.
+    /// Apple SDK function `CFBundleGetDataPointerForName`.
     pub fn CFBundleGetDataPointerForName(
         bundle: CFBundleRef,
         symbolName: CFStringRef,
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetDataPointersForNames`.
+    /// Apple SDK function `CFBundleGetDataPointersForNames`.
     pub fn CFBundleGetDataPointersForNames(
         bundle: CFBundleRef,
         symbolNames: CFArrayRef,
@@ -8492,36 +8492,36 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFBundleCopyAuxiliaryExecutableURL`.
+    /// Apple SDK function `CFBundleCopyAuxiliaryExecutableURL`.
     pub fn CFBundleCopyAuxiliaryExecutableURL(
         bundle: CFBundleRef,
         executableName: CFStringRef,
     ) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFBundleIsExecutableLoadable`.
+    /// Apple SDK function `CFBundleIsExecutableLoadable`.
     pub fn CFBundleIsExecutableLoadable(bundle: CFBundleRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleIsExecutableLoadableForURL`.
+    /// Apple SDK function `CFBundleIsExecutableLoadableForURL`.
     pub fn CFBundleIsExecutableLoadableForURL(url: CFURLRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleIsArchitectureLoadable`.
+    /// Apple SDK function `CFBundleIsArchitectureLoadable`.
     pub fn CFBundleIsArchitectureLoadable(arch: cpu_type_t) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFBundleGetPlugIn`.
+    /// Apple SDK function `CFBundleGetPlugIn`.
     pub fn CFBundleGetPlugIn(bundle: CFBundleRef) -> CFPlugInRef;
 }
 /// Apple SDK type alias `CFBundleRefNum`.
 pub type CFBundleRefNum = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK function `CFBundleOpenBundleResourceMap`.
+    /// Apple SDK function `CFBundleOpenBundleResourceMap`.
     pub fn CFBundleOpenBundleResourceMap(bundle: CFBundleRef) -> CFBundleRefNum;
 }
 extern "C" {
-/// Apple SDK function `CFBundleOpenBundleResourceFiles`.
+    /// Apple SDK function `CFBundleOpenBundleResourceFiles`.
     pub fn CFBundleOpenBundleResourceFiles(
         bundle: CFBundleRef,
         refNum: *mut CFBundleRefNum,
@@ -8529,7 +8529,7 @@ extern "C" {
     ) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFBundleCloseBundleResourceMap`.
+    /// Apple SDK function `CFBundleCloseBundleResourceMap`.
     pub fn CFBundleCloseBundleResourceMap(bundle: CFBundleRef, refNum: CFBundleRefNum);
 }
 #[repr(C)]
@@ -8582,11 +8582,11 @@ pub type CFMessagePortInvalidationCallBack = ::core::option::Option<
     unsafe extern "C" fn(ms: CFMessagePortRef, info: *mut ::core::ffi::c_void),
 >;
 extern "C" {
-/// Apple SDK function `CFMessagePortGetTypeID`.
+    /// Apple SDK function `CFMessagePortGetTypeID`.
     pub fn CFMessagePortGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortCreateLocal`.
+    /// Apple SDK function `CFMessagePortCreateLocal`.
     pub fn CFMessagePortCreateLocal(
         allocator: CFAllocatorRef,
         name: CFStringRef,
@@ -8596,51 +8596,51 @@ extern "C" {
     ) -> CFMessagePortRef;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortCreateRemote`.
+    /// Apple SDK function `CFMessagePortCreateRemote`.
     pub fn CFMessagePortCreateRemote(
         allocator: CFAllocatorRef,
         name: CFStringRef,
     ) -> CFMessagePortRef;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortIsRemote`.
+    /// Apple SDK function `CFMessagePortIsRemote`.
     pub fn CFMessagePortIsRemote(ms: CFMessagePortRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortGetName`.
+    /// Apple SDK function `CFMessagePortGetName`.
     pub fn CFMessagePortGetName(ms: CFMessagePortRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortSetName`.
+    /// Apple SDK function `CFMessagePortSetName`.
     pub fn CFMessagePortSetName(ms: CFMessagePortRef, newName: CFStringRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortGetContext`.
+    /// Apple SDK function `CFMessagePortGetContext`.
     pub fn CFMessagePortGetContext(ms: CFMessagePortRef, context: *mut CFMessagePortContext);
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortInvalidate`.
+    /// Apple SDK function `CFMessagePortInvalidate`.
     pub fn CFMessagePortInvalidate(ms: CFMessagePortRef);
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortIsValid`.
+    /// Apple SDK function `CFMessagePortIsValid`.
     pub fn CFMessagePortIsValid(ms: CFMessagePortRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortGetInvalidationCallBack`.
+    /// Apple SDK function `CFMessagePortGetInvalidationCallBack`.
     pub fn CFMessagePortGetInvalidationCallBack(
         ms: CFMessagePortRef,
     ) -> CFMessagePortInvalidationCallBack;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortSetInvalidationCallBack`.
+    /// Apple SDK function `CFMessagePortSetInvalidationCallBack`.
     pub fn CFMessagePortSetInvalidationCallBack(
         ms: CFMessagePortRef,
         callout: CFMessagePortInvalidationCallBack,
     );
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortSendRequest`.
+    /// Apple SDK function `CFMessagePortSendRequest`.
     pub fn CFMessagePortSendRequest(
         remote: CFMessagePortRef,
         msgid: SInt32,
@@ -8652,7 +8652,7 @@ extern "C" {
     ) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortCreateRunLoopSource`.
+    /// Apple SDK function `CFMessagePortCreateRunLoopSource`.
     pub fn CFMessagePortCreateRunLoopSource(
         allocator: CFAllocatorRef,
         local: CFMessagePortRef,
@@ -8660,27 +8660,27 @@ extern "C" {
     ) -> CFRunLoopSourceRef;
 }
 extern "C" {
-/// Apple SDK function `CFMessagePortSetDispatchQueue`.
+    /// Apple SDK function `CFMessagePortSetDispatchQueue`.
     pub fn CFMessagePortSetDispatchQueue(ms: CFMessagePortRef, queue: dispatch_queue_t);
 }
 extern "C" {
-/// Apple SDK exported static `kCFPlugInDynamicRegistrationKey`.
+    /// Apple SDK exported static `kCFPlugInDynamicRegistrationKey`.
     pub static kCFPlugInDynamicRegistrationKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPlugInDynamicRegisterFunctionKey`.
+    /// Apple SDK exported static `kCFPlugInDynamicRegisterFunctionKey`.
     pub static kCFPlugInDynamicRegisterFunctionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPlugInUnloadFunctionKey`.
+    /// Apple SDK exported static `kCFPlugInUnloadFunctionKey`.
     pub static kCFPlugInUnloadFunctionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPlugInFactoriesKey`.
+    /// Apple SDK exported static `kCFPlugInFactoriesKey`.
     pub static kCFPlugInFactoriesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFPlugInTypesKey`.
+    /// Apple SDK exported static `kCFPlugInTypesKey`.
     pub static kCFPlugInTypesKey: CFStringRef;
 }
 /// Apple SDK type alias `CFPlugInDynamicRegisterFunction`.
@@ -8696,38 +8696,38 @@ pub type CFPlugInFactoryFunction = ::core::option::Option<
     ) -> *mut ::core::ffi::c_void,
 >;
 extern "C" {
-/// Apple SDK function `CFPlugInGetTypeID`.
+    /// Apple SDK function `CFPlugInGetTypeID`.
     pub fn CFPlugInGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInCreate`.
+    /// Apple SDK function `CFPlugInCreate`.
     pub fn CFPlugInCreate(allocator: CFAllocatorRef, plugInURL: CFURLRef) -> CFPlugInRef;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInGetBundle`.
+    /// Apple SDK function `CFPlugInGetBundle`.
     pub fn CFPlugInGetBundle(plugIn: CFPlugInRef) -> CFBundleRef;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInSetLoadOnDemand`.
+    /// Apple SDK function `CFPlugInSetLoadOnDemand`.
     pub fn CFPlugInSetLoadOnDemand(plugIn: CFPlugInRef, flag: Boolean);
 }
 extern "C" {
-/// Apple SDK function `CFPlugInIsLoadOnDemand`.
+    /// Apple SDK function `CFPlugInIsLoadOnDemand`.
     pub fn CFPlugInIsLoadOnDemand(plugIn: CFPlugInRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInFindFactoriesForPlugInType`.
+    /// Apple SDK function `CFPlugInFindFactoriesForPlugInType`.
     pub fn CFPlugInFindFactoriesForPlugInType(typeUUID: CFUUIDRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInFindFactoriesForPlugInTypeInPlugIn`.
+    /// Apple SDK function `CFPlugInFindFactoriesForPlugInTypeInPlugIn`.
     pub fn CFPlugInFindFactoriesForPlugInTypeInPlugIn(
         typeUUID: CFUUIDRef,
         plugIn: CFPlugInRef,
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInInstanceCreate`.
+    /// Apple SDK function `CFPlugInInstanceCreate`.
     pub fn CFPlugInInstanceCreate(
         allocator: CFAllocatorRef,
         factoryUUID: CFUUIDRef,
@@ -8735,14 +8735,14 @@ extern "C" {
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInRegisterFactoryFunction`.
+    /// Apple SDK function `CFPlugInRegisterFactoryFunction`.
     pub fn CFPlugInRegisterFactoryFunction(
         factoryUUID: CFUUIDRef,
         func: CFPlugInFactoryFunction,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInRegisterFactoryFunctionByName`.
+    /// Apple SDK function `CFPlugInRegisterFactoryFunctionByName`.
     pub fn CFPlugInRegisterFactoryFunctionByName(
         factoryUUID: CFUUIDRef,
         plugIn: CFPlugInRef,
@@ -8750,23 +8750,23 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInUnregisterFactory`.
+    /// Apple SDK function `CFPlugInUnregisterFactory`.
     pub fn CFPlugInUnregisterFactory(factoryUUID: CFUUIDRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInRegisterPlugInType`.
+    /// Apple SDK function `CFPlugInRegisterPlugInType`.
     pub fn CFPlugInRegisterPlugInType(factoryUUID: CFUUIDRef, typeUUID: CFUUIDRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInUnregisterPlugInType`.
+    /// Apple SDK function `CFPlugInUnregisterPlugInType`.
     pub fn CFPlugInUnregisterPlugInType(factoryUUID: CFUUIDRef, typeUUID: CFUUIDRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInAddInstanceForFactory`.
+    /// Apple SDK function `CFPlugInAddInstanceForFactory`.
     pub fn CFPlugInAddInstanceForFactory(factoryID: CFUUIDRef);
 }
 extern "C" {
-/// Apple SDK function `CFPlugInRemoveInstanceForFactory`.
+    /// Apple SDK function `CFPlugInRemoveInstanceForFactory`.
     pub fn CFPlugInRemoveInstanceForFactory(factoryID: CFUUIDRef);
 }
 #[repr(C)]
@@ -8789,7 +8789,7 @@ pub type CFPlugInInstanceGetInterfaceFunction = ::core::option::Option<
 pub type CFPlugInInstanceDeallocateInstanceDataFunction =
     ::core::option::Option<unsafe extern "C" fn(instanceData: *mut ::core::ffi::c_void)>;
 extern "C" {
-/// Apple SDK function `CFPlugInInstanceGetInterfaceFunctionTable`.
+    /// Apple SDK function `CFPlugInInstanceGetInterfaceFunctionTable`.
     pub fn CFPlugInInstanceGetInterfaceFunctionTable(
         instance: CFPlugInInstanceRef,
         interfaceName: CFStringRef,
@@ -8797,21 +8797,21 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInInstanceGetFactoryName`.
+    /// Apple SDK function `CFPlugInInstanceGetFactoryName`.
     pub fn CFPlugInInstanceGetFactoryName(instance: CFPlugInInstanceRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInInstanceGetInstanceData`.
+    /// Apple SDK function `CFPlugInInstanceGetInstanceData`.
     pub fn CFPlugInInstanceGetInstanceData(
         instance: CFPlugInInstanceRef,
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInInstanceGetTypeID`.
+    /// Apple SDK function `CFPlugInInstanceGetTypeID`.
     pub fn CFPlugInInstanceGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFPlugInInstanceCreateWithInstanceDataSize`.
+    /// Apple SDK function `CFPlugInInstanceCreateWithInstanceDataSize`.
     pub fn CFPlugInInstanceCreateWithInstanceDataSize(
         allocator: CFAllocatorRef,
         instanceDataSize: CFIndex,
@@ -8856,11 +8856,11 @@ pub type CFMachPortInvalidationCallBack = ::core::option::Option<
     unsafe extern "C" fn(port: CFMachPortRef, info: *mut ::core::ffi::c_void),
 >;
 extern "C" {
-/// Apple SDK function `CFMachPortGetTypeID`.
+    /// Apple SDK function `CFMachPortGetTypeID`.
     pub fn CFMachPortGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFMachPortCreate`.
+    /// Apple SDK function `CFMachPortCreate`.
     pub fn CFMachPortCreate(
         allocator: CFAllocatorRef,
         callout: CFMachPortCallBack,
@@ -8869,7 +8869,7 @@ extern "C" {
     ) -> CFMachPortRef;
 }
 extern "C" {
-/// Apple SDK function `CFMachPortCreateWithPort`.
+    /// Apple SDK function `CFMachPortCreateWithPort`.
     pub fn CFMachPortCreateWithPort(
         allocator: CFAllocatorRef,
         portNum: mach_port_t,
@@ -8879,35 +8879,35 @@ extern "C" {
     ) -> CFMachPortRef;
 }
 extern "C" {
-/// Apple SDK function `CFMachPortGetPort`.
+    /// Apple SDK function `CFMachPortGetPort`.
     pub fn CFMachPortGetPort(port: CFMachPortRef) -> mach_port_t;
 }
 extern "C" {
-/// Apple SDK function `CFMachPortGetContext`.
+    /// Apple SDK function `CFMachPortGetContext`.
     pub fn CFMachPortGetContext(port: CFMachPortRef, context: *mut CFMachPortContext);
 }
 extern "C" {
-/// Apple SDK function `CFMachPortInvalidate`.
+    /// Apple SDK function `CFMachPortInvalidate`.
     pub fn CFMachPortInvalidate(port: CFMachPortRef);
 }
 extern "C" {
-/// Apple SDK function `CFMachPortIsValid`.
+    /// Apple SDK function `CFMachPortIsValid`.
     pub fn CFMachPortIsValid(port: CFMachPortRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFMachPortGetInvalidationCallBack`.
+    /// Apple SDK function `CFMachPortGetInvalidationCallBack`.
     pub fn CFMachPortGetInvalidationCallBack(port: CFMachPortRef)
         -> CFMachPortInvalidationCallBack;
 }
 extern "C" {
-/// Apple SDK function `CFMachPortSetInvalidationCallBack`.
+    /// Apple SDK function `CFMachPortSetInvalidationCallBack`.
     pub fn CFMachPortSetInvalidationCallBack(
         port: CFMachPortRef,
         callout: CFMachPortInvalidationCallBack,
     );
 }
 extern "C" {
-/// Apple SDK function `CFMachPortCreateRunLoopSource`.
+    /// Apple SDK function `CFMachPortCreateRunLoopSource`.
     pub fn CFMachPortCreateRunLoopSource(
         allocator: CFAllocatorRef,
         port: CFMachPortRef,
@@ -8925,11 +8925,11 @@ pub type CFAttributedStringRef = *const __CFAttributedString;
 /// Apple SDK type alias `CFMutableAttributedStringRef`.
 pub type CFMutableAttributedStringRef = *mut __CFAttributedString;
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetTypeID`.
+    /// Apple SDK function `CFAttributedStringGetTypeID`.
     pub fn CFAttributedStringGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringCreate`.
+    /// Apple SDK function `CFAttributedStringCreate`.
     pub fn CFAttributedStringCreate(
         alloc: CFAllocatorRef,
         str_: CFStringRef,
@@ -8937,7 +8937,7 @@ extern "C" {
     ) -> CFAttributedStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringCreateWithSubstring`.
+    /// Apple SDK function `CFAttributedStringCreateWithSubstring`.
     pub fn CFAttributedStringCreateWithSubstring(
         alloc: CFAllocatorRef,
         aStr: CFAttributedStringRef,
@@ -8945,22 +8945,22 @@ extern "C" {
     ) -> CFAttributedStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringCreateCopy`.
+    /// Apple SDK function `CFAttributedStringCreateCopy`.
     pub fn CFAttributedStringCreateCopy(
         alloc: CFAllocatorRef,
         aStr: CFAttributedStringRef,
     ) -> CFAttributedStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetString`.
+    /// Apple SDK function `CFAttributedStringGetString`.
     pub fn CFAttributedStringGetString(aStr: CFAttributedStringRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetLength`.
+    /// Apple SDK function `CFAttributedStringGetLength`.
     pub fn CFAttributedStringGetLength(aStr: CFAttributedStringRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetAttributes`.
+    /// Apple SDK function `CFAttributedStringGetAttributes`.
     pub fn CFAttributedStringGetAttributes(
         aStr: CFAttributedStringRef,
         loc: CFIndex,
@@ -8968,7 +8968,7 @@ extern "C" {
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetAttribute`.
+    /// Apple SDK function `CFAttributedStringGetAttribute`.
     pub fn CFAttributedStringGetAttribute(
         aStr: CFAttributedStringRef,
         loc: CFIndex,
@@ -8977,7 +8977,7 @@ extern "C" {
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetAttributesAndLongestEffectiveRange`.
+    /// Apple SDK function `CFAttributedStringGetAttributesAndLongestEffectiveRange`.
     pub fn CFAttributedStringGetAttributesAndLongestEffectiveRange(
         aStr: CFAttributedStringRef,
         loc: CFIndex,
@@ -8986,7 +8986,7 @@ extern "C" {
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetAttributeAndLongestEffectiveRange`.
+    /// Apple SDK function `CFAttributedStringGetAttributeAndLongestEffectiveRange`.
     pub fn CFAttributedStringGetAttributeAndLongestEffectiveRange(
         aStr: CFAttributedStringRef,
         loc: CFIndex,
@@ -8996,7 +8996,7 @@ extern "C" {
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringCreateMutableCopy`.
+    /// Apple SDK function `CFAttributedStringCreateMutableCopy`.
     pub fn CFAttributedStringCreateMutableCopy(
         alloc: CFAllocatorRef,
         maxLength: CFIndex,
@@ -9004,14 +9004,14 @@ extern "C" {
     ) -> CFMutableAttributedStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringCreateMutable`.
+    /// Apple SDK function `CFAttributedStringCreateMutable`.
     pub fn CFAttributedStringCreateMutable(
         alloc: CFAllocatorRef,
         maxLength: CFIndex,
     ) -> CFMutableAttributedStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringReplaceString`.
+    /// Apple SDK function `CFAttributedStringReplaceString`.
     pub fn CFAttributedStringReplaceString(
         aStr: CFMutableAttributedStringRef,
         range: CFRange,
@@ -9019,13 +9019,13 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetMutableString`.
+    /// Apple SDK function `CFAttributedStringGetMutableString`.
     pub fn CFAttributedStringGetMutableString(
         aStr: CFMutableAttributedStringRef,
     ) -> CFMutableStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringSetAttributes`.
+    /// Apple SDK function `CFAttributedStringSetAttributes`.
     pub fn CFAttributedStringSetAttributes(
         aStr: CFMutableAttributedStringRef,
         range: CFRange,
@@ -9034,7 +9034,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringSetAttribute`.
+    /// Apple SDK function `CFAttributedStringSetAttribute`.
     pub fn CFAttributedStringSetAttribute(
         aStr: CFMutableAttributedStringRef,
         range: CFRange,
@@ -9043,7 +9043,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringRemoveAttribute`.
+    /// Apple SDK function `CFAttributedStringRemoveAttribute`.
     pub fn CFAttributedStringRemoveAttribute(
         aStr: CFMutableAttributedStringRef,
         range: CFRange,
@@ -9051,7 +9051,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringReplaceAttributedString`.
+    /// Apple SDK function `CFAttributedStringReplaceAttributedString`.
     pub fn CFAttributedStringReplaceAttributedString(
         aStr: CFMutableAttributedStringRef,
         range: CFRange,
@@ -9059,15 +9059,15 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringBeginEditing`.
+    /// Apple SDK function `CFAttributedStringBeginEditing`.
     pub fn CFAttributedStringBeginEditing(aStr: CFMutableAttributedStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringEndEditing`.
+    /// Apple SDK function `CFAttributedStringEndEditing`.
     pub fn CFAttributedStringEndEditing(aStr: CFMutableAttributedStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetBidiLevelsAndResolvedDirections`.
+    /// Apple SDK function `CFAttributedStringGetBidiLevelsAndResolvedDirections`.
     pub fn CFAttributedStringGetBidiLevelsAndResolvedDirections(
         attributedString: CFAttributedStringRef,
         range: CFRange,
@@ -9077,7 +9077,7 @@ extern "C" {
     ) -> bool;
 }
 extern "C" {
-/// Apple SDK function `CFAttributedStringGetStatisticalWritingDirections`.
+    /// Apple SDK function `CFAttributedStringGetStatisticalWritingDirections`.
     pub fn CFAttributedStringGetStatisticalWritingDirections(
         attributedString: CFAttributedStringRef,
         range: CFRange,
@@ -9095,7 +9095,7 @@ pub struct __CFURLEnumerator {
 /// Apple SDK type alias `CFURLEnumeratorRef`.
 pub type CFURLEnumeratorRef = *const __CFURLEnumerator;
 extern "C" {
-/// Apple SDK function `CFURLEnumeratorGetTypeID`.
+    /// Apple SDK function `CFURLEnumeratorGetTypeID`.
     pub fn CFURLEnumeratorGetTypeID() -> CFTypeID;
 }
 /// Apple SDK type alias `CFURLEnumeratorOptions`.
@@ -9119,7 +9119,7 @@ pub const kCFURLEnumeratorGenerateRelativePathURLs: _bindgen_ty_49 = 64;
 /// Apple SDK type alias `_bindgen_ty_49`.
 pub type _bindgen_ty_49 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFURLEnumeratorCreateForDirectoryURL`.
+    /// Apple SDK function `CFURLEnumeratorCreateForDirectoryURL`.
     pub fn CFURLEnumeratorCreateForDirectoryURL(
         alloc: CFAllocatorRef,
         directoryURL: CFURLRef,
@@ -9128,7 +9128,7 @@ extern "C" {
     ) -> CFURLEnumeratorRef;
 }
 extern "C" {
-/// Apple SDK function `CFURLEnumeratorCreateForMountedVolumes`.
+    /// Apple SDK function `CFURLEnumeratorCreateForMountedVolumes`.
     pub fn CFURLEnumeratorCreateForMountedVolumes(
         alloc: CFAllocatorRef,
         option: CFURLEnumeratorOptions,
@@ -9148,7 +9148,7 @@ pub const kCFURLEnumeratorDirectoryPostOrderSuccess: _bindgen_ty_50 = 4;
 /// Apple SDK type alias `_bindgen_ty_50`.
 pub type _bindgen_ty_50 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFURLEnumeratorGetNextURL`.
+    /// Apple SDK function `CFURLEnumeratorGetNextURL`.
     pub fn CFURLEnumeratorGetNextURL(
         enumerator: CFURLEnumeratorRef,
         url: *mut CFURLRef,
@@ -9156,15 +9156,15 @@ extern "C" {
     ) -> CFURLEnumeratorResult;
 }
 extern "C" {
-/// Apple SDK function `CFURLEnumeratorSkipDescendents`.
+    /// Apple SDK function `CFURLEnumeratorSkipDescendents`.
     pub fn CFURLEnumeratorSkipDescendents(enumerator: CFURLEnumeratorRef);
 }
 extern "C" {
-/// Apple SDK function `CFURLEnumeratorGetDescendentLevel`.
+    /// Apple SDK function `CFURLEnumeratorGetDescendentLevel`.
     pub fn CFURLEnumeratorGetDescendentLevel(enumerator: CFURLEnumeratorRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFURLEnumeratorGetSourceDidChange`.
+    /// Apple SDK function `CFURLEnumeratorGetSourceDidChange`.
     pub fn CFURLEnumeratorGetSourceDidChange(enumerator: CFURLEnumeratorRef) -> Boolean;
 }
 #[repr(C)]
@@ -9184,78 +9184,78 @@ pub struct __CFFileSecurity {
 /// Apple SDK type alias `CFFileSecurityRef`.
 pub type CFFileSecurityRef = *mut __CFFileSecurity;
 extern "C" {
-/// Apple SDK function `CFFileSecurityGetTypeID`.
+    /// Apple SDK function `CFFileSecurityGetTypeID`.
     pub fn CFFileSecurityGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityCreate`.
+    /// Apple SDK function `CFFileSecurityCreate`.
     pub fn CFFileSecurityCreate(allocator: CFAllocatorRef) -> CFFileSecurityRef;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityCreateCopy`.
+    /// Apple SDK function `CFFileSecurityCreateCopy`.
     pub fn CFFileSecurityCreateCopy(
         allocator: CFAllocatorRef,
         fileSec: CFFileSecurityRef,
     ) -> CFFileSecurityRef;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityCopyOwnerUUID`.
+    /// Apple SDK function `CFFileSecurityCopyOwnerUUID`.
     pub fn CFFileSecurityCopyOwnerUUID(
         fileSec: CFFileSecurityRef,
         ownerUUID: *mut CFUUIDRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecuritySetOwnerUUID`.
+    /// Apple SDK function `CFFileSecuritySetOwnerUUID`.
     pub fn CFFileSecuritySetOwnerUUID(fileSec: CFFileSecurityRef, ownerUUID: CFUUIDRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityCopyGroupUUID`.
+    /// Apple SDK function `CFFileSecurityCopyGroupUUID`.
     pub fn CFFileSecurityCopyGroupUUID(
         fileSec: CFFileSecurityRef,
         groupUUID: *mut CFUUIDRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecuritySetGroupUUID`.
+    /// Apple SDK function `CFFileSecuritySetGroupUUID`.
     pub fn CFFileSecuritySetGroupUUID(fileSec: CFFileSecurityRef, groupUUID: CFUUIDRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityCopyAccessControlList`.
+    /// Apple SDK function `CFFileSecurityCopyAccessControlList`.
     pub fn CFFileSecurityCopyAccessControlList(
         fileSec: CFFileSecurityRef,
         accessControlList: *mut acl_t,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecuritySetAccessControlList`.
+    /// Apple SDK function `CFFileSecuritySetAccessControlList`.
     pub fn CFFileSecuritySetAccessControlList(
         fileSec: CFFileSecurityRef,
         accessControlList: acl_t,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityGetOwner`.
+    /// Apple SDK function `CFFileSecurityGetOwner`.
     pub fn CFFileSecurityGetOwner(fileSec: CFFileSecurityRef, owner: *mut uid_t) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecuritySetOwner`.
+    /// Apple SDK function `CFFileSecuritySetOwner`.
     pub fn CFFileSecuritySetOwner(fileSec: CFFileSecurityRef, owner: uid_t) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityGetGroup`.
+    /// Apple SDK function `CFFileSecurityGetGroup`.
     pub fn CFFileSecurityGetGroup(fileSec: CFFileSecurityRef, group: *mut gid_t) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecuritySetGroup`.
+    /// Apple SDK function `CFFileSecuritySetGroup`.
     pub fn CFFileSecuritySetGroup(fileSec: CFFileSecurityRef, group: gid_t) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecurityGetMode`.
+    /// Apple SDK function `CFFileSecurityGetMode`.
     pub fn CFFileSecurityGetMode(fileSec: CFFileSecurityRef, mode: *mut mode_t) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileSecuritySetMode`.
+    /// Apple SDK function `CFFileSecuritySetMode`.
     pub fn CFFileSecuritySetMode(fileSec: CFFileSecurityRef, mode: mode_t) -> Boolean;
 }
 /// Apple SDK type alias `CFFileSecurityClearOptions`.
@@ -9275,14 +9275,14 @@ pub const kCFFileSecurityClearAccessControlList: _bindgen_ty_51 = 32;
 /// Apple SDK type alias `_bindgen_ty_51`.
 pub type _bindgen_ty_51 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFFileSecurityClearProperties`.
+    /// Apple SDK function `CFFileSecurityClearProperties`.
     pub fn CFFileSecurityClearProperties(
         fileSec: CFFileSecurityRef,
         clearPropertyMask: CFFileSecurityClearOptions,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerCopyBestStringLanguage`.
+    /// Apple SDK function `CFStringTokenizerCopyBestStringLanguage`.
     pub fn CFStringTokenizerCopyBestStringLanguage(
         string: CFStringRef,
         range: CFRange,
@@ -9331,11 +9331,11 @@ pub const kCFStringTokenizerTokenIsCJWordMask: _bindgen_ty_53 = 32;
 /// Apple SDK type alias `_bindgen_ty_53`.
 pub type _bindgen_ty_53 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CFStringTokenizerGetTypeID`.
+    /// Apple SDK function `CFStringTokenizerGetTypeID`.
     pub fn CFStringTokenizerGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerCreate`.
+    /// Apple SDK function `CFStringTokenizerCreate`.
     pub fn CFStringTokenizerCreate(
         alloc: CFAllocatorRef,
         string: CFStringRef,
@@ -9345,7 +9345,7 @@ extern "C" {
     ) -> CFStringTokenizerRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerSetString`.
+    /// Apple SDK function `CFStringTokenizerSetString`.
     pub fn CFStringTokenizerSetString(
         tokenizer: CFStringTokenizerRef,
         string: CFStringRef,
@@ -9353,31 +9353,31 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerGoToTokenAtIndex`.
+    /// Apple SDK function `CFStringTokenizerGoToTokenAtIndex`.
     pub fn CFStringTokenizerGoToTokenAtIndex(
         tokenizer: CFStringTokenizerRef,
         index: CFIndex,
     ) -> CFStringTokenizerTokenType;
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerAdvanceToNextToken`.
+    /// Apple SDK function `CFStringTokenizerAdvanceToNextToken`.
     pub fn CFStringTokenizerAdvanceToNextToken(
         tokenizer: CFStringTokenizerRef,
     ) -> CFStringTokenizerTokenType;
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerGetCurrentTokenRange`.
+    /// Apple SDK function `CFStringTokenizerGetCurrentTokenRange`.
     pub fn CFStringTokenizerGetCurrentTokenRange(tokenizer: CFStringTokenizerRef) -> CFRange;
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerCopyCurrentTokenAttribute`.
+    /// Apple SDK function `CFStringTokenizerCopyCurrentTokenAttribute`.
     pub fn CFStringTokenizerCopyCurrentTokenAttribute(
         tokenizer: CFStringTokenizerRef,
         attribute: CFOptionFlags,
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CFStringTokenizerGetCurrentSubTokens`.
+    /// Apple SDK function `CFStringTokenizerGetCurrentSubTokens`.
     pub fn CFStringTokenizerGetCurrentSubTokens(
         tokenizer: CFStringTokenizerRef,
         ranges: *mut CFRange,
@@ -9423,11 +9423,11 @@ pub struct CFFileDescriptorContext {
         ::core::option::Option<unsafe extern "C" fn(info: *mut ::core::ffi::c_void) -> CFStringRef>,
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorGetTypeID`.
+    /// Apple SDK function `CFFileDescriptorGetTypeID`.
     pub fn CFFileDescriptorGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorCreate`.
+    /// Apple SDK function `CFFileDescriptorCreate`.
     pub fn CFFileDescriptorCreate(
         allocator: CFAllocatorRef,
         fd: CFFileDescriptorNativeDescriptor,
@@ -9437,36 +9437,36 @@ extern "C" {
     ) -> CFFileDescriptorRef;
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorGetNativeDescriptor`.
+    /// Apple SDK function `CFFileDescriptorGetNativeDescriptor`.
     pub fn CFFileDescriptorGetNativeDescriptor(
         f: CFFileDescriptorRef,
     ) -> CFFileDescriptorNativeDescriptor;
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorGetContext`.
+    /// Apple SDK function `CFFileDescriptorGetContext`.
     pub fn CFFileDescriptorGetContext(
         f: CFFileDescriptorRef,
         context: *mut CFFileDescriptorContext,
     );
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorEnableCallBacks`.
+    /// Apple SDK function `CFFileDescriptorEnableCallBacks`.
     pub fn CFFileDescriptorEnableCallBacks(f: CFFileDescriptorRef, callBackTypes: CFOptionFlags);
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorDisableCallBacks`.
+    /// Apple SDK function `CFFileDescriptorDisableCallBacks`.
     pub fn CFFileDescriptorDisableCallBacks(f: CFFileDescriptorRef, callBackTypes: CFOptionFlags);
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorInvalidate`.
+    /// Apple SDK function `CFFileDescriptorInvalidate`.
     pub fn CFFileDescriptorInvalidate(f: CFFileDescriptorRef);
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorIsValid`.
+    /// Apple SDK function `CFFileDescriptorIsValid`.
     pub fn CFFileDescriptorIsValid(f: CFFileDescriptorRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFFileDescriptorCreateRunLoopSource`.
+    /// Apple SDK function `CFFileDescriptorCreateRunLoopSource`.
     pub fn CFFileDescriptorCreateRunLoopSource(
         allocator: CFAllocatorRef,
         f: CFFileDescriptorRef,
@@ -9486,11 +9486,11 @@ pub type CFUserNotificationCallBack = ::core::option::Option<
     unsafe extern "C" fn(userNotification: CFUserNotificationRef, responseFlags: CFOptionFlags),
 >;
 extern "C" {
-/// Apple SDK function `CFUserNotificationGetTypeID`.
+    /// Apple SDK function `CFUserNotificationGetTypeID`.
     pub fn CFUserNotificationGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationCreate`.
+    /// Apple SDK function `CFUserNotificationCreate`.
     pub fn CFUserNotificationCreate(
         allocator: CFAllocatorRef,
         timeout: CFTimeInterval,
@@ -9500,7 +9500,7 @@ extern "C" {
     ) -> CFUserNotificationRef;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationReceiveResponse`.
+    /// Apple SDK function `CFUserNotificationReceiveResponse`.
     pub fn CFUserNotificationReceiveResponse(
         userNotification: CFUserNotificationRef,
         timeout: CFTimeInterval,
@@ -9508,7 +9508,7 @@ extern "C" {
     ) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationGetResponseValue`.
+    /// Apple SDK function `CFUserNotificationGetResponseValue`.
     pub fn CFUserNotificationGetResponseValue(
         userNotification: CFUserNotificationRef,
         key: CFStringRef,
@@ -9516,13 +9516,13 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationGetResponseDictionary`.
+    /// Apple SDK function `CFUserNotificationGetResponseDictionary`.
     pub fn CFUserNotificationGetResponseDictionary(
         userNotification: CFUserNotificationRef,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationUpdate`.
+    /// Apple SDK function `CFUserNotificationUpdate`.
     pub fn CFUserNotificationUpdate(
         userNotification: CFUserNotificationRef,
         timeout: CFTimeInterval,
@@ -9531,11 +9531,11 @@ extern "C" {
     ) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationCancel`.
+    /// Apple SDK function `CFUserNotificationCancel`.
     pub fn CFUserNotificationCancel(userNotification: CFUserNotificationRef) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationCreateRunLoopSource`.
+    /// Apple SDK function `CFUserNotificationCreateRunLoopSource`.
     pub fn CFUserNotificationCreateRunLoopSource(
         allocator: CFAllocatorRef,
         userNotification: CFUserNotificationRef,
@@ -9544,7 +9544,7 @@ extern "C" {
     ) -> CFRunLoopSourceRef;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationDisplayNotice`.
+    /// Apple SDK function `CFUserNotificationDisplayNotice`.
     pub fn CFUserNotificationDisplayNotice(
         timeout: CFTimeInterval,
         flags: CFOptionFlags,
@@ -9557,7 +9557,7 @@ extern "C" {
     ) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFUserNotificationDisplayAlert`.
+    /// Apple SDK function `CFUserNotificationDisplayAlert`.
     pub fn CFUserNotificationDisplayAlert(
         timeout: CFTimeInterval,
         flags: CFOptionFlags,
@@ -9599,83 +9599,83 @@ pub const kCFUserNotificationUseRadioButtonsFlag: _bindgen_ty_57 = 64;
 /// Apple SDK type alias `_bindgen_ty_57`.
 pub type _bindgen_ty_57 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationIconURLKey`.
+    /// Apple SDK exported static `kCFUserNotificationIconURLKey`.
     pub static kCFUserNotificationIconURLKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationSoundURLKey`.
+    /// Apple SDK exported static `kCFUserNotificationSoundURLKey`.
     pub static kCFUserNotificationSoundURLKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationLocalizationURLKey`.
+    /// Apple SDK exported static `kCFUserNotificationLocalizationURLKey`.
     pub static kCFUserNotificationLocalizationURLKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationAlertHeaderKey`.
+    /// Apple SDK exported static `kCFUserNotificationAlertHeaderKey`.
     pub static kCFUserNotificationAlertHeaderKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationAlertMessageKey`.
+    /// Apple SDK exported static `kCFUserNotificationAlertMessageKey`.
     pub static kCFUserNotificationAlertMessageKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationDefaultButtonTitleKey`.
+    /// Apple SDK exported static `kCFUserNotificationDefaultButtonTitleKey`.
     pub static kCFUserNotificationDefaultButtonTitleKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationAlternateButtonTitleKey`.
+    /// Apple SDK exported static `kCFUserNotificationAlternateButtonTitleKey`.
     pub static kCFUserNotificationAlternateButtonTitleKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationOtherButtonTitleKey`.
+    /// Apple SDK exported static `kCFUserNotificationOtherButtonTitleKey`.
     pub static kCFUserNotificationOtherButtonTitleKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationProgressIndicatorValueKey`.
+    /// Apple SDK exported static `kCFUserNotificationProgressIndicatorValueKey`.
     pub static kCFUserNotificationProgressIndicatorValueKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationPopUpTitlesKey`.
+    /// Apple SDK exported static `kCFUserNotificationPopUpTitlesKey`.
     pub static kCFUserNotificationPopUpTitlesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationTextFieldTitlesKey`.
+    /// Apple SDK exported static `kCFUserNotificationTextFieldTitlesKey`.
     pub static kCFUserNotificationTextFieldTitlesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationCheckBoxTitlesKey`.
+    /// Apple SDK exported static `kCFUserNotificationCheckBoxTitlesKey`.
     pub static kCFUserNotificationCheckBoxTitlesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationTextFieldValuesKey`.
+    /// Apple SDK exported static `kCFUserNotificationTextFieldValuesKey`.
     pub static kCFUserNotificationTextFieldValuesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationPopUpSelectionKey`.
+    /// Apple SDK exported static `kCFUserNotificationPopUpSelectionKey`.
     pub static kCFUserNotificationPopUpSelectionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationAlertTopMostKey`.
+    /// Apple SDK exported static `kCFUserNotificationAlertTopMostKey`.
     pub static kCFUserNotificationAlertTopMostKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationKeyboardTypesKey`.
+    /// Apple SDK exported static `kCFUserNotificationKeyboardTypesKey`.
     pub static kCFUserNotificationKeyboardTypesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationAlertAccessibilityIdentifierKey`.
+    /// Apple SDK exported static `kCFUserNotificationAlertAccessibilityIdentifierKey`.
     pub static kCFUserNotificationAlertAccessibilityIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationDefaultButtonAccessibilityIdentifierKey`.
+    /// Apple SDK exported static `kCFUserNotificationDefaultButtonAccessibilityIdentifierKey`.
     pub static kCFUserNotificationDefaultButtonAccessibilityIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationAlternateButtonAccessibilityIdentifierKey`.
+    /// Apple SDK exported static `kCFUserNotificationAlternateButtonAccessibilityIdentifierKey`.
     pub static kCFUserNotificationAlternateButtonAccessibilityIdentifierKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFUserNotificationOtherButtonAccessibilityIdentifierKey`.
+    /// Apple SDK exported static `kCFUserNotificationOtherButtonAccessibilityIdentifierKey`.
     pub static kCFUserNotificationOtherButtonAccessibilityIdentifierKey: CFStringRef;
 }
 /// Apple SDK constant `kCFXMLNodeCurrentVersion`.
@@ -9818,11 +9818,11 @@ pub struct CFXMLEntityReferenceInfo {
     pub entityType: CFXMLEntityTypeCode,
 }
 extern "C" {
-/// Apple SDK function `CFXMLNodeGetTypeID`.
+    /// Apple SDK function `CFXMLNodeGetTypeID`.
     pub fn CFXMLNodeGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFXMLNodeCreate`.
+    /// Apple SDK function `CFXMLNodeCreate`.
     pub fn CFXMLNodeCreate(
         alloc: CFAllocatorRef,
         xmlType: CFXMLNodeTypeCode,
@@ -9832,31 +9832,31 @@ extern "C" {
     ) -> CFXMLNodeRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLNodeCreateCopy`.
+    /// Apple SDK function `CFXMLNodeCreateCopy`.
     pub fn CFXMLNodeCreateCopy(alloc: CFAllocatorRef, origNode: CFXMLNodeRef) -> CFXMLNodeRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLNodeGetTypeCode`.
+    /// Apple SDK function `CFXMLNodeGetTypeCode`.
     pub fn CFXMLNodeGetTypeCode(node: CFXMLNodeRef) -> CFXMLNodeTypeCode;
 }
 extern "C" {
-/// Apple SDK function `CFXMLNodeGetString`.
+    /// Apple SDK function `CFXMLNodeGetString`.
     pub fn CFXMLNodeGetString(node: CFXMLNodeRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLNodeGetInfoPtr`.
+    /// Apple SDK function `CFXMLNodeGetInfoPtr`.
     pub fn CFXMLNodeGetInfoPtr(node: CFXMLNodeRef) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFXMLNodeGetVersion`.
+    /// Apple SDK function `CFXMLNodeGetVersion`.
     pub fn CFXMLNodeGetVersion(node: CFXMLNodeRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFXMLTreeCreateWithNode`.
+    /// Apple SDK function `CFXMLTreeCreateWithNode`.
     pub fn CFXMLTreeCreateWithNode(allocator: CFAllocatorRef, node: CFXMLNodeRef) -> CFXMLTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLTreeGetNode`.
+    /// Apple SDK function `CFXMLTreeGetNode`.
     pub fn CFXMLTreeGetNode(xmlTree: CFXMLTreeRef) -> CFXMLNodeRef;
 }
 #[repr(C)]
@@ -10000,11 +10000,11 @@ pub struct CFXMLParserContext {
     pub copyDescription: CFXMLParserCopyDescriptionCallBack,
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetTypeID`.
+    /// Apple SDK function `CFXMLParserGetTypeID`.
     pub fn CFXMLParserGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserCreate`.
+    /// Apple SDK function `CFXMLParserCreate`.
     pub fn CFXMLParserCreate(
         allocator: CFAllocatorRef,
         xmlData: CFDataRef,
@@ -10016,7 +10016,7 @@ extern "C" {
     ) -> CFXMLParserRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserCreateWithDataFromURL`.
+    /// Apple SDK function `CFXMLParserCreateWithDataFromURL`.
     pub fn CFXMLParserCreateWithDataFromURL(
         allocator: CFAllocatorRef,
         dataSource: CFURLRef,
@@ -10027,39 +10027,39 @@ extern "C" {
     ) -> CFXMLParserRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetContext`.
+    /// Apple SDK function `CFXMLParserGetContext`.
     pub fn CFXMLParserGetContext(parser: CFXMLParserRef, context: *mut CFXMLParserContext);
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetCallBacks`.
+    /// Apple SDK function `CFXMLParserGetCallBacks`.
     pub fn CFXMLParserGetCallBacks(parser: CFXMLParserRef, callBacks: *mut CFXMLParserCallBacks);
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetSourceURL`.
+    /// Apple SDK function `CFXMLParserGetSourceURL`.
     pub fn CFXMLParserGetSourceURL(parser: CFXMLParserRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetLocation`.
+    /// Apple SDK function `CFXMLParserGetLocation`.
     pub fn CFXMLParserGetLocation(parser: CFXMLParserRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetLineNumber`.
+    /// Apple SDK function `CFXMLParserGetLineNumber`.
     pub fn CFXMLParserGetLineNumber(parser: CFXMLParserRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetDocument`.
+    /// Apple SDK function `CFXMLParserGetDocument`.
     pub fn CFXMLParserGetDocument(parser: CFXMLParserRef) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserGetStatusCode`.
+    /// Apple SDK function `CFXMLParserGetStatusCode`.
     pub fn CFXMLParserGetStatusCode(parser: CFXMLParserRef) -> CFXMLParserStatusCode;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserCopyErrorDescription`.
+    /// Apple SDK function `CFXMLParserCopyErrorDescription`.
     pub fn CFXMLParserCopyErrorDescription(parser: CFXMLParserRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserAbort`.
+    /// Apple SDK function `CFXMLParserAbort`.
     pub fn CFXMLParserAbort(
         parser: CFXMLParserRef,
         errorCode: CFXMLParserStatusCode,
@@ -10067,11 +10067,11 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFXMLParserParse`.
+    /// Apple SDK function `CFXMLParserParse`.
     pub fn CFXMLParserParse(parser: CFXMLParserRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFXMLTreeCreateFromData`.
+    /// Apple SDK function `CFXMLTreeCreateFromData`.
     pub fn CFXMLTreeCreateFromData(
         allocator: CFAllocatorRef,
         xmlData: CFDataRef,
@@ -10081,7 +10081,7 @@ extern "C" {
     ) -> CFXMLTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLTreeCreateFromDataWithError`.
+    /// Apple SDK function `CFXMLTreeCreateFromDataWithError`.
     pub fn CFXMLTreeCreateFromDataWithError(
         allocator: CFAllocatorRef,
         xmlData: CFDataRef,
@@ -10092,7 +10092,7 @@ extern "C" {
     ) -> CFXMLTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLTreeCreateWithDataFromURL`.
+    /// Apple SDK function `CFXMLTreeCreateWithDataFromURL`.
     pub fn CFXMLTreeCreateWithDataFromURL(
         allocator: CFAllocatorRef,
         dataSource: CFURLRef,
@@ -10101,11 +10101,11 @@ extern "C" {
     ) -> CFXMLTreeRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLTreeCreateXMLData`.
+    /// Apple SDK function `CFXMLTreeCreateXMLData`.
     pub fn CFXMLTreeCreateXMLData(allocator: CFAllocatorRef, xmlTree: CFXMLTreeRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLCreateStringByEscapingEntities`.
+    /// Apple SDK function `CFXMLCreateStringByEscapingEntities`.
     pub fn CFXMLCreateStringByEscapingEntities(
         allocator: CFAllocatorRef,
         string: CFStringRef,
@@ -10113,7 +10113,7 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFXMLCreateStringByUnescapingEntities`.
+    /// Apple SDK function `CFXMLCreateStringByUnescapingEntities`.
     pub fn CFXMLCreateStringByUnescapingEntities(
         allocator: CFAllocatorRef,
         string: CFStringRef,
@@ -10121,19 +10121,19 @@ extern "C" {
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFXMLTreeErrorDescription`.
+    /// Apple SDK exported static `kCFXMLTreeErrorDescription`.
     pub static kCFXMLTreeErrorDescription: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFXMLTreeErrorLineNumber`.
+    /// Apple SDK exported static `kCFXMLTreeErrorLineNumber`.
     pub static kCFXMLTreeErrorLineNumber: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFXMLTreeErrorLocation`.
+    /// Apple SDK exported static `kCFXMLTreeErrorLocation`.
     pub static kCFXMLTreeErrorLocation: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFXMLTreeErrorStatusCode`.
+    /// Apple SDK exported static `kCFXMLTreeErrorStatusCode`.
     pub static kCFXMLTreeErrorStatusCode: CFStringRef;
 }
 /// Apple SDK type alias `CMItemCount`.
@@ -10182,39 +10182,39 @@ pub struct CMTime {
     pub epoch: CMTimeEpoch,
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeInvalid`.
+    /// Apple SDK exported static `kCMTimeInvalid`.
     pub static kCMTimeInvalid: CMTime;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeIndefinite`.
+    /// Apple SDK exported static `kCMTimeIndefinite`.
     pub static kCMTimeIndefinite: CMTime;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimePositiveInfinity`.
+    /// Apple SDK exported static `kCMTimePositiveInfinity`.
     pub static kCMTimePositiveInfinity: CMTime;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeNegativeInfinity`.
+    /// Apple SDK exported static `kCMTimeNegativeInfinity`.
     pub static kCMTimeNegativeInfinity: CMTime;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeZero`.
+    /// Apple SDK exported static `kCMTimeZero`.
     pub static kCMTimeZero: CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMake`.
+    /// Apple SDK function `CMTimeMake`.
     pub fn CMTimeMake(value: i64, timescale: i32) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMakeWithEpoch`.
+    /// Apple SDK function `CMTimeMakeWithEpoch`.
     pub fn CMTimeMakeWithEpoch(value: i64, timescale: i32, epoch: i64) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMakeWithSeconds`.
+    /// Apple SDK function `CMTimeMakeWithSeconds`.
     pub fn CMTimeMakeWithSeconds(seconds: Float64, preferredTimescale: i32) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeGetSeconds`.
+    /// Apple SDK function `CMTimeGetSeconds`.
     pub fn CMTimeGetSeconds(time: CMTime) -> Float64;
 }
 /// Apple SDK type alias `CMTimeRoundingMethod`.
@@ -10236,7 +10236,7 @@ pub const kCMTimeRoundingMethod_Default: _bindgen_ty_65 = 1;
 /// Apple SDK type alias `_bindgen_ty_65`.
 pub type _bindgen_ty_65 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMTimeConvertScale`.
+    /// Apple SDK function `CMTimeConvertScale`.
     pub fn CMTimeConvertScale(
         time: CMTime,
         newTimescale: i32,
@@ -10244,71 +10244,71 @@ extern "C" {
     ) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeAdd`.
+    /// Apple SDK function `CMTimeAdd`.
     pub fn CMTimeAdd(lhs: CMTime, rhs: CMTime) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeSubtract`.
+    /// Apple SDK function `CMTimeSubtract`.
     pub fn CMTimeSubtract(lhs: CMTime, rhs: CMTime) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMultiply`.
+    /// Apple SDK function `CMTimeMultiply`.
     pub fn CMTimeMultiply(time: CMTime, multiplier: i32) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMultiplyByFloat64`.
+    /// Apple SDK function `CMTimeMultiplyByFloat64`.
     pub fn CMTimeMultiplyByFloat64(time: CMTime, multiplier: Float64) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMultiplyByRatio`.
+    /// Apple SDK function `CMTimeMultiplyByRatio`.
     pub fn CMTimeMultiplyByRatio(time: CMTime, multiplier: i32, divisor: i32) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCompare`.
+    /// Apple SDK function `CMTimeCompare`.
     pub fn CMTimeCompare(time1: CMTime, time2: CMTime) -> i32;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMinimum`.
+    /// Apple SDK function `CMTimeMinimum`.
     pub fn CMTimeMinimum(time1: CMTime, time2: CMTime) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMaximum`.
+    /// Apple SDK function `CMTimeMaximum`.
     pub fn CMTimeMaximum(time1: CMTime, time2: CMTime) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeAbsoluteValue`.
+    /// Apple SDK function `CMTimeAbsoluteValue`.
     pub fn CMTimeAbsoluteValue(time: CMTime) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCopyAsDictionary`.
+    /// Apple SDK function `CMTimeCopyAsDictionary`.
     pub fn CMTimeCopyAsDictionary(time: CMTime, allocator: CFAllocatorRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMakeFromDictionary`.
+    /// Apple SDK function `CMTimeMakeFromDictionary`.
     pub fn CMTimeMakeFromDictionary(dictionaryRepresentation: CFDictionaryRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeValueKey`.
+    /// Apple SDK exported static `kCMTimeValueKey`.
     pub static kCMTimeValueKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeScaleKey`.
+    /// Apple SDK exported static `kCMTimeScaleKey`.
     pub static kCMTimeScaleKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeEpochKey`.
+    /// Apple SDK exported static `kCMTimeEpochKey`.
     pub static kCMTimeEpochKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeFlagsKey`.
+    /// Apple SDK exported static `kCMTimeFlagsKey`.
     pub static kCMTimeFlagsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCopyDescription`.
+    /// Apple SDK function `CMTimeCopyDescription`.
     pub fn CMTimeCopyDescription(allocator: CFAllocatorRef, time: CMTime) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeShow`.
+    /// Apple SDK function `CMTimeShow`.
     pub fn CMTimeShow(time: CMTime);
 }
 #[repr(C)]
@@ -10319,43 +10319,43 @@ pub struct CMTimeRange {
     pub duration: CMTime,
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeRangeZero`.
+    /// Apple SDK exported static `kCMTimeRangeZero`.
     pub static kCMTimeRangeZero: CMTimeRange;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeRangeInvalid`.
+    /// Apple SDK exported static `kCMTimeRangeInvalid`.
     pub static kCMTimeRangeInvalid: CMTimeRange;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeMake`.
+    /// Apple SDK function `CMTimeRangeMake`.
     pub fn CMTimeRangeMake(start: CMTime, duration: CMTime) -> CMTimeRange;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeGetUnion`.
+    /// Apple SDK function `CMTimeRangeGetUnion`.
     pub fn CMTimeRangeGetUnion(range: CMTimeRange, otherRange: CMTimeRange) -> CMTimeRange;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeGetIntersection`.
+    /// Apple SDK function `CMTimeRangeGetIntersection`.
     pub fn CMTimeRangeGetIntersection(range: CMTimeRange, otherRange: CMTimeRange) -> CMTimeRange;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeEqual`.
+    /// Apple SDK function `CMTimeRangeEqual`.
     pub fn CMTimeRangeEqual(range1: CMTimeRange, range2: CMTimeRange) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeContainsTime`.
+    /// Apple SDK function `CMTimeRangeContainsTime`.
     pub fn CMTimeRangeContainsTime(range: CMTimeRange, time: CMTime) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeContainsTimeRange`.
+    /// Apple SDK function `CMTimeRangeContainsTimeRange`.
     pub fn CMTimeRangeContainsTimeRange(range: CMTimeRange, otherRange: CMTimeRange) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeGetEnd`.
+    /// Apple SDK function `CMTimeRangeGetEnd`.
     pub fn CMTimeRangeGetEnd(range: CMTimeRange) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMapTimeFromRangeToRange`.
+    /// Apple SDK function `CMTimeMapTimeFromRangeToRange`.
     pub fn CMTimeMapTimeFromRangeToRange(
         t: CMTime,
         fromRange: CMTimeRange,
@@ -10363,11 +10363,11 @@ extern "C" {
     ) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeClampToRange`.
+    /// Apple SDK function `CMTimeClampToRange`.
     pub fn CMTimeClampToRange(time: CMTime, range: CMTimeRange) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMapDurationFromRangeToRange`.
+    /// Apple SDK function `CMTimeMapDurationFromRangeToRange`.
     pub fn CMTimeMapDurationFromRangeToRange(
         dur: CMTime,
         fromRange: CMTimeRange,
@@ -10375,39 +10375,39 @@ extern "C" {
     ) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeFoldIntoRange`.
+    /// Apple SDK function `CMTimeFoldIntoRange`.
     pub fn CMTimeFoldIntoRange(time: CMTime, foldRange: CMTimeRange) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeFromTimeToTime`.
+    /// Apple SDK function `CMTimeRangeFromTimeToTime`.
     pub fn CMTimeRangeFromTimeToTime(start: CMTime, end: CMTime) -> CMTimeRange;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeCopyAsDictionary`.
+    /// Apple SDK function `CMTimeRangeCopyAsDictionary`.
     pub fn CMTimeRangeCopyAsDictionary(
         range: CMTimeRange,
         allocator: CFAllocatorRef,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeMakeFromDictionary`.
+    /// Apple SDK function `CMTimeRangeMakeFromDictionary`.
     pub fn CMTimeRangeMakeFromDictionary(dictionaryRepresentation: CFDictionaryRef) -> CMTimeRange;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeRangeStartKey`.
+    /// Apple SDK exported static `kCMTimeRangeStartKey`.
     pub static kCMTimeRangeStartKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeRangeDurationKey`.
+    /// Apple SDK exported static `kCMTimeRangeDurationKey`.
     pub static kCMTimeRangeDurationKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeCopyDescription`.
+    /// Apple SDK function `CMTimeRangeCopyDescription`.
     pub fn CMTimeRangeCopyDescription(allocator: CFAllocatorRef, range: CMTimeRange)
         -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeRangeShow`.
+    /// Apple SDK function `CMTimeRangeShow`.
     pub fn CMTimeRangeShow(range: CMTimeRange);
 }
 #[repr(C)]
@@ -10418,47 +10418,47 @@ pub struct CMTimeMapping {
     pub target: CMTimeRange,
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeMappingInvalid`.
+    /// Apple SDK exported static `kCMTimeMappingInvalid`.
     pub static kCMTimeMappingInvalid: CMTimeMapping;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMappingMake`.
+    /// Apple SDK function `CMTimeMappingMake`.
     pub fn CMTimeMappingMake(source: CMTimeRange, target: CMTimeRange) -> CMTimeMapping;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMappingMakeEmpty`.
+    /// Apple SDK function `CMTimeMappingMakeEmpty`.
     pub fn CMTimeMappingMakeEmpty(target: CMTimeRange) -> CMTimeMapping;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMappingCopyAsDictionary`.
+    /// Apple SDK function `CMTimeMappingCopyAsDictionary`.
     pub fn CMTimeMappingCopyAsDictionary(
         mapping: CMTimeMapping,
         allocator: CFAllocatorRef,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMappingMakeFromDictionary`.
+    /// Apple SDK function `CMTimeMappingMakeFromDictionary`.
     pub fn CMTimeMappingMakeFromDictionary(
         dictionaryRepresentation: CFDictionaryRef,
     ) -> CMTimeMapping;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeMappingSourceKey`.
+    /// Apple SDK exported static `kCMTimeMappingSourceKey`.
     pub static kCMTimeMappingSourceKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeMappingTargetKey`.
+    /// Apple SDK exported static `kCMTimeMappingTargetKey`.
     pub static kCMTimeMappingTargetKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMappingCopyDescription`.
+    /// Apple SDK function `CMTimeMappingCopyDescription`.
     pub fn CMTimeMappingCopyDescription(
         allocator: CFAllocatorRef,
         mapping: CMTimeMapping,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimeMappingShow`.
+    /// Apple SDK function `CMTimeMappingShow`.
     pub fn CMTimeMappingShow(mapping: CMTimeMapping);
 }
 #[repr(C)]
@@ -10601,11 +10601,11 @@ pub struct CVTime {
     pub flags: i32,
 }
 extern "C" {
-/// Apple SDK exported static `kCVZeroTime`.
+    /// Apple SDK exported static `kCVZeroTime`.
     pub static kCVZeroTime: CVTime;
 }
 extern "C" {
-/// Apple SDK exported static `kCVIndefiniteTime`.
+    /// Apple SDK exported static `kCVIndefiniteTime`.
     pub static kCVIndefiniteTime: CVTime;
 }
 #[repr(C)]
@@ -10647,15 +10647,15 @@ pub type _bindgen_ty_84 = ::core::ffi::c_uint;
 /// Apple SDK type alias `CVReturn`.
 pub type CVReturn = i32;
 extern "C" {
-/// Apple SDK function `CVGetCurrentHostTime`.
+    /// Apple SDK function `CVGetCurrentHostTime`.
     pub fn CVGetCurrentHostTime() -> u64;
 }
 extern "C" {
-/// Apple SDK function `CVGetHostClockFrequency`.
+    /// Apple SDK function `CVGetHostClockFrequency`.
     pub fn CVGetHostClockFrequency() -> f64;
 }
 extern "C" {
-/// Apple SDK function `CVGetHostClockMinimumTimeDelta`.
+    /// Apple SDK function `CVGetHostClockMinimumTimeDelta`.
     pub fn CVGetHostClockMinimumTimeDelta() -> u32;
 }
 #[repr(C)]
@@ -10724,11 +10724,11 @@ pub type CVDisplayLinkOutputCallback = ::core::option::Option<
 /// Apple SDK type alias `CVDisplayLinkOutputHandler`.
 pub type CVDisplayLinkOutputHandler = *mut ::core::ffi::c_void;
 extern "C" {
-/// Apple SDK function `CVDisplayLinkGetTypeID`.
+    /// Apple SDK function `CVDisplayLinkGetTypeID`.
     pub fn CVDisplayLinkGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkCreateWithCGDisplays`.
+    /// Apple SDK function `CVDisplayLinkCreateWithCGDisplays`.
     pub fn CVDisplayLinkCreateWithCGDisplays(
         displayArray: *mut CGDirectDisplayID,
         count: CFIndex,
@@ -10736,34 +10736,34 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkCreateWithOpenGLDisplayMask`.
+    /// Apple SDK function `CVDisplayLinkCreateWithOpenGLDisplayMask`.
     pub fn CVDisplayLinkCreateWithOpenGLDisplayMask(
         mask: CGOpenGLDisplayMask,
         displayLinkOut: *mut CVDisplayLinkRef,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkCreateWithCGDisplay`.
+    /// Apple SDK function `CVDisplayLinkCreateWithCGDisplay`.
     pub fn CVDisplayLinkCreateWithCGDisplay(
         displayID: CGDirectDisplayID,
         displayLinkOut: *mut CVDisplayLinkRef,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkCreateWithActiveCGDisplays`.
+    /// Apple SDK function `CVDisplayLinkCreateWithActiveCGDisplays`.
     pub fn CVDisplayLinkCreateWithActiveCGDisplays(
         displayLinkOut: *mut CVDisplayLinkRef,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkSetCurrentCGDisplay`.
+    /// Apple SDK function `CVDisplayLinkSetCurrentCGDisplay`.
     pub fn CVDisplayLinkSetCurrentCGDisplay(
         displayLink: CVDisplayLinkRef,
         displayID: CGDirectDisplayID,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext`.
+    /// Apple SDK function `CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext`.
     pub fn CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(
         displayLink: CVDisplayLinkRef,
         cglContext: CGLContextObj,
@@ -10771,11 +10771,11 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkGetCurrentCGDisplay`.
+    /// Apple SDK function `CVDisplayLinkGetCurrentCGDisplay`.
     pub fn CVDisplayLinkGetCurrentCGDisplay(displayLink: CVDisplayLinkRef) -> CGDirectDisplayID;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkSetOutputCallback`.
+    /// Apple SDK function `CVDisplayLinkSetOutputCallback`.
     pub fn CVDisplayLinkSetOutputCallback(
         displayLink: CVDisplayLinkRef,
         callback: CVDisplayLinkOutputCallback,
@@ -10783,46 +10783,46 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkSetOutputHandler`.
+    /// Apple SDK function `CVDisplayLinkSetOutputHandler`.
     pub fn CVDisplayLinkSetOutputHandler(
         displayLink: CVDisplayLinkRef,
         handler: CVDisplayLinkOutputHandler,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkStart`.
+    /// Apple SDK function `CVDisplayLinkStart`.
     pub fn CVDisplayLinkStart(displayLink: CVDisplayLinkRef) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkStop`.
+    /// Apple SDK function `CVDisplayLinkStop`.
     pub fn CVDisplayLinkStop(displayLink: CVDisplayLinkRef) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkGetNominalOutputVideoRefreshPeriod`.
+    /// Apple SDK function `CVDisplayLinkGetNominalOutputVideoRefreshPeriod`.
     pub fn CVDisplayLinkGetNominalOutputVideoRefreshPeriod(displayLink: CVDisplayLinkRef)
         -> CVTime;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkGetOutputVideoLatency`.
+    /// Apple SDK function `CVDisplayLinkGetOutputVideoLatency`.
     pub fn CVDisplayLinkGetOutputVideoLatency(displayLink: CVDisplayLinkRef) -> CVTime;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkGetActualOutputVideoRefreshPeriod`.
+    /// Apple SDK function `CVDisplayLinkGetActualOutputVideoRefreshPeriod`.
     pub fn CVDisplayLinkGetActualOutputVideoRefreshPeriod(displayLink: CVDisplayLinkRef) -> f64;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkIsRunning`.
+    /// Apple SDK function `CVDisplayLinkIsRunning`.
     pub fn CVDisplayLinkIsRunning(displayLink: CVDisplayLinkRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkGetCurrentTime`.
+    /// Apple SDK function `CVDisplayLinkGetCurrentTime`.
     pub fn CVDisplayLinkGetCurrentTime(
         displayLink: CVDisplayLinkRef,
         outTime: *mut CVTimeStamp,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkTranslateTime`.
+    /// Apple SDK function `CVDisplayLinkTranslateTime`.
     pub fn CVDisplayLinkTranslateTime(
         displayLink: CVDisplayLinkRef,
         inTime: *const CVTimeStamp,
@@ -10830,31 +10830,31 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkRetain`.
+    /// Apple SDK function `CVDisplayLinkRetain`.
     pub fn CVDisplayLinkRetain(displayLink: CVDisplayLinkRef) -> CVDisplayLinkRef;
 }
 extern "C" {
-/// Apple SDK function `CVDisplayLinkRelease`.
+    /// Apple SDK function `CVDisplayLinkRelease`.
     pub fn CVDisplayLinkRelease(displayLink: CVDisplayLinkRef);
 }
 extern "C" {
-/// Apple SDK exported static `kCVBufferPropagatedAttachmentsKey`.
+    /// Apple SDK exported static `kCVBufferPropagatedAttachmentsKey`.
     pub static mut kCVBufferPropagatedAttachmentsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVBufferNonPropagatedAttachmentsKey`.
+    /// Apple SDK exported static `kCVBufferNonPropagatedAttachmentsKey`.
     pub static mut kCVBufferNonPropagatedAttachmentsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVBufferMovieTimeKey`.
+    /// Apple SDK exported static `kCVBufferMovieTimeKey`.
     pub static mut kCVBufferMovieTimeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVBufferTimeValueKey`.
+    /// Apple SDK exported static `kCVBufferTimeValueKey`.
     pub static mut kCVBufferTimeValueKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVBufferTimeScaleKey`.
+    /// Apple SDK exported static `kCVBufferTimeScaleKey`.
     pub static mut kCVBufferTimeScaleKey: CFStringRef;
 }
 /// Apple SDK type alias `CVAttachmentMode`.
@@ -10874,15 +10874,15 @@ pub struct __CVBuffer {
 /// Apple SDK type alias `CVBufferRef`.
 pub type CVBufferRef = *mut __CVBuffer;
 extern "C" {
-/// Apple SDK function `CVBufferRetain`.
+    /// Apple SDK function `CVBufferRetain`.
     pub fn CVBufferRetain(buffer: CVBufferRef) -> CVBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CVBufferRelease`.
+    /// Apple SDK function `CVBufferRelease`.
     pub fn CVBufferRelease(buffer: CVBufferRef);
 }
 extern "C" {
-/// Apple SDK function `CVBufferSetAttachment`.
+    /// Apple SDK function `CVBufferSetAttachment`.
     pub fn CVBufferSetAttachment(
         buffer: CVBufferRef,
         key: CFStringRef,
@@ -10891,7 +10891,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CVBufferGetAttachment`.
+    /// Apple SDK function `CVBufferGetAttachment`.
     pub fn CVBufferGetAttachment(
         buffer: CVBufferRef,
         key: CFStringRef,
@@ -10899,22 +10899,22 @@ extern "C" {
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CVBufferRemoveAttachment`.
+    /// Apple SDK function `CVBufferRemoveAttachment`.
     pub fn CVBufferRemoveAttachment(buffer: CVBufferRef, key: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CVBufferRemoveAllAttachments`.
+    /// Apple SDK function `CVBufferRemoveAllAttachments`.
     pub fn CVBufferRemoveAllAttachments(buffer: CVBufferRef);
 }
 extern "C" {
-/// Apple SDK function `CVBufferGetAttachments`.
+    /// Apple SDK function `CVBufferGetAttachments`.
     pub fn CVBufferGetAttachments(
         buffer: CVBufferRef,
         attachmentMode: CVAttachmentMode,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVBufferSetAttachments`.
+    /// Apple SDK function `CVBufferSetAttachments`.
     pub fn CVBufferSetAttachments(
         buffer: CVBufferRef,
         theAttachments: CFDictionaryRef,
@@ -10922,18 +10922,18 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CVBufferPropagateAttachments`.
+    /// Apple SDK function `CVBufferPropagateAttachments`.
     pub fn CVBufferPropagateAttachments(sourceBuffer: CVBufferRef, destinationBuffer: CVBufferRef);
 }
 extern "C" {
-/// Apple SDK function `CVBufferCopyAttachments`.
+    /// Apple SDK function `CVBufferCopyAttachments`.
     pub fn CVBufferCopyAttachments(
         buffer: CVBufferRef,
         attachmentMode: CVAttachmentMode,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVBufferCopyAttachment`.
+    /// Apple SDK function `CVBufferCopyAttachment`.
     pub fn CVBufferCopyAttachment(
         buffer: CVBufferRef,
         key: CFStringRef,
@@ -10941,7 +10941,7 @@ extern "C" {
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CVBufferHasAttachment`.
+    /// Apple SDK function `CVBufferHasAttachment`.
     pub fn CVBufferHasAttachment(buffer: CVBufferRef, key: CFStringRef) -> Boolean;
 }
 /// Apple SDK constant `kOld68kRTA`.
@@ -10959,11 +10959,11 @@ pub struct FSRef {
     pub hidden: [UInt8; 80usize],
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorDomainCFNetwork`.
+    /// Apple SDK exported static `kCFErrorDomainCFNetwork`.
     pub static kCFErrorDomainCFNetwork: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFErrorDomainWinSock`.
+    /// Apple SDK exported static `kCFErrorDomainWinSock`.
     pub static kCFErrorDomainWinSock: CFStringRef;
 }
 /// Apple SDK type alias `CFNetworkErrors`.
@@ -11139,35 +11139,35 @@ pub const kCFNetServiceErrorDNSServiceFailure: _bindgen_ty_1057 = -73000;
 /// Apple SDK type alias `_bindgen_ty_1057`.
 pub type _bindgen_ty_1057 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK exported static `kCFURLErrorFailingURLErrorKey`.
+    /// Apple SDK exported static `kCFURLErrorFailingURLErrorKey`.
     pub static kCFURLErrorFailingURLErrorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFURLErrorFailingURLStringErrorKey`.
+    /// Apple SDK exported static `kCFURLErrorFailingURLStringErrorKey`.
     pub static kCFURLErrorFailingURLStringErrorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFGetAddrInfoFailureKey`.
+    /// Apple SDK exported static `kCFGetAddrInfoFailureKey`.
     pub static kCFGetAddrInfoFailureKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSOCKSStatusCodeKey`.
+    /// Apple SDK exported static `kCFSOCKSStatusCodeKey`.
     pub static kCFSOCKSStatusCodeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSOCKSVersionKey`.
+    /// Apple SDK exported static `kCFSOCKSVersionKey`.
     pub static kCFSOCKSVersionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFSOCKSNegotiationMethodKey`.
+    /// Apple SDK exported static `kCFSOCKSNegotiationMethodKey`.
     pub static kCFSOCKSNegotiationMethodKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFDNSServiceFailureKey`.
+    /// Apple SDK exported static `kCFDNSServiceFailureKey`.
     pub static kCFDNSServiceFailureKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPStatusCodeKey`.
+    /// Apple SDK exported static `kCFFTPStatusCodeKey`.
     pub static kCFFTPStatusCodeKey: CFStringRef;
 }
 #[repr(C)]
@@ -11179,11 +11179,11 @@ pub struct __CFHost {
 /// Apple SDK type alias `CFHostRef`.
 pub type CFHostRef = *mut __CFHost;
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainNetDB`.
+    /// Apple SDK exported static `kCFStreamErrorDomainNetDB`.
     pub static kCFStreamErrorDomainNetDB: SInt32;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainSystemConfiguration`.
+    /// Apple SDK exported static `kCFStreamErrorDomainSystemConfiguration`.
     pub static kCFStreamErrorDomainSystemConfiguration: SInt32;
 }
 /// Apple SDK type alias `CFHostInfoType`.
@@ -11216,23 +11216,23 @@ pub type CFHostClientCallBack = ::core::option::Option<
     ),
 >;
 extern "C" {
-/// Apple SDK function `CFHostGetTypeID`.
+    /// Apple SDK function `CFHostGetTypeID`.
     pub fn CFHostGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFHostCreateWithName`.
+    /// Apple SDK function `CFHostCreateWithName`.
     pub fn CFHostCreateWithName(allocator: CFAllocatorRef, hostname: CFStringRef) -> CFHostRef;
 }
 extern "C" {
-/// Apple SDK function `CFHostCreateWithAddress`.
+    /// Apple SDK function `CFHostCreateWithAddress`.
     pub fn CFHostCreateWithAddress(allocator: CFAllocatorRef, addr: CFDataRef) -> CFHostRef;
 }
 extern "C" {
-/// Apple SDK function `CFHostCreateCopy`.
+    /// Apple SDK function `CFHostCreateCopy`.
     pub fn CFHostCreateCopy(alloc: CFAllocatorRef, host: CFHostRef) -> CFHostRef;
 }
 extern "C" {
-/// Apple SDK function `CFHostStartInfoResolution`.
+    /// Apple SDK function `CFHostStartInfoResolution`.
     pub fn CFHostStartInfoResolution(
         theHost: CFHostRef,
         info: CFHostInfoType,
@@ -11240,23 +11240,23 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHostGetAddressing`.
+    /// Apple SDK function `CFHostGetAddressing`.
     pub fn CFHostGetAddressing(theHost: CFHostRef, hasBeenResolved: *mut Boolean) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFHostGetNames`.
+    /// Apple SDK function `CFHostGetNames`.
     pub fn CFHostGetNames(theHost: CFHostRef, hasBeenResolved: *mut Boolean) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFHostGetReachability`.
+    /// Apple SDK function `CFHostGetReachability`.
     pub fn CFHostGetReachability(theHost: CFHostRef, hasBeenResolved: *mut Boolean) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFHostCancelInfoResolution`.
+    /// Apple SDK function `CFHostCancelInfoResolution`.
     pub fn CFHostCancelInfoResolution(theHost: CFHostRef, info: CFHostInfoType);
 }
 extern "C" {
-/// Apple SDK function `CFHostSetClient`.
+    /// Apple SDK function `CFHostSetClient`.
     pub fn CFHostSetClient(
         theHost: CFHostRef,
         clientCB: CFHostClientCallBack,
@@ -11264,7 +11264,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHostScheduleWithRunLoop`.
+    /// Apple SDK function `CFHostScheduleWithRunLoop`.
     pub fn CFHostScheduleWithRunLoop(
         theHost: CFHostRef,
         runLoop: CFRunLoopRef,
@@ -11272,7 +11272,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFHostUnscheduleFromRunLoop`.
+    /// Apple SDK function `CFHostUnscheduleFromRunLoop`.
     pub fn CFHostUnscheduleFromRunLoop(
         theHost: CFHostRef,
         runLoop: CFRunLoopRef,
@@ -11304,11 +11304,11 @@ pub struct __CFNetServiceBrowser {
 /// Apple SDK type alias `CFNetServiceBrowserRef`.
 pub type CFNetServiceBrowserRef = *mut __CFNetServiceBrowser;
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainMach`.
+    /// Apple SDK exported static `kCFStreamErrorDomainMach`.
     pub static kCFStreamErrorDomainMach: SInt32;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainNetServices`.
+    /// Apple SDK exported static `kCFStreamErrorDomainNetServices`.
     pub static kCFStreamErrorDomainNetServices: SInt32;
 }
 /// Apple SDK type alias `CFNetServicesError`.
@@ -11399,19 +11399,19 @@ pub type CFNetServiceBrowserClientCallBack = ::core::option::Option<
     ),
 >;
 extern "C" {
-/// Apple SDK function `CFNetServiceGetTypeID`.
+    /// Apple SDK function `CFNetServiceGetTypeID`.
     pub fn CFNetServiceGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceMonitorGetTypeID`.
+    /// Apple SDK function `CFNetServiceMonitorGetTypeID`.
     pub fn CFNetServiceMonitorGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserGetTypeID`.
+    /// Apple SDK function `CFNetServiceBrowserGetTypeID`.
     pub fn CFNetServiceBrowserGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceCreate`.
+    /// Apple SDK function `CFNetServiceCreate`.
     pub fn CFNetServiceCreate(
         alloc: CFAllocatorRef,
         domain: CFStringRef,
@@ -11421,26 +11421,26 @@ extern "C" {
     ) -> CFNetServiceRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceCreateCopy`.
+    /// Apple SDK function `CFNetServiceCreateCopy`.
     pub fn CFNetServiceCreateCopy(
         alloc: CFAllocatorRef,
         service: CFNetServiceRef,
     ) -> CFNetServiceRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceGetDomain`.
+    /// Apple SDK function `CFNetServiceGetDomain`.
     pub fn CFNetServiceGetDomain(theService: CFNetServiceRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceGetType`.
+    /// Apple SDK function `CFNetServiceGetType`.
     pub fn CFNetServiceGetType(theService: CFNetServiceRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceGetName`.
+    /// Apple SDK function `CFNetServiceGetName`.
     pub fn CFNetServiceGetName(theService: CFNetServiceRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceRegisterWithOptions`.
+    /// Apple SDK function `CFNetServiceRegisterWithOptions`.
     pub fn CFNetServiceRegisterWithOptions(
         theService: CFNetServiceRef,
         options: CFOptionFlags,
@@ -11448,7 +11448,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceResolveWithTimeout`.
+    /// Apple SDK function `CFNetServiceResolveWithTimeout`.
     pub fn CFNetServiceResolveWithTimeout(
         theService: CFNetServiceRef,
         timeout: CFTimeInterval,
@@ -11456,45 +11456,45 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceCancel`.
+    /// Apple SDK function `CFNetServiceCancel`.
     pub fn CFNetServiceCancel(theService: CFNetServiceRef);
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceGetTargetHost`.
+    /// Apple SDK function `CFNetServiceGetTargetHost`.
     pub fn CFNetServiceGetTargetHost(theService: CFNetServiceRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceGetPortNumber`.
+    /// Apple SDK function `CFNetServiceGetPortNumber`.
     pub fn CFNetServiceGetPortNumber(theService: CFNetServiceRef) -> SInt32;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceGetAddressing`.
+    /// Apple SDK function `CFNetServiceGetAddressing`.
     pub fn CFNetServiceGetAddressing(theService: CFNetServiceRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceGetTXTData`.
+    /// Apple SDK function `CFNetServiceGetTXTData`.
     pub fn CFNetServiceGetTXTData(theService: CFNetServiceRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceSetTXTData`.
+    /// Apple SDK function `CFNetServiceSetTXTData`.
     pub fn CFNetServiceSetTXTData(theService: CFNetServiceRef, txtRecord: CFDataRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceCreateDictionaryWithTXTData`.
+    /// Apple SDK function `CFNetServiceCreateDictionaryWithTXTData`.
     pub fn CFNetServiceCreateDictionaryWithTXTData(
         alloc: CFAllocatorRef,
         txtRecord: CFDataRef,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceCreateTXTDataWithDictionary`.
+    /// Apple SDK function `CFNetServiceCreateTXTDataWithDictionary`.
     pub fn CFNetServiceCreateTXTDataWithDictionary(
         alloc: CFAllocatorRef,
         keyValuePairs: CFDictionaryRef,
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceSetClient`.
+    /// Apple SDK function `CFNetServiceSetClient`.
     pub fn CFNetServiceSetClient(
         theService: CFNetServiceRef,
         clientCB: CFNetServiceClientCallBack,
@@ -11502,7 +11502,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceScheduleWithRunLoop`.
+    /// Apple SDK function `CFNetServiceScheduleWithRunLoop`.
     pub fn CFNetServiceScheduleWithRunLoop(
         theService: CFNetServiceRef,
         runLoop: CFRunLoopRef,
@@ -11510,7 +11510,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceUnscheduleFromRunLoop`.
+    /// Apple SDK function `CFNetServiceUnscheduleFromRunLoop`.
     pub fn CFNetServiceUnscheduleFromRunLoop(
         theService: CFNetServiceRef,
         runLoop: CFRunLoopRef,
@@ -11518,7 +11518,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceMonitorCreate`.
+    /// Apple SDK function `CFNetServiceMonitorCreate`.
     pub fn CFNetServiceMonitorCreate(
         alloc: CFAllocatorRef,
         theService: CFNetServiceRef,
@@ -11527,11 +11527,11 @@ extern "C" {
     ) -> CFNetServiceMonitorRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceMonitorInvalidate`.
+    /// Apple SDK function `CFNetServiceMonitorInvalidate`.
     pub fn CFNetServiceMonitorInvalidate(monitor: CFNetServiceMonitorRef);
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceMonitorStart`.
+    /// Apple SDK function `CFNetServiceMonitorStart`.
     pub fn CFNetServiceMonitorStart(
         monitor: CFNetServiceMonitorRef,
         recordType: CFNetServiceMonitorType,
@@ -11539,11 +11539,11 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceMonitorStop`.
+    /// Apple SDK function `CFNetServiceMonitorStop`.
     pub fn CFNetServiceMonitorStop(monitor: CFNetServiceMonitorRef, error: *mut CFStreamError);
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceMonitorScheduleWithRunLoop`.
+    /// Apple SDK function `CFNetServiceMonitorScheduleWithRunLoop`.
     pub fn CFNetServiceMonitorScheduleWithRunLoop(
         monitor: CFNetServiceMonitorRef,
         runLoop: CFRunLoopRef,
@@ -11551,7 +11551,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceMonitorUnscheduleFromRunLoop`.
+    /// Apple SDK function `CFNetServiceMonitorUnscheduleFromRunLoop`.
     pub fn CFNetServiceMonitorUnscheduleFromRunLoop(
         monitor: CFNetServiceMonitorRef,
         runLoop: CFRunLoopRef,
@@ -11559,7 +11559,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserCreate`.
+    /// Apple SDK function `CFNetServiceBrowserCreate`.
     pub fn CFNetServiceBrowserCreate(
         alloc: CFAllocatorRef,
         clientCB: CFNetServiceBrowserClientCallBack,
@@ -11567,11 +11567,11 @@ extern "C" {
     ) -> CFNetServiceBrowserRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserInvalidate`.
+    /// Apple SDK function `CFNetServiceBrowserInvalidate`.
     pub fn CFNetServiceBrowserInvalidate(browser: CFNetServiceBrowserRef);
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserSearchForDomains`.
+    /// Apple SDK function `CFNetServiceBrowserSearchForDomains`.
     pub fn CFNetServiceBrowserSearchForDomains(
         browser: CFNetServiceBrowserRef,
         registrationDomains: Boolean,
@@ -11579,7 +11579,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserSearchForServices`.
+    /// Apple SDK function `CFNetServiceBrowserSearchForServices`.
     pub fn CFNetServiceBrowserSearchForServices(
         browser: CFNetServiceBrowserRef,
         domain: CFStringRef,
@@ -11588,14 +11588,14 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserStopSearch`.
+    /// Apple SDK function `CFNetServiceBrowserStopSearch`.
     pub fn CFNetServiceBrowserStopSearch(
         browser: CFNetServiceBrowserRef,
         error: *mut CFStreamError,
     );
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserScheduleWithRunLoop`.
+    /// Apple SDK function `CFNetServiceBrowserScheduleWithRunLoop`.
     pub fn CFNetServiceBrowserScheduleWithRunLoop(
         browser: CFNetServiceBrowserRef,
         runLoop: CFRunLoopRef,
@@ -11603,7 +11603,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceBrowserUnscheduleFromRunLoop`.
+    /// Apple SDK function `CFNetServiceBrowserUnscheduleFromRunLoop`.
     pub fn CFNetServiceBrowserUnscheduleFromRunLoop(
         browser: CFNetServiceBrowserRef,
         runLoop: CFRunLoopRef,
@@ -11611,103 +11611,103 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceRegister`.
+    /// Apple SDK function `CFNetServiceRegister`.
     pub fn CFNetServiceRegister(theService: CFNetServiceRef, error: *mut CFStreamError) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFNetServiceResolve`.
+    /// Apple SDK function `CFNetServiceResolve`.
     pub fn CFNetServiceResolve(theService: CFNetServiceRef, error: *mut CFStreamError) -> Boolean;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySSLContext`.
+    /// Apple SDK exported static `kCFStreamPropertySSLContext`.
     pub static kCFStreamPropertySSLContext: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySSLPeerTrust`.
+    /// Apple SDK exported static `kCFStreamPropertySSLPeerTrust`.
     pub static kCFStreamPropertySSLPeerTrust: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLValidatesCertificateChain`.
+    /// Apple SDK exported static `kCFStreamSSLValidatesCertificateChain`.
     pub static kCFStreamSSLValidatesCertificateChain: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySSLSettings`.
+    /// Apple SDK exported static `kCFStreamPropertySSLSettings`.
     pub static kCFStreamPropertySSLSettings: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLLevel`.
+    /// Apple SDK exported static `kCFStreamSSLLevel`.
     pub static kCFStreamSSLLevel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLPeerName`.
+    /// Apple SDK exported static `kCFStreamSSLPeerName`.
     pub static kCFStreamSSLPeerName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLCertificates`.
+    /// Apple SDK exported static `kCFStreamSSLCertificates`.
     pub static kCFStreamSSLCertificates: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLIsServer`.
+    /// Apple SDK exported static `kCFStreamSSLIsServer`.
     pub static kCFStreamSSLIsServer: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceType`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceType`.
     pub static kCFStreamNetworkServiceType: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeVideo`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeVideo`.
     pub static kCFStreamNetworkServiceTypeVideo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeVoice`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeVoice`.
     pub static kCFStreamNetworkServiceTypeVoice: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeBackground`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeBackground`.
     pub static kCFStreamNetworkServiceTypeBackground: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeResponsiveData`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeResponsiveData`.
     pub static kCFStreamNetworkServiceTypeResponsiveData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeCallSignaling`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeCallSignaling`.
     pub static kCFStreamNetworkServiceTypeCallSignaling: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeAVStreaming`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeAVStreaming`.
     pub static kCFStreamNetworkServiceTypeAVStreaming: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeResponsiveAV`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeResponsiveAV`.
     pub static kCFStreamNetworkServiceTypeResponsiveAV: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamNetworkServiceTypeVoIP`.
+    /// Apple SDK exported static `kCFStreamNetworkServiceTypeVoIP`.
     pub static kCFStreamNetworkServiceTypeVoIP: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyNoCellular`.
+    /// Apple SDK exported static `kCFStreamPropertyNoCellular`.
     pub static kCFStreamPropertyNoCellular: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyConnectionIsCellular`.
+    /// Apple SDK exported static `kCFStreamPropertyConnectionIsCellular`.
     pub static kCFStreamPropertyConnectionIsCellular: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyAllowExpensiveNetworkAccess`.
+    /// Apple SDK exported static `kCFStreamPropertyAllowExpensiveNetworkAccess`.
     pub static kCFStreamPropertyAllowExpensiveNetworkAccess: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyConnectionIsExpensive`.
+    /// Apple SDK exported static `kCFStreamPropertyConnectionIsExpensive`.
     pub static kCFStreamPropertyConnectionIsExpensive: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyAllowConstrainedNetworkAccess`.
+    /// Apple SDK exported static `kCFStreamPropertyAllowConstrainedNetworkAccess`.
     pub static kCFStreamPropertyAllowConstrainedNetworkAccess: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainWinSock`.
+    /// Apple SDK exported static `kCFStreamErrorDomainWinSock`.
     pub static kCFStreamErrorDomainWinSock: CFIndex;
 }
 /// Apple SDK constant `kCFStreamErrorSOCKSSubDomainNone`.
@@ -11741,23 +11741,23 @@ pub const kCFStreamErrorSOCKS4IdConflict: _bindgen_ty_1065 = 93;
 /// Apple SDK type alias `_bindgen_ty_1065`.
 pub type _bindgen_ty_1065 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyProxyLocalBypass`.
+    /// Apple SDK exported static `kCFStreamPropertyProxyLocalBypass`.
     pub static kCFStreamPropertyProxyLocalBypass: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySocketRemoteHost`.
+    /// Apple SDK exported static `kCFStreamPropertySocketRemoteHost`.
     pub static kCFStreamPropertySocketRemoteHost: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySocketRemoteNetService`.
+    /// Apple SDK exported static `kCFStreamPropertySocketRemoteNetService`.
     pub static kCFStreamPropertySocketRemoteNetService: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySocketExtendedBackgroundIdleMode`.
+    /// Apple SDK exported static `kCFStreamPropertySocketExtendedBackgroundIdleMode`.
     pub static kCFStreamPropertySocketExtendedBackgroundIdleMode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFStreamCreatePairWithSocketToCFHost`.
+    /// Apple SDK function `CFStreamCreatePairWithSocketToCFHost`.
     pub fn CFStreamCreatePairWithSocketToCFHost(
         alloc: CFAllocatorRef,
         host: CFHostRef,
@@ -11767,7 +11767,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFStreamCreatePairWithSocketToNetService`.
+    /// Apple SDK function `CFStreamCreatePairWithSocketToNetService`.
     pub fn CFStreamCreatePairWithSocketToNetService(
         alloc: CFAllocatorRef,
         service: CFNetServiceRef,
@@ -11776,112 +11776,112 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertySSLPeerCertificates`.
+    /// Apple SDK exported static `kCFStreamPropertySSLPeerCertificates`.
     pub static kCFStreamPropertySSLPeerCertificates: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLAllowsExpiredCertificates`.
+    /// Apple SDK exported static `kCFStreamSSLAllowsExpiredCertificates`.
     pub static kCFStreamSSLAllowsExpiredCertificates: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLAllowsExpiredRoots`.
+    /// Apple SDK exported static `kCFStreamSSLAllowsExpiredRoots`.
     pub static kCFStreamSSLAllowsExpiredRoots: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamSSLAllowsAnyRoot`.
+    /// Apple SDK exported static `kCFStreamSSLAllowsAnyRoot`.
     pub static kCFStreamSSLAllowsAnyRoot: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainFTP`.
+    /// Apple SDK exported static `kCFStreamErrorDomainFTP`.
     pub static kCFStreamErrorDomainFTP: SInt32;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPUserName`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPUserName`.
     pub static kCFStreamPropertyFTPUserName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPPassword`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPPassword`.
     pub static kCFStreamPropertyFTPPassword: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPUsePassiveMode`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPUsePassiveMode`.
     pub static kCFStreamPropertyFTPUsePassiveMode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPResourceSize`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPResourceSize`.
     pub static kCFStreamPropertyFTPResourceSize: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPFetchResourceInfo`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPFetchResourceInfo`.
     pub static kCFStreamPropertyFTPFetchResourceInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPFileTransferOffset`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPFileTransferOffset`.
     pub static kCFStreamPropertyFTPFileTransferOffset: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPAttemptPersistentConnection`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPAttemptPersistentConnection`.
     pub static kCFStreamPropertyFTPAttemptPersistentConnection: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPProxy`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPProxy`.
     pub static kCFStreamPropertyFTPProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPProxyHost`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPProxyHost`.
     pub static kCFStreamPropertyFTPProxyHost: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPProxyPort`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPProxyPort`.
     pub static kCFStreamPropertyFTPProxyPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPProxyUser`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPProxyUser`.
     pub static kCFStreamPropertyFTPProxyUser: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyFTPProxyPassword`.
+    /// Apple SDK exported static `kCFStreamPropertyFTPProxyPassword`.
     pub static kCFStreamPropertyFTPProxyPassword: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceMode`.
+    /// Apple SDK exported static `kCFFTPResourceMode`.
     pub static kCFFTPResourceMode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceName`.
+    /// Apple SDK exported static `kCFFTPResourceName`.
     pub static kCFFTPResourceName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceOwner`.
+    /// Apple SDK exported static `kCFFTPResourceOwner`.
     pub static kCFFTPResourceOwner: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceGroup`.
+    /// Apple SDK exported static `kCFFTPResourceGroup`.
     pub static kCFFTPResourceGroup: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceLink`.
+    /// Apple SDK exported static `kCFFTPResourceLink`.
     pub static kCFFTPResourceLink: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceSize`.
+    /// Apple SDK exported static `kCFFTPResourceSize`.
     pub static kCFFTPResourceSize: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceType`.
+    /// Apple SDK exported static `kCFFTPResourceType`.
     pub static kCFFTPResourceType: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFFTPResourceModDate`.
+    /// Apple SDK exported static `kCFFTPResourceModDate`.
     pub static kCFFTPResourceModDate: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCreateWithFTPURL`.
+    /// Apple SDK function `CFReadStreamCreateWithFTPURL`.
     pub fn CFReadStreamCreateWithFTPURL(alloc: CFAllocatorRef, ftpURL: CFURLRef)
         -> CFReadStreamRef;
 }
 extern "C" {
-/// Apple SDK function `CFFTPCreateParsedResourceListing`.
+    /// Apple SDK function `CFFTPCreateParsedResourceListing`.
     pub fn CFFTPCreateParsedResourceListing(
         alloc: CFAllocatorRef,
         buffer: *const UInt8,
@@ -11890,54 +11890,54 @@ extern "C" {
     ) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFWriteStreamCreateWithFTPURL`.
+    /// Apple SDK function `CFWriteStreamCreateWithFTPURL`.
     pub fn CFWriteStreamCreateWithFTPURL(
         alloc: CFAllocatorRef,
         ftpURL: CFURLRef,
     ) -> CFWriteStreamRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPVersion1_0`.
+    /// Apple SDK exported static `kCFHTTPVersion1_0`.
     pub static kCFHTTPVersion1_0: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPVersion1_1`.
+    /// Apple SDK exported static `kCFHTTPVersion1_1`.
     pub static kCFHTTPVersion1_1: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPVersion2_0`.
+    /// Apple SDK exported static `kCFHTTPVersion2_0`.
     pub static kCFHTTPVersion2_0: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPVersion3_0`.
+    /// Apple SDK exported static `kCFHTTPVersion3_0`.
     pub static kCFHTTPVersion3_0: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationSchemeBasic`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationSchemeBasic`.
     pub static kCFHTTPAuthenticationSchemeBasic: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationSchemeDigest`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationSchemeDigest`.
     pub static kCFHTTPAuthenticationSchemeDigest: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationSchemeNTLM`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationSchemeNTLM`.
     pub static kCFHTTPAuthenticationSchemeNTLM: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationSchemeKerberos`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationSchemeKerberos`.
     pub static kCFHTTPAuthenticationSchemeKerberos: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationSchemeNegotiate`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationSchemeNegotiate`.
     pub static kCFHTTPAuthenticationSchemeNegotiate: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationSchemeNegotiate2`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationSchemeNegotiate2`.
     pub static kCFHTTPAuthenticationSchemeNegotiate2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationSchemeXMobileMeAuthToken`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationSchemeXMobileMeAuthToken`.
     pub static kCFHTTPAuthenticationSchemeXMobileMeAuthToken: CFStringRef;
 }
 #[repr(C)]
@@ -11949,11 +11949,11 @@ pub struct __CFHTTPMessage {
 /// Apple SDK type alias `CFHTTPMessageRef`.
 pub type CFHTTPMessageRef = *mut __CFHTTPMessage;
 extern "C" {
-/// Apple SDK function `CFHTTPMessageGetTypeID`.
+    /// Apple SDK function `CFHTTPMessageGetTypeID`.
     pub fn CFHTTPMessageGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCreateRequest`.
+    /// Apple SDK function `CFHTTPMessageCreateRequest`.
     pub fn CFHTTPMessageCreateRequest(
         alloc: CFAllocatorRef,
         requestMethod: CFStringRef,
@@ -11962,7 +11962,7 @@ extern "C" {
     ) -> CFHTTPMessageRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCreateResponse`.
+    /// Apple SDK function `CFHTTPMessageCreateResponse`.
     pub fn CFHTTPMessageCreateResponse(
         alloc: CFAllocatorRef,
         statusCode: CFIndex,
@@ -11971,45 +11971,45 @@ extern "C" {
     ) -> CFHTTPMessageRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCreateEmpty`.
+    /// Apple SDK function `CFHTTPMessageCreateEmpty`.
     pub fn CFHTTPMessageCreateEmpty(alloc: CFAllocatorRef, isRequest: Boolean) -> CFHTTPMessageRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCreateCopy`.
+    /// Apple SDK function `CFHTTPMessageCreateCopy`.
     pub fn CFHTTPMessageCreateCopy(
         alloc: CFAllocatorRef,
         message: CFHTTPMessageRef,
     ) -> CFHTTPMessageRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageIsRequest`.
+    /// Apple SDK function `CFHTTPMessageIsRequest`.
     pub fn CFHTTPMessageIsRequest(message: CFHTTPMessageRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopyVersion`.
+    /// Apple SDK function `CFHTTPMessageCopyVersion`.
     pub fn CFHTTPMessageCopyVersion(message: CFHTTPMessageRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopyBody`.
+    /// Apple SDK function `CFHTTPMessageCopyBody`.
     pub fn CFHTTPMessageCopyBody(message: CFHTTPMessageRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageSetBody`.
+    /// Apple SDK function `CFHTTPMessageSetBody`.
     pub fn CFHTTPMessageSetBody(message: CFHTTPMessageRef, bodyData: CFDataRef);
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopyHeaderFieldValue`.
+    /// Apple SDK function `CFHTTPMessageCopyHeaderFieldValue`.
     pub fn CFHTTPMessageCopyHeaderFieldValue(
         message: CFHTTPMessageRef,
         headerField: CFStringRef,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopyAllHeaderFields`.
+    /// Apple SDK function `CFHTTPMessageCopyAllHeaderFields`.
     pub fn CFHTTPMessageCopyAllHeaderFields(message: CFHTTPMessageRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageSetHeaderFieldValue`.
+    /// Apple SDK function `CFHTTPMessageSetHeaderFieldValue`.
     pub fn CFHTTPMessageSetHeaderFieldValue(
         message: CFHTTPMessageRef,
         headerField: CFStringRef,
@@ -12017,7 +12017,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageAppendBytes`.
+    /// Apple SDK function `CFHTTPMessageAppendBytes`.
     pub fn CFHTTPMessageAppendBytes(
         message: CFHTTPMessageRef,
         newBytes: *const UInt8,
@@ -12025,23 +12025,23 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageIsHeaderComplete`.
+    /// Apple SDK function `CFHTTPMessageIsHeaderComplete`.
     pub fn CFHTTPMessageIsHeaderComplete(message: CFHTTPMessageRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopySerializedMessage`.
+    /// Apple SDK function `CFHTTPMessageCopySerializedMessage`.
     pub fn CFHTTPMessageCopySerializedMessage(message: CFHTTPMessageRef) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopyRequestURL`.
+    /// Apple SDK function `CFHTTPMessageCopyRequestURL`.
     pub fn CFHTTPMessageCopyRequestURL(request: CFHTTPMessageRef) -> CFURLRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopyRequestMethod`.
+    /// Apple SDK function `CFHTTPMessageCopyRequestMethod`.
     pub fn CFHTTPMessageCopyRequestMethod(request: CFHTTPMessageRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageAddAuthentication`.
+    /// Apple SDK function `CFHTTPMessageAddAuthentication`.
     pub fn CFHTTPMessageAddAuthentication(
         request: CFHTTPMessageRef,
         authenticationFailureResponse: CFHTTPMessageRef,
@@ -12052,15 +12052,15 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageGetResponseStatusCode`.
+    /// Apple SDK function `CFHTTPMessageGetResponseStatusCode`.
     pub fn CFHTTPMessageGetResponseStatusCode(response: CFHTTPMessageRef) -> CFIndex;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageCopyResponseStatusLine`.
+    /// Apple SDK function `CFHTTPMessageCopyResponseStatusLine`.
     pub fn CFHTTPMessageCopyResponseStatusLine(response: CFHTTPMessageRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamErrorDomainHTTP`.
+    /// Apple SDK exported static `kCFStreamErrorDomainHTTP`.
     pub static kCFStreamErrorDomainHTTP: SInt32;
 }
 /// Apple SDK type alias `CFStreamErrorHTTP`.
@@ -12074,58 +12074,58 @@ pub const kCFStreamErrorHTTPBadURL: _bindgen_ty_1067 = -3;
 /// Apple SDK type alias `_bindgen_ty_1067`.
 pub type _bindgen_ty_1067 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPResponseHeader`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPResponseHeader`.
     pub static kCFStreamPropertyHTTPResponseHeader: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPFinalURL`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPFinalURL`.
     pub static kCFStreamPropertyHTTPFinalURL: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPFinalRequest`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPFinalRequest`.
     pub static kCFStreamPropertyHTTPFinalRequest: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPProxy`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPProxy`.
     pub static kCFStreamPropertyHTTPProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPProxyHost`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPProxyHost`.
     pub static kCFStreamPropertyHTTPProxyHost: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPProxyPort`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPProxyPort`.
     pub static kCFStreamPropertyHTTPProxyPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPSProxyHost`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPSProxyHost`.
     pub static kCFStreamPropertyHTTPSProxyHost: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPSProxyPort`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPSProxyPort`.
     pub static kCFStreamPropertyHTTPSProxyPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPShouldAutoredirect`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPShouldAutoredirect`.
     pub static kCFStreamPropertyHTTPShouldAutoredirect: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPAttemptPersistentConnection`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPAttemptPersistentConnection`.
     pub static kCFStreamPropertyHTTPAttemptPersistentConnection: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFStreamPropertyHTTPRequestBytesWrittenCount`.
+    /// Apple SDK exported static `kCFStreamPropertyHTTPRequestBytesWrittenCount`.
     pub static kCFStreamPropertyHTTPRequestBytesWrittenCount: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCreateForHTTPRequest`.
+    /// Apple SDK function `CFReadStreamCreateForHTTPRequest`.
     pub fn CFReadStreamCreateForHTTPRequest(
         alloc: CFAllocatorRef,
         request: CFHTTPMessageRef,
     ) -> CFReadStreamRef;
 }
 extern "C" {
-/// Apple SDK function `CFReadStreamCreateForStreamedHTTPRequest`.
+    /// Apple SDK function `CFReadStreamCreateForStreamedHTTPRequest`.
     pub fn CFReadStreamCreateForStreamedHTTPRequest(
         alloc: CFAllocatorRef,
         requestHeaders: CFHTTPMessageRef,
@@ -12151,48 +12151,48 @@ pub const kCFStreamErrorHTTPAuthenticationBadPassword: _bindgen_ty_1068 = -1002;
 /// Apple SDK type alias `_bindgen_ty_1068`.
 pub type _bindgen_ty_1068 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationUsername`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationUsername`.
     pub static kCFHTTPAuthenticationUsername: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationPassword`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationPassword`.
     pub static kCFHTTPAuthenticationPassword: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFHTTPAuthenticationAccountDomain`.
+    /// Apple SDK exported static `kCFHTTPAuthenticationAccountDomain`.
     pub static kCFHTTPAuthenticationAccountDomain: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationGetTypeID`.
+    /// Apple SDK function `CFHTTPAuthenticationGetTypeID`.
     pub fn CFHTTPAuthenticationGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationCreateFromResponse`.
+    /// Apple SDK function `CFHTTPAuthenticationCreateFromResponse`.
     pub fn CFHTTPAuthenticationCreateFromResponse(
         alloc: CFAllocatorRef,
         response: CFHTTPMessageRef,
     ) -> CFHTTPAuthenticationRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationIsValid`.
+    /// Apple SDK function `CFHTTPAuthenticationIsValid`.
     pub fn CFHTTPAuthenticationIsValid(
         auth: CFHTTPAuthenticationRef,
         error: *mut CFStreamError,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationAppliesToRequest`.
+    /// Apple SDK function `CFHTTPAuthenticationAppliesToRequest`.
     pub fn CFHTTPAuthenticationAppliesToRequest(
         auth: CFHTTPAuthenticationRef,
         request: CFHTTPMessageRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationRequiresOrderedRequests`.
+    /// Apple SDK function `CFHTTPAuthenticationRequiresOrderedRequests`.
     pub fn CFHTTPAuthenticationRequiresOrderedRequests(auth: CFHTTPAuthenticationRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageApplyCredentials`.
+    /// Apple SDK function `CFHTTPMessageApplyCredentials`.
     pub fn CFHTTPMessageApplyCredentials(
         request: CFHTTPMessageRef,
         auth: CFHTTPAuthenticationRef,
@@ -12202,7 +12202,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPMessageApplyCredentialDictionary`.
+    /// Apple SDK function `CFHTTPMessageApplyCredentialDictionary`.
     pub fn CFHTTPMessageApplyCredentialDictionary(
         request: CFHTTPMessageRef,
         auth: CFHTTPAuthenticationRef,
@@ -12211,25 +12211,25 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationCopyRealm`.
+    /// Apple SDK function `CFHTTPAuthenticationCopyRealm`.
     pub fn CFHTTPAuthenticationCopyRealm(auth: CFHTTPAuthenticationRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationCopyDomains`.
+    /// Apple SDK function `CFHTTPAuthenticationCopyDomains`.
     pub fn CFHTTPAuthenticationCopyDomains(auth: CFHTTPAuthenticationRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationCopyMethod`.
+    /// Apple SDK function `CFHTTPAuthenticationCopyMethod`.
     pub fn CFHTTPAuthenticationCopyMethod(auth: CFHTTPAuthenticationRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationRequiresUserNameAndPassword`.
+    /// Apple SDK function `CFHTTPAuthenticationRequiresUserNameAndPassword`.
     pub fn CFHTTPAuthenticationRequiresUserNameAndPassword(
         auth: CFHTTPAuthenticationRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CFHTTPAuthenticationRequiresAccountDomain`.
+    /// Apple SDK function `CFHTTPAuthenticationRequiresAccountDomain`.
     pub fn CFHTTPAuthenticationRequiresAccountDomain(auth: CFHTTPAuthenticationRef) -> Boolean;
 }
 #[repr(C)]
@@ -12257,7 +12257,7 @@ pub type _bindgen_ty_1069 = ::core::ffi::c_int;
 /// Apple SDK type alias `CFNetDiagnosticStatus`.
 pub type CFNetDiagnosticStatus = CFIndex;
 extern "C" {
-/// Apple SDK function `CFNetDiagnosticCreateWithStreams`.
+    /// Apple SDK function `CFNetDiagnosticCreateWithStreams`.
     pub fn CFNetDiagnosticCreateWithStreams(
         alloc: CFAllocatorRef,
         readStream: CFReadStreamRef,
@@ -12265,33 +12265,33 @@ extern "C" {
     ) -> CFNetDiagnosticRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetDiagnosticCreateWithURL`.
+    /// Apple SDK function `CFNetDiagnosticCreateWithURL`.
     pub fn CFNetDiagnosticCreateWithURL(alloc: CFAllocatorRef, url: CFURLRef)
         -> CFNetDiagnosticRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetDiagnosticSetName`.
+    /// Apple SDK function `CFNetDiagnosticSetName`.
     pub fn CFNetDiagnosticSetName(details: CFNetDiagnosticRef, name: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CFNetDiagnosticDiagnoseProblemInteractively`.
+    /// Apple SDK function `CFNetDiagnosticDiagnoseProblemInteractively`.
     pub fn CFNetDiagnosticDiagnoseProblemInteractively(
         details: CFNetDiagnosticRef,
     ) -> CFNetDiagnosticStatus;
 }
 extern "C" {
-/// Apple SDK function `CFNetDiagnosticCopyNetworkStatusPassively`.
+    /// Apple SDK function `CFNetDiagnosticCopyNetworkStatusPassively`.
     pub fn CFNetDiagnosticCopyNetworkStatusPassively(
         details: CFNetDiagnosticRef,
         description: *mut CFStringRef,
     ) -> CFNetDiagnosticStatus;
 }
 extern "C" {
-/// Apple SDK function `CFNetworkCopySystemProxySettings`.
+    /// Apple SDK function `CFNetworkCopySystemProxySettings`.
     pub fn CFNetworkCopySystemProxySettings() -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetworkCopyProxiesForURL`.
+    /// Apple SDK function `CFNetworkCopyProxiesForURL`.
     pub fn CFNetworkCopyProxiesForURL(url: CFURLRef, proxySettings: CFDictionaryRef) -> CFArrayRef;
 }
 /// Apple SDK type alias `CFProxyAutoConfigurationResultCallback`.
@@ -12303,7 +12303,7 @@ pub type CFProxyAutoConfigurationResultCallback = ::core::option::Option<
     ),
 >;
 extern "C" {
-/// Apple SDK function `CFNetworkCopyProxiesForAutoConfigurationScript`.
+    /// Apple SDK function `CFNetworkCopyProxiesForAutoConfigurationScript`.
     pub fn CFNetworkCopyProxiesForAutoConfigurationScript(
         proxyAutoConfigurationScript: CFStringRef,
         targetURL: CFURLRef,
@@ -12311,7 +12311,7 @@ extern "C" {
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetworkExecuteProxyAutoConfigurationScript`.
+    /// Apple SDK function `CFNetworkExecuteProxyAutoConfigurationScript`.
     pub fn CFNetworkExecuteProxyAutoConfigurationScript(
         proxyAutoConfigurationScript: CFStringRef,
         targetURL: CFURLRef,
@@ -12320,7 +12320,7 @@ extern "C" {
     ) -> CFRunLoopSourceRef;
 }
 extern "C" {
-/// Apple SDK function `CFNetworkExecuteProxyAutoConfigurationURL`.
+    /// Apple SDK function `CFNetworkExecuteProxyAutoConfigurationURL`.
     pub fn CFNetworkExecuteProxyAutoConfigurationURL(
         proxyAutoConfigURL: CFURLRef,
         targetURL: CFURLRef,
@@ -12329,163 +12329,163 @@ extern "C" {
     ) -> CFRunLoopSourceRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeKey`.
+    /// Apple SDK exported static `kCFProxyTypeKey`.
     pub static kCFProxyTypeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyHostNameKey`.
+    /// Apple SDK exported static `kCFProxyHostNameKey`.
     pub static kCFProxyHostNameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyPortNumberKey`.
+    /// Apple SDK exported static `kCFProxyPortNumberKey`.
     pub static kCFProxyPortNumberKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyAutoConfigurationURLKey`.
+    /// Apple SDK exported static `kCFProxyAutoConfigurationURLKey`.
     pub static kCFProxyAutoConfigurationURLKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyAutoConfigurationJavaScriptKey`.
+    /// Apple SDK exported static `kCFProxyAutoConfigurationJavaScriptKey`.
     pub static kCFProxyAutoConfigurationJavaScriptKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyUsernameKey`.
+    /// Apple SDK exported static `kCFProxyUsernameKey`.
     pub static kCFProxyUsernameKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyPasswordKey`.
+    /// Apple SDK exported static `kCFProxyPasswordKey`.
     pub static kCFProxyPasswordKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeNone`.
+    /// Apple SDK exported static `kCFProxyTypeNone`.
     pub static kCFProxyTypeNone: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeHTTP`.
+    /// Apple SDK exported static `kCFProxyTypeHTTP`.
     pub static kCFProxyTypeHTTP: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeHTTPS`.
+    /// Apple SDK exported static `kCFProxyTypeHTTPS`.
     pub static kCFProxyTypeHTTPS: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeSOCKS`.
+    /// Apple SDK exported static `kCFProxyTypeSOCKS`.
     pub static kCFProxyTypeSOCKS: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeFTP`.
+    /// Apple SDK exported static `kCFProxyTypeFTP`.
     pub static kCFProxyTypeFTP: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeAutoConfigurationURL`.
+    /// Apple SDK exported static `kCFProxyTypeAutoConfigurationURL`.
     pub static kCFProxyTypeAutoConfigurationURL: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyTypeAutoConfigurationJavaScript`.
+    /// Apple SDK exported static `kCFProxyTypeAutoConfigurationJavaScript`.
     pub static kCFProxyTypeAutoConfigurationJavaScript: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFProxyAutoConfigurationHTTPResponseKey`.
+    /// Apple SDK exported static `kCFProxyAutoConfigurationHTTPResponseKey`.
     pub static kCFProxyAutoConfigurationHTTPResponseKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesExceptionsList`.
+    /// Apple SDK exported static `kCFNetworkProxiesExceptionsList`.
     pub static kCFNetworkProxiesExceptionsList: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesExcludeSimpleHostnames`.
+    /// Apple SDK exported static `kCFNetworkProxiesExcludeSimpleHostnames`.
     pub static kCFNetworkProxiesExcludeSimpleHostnames: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesFTPEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesFTPEnable`.
     pub static kCFNetworkProxiesFTPEnable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesFTPPassive`.
+    /// Apple SDK exported static `kCFNetworkProxiesFTPPassive`.
     pub static kCFNetworkProxiesFTPPassive: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesFTPPort`.
+    /// Apple SDK exported static `kCFNetworkProxiesFTPPort`.
     pub static kCFNetworkProxiesFTPPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesFTPProxy`.
+    /// Apple SDK exported static `kCFNetworkProxiesFTPProxy`.
     pub static kCFNetworkProxiesFTPProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesGopherEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesGopherEnable`.
     pub static kCFNetworkProxiesGopherEnable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesGopherPort`.
+    /// Apple SDK exported static `kCFNetworkProxiesGopherPort`.
     pub static kCFNetworkProxiesGopherPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesGopherProxy`.
+    /// Apple SDK exported static `kCFNetworkProxiesGopherProxy`.
     pub static kCFNetworkProxiesGopherProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesHTTPEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesHTTPEnable`.
     pub static kCFNetworkProxiesHTTPEnable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesHTTPPort`.
+    /// Apple SDK exported static `kCFNetworkProxiesHTTPPort`.
     pub static kCFNetworkProxiesHTTPPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesHTTPProxy`.
+    /// Apple SDK exported static `kCFNetworkProxiesHTTPProxy`.
     pub static kCFNetworkProxiesHTTPProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesHTTPSEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesHTTPSEnable`.
     pub static kCFNetworkProxiesHTTPSEnable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesHTTPSPort`.
+    /// Apple SDK exported static `kCFNetworkProxiesHTTPSPort`.
     pub static kCFNetworkProxiesHTTPSPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesHTTPSProxy`.
+    /// Apple SDK exported static `kCFNetworkProxiesHTTPSProxy`.
     pub static kCFNetworkProxiesHTTPSProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesRTSPEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesRTSPEnable`.
     pub static kCFNetworkProxiesRTSPEnable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesRTSPPort`.
+    /// Apple SDK exported static `kCFNetworkProxiesRTSPPort`.
     pub static kCFNetworkProxiesRTSPPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesRTSPProxy`.
+    /// Apple SDK exported static `kCFNetworkProxiesRTSPProxy`.
     pub static kCFNetworkProxiesRTSPProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesSOCKSEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesSOCKSEnable`.
     pub static kCFNetworkProxiesSOCKSEnable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesSOCKSPort`.
+    /// Apple SDK exported static `kCFNetworkProxiesSOCKSPort`.
     pub static kCFNetworkProxiesSOCKSPort: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesSOCKSProxy`.
+    /// Apple SDK exported static `kCFNetworkProxiesSOCKSProxy`.
     pub static kCFNetworkProxiesSOCKSProxy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesProxyAutoConfigEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesProxyAutoConfigEnable`.
     pub static kCFNetworkProxiesProxyAutoConfigEnable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesProxyAutoConfigURLString`.
+    /// Apple SDK exported static `kCFNetworkProxiesProxyAutoConfigURLString`.
     pub static kCFNetworkProxiesProxyAutoConfigURLString: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesProxyAutoConfigJavaScript`.
+    /// Apple SDK exported static `kCFNetworkProxiesProxyAutoConfigJavaScript`.
     pub static kCFNetworkProxiesProxyAutoConfigJavaScript: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCFNetworkProxiesProxyAutoDiscoveryEnable`.
+    /// Apple SDK exported static `kCFNetworkProxiesProxyAutoDiscoveryEnable`.
     pub static kCFNetworkProxiesProxyAutoDiscoveryEnable: CFStringRef;
 }
 #[repr(C)]
@@ -12524,7 +12524,7 @@ pub struct _CMSDecoder {
 /// Apple SDK type alias `CMSDecoderRef`.
 pub type CMSDecoderRef = *mut _CMSDecoder;
 extern "C" {
-/// Apple SDK function `CMSDecoderGetTypeID`.
+    /// Apple SDK function `CMSDecoderGetTypeID`.
     pub fn CMSDecoderGetTypeID() -> CFTypeID;
 }
 /// Apple SDK type alias `CMSSignerStatus`.
@@ -12544,11 +12544,11 @@ pub const kCMSSignerInvalidIndex: _bindgen_ty_1276 = 5;
 /// Apple SDK type alias `_bindgen_ty_1276`.
 pub type _bindgen_ty_1276 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMSDecoderCreate`.
+    /// Apple SDK function `CMSDecoderCreate`.
     pub fn CMSDecoderCreate(cmsDecoderOut: *mut CMSDecoderRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderUpdateMessage`.
+    /// Apple SDK function `CMSDecoderUpdateMessage`.
     pub fn CMSDecoderUpdateMessage(
         cmsDecoder: CMSDecoderRef,
         msgBytes: *const ::core::ffi::c_void,
@@ -12556,39 +12556,39 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderFinalizeMessage`.
+    /// Apple SDK function `CMSDecoderFinalizeMessage`.
     pub fn CMSDecoderFinalizeMessage(cmsDecoder: CMSDecoderRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderSetDetachedContent`.
+    /// Apple SDK function `CMSDecoderSetDetachedContent`.
     pub fn CMSDecoderSetDetachedContent(
         cmsDecoder: CMSDecoderRef,
         detachedContent: CFDataRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopyDetachedContent`.
+    /// Apple SDK function `CMSDecoderCopyDetachedContent`.
     pub fn CMSDecoderCopyDetachedContent(
         cmsDecoder: CMSDecoderRef,
         detachedContentOut: *mut CFDataRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderSetSearchKeychain`.
+    /// Apple SDK function `CMSDecoderSetSearchKeychain`.
     pub fn CMSDecoderSetSearchKeychain(
         cmsDecoder: CMSDecoderRef,
         keychainOrArray: CFTypeRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderGetNumSigners`.
+    /// Apple SDK function `CMSDecoderGetNumSigners`.
     pub fn CMSDecoderGetNumSigners(
         cmsDecoder: CMSDecoderRef,
         numSignersOut: *mut usize,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopySignerStatus`.
+    /// Apple SDK function `CMSDecoderCopySignerStatus`.
     pub fn CMSDecoderCopySignerStatus(
         cmsDecoder: CMSDecoderRef,
         signerIndex: usize,
@@ -12600,7 +12600,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopySignerEmailAddress`.
+    /// Apple SDK function `CMSDecoderCopySignerEmailAddress`.
     pub fn CMSDecoderCopySignerEmailAddress(
         cmsDecoder: CMSDecoderRef,
         signerIndex: usize,
@@ -12608,7 +12608,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopySignerCert`.
+    /// Apple SDK function `CMSDecoderCopySignerCert`.
     pub fn CMSDecoderCopySignerCert(
         cmsDecoder: CMSDecoderRef,
         signerIndex: usize,
@@ -12616,31 +12616,31 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderIsContentEncrypted`.
+    /// Apple SDK function `CMSDecoderIsContentEncrypted`.
     pub fn CMSDecoderIsContentEncrypted(
         cmsDecoder: CMSDecoderRef,
         isEncryptedOut: *mut Boolean,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopyEncapsulatedContentType`.
+    /// Apple SDK function `CMSDecoderCopyEncapsulatedContentType`.
     pub fn CMSDecoderCopyEncapsulatedContentType(
         cmsDecoder: CMSDecoderRef,
         eContentTypeOut: *mut CFDataRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopyAllCerts`.
+    /// Apple SDK function `CMSDecoderCopyAllCerts`.
     pub fn CMSDecoderCopyAllCerts(cmsDecoder: CMSDecoderRef, certsOut: *mut CFArrayRef)
         -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopyContent`.
+    /// Apple SDK function `CMSDecoderCopyContent`.
     pub fn CMSDecoderCopyContent(cmsDecoder: CMSDecoderRef, contentOut: *mut CFDataRef)
         -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopySignerSigningTime`.
+    /// Apple SDK function `CMSDecoderCopySignerSigningTime`.
     pub fn CMSDecoderCopySignerSigningTime(
         cmsDecoder: CMSDecoderRef,
         signerIndex: usize,
@@ -12648,7 +12648,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopySignerTimestamp`.
+    /// Apple SDK function `CMSDecoderCopySignerTimestamp`.
     pub fn CMSDecoderCopySignerTimestamp(
         cmsDecoder: CMSDecoderRef,
         signerIndex: usize,
@@ -12656,7 +12656,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopySignerTimestampWithPolicy`.
+    /// Apple SDK function `CMSDecoderCopySignerTimestampWithPolicy`.
     pub fn CMSDecoderCopySignerTimestampWithPolicy(
         cmsDecoder: CMSDecoderRef,
         timeStampPolicy: CFTypeRef,
@@ -12665,7 +12665,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSDecoderCopySignerTimestampCertificates`.
+    /// Apple SDK function `CMSDecoderCopySignerTimestampCertificates`.
     pub fn CMSDecoderCopySignerTimestampCertificates(
         cmsDecoder: CMSDecoderRef,
         signerIndex: usize,
@@ -12681,97 +12681,97 @@ pub struct _CMSEncoder {
 /// Apple SDK type alias `CMSEncoderRef`.
 pub type CMSEncoderRef = *mut _CMSEncoder;
 extern "C" {
-/// Apple SDK function `CMSEncoderGetTypeID`.
+    /// Apple SDK function `CMSEncoderGetTypeID`.
     pub fn CMSEncoderGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCreate`.
+    /// Apple SDK function `CMSEncoderCreate`.
     pub fn CMSEncoderCreate(cmsEncoderOut: *mut CMSEncoderRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSEncoderDigestAlgorithmSHA1`.
+    /// Apple SDK exported static `kCMSEncoderDigestAlgorithmSHA1`.
     pub static kCMSEncoderDigestAlgorithmSHA1: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSEncoderDigestAlgorithmSHA256`.
+    /// Apple SDK exported static `kCMSEncoderDigestAlgorithmSHA256`.
     pub static kCMSEncoderDigestAlgorithmSHA256: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderSetSignerAlgorithm`.
+    /// Apple SDK function `CMSEncoderSetSignerAlgorithm`.
     pub fn CMSEncoderSetSignerAlgorithm(
         cmsEncoder: CMSEncoderRef,
         digestAlgorithm: CFStringRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderAddSigners`.
+    /// Apple SDK function `CMSEncoderAddSigners`.
     pub fn CMSEncoderAddSigners(cmsEncoder: CMSEncoderRef, signerOrArray: CFTypeRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCopySigners`.
+    /// Apple SDK function `CMSEncoderCopySigners`.
     pub fn CMSEncoderCopySigners(
         cmsEncoder: CMSEncoderRef,
         signersOut: *mut CFArrayRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderAddRecipients`.
+    /// Apple SDK function `CMSEncoderAddRecipients`.
     pub fn CMSEncoderAddRecipients(
         cmsEncoder: CMSEncoderRef,
         recipientOrArray: CFTypeRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCopyRecipients`.
+    /// Apple SDK function `CMSEncoderCopyRecipients`.
     pub fn CMSEncoderCopyRecipients(
         cmsEncoder: CMSEncoderRef,
         recipientsOut: *mut CFArrayRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderSetHasDetachedContent`.
+    /// Apple SDK function `CMSEncoderSetHasDetachedContent`.
     pub fn CMSEncoderSetHasDetachedContent(
         cmsEncoder: CMSEncoderRef,
         detachedContent: Boolean,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderGetHasDetachedContent`.
+    /// Apple SDK function `CMSEncoderGetHasDetachedContent`.
     pub fn CMSEncoderGetHasDetachedContent(
         cmsEncoder: CMSEncoderRef,
         detachedContentOut: *mut Boolean,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderSetEncapsulatedContentType`.
+    /// Apple SDK function `CMSEncoderSetEncapsulatedContentType`.
     pub fn CMSEncoderSetEncapsulatedContentType(
         cmsEncoder: CMSEncoderRef,
         eContentType: *const SecAsn1Oid,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderSetEncapsulatedContentTypeOID`.
+    /// Apple SDK function `CMSEncoderSetEncapsulatedContentTypeOID`.
     pub fn CMSEncoderSetEncapsulatedContentTypeOID(
         cmsEncoder: CMSEncoderRef,
         eContentTypeOID: CFTypeRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCopyEncapsulatedContentType`.
+    /// Apple SDK function `CMSEncoderCopyEncapsulatedContentType`.
     pub fn CMSEncoderCopyEncapsulatedContentType(
         cmsEncoder: CMSEncoderRef,
         eContentTypeOut: *mut CFDataRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderAddSupportingCerts`.
+    /// Apple SDK function `CMSEncoderAddSupportingCerts`.
     pub fn CMSEncoderAddSupportingCerts(
         cmsEncoder: CMSEncoderRef,
         certOrArray: CFTypeRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCopySupportingCerts`.
+    /// Apple SDK function `CMSEncoderCopySupportingCerts`.
     pub fn CMSEncoderCopySupportingCerts(
         cmsEncoder: CMSEncoderRef,
         certsOut: *mut CFArrayRef,
@@ -12798,7 +12798,7 @@ pub const kCMSAttrAppleExpirationTime: _bindgen_ty_1277 = 64;
 /// Apple SDK type alias `_bindgen_ty_1277`.
 pub type _bindgen_ty_1277 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMSEncoderAddSignedAttributes`.
+    /// Apple SDK function `CMSEncoderAddSignedAttributes`.
     pub fn CMSEncoderAddSignedAttributes(
         cmsEncoder: CMSEncoderRef,
         signedAttributes: CMSSignedAttributes,
@@ -12819,21 +12819,21 @@ pub const kCMSCertificateChainWithRootOrFail: _bindgen_ty_1278 = 4;
 /// Apple SDK type alias `_bindgen_ty_1278`.
 pub type _bindgen_ty_1278 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMSEncoderSetCertificateChainMode`.
+    /// Apple SDK function `CMSEncoderSetCertificateChainMode`.
     pub fn CMSEncoderSetCertificateChainMode(
         cmsEncoder: CMSEncoderRef,
         chainMode: CMSCertificateChainMode,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderGetCertificateChainMode`.
+    /// Apple SDK function `CMSEncoderGetCertificateChainMode`.
     pub fn CMSEncoderGetCertificateChainMode(
         cmsEncoder: CMSEncoderRef,
         chainModeOut: *mut CMSCertificateChainMode,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderUpdateContent`.
+    /// Apple SDK function `CMSEncoderUpdateContent`.
     pub fn CMSEncoderUpdateContent(
         cmsEncoder: CMSEncoderRef,
         content: *const ::core::ffi::c_void,
@@ -12841,14 +12841,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCopyEncodedContent`.
+    /// Apple SDK function `CMSEncoderCopyEncodedContent`.
     pub fn CMSEncoderCopyEncodedContent(
         cmsEncoder: CMSEncoderRef,
         encodedContentOut: *mut CFDataRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncode`.
+    /// Apple SDK function `CMSEncode`.
     pub fn CMSEncode(
         signers: CFTypeRef,
         recipients: CFTypeRef,
@@ -12861,7 +12861,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncodeContent`.
+    /// Apple SDK function `CMSEncodeContent`.
     pub fn CMSEncodeContent(
         signers: CFTypeRef,
         recipients: CFTypeRef,
@@ -12874,7 +12874,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCopySignerTimestamp`.
+    /// Apple SDK function `CMSEncoderCopySignerTimestamp`.
     pub fn CMSEncoderCopySignerTimestamp(
         cmsEncoder: CMSEncoderRef,
         signerIndex: usize,
@@ -12882,7 +12882,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSEncoderCopySignerTimestampWithPolicy`.
+    /// Apple SDK function `CMSEncoderCopySignerTimestampWithPolicy`.
     pub fn CMSEncoderCopySignerTimestampWithPolicy(
         cmsEncoder: CMSEncoderRef,
         timeStampPolicy: CFTypeRef,
@@ -12964,19 +12964,19 @@ pub type CMMCreateTransformPropertyProc = ::core::option::Option<
     ) -> CFTypeRef,
 >;
 extern "C" {
-/// Apple SDK exported static `kCMMInitializeLinkProfileProcName`.
+    /// Apple SDK exported static `kCMMInitializeLinkProfileProcName`.
     pub static mut kCMMInitializeLinkProfileProcName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMInitializeTransformProcName`.
+    /// Apple SDK exported static `kCMMInitializeTransformProcName`.
     pub static mut kCMMInitializeTransformProcName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMApplyTransformProcName`.
+    /// Apple SDK exported static `kCMMApplyTransformProcName`.
     pub static mut kCMMApplyTransformProcName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMCreateTransformPropertyProcName`.
+    /// Apple SDK exported static `kCMMCreateTransformPropertyProcName`.
     pub static mut kCMMCreateTransformPropertyProcName: CFStringRef;
 }
 #[repr(C)]
@@ -13870,309 +13870,309 @@ pub type CMIterateDeviceProfileProcPtr = ::core::option::Option<
     ) -> OSErr,
 >;
 extern "C" {
-/// Apple SDK exported static `kCFErrorDomainCGImageMetadata`.
+    /// Apple SDK exported static `kCFErrorDomainCGImageMetadata`.
     pub static mut kCFErrorDomainCGImageMetadata: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferCGColorSpaceKey`.
+    /// Apple SDK exported static `kCVImageBufferCGColorSpaceKey`.
     pub static mut kCVImageBufferCGColorSpaceKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferCleanApertureKey`.
+    /// Apple SDK exported static `kCVImageBufferCleanApertureKey`.
     pub static mut kCVImageBufferCleanApertureKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferCleanApertureWidthKey`.
+    /// Apple SDK exported static `kCVImageBufferCleanApertureWidthKey`.
     pub static mut kCVImageBufferCleanApertureWidthKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferCleanApertureHeightKey`.
+    /// Apple SDK exported static `kCVImageBufferCleanApertureHeightKey`.
     pub static mut kCVImageBufferCleanApertureHeightKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferCleanApertureHorizontalOffsetKey`.
+    /// Apple SDK exported static `kCVImageBufferCleanApertureHorizontalOffsetKey`.
     pub static mut kCVImageBufferCleanApertureHorizontalOffsetKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferCleanApertureVerticalOffsetKey`.
+    /// Apple SDK exported static `kCVImageBufferCleanApertureVerticalOffsetKey`.
     pub static mut kCVImageBufferCleanApertureVerticalOffsetKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferPreferredCleanApertureKey`.
+    /// Apple SDK exported static `kCVImageBufferPreferredCleanApertureKey`.
     pub static mut kCVImageBufferPreferredCleanApertureKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferFieldCountKey`.
+    /// Apple SDK exported static `kCVImageBufferFieldCountKey`.
     pub static mut kCVImageBufferFieldCountKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferFieldDetailKey`.
+    /// Apple SDK exported static `kCVImageBufferFieldDetailKey`.
     pub static mut kCVImageBufferFieldDetailKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferFieldDetailTemporalTopFirst`.
+    /// Apple SDK exported static `kCVImageBufferFieldDetailTemporalTopFirst`.
     pub static mut kCVImageBufferFieldDetailTemporalTopFirst: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferFieldDetailTemporalBottomFirst`.
+    /// Apple SDK exported static `kCVImageBufferFieldDetailTemporalBottomFirst`.
     pub static mut kCVImageBufferFieldDetailTemporalBottomFirst: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferFieldDetailSpatialFirstLineEarly`.
+    /// Apple SDK exported static `kCVImageBufferFieldDetailSpatialFirstLineEarly`.
     pub static mut kCVImageBufferFieldDetailSpatialFirstLineEarly: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferFieldDetailSpatialFirstLineLate`.
+    /// Apple SDK exported static `kCVImageBufferFieldDetailSpatialFirstLineLate`.
     pub static mut kCVImageBufferFieldDetailSpatialFirstLineLate: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferPixelAspectRatioKey`.
+    /// Apple SDK exported static `kCVImageBufferPixelAspectRatioKey`.
     pub static mut kCVImageBufferPixelAspectRatioKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferPixelAspectRatioHorizontalSpacingKey`.
+    /// Apple SDK exported static `kCVImageBufferPixelAspectRatioHorizontalSpacingKey`.
     pub static mut kCVImageBufferPixelAspectRatioHorizontalSpacingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferPixelAspectRatioVerticalSpacingKey`.
+    /// Apple SDK exported static `kCVImageBufferPixelAspectRatioVerticalSpacingKey`.
     pub static mut kCVImageBufferPixelAspectRatioVerticalSpacingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayDimensionsKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayDimensionsKey`.
     pub static mut kCVImageBufferDisplayDimensionsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayWidthKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayWidthKey`.
     pub static mut kCVImageBufferDisplayWidthKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayHeightKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayHeightKey`.
     pub static mut kCVImageBufferDisplayHeightKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferGammaLevelKey`.
+    /// Apple SDK exported static `kCVImageBufferGammaLevelKey`.
     pub static mut kCVImageBufferGammaLevelKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferICCProfileKey`.
+    /// Apple SDK exported static `kCVImageBufferICCProfileKey`.
     pub static mut kCVImageBufferICCProfileKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferYCbCrMatrixKey`.
+    /// Apple SDK exported static `kCVImageBufferYCbCrMatrixKey`.
     pub static mut kCVImageBufferYCbCrMatrixKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferYCbCrMatrix_ITU_R_709_2`.
+    /// Apple SDK exported static `kCVImageBufferYCbCrMatrix_ITU_R_709_2`.
     pub static mut kCVImageBufferYCbCrMatrix_ITU_R_709_2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferYCbCrMatrix_ITU_R_601_4`.
+    /// Apple SDK exported static `kCVImageBufferYCbCrMatrix_ITU_R_601_4`.
     pub static mut kCVImageBufferYCbCrMatrix_ITU_R_601_4: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferYCbCrMatrix_SMPTE_240M_1995`.
+    /// Apple SDK exported static `kCVImageBufferYCbCrMatrix_SMPTE_240M_1995`.
     pub static mut kCVImageBufferYCbCrMatrix_SMPTE_240M_1995: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferYCbCrMatrix_DCI_P3`.
+    /// Apple SDK exported static `kCVImageBufferYCbCrMatrix_DCI_P3`.
     pub static mut kCVImageBufferYCbCrMatrix_DCI_P3: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferYCbCrMatrix_P3_D65`.
+    /// Apple SDK exported static `kCVImageBufferYCbCrMatrix_P3_D65`.
     pub static mut kCVImageBufferYCbCrMatrix_P3_D65: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferYCbCrMatrix_ITU_R_2020`.
+    /// Apple SDK exported static `kCVImageBufferYCbCrMatrix_ITU_R_2020`.
     pub static mut kCVImageBufferYCbCrMatrix_ITU_R_2020: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimariesKey`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimariesKey`.
     pub static mut kCVImageBufferColorPrimariesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimaries_ITU_R_709_2`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimaries_ITU_R_709_2`.
     pub static mut kCVImageBufferColorPrimaries_ITU_R_709_2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimaries_EBU_3213`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimaries_EBU_3213`.
     pub static mut kCVImageBufferColorPrimaries_EBU_3213: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimaries_SMPTE_C`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimaries_SMPTE_C`.
     pub static mut kCVImageBufferColorPrimaries_SMPTE_C: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimaries_P22`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimaries_P22`.
     pub static mut kCVImageBufferColorPrimaries_P22: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimaries_DCI_P3`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimaries_DCI_P3`.
     pub static mut kCVImageBufferColorPrimaries_DCI_P3: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimaries_P3_D65`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimaries_P3_D65`.
     pub static mut kCVImageBufferColorPrimaries_P3_D65: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferColorPrimaries_ITU_R_2020`.
+    /// Apple SDK exported static `kCVImageBufferColorPrimaries_ITU_R_2020`.
     pub static mut kCVImageBufferColorPrimaries_ITU_R_2020: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunctionKey`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunctionKey`.
     pub static mut kCVImageBufferTransferFunctionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_ITU_R_709_2`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_ITU_R_709_2`.
     pub static mut kCVImageBufferTransferFunction_ITU_R_709_2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_240M_1995`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_240M_1995`.
     pub static mut kCVImageBufferTransferFunction_SMPTE_240M_1995: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_UseGamma`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_UseGamma`.
     pub static mut kCVImageBufferTransferFunction_UseGamma: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_EBU_3213`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_EBU_3213`.
     pub static mut kCVImageBufferTransferFunction_EBU_3213: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_C`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_C`.
     pub static mut kCVImageBufferTransferFunction_SMPTE_C: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_sRGB`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_sRGB`.
     pub static mut kCVImageBufferTransferFunction_sRGB: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_ITU_R_2020`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_ITU_R_2020`.
     pub static mut kCVImageBufferTransferFunction_ITU_R_2020: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_ST_428_1`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_ST_428_1`.
     pub static mut kCVImageBufferTransferFunction_SMPTE_ST_428_1: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ`.
     pub static mut kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_ITU_R_2100_HLG`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_ITU_R_2100_HLG`.
     pub static mut kCVImageBufferTransferFunction_ITU_R_2100_HLG: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferTransferFunction_Linear`.
+    /// Apple SDK exported static `kCVImageBufferTransferFunction_Linear`.
     pub static mut kCVImageBufferTransferFunction_Linear: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocationTopFieldKey`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocationTopFieldKey`.
     pub static mut kCVImageBufferChromaLocationTopFieldKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocationBottomFieldKey`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocationBottomFieldKey`.
     pub static mut kCVImageBufferChromaLocationBottomFieldKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocation_Left`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocation_Left`.
     pub static mut kCVImageBufferChromaLocation_Left: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocation_Center`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocation_Center`.
     pub static mut kCVImageBufferChromaLocation_Center: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocation_TopLeft`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocation_TopLeft`.
     pub static mut kCVImageBufferChromaLocation_TopLeft: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocation_Top`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocation_Top`.
     pub static mut kCVImageBufferChromaLocation_Top: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocation_BottomLeft`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocation_BottomLeft`.
     pub static mut kCVImageBufferChromaLocation_BottomLeft: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocation_Bottom`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocation_Bottom`.
     pub static mut kCVImageBufferChromaLocation_Bottom: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaLocation_DV420`.
+    /// Apple SDK exported static `kCVImageBufferChromaLocation_DV420`.
     pub static mut kCVImageBufferChromaLocation_DV420: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaSubsamplingKey`.
+    /// Apple SDK exported static `kCVImageBufferChromaSubsamplingKey`.
     pub static mut kCVImageBufferChromaSubsamplingKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaSubsampling_420`.
+    /// Apple SDK exported static `kCVImageBufferChromaSubsampling_420`.
     pub static mut kCVImageBufferChromaSubsampling_420: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaSubsampling_422`.
+    /// Apple SDK exported static `kCVImageBufferChromaSubsampling_422`.
     pub static mut kCVImageBufferChromaSubsampling_422: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferChromaSubsampling_411`.
+    /// Apple SDK exported static `kCVImageBufferChromaSubsampling_411`.
     pub static mut kCVImageBufferChromaSubsampling_411: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferAlphaChannelIsOpaque`.
+    /// Apple SDK exported static `kCVImageBufferAlphaChannelIsOpaque`.
     pub static mut kCVImageBufferAlphaChannelIsOpaque: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferAlphaChannelModeKey`.
+    /// Apple SDK exported static `kCVImageBufferAlphaChannelModeKey`.
     pub static mut kCVImageBufferAlphaChannelModeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferAlphaChannelMode_StraightAlpha`.
+    /// Apple SDK exported static `kCVImageBufferAlphaChannelMode_StraightAlpha`.
     pub static mut kCVImageBufferAlphaChannelMode_StraightAlpha: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferAlphaChannelMode_PremultipliedAlpha`.
+    /// Apple SDK exported static `kCVImageBufferAlphaChannelMode_PremultipliedAlpha`.
     pub static mut kCVImageBufferAlphaChannelMode_PremultipliedAlpha: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferPostDecodeProcessingSequenceMetadataKey`.
+    /// Apple SDK exported static `kCVImageBufferPostDecodeProcessingSequenceMetadataKey`.
     pub static mut kCVImageBufferPostDecodeProcessingSequenceMetadataKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferPostDecodeProcessingFrameMetadataKey`.
+    /// Apple SDK exported static `kCVImageBufferPostDecodeProcessingFrameMetadataKey`.
     pub static mut kCVImageBufferPostDecodeProcessingFrameMetadataKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVYCbCrMatrixGetIntegerCodePointForString`.
+    /// Apple SDK function `CVYCbCrMatrixGetIntegerCodePointForString`.
     pub fn CVYCbCrMatrixGetIntegerCodePointForString(
         yCbCrMatrixString: CFStringRef,
     ) -> ::core::ffi::c_int;
 }
 extern "C" {
-/// Apple SDK function `CVColorPrimariesGetIntegerCodePointForString`.
+    /// Apple SDK function `CVColorPrimariesGetIntegerCodePointForString`.
     pub fn CVColorPrimariesGetIntegerCodePointForString(
         colorPrimariesString: CFStringRef,
     ) -> ::core::ffi::c_int;
 }
 extern "C" {
-/// Apple SDK function `CVTransferFunctionGetIntegerCodePointForString`.
+    /// Apple SDK function `CVTransferFunctionGetIntegerCodePointForString`.
     pub fn CVTransferFunctionGetIntegerCodePointForString(
         transferFunctionString: CFStringRef,
     ) -> ::core::ffi::c_int;
 }
 extern "C" {
-/// Apple SDK function `CVYCbCrMatrixGetStringForIntegerCodePoint`.
+    /// Apple SDK function `CVYCbCrMatrixGetStringForIntegerCodePoint`.
     pub fn CVYCbCrMatrixGetStringForIntegerCodePoint(
         yCbCrMatrixCodePoint: ::core::ffi::c_int,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVColorPrimariesGetStringForIntegerCodePoint`.
+    /// Apple SDK function `CVColorPrimariesGetStringForIntegerCodePoint`.
     pub fn CVColorPrimariesGetStringForIntegerCodePoint(
         colorPrimariesCodePoint: ::core::ffi::c_int,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVTransferFunctionGetStringForIntegerCodePoint`.
+    /// Apple SDK function `CVTransferFunctionGetStringForIntegerCodePoint`.
     pub fn CVTransferFunctionGetStringForIntegerCodePoint(
         transferFunctionCodePoint: ::core::ffi::c_int,
     ) -> CFStringRef;
@@ -14180,105 +14180,105 @@ extern "C" {
 /// Apple SDK type alias `CVImageBufferRef`.
 pub type CVImageBufferRef = CVBufferRef;
 extern "C" {
-/// Apple SDK function `CVImageBufferGetEncodedSize`.
+    /// Apple SDK function `CVImageBufferGetEncodedSize`.
     pub fn CVImageBufferGetEncodedSize(imageBuffer: CVImageBufferRef) -> CGSize;
 }
 extern "C" {
-/// Apple SDK function `CVImageBufferGetDisplaySize`.
+    /// Apple SDK function `CVImageBufferGetDisplaySize`.
     pub fn CVImageBufferGetDisplaySize(imageBuffer: CVImageBufferRef) -> CGSize;
 }
 extern "C" {
-/// Apple SDK function `CVImageBufferGetCleanRect`.
+    /// Apple SDK function `CVImageBufferGetCleanRect`.
     pub fn CVImageBufferGetCleanRect(imageBuffer: CVImageBufferRef) -> CGRect;
 }
 extern "C" {
-/// Apple SDK function `CVImageBufferIsFlipped`.
+    /// Apple SDK function `CVImageBufferIsFlipped`.
     pub fn CVImageBufferIsFlipped(imageBuffer: CVImageBufferRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CVImageBufferGetColorSpace`.
+    /// Apple SDK function `CVImageBufferGetColorSpace`.
     pub fn CVImageBufferGetColorSpace(imageBuffer: CVImageBufferRef) -> CGColorSpaceRef;
 }
 extern "C" {
-/// Apple SDK function `CVImageBufferCreateColorSpaceFromAttachments`.
+    /// Apple SDK function `CVImageBufferCreateColorSpaceFromAttachments`.
     pub fn CVImageBufferCreateColorSpaceFromAttachments(
         attachments: CFDictionaryRef,
     ) -> CGColorSpaceRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferMasteringDisplayColorVolumeKey`.
+    /// Apple SDK exported static `kCVImageBufferMasteringDisplayColorVolumeKey`.
     pub static mut kCVImageBufferMasteringDisplayColorVolumeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferContentLightLevelInfoKey`.
+    /// Apple SDK exported static `kCVImageBufferContentLightLevelInfoKey`.
     pub static mut kCVImageBufferContentLightLevelInfoKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferAmbientViewingEnvironmentKey`.
+    /// Apple SDK exported static `kCVImageBufferAmbientViewingEnvironmentKey`.
     pub static mut kCVImageBufferAmbientViewingEnvironmentKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferSceneIlluminationKey`.
+    /// Apple SDK exported static `kCVImageBufferSceneIlluminationKey`.
     pub static mut kCVImageBufferSceneIlluminationKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferRegionOfInterestKey`.
+    /// Apple SDK exported static `kCVImageBufferRegionOfInterestKey`.
     pub static mut kCVImageBufferRegionOfInterestKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferLogTransferFunctionKey`.
+    /// Apple SDK exported static `kCVImageBufferLogTransferFunctionKey`.
     pub static mut kCVImageBufferLogTransferFunctionKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferLogTransferFunction_AppleLog`.
+    /// Apple SDK exported static `kCVImageBufferLogTransferFunction_AppleLog`.
     pub static mut kCVImageBufferLogTransferFunction_AppleLog: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferLogTransferFunction_AppleLog2`.
+    /// Apple SDK exported static `kCVImageBufferLogTransferFunction_AppleLog2`.
     pub static mut kCVImageBufferLogTransferFunction_AppleLog2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangleKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangleKey`.
     pub static mut kCVImageBufferDisplayMaskRectangleKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleLeftKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleLeftKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_RectangleLeftKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleWidthKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleWidthKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_RectangleWidthKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleTopKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleTopKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_RectangleTopKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleHeightKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RectangleHeightKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_RectangleHeightKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangleStereoLeftKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangleStereoLeftKey`.
     pub static mut kCVImageBufferDisplayMaskRectangleStereoLeftKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangleStereoRightKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangleStereoRightKey`.
     pub static mut kCVImageBufferDisplayMaskRectangleStereoRightKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey`.
+    /// Apple SDK exported static `kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey`.
     pub static mut kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey: CFStringRef;
 }
 /// Apple SDK constant `kCVPixelFormatType_1Monochrome`.
@@ -14525,79 +14525,79 @@ pub struct CVPlanarPixelBufferInfo_YCbCrBiPlanar {
     pub componentInfoCbCr: CVPlanarComponentInfo,
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferPixelFormatTypeKey`.
+    /// Apple SDK exported static `kCVPixelBufferPixelFormatTypeKey`.
     pub static mut kCVPixelBufferPixelFormatTypeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferMemoryAllocatorKey`.
+    /// Apple SDK exported static `kCVPixelBufferMemoryAllocatorKey`.
     pub static mut kCVPixelBufferMemoryAllocatorKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferWidthKey`.
+    /// Apple SDK exported static `kCVPixelBufferWidthKey`.
     pub static mut kCVPixelBufferWidthKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferHeightKey`.
+    /// Apple SDK exported static `kCVPixelBufferHeightKey`.
     pub static mut kCVPixelBufferHeightKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferExtendedPixelsLeftKey`.
+    /// Apple SDK exported static `kCVPixelBufferExtendedPixelsLeftKey`.
     pub static mut kCVPixelBufferExtendedPixelsLeftKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferExtendedPixelsTopKey`.
+    /// Apple SDK exported static `kCVPixelBufferExtendedPixelsTopKey`.
     pub static mut kCVPixelBufferExtendedPixelsTopKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferExtendedPixelsRightKey`.
+    /// Apple SDK exported static `kCVPixelBufferExtendedPixelsRightKey`.
     pub static mut kCVPixelBufferExtendedPixelsRightKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferExtendedPixelsBottomKey`.
+    /// Apple SDK exported static `kCVPixelBufferExtendedPixelsBottomKey`.
     pub static mut kCVPixelBufferExtendedPixelsBottomKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferBytesPerRowAlignmentKey`.
+    /// Apple SDK exported static `kCVPixelBufferBytesPerRowAlignmentKey`.
     pub static mut kCVPixelBufferBytesPerRowAlignmentKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferCGBitmapContextCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferCGBitmapContextCompatibilityKey`.
     pub static mut kCVPixelBufferCGBitmapContextCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferCGImageCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferCGImageCompatibilityKey`.
     pub static mut kCVPixelBufferCGImageCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferOpenGLCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferOpenGLCompatibilityKey`.
     pub static mut kCVPixelBufferOpenGLCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferPlaneAlignmentKey`.
+    /// Apple SDK exported static `kCVPixelBufferPlaneAlignmentKey`.
     pub static mut kCVPixelBufferPlaneAlignmentKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferIOSurfacePropertiesKey`.
+    /// Apple SDK exported static `kCVPixelBufferIOSurfacePropertiesKey`.
     pub static mut kCVPixelBufferIOSurfacePropertiesKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferOpenGLESCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferOpenGLESCompatibilityKey`.
     pub static mut kCVPixelBufferOpenGLESCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferMetalCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferMetalCompatibilityKey`.
     pub static mut kCVPixelBufferMetalCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferOpenGLTextureCacheCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferOpenGLTextureCacheCompatibilityKey`.
     pub static mut kCVPixelBufferOpenGLTextureCacheCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferOpenGLESTextureCacheCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferOpenGLESTextureCacheCompatibilityKey`.
     pub static mut kCVPixelBufferOpenGLESTextureCacheCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferVersatileBayerKey_BayerPattern`.
+    /// Apple SDK exported static `kCVPixelBufferVersatileBayerKey_BayerPattern`.
     pub static mut kCVPixelBufferVersatileBayerKey_BayerPattern: CFStringRef;
 }
 /// Apple SDK constant `kCVVersatileBayer_BayerPattern_RGGB`.
@@ -14611,65 +14611,65 @@ pub const kCVVersatileBayer_BayerPattern_BGGR: _bindgen_ty_1665 = 3;
 /// Apple SDK type alias `_bindgen_ty_1665`.
 pub type _bindgen_ty_1665 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_SenselSitingOffsets`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_SenselSitingOffsets`.
     pub static mut kCVPixelBufferProResRAWKey_SenselSitingOffsets: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_BlackLevel`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_BlackLevel`.
     pub static mut kCVPixelBufferProResRAWKey_BlackLevel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteLevel`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteLevel`.
     pub static mut kCVPixelBufferProResRAWKey_WhiteLevel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteBalanceCCT`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteBalanceCCT`.
     pub static mut kCVPixelBufferProResRAWKey_WhiteBalanceCCT: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor`.
     pub static mut kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor`.
     pub static mut kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_ColorMatrix`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_ColorMatrix`.
     pub static mut kCVPixelBufferProResRAWKey_ColorMatrix: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_GainFactor`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_GainFactor`.
     pub static mut kCVPixelBufferProResRAWKey_GainFactor: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_RecommendedCrop`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_RecommendedCrop`.
     pub static mut kCVPixelBufferProResRAWKey_RecommendedCrop: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferProResRAWKey_MetadataExtension`.
+    /// Apple SDK exported static `kCVPixelBufferProResRAWKey_MetadataExtension`.
     pub static mut kCVPixelBufferProResRAWKey_MetadataExtension: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferIOSurfacePurgeableKey`.
+    /// Apple SDK exported static `kCVPixelBufferIOSurfacePurgeableKey`.
     pub static mut kCVPixelBufferIOSurfacePurgeableKey: CFStringRef;
 }
 /// Apple SDK type alias `CVPixelBufferRef`.
 pub type CVPixelBufferRef = CVImageBufferRef;
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetTypeID`.
+    /// Apple SDK function `CVPixelBufferGetTypeID`.
     pub fn CVPixelBufferGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferRetain`.
+    /// Apple SDK function `CVPixelBufferRetain`.
     pub fn CVPixelBufferRetain(texture: CVPixelBufferRef) -> CVPixelBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferRelease`.
+    /// Apple SDK function `CVPixelBufferRelease`.
     pub fn CVPixelBufferRelease(texture: CVPixelBufferRef);
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferCreateResolvedAttributesDictionary`.
+    /// Apple SDK function `CVPixelBufferCreateResolvedAttributesDictionary`.
     pub fn CVPixelBufferCreateResolvedAttributesDictionary(
         allocator: CFAllocatorRef,
         attributes: CFArrayRef,
@@ -14677,7 +14677,7 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferCreate`.
+    /// Apple SDK function `CVPixelBufferCreate`.
     pub fn CVPixelBufferCreate(
         allocator: CFAllocatorRef,
         width: usize,
@@ -14695,7 +14695,7 @@ pub type CVPixelBufferReleaseBytesCallback = ::core::option::Option<
     ),
 >;
 extern "C" {
-/// Apple SDK function `CVPixelBufferCreateWithBytes`.
+    /// Apple SDK function `CVPixelBufferCreateWithBytes`.
     pub fn CVPixelBufferCreateWithBytes(
         allocator: CFAllocatorRef,
         width: usize,
@@ -14720,7 +14720,7 @@ pub type CVPixelBufferReleasePlanarBytesCallback = ::core::option::Option<
     ),
 >;
 extern "C" {
-/// Apple SDK function `CVPixelBufferCreateWithPlanarBytes`.
+    /// Apple SDK function `CVPixelBufferCreateWithPlanarBytes`.
     pub fn CVPixelBufferCreateWithPlanarBytes(
         allocator: CFAllocatorRef,
         width: usize,
@@ -14740,76 +14740,76 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferLockBaseAddress`.
+    /// Apple SDK function `CVPixelBufferLockBaseAddress`.
     pub fn CVPixelBufferLockBaseAddress(
         pixelBuffer: CVPixelBufferRef,
         lockFlags: CVPixelBufferLockFlags,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferUnlockBaseAddress`.
+    /// Apple SDK function `CVPixelBufferUnlockBaseAddress`.
     pub fn CVPixelBufferUnlockBaseAddress(
         pixelBuffer: CVPixelBufferRef,
         unlockFlags: CVPixelBufferLockFlags,
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetWidth`.
+    /// Apple SDK function `CVPixelBufferGetWidth`.
     pub fn CVPixelBufferGetWidth(pixelBuffer: CVPixelBufferRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetHeight`.
+    /// Apple SDK function `CVPixelBufferGetHeight`.
     pub fn CVPixelBufferGetHeight(pixelBuffer: CVPixelBufferRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetPixelFormatType`.
+    /// Apple SDK function `CVPixelBufferGetPixelFormatType`.
     pub fn CVPixelBufferGetPixelFormatType(pixelBuffer: CVPixelBufferRef) -> OSType;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetBaseAddress`.
+    /// Apple SDK function `CVPixelBufferGetBaseAddress`.
     pub fn CVPixelBufferGetBaseAddress(pixelBuffer: CVPixelBufferRef) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetBytesPerRow`.
+    /// Apple SDK function `CVPixelBufferGetBytesPerRow`.
     pub fn CVPixelBufferGetBytesPerRow(pixelBuffer: CVPixelBufferRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetDataSize`.
+    /// Apple SDK function `CVPixelBufferGetDataSize`.
     pub fn CVPixelBufferGetDataSize(pixelBuffer: CVPixelBufferRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferIsPlanar`.
+    /// Apple SDK function `CVPixelBufferIsPlanar`.
     pub fn CVPixelBufferIsPlanar(pixelBuffer: CVPixelBufferRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetPlaneCount`.
+    /// Apple SDK function `CVPixelBufferGetPlaneCount`.
     pub fn CVPixelBufferGetPlaneCount(pixelBuffer: CVPixelBufferRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetWidthOfPlane`.
+    /// Apple SDK function `CVPixelBufferGetWidthOfPlane`.
     pub fn CVPixelBufferGetWidthOfPlane(pixelBuffer: CVPixelBufferRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetHeightOfPlane`.
+    /// Apple SDK function `CVPixelBufferGetHeightOfPlane`.
     pub fn CVPixelBufferGetHeightOfPlane(pixelBuffer: CVPixelBufferRef, planeIndex: usize)
         -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetBaseAddressOfPlane`.
+    /// Apple SDK function `CVPixelBufferGetBaseAddressOfPlane`.
     pub fn CVPixelBufferGetBaseAddressOfPlane(
         pixelBuffer: CVPixelBufferRef,
         planeIndex: usize,
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetBytesPerRowOfPlane`.
+    /// Apple SDK function `CVPixelBufferGetBytesPerRowOfPlane`.
     pub fn CVPixelBufferGetBytesPerRowOfPlane(
         pixelBuffer: CVPixelBufferRef,
         planeIndex: usize,
     ) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetExtendedPixels`.
+    /// Apple SDK function `CVPixelBufferGetExtendedPixels`.
     pub fn CVPixelBufferGetExtendedPixels(
         pixelBuffer: CVPixelBufferRef,
         extraColumnsOnLeft: *mut usize,
@@ -14819,15 +14819,15 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferFillExtendedPixels`.
+    /// Apple SDK function `CVPixelBufferFillExtendedPixels`.
     pub fn CVPixelBufferFillExtendedPixels(pixelBuffer: CVPixelBufferRef) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferCopyCreationAttributes`.
+    /// Apple SDK function `CVPixelBufferCopyCreationAttributes`.
     pub fn CVPixelBufferCopyCreationAttributes(pixelBuffer: CVPixelBufferRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferIsCompatibleWithAttributes`.
+    /// Apple SDK function `CVPixelBufferIsCompatibleWithAttributes`.
     pub fn CVPixelBufferIsCompatibleWithAttributes(
         pixelBuffer: CVPixelBufferRef,
         attributes: CFDictionaryRef,
@@ -14886,107 +14886,107 @@ pub const kIOSurfaceMapCopybackInnerCache: _bindgen_ty_1669 = 1280;
 /// Apple SDK type alias `_bindgen_ty_1669`.
 pub type _bindgen_ty_1669 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceAllocSize`.
+    /// Apple SDK exported static `kIOSurfaceAllocSize`.
     pub static kIOSurfaceAllocSize: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceWidth`.
+    /// Apple SDK exported static `kIOSurfaceWidth`.
     pub static kIOSurfaceWidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceHeight`.
+    /// Apple SDK exported static `kIOSurfaceHeight`.
     pub static kIOSurfaceHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceBytesPerRow`.
+    /// Apple SDK exported static `kIOSurfaceBytesPerRow`.
     pub static kIOSurfaceBytesPerRow: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceBytesPerElement`.
+    /// Apple SDK exported static `kIOSurfaceBytesPerElement`.
     pub static kIOSurfaceBytesPerElement: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceElementWidth`.
+    /// Apple SDK exported static `kIOSurfaceElementWidth`.
     pub static kIOSurfaceElementWidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceElementHeight`.
+    /// Apple SDK exported static `kIOSurfaceElementHeight`.
     pub static kIOSurfaceElementHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceOffset`.
+    /// Apple SDK exported static `kIOSurfaceOffset`.
     pub static kIOSurfaceOffset: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneInfo`.
+    /// Apple SDK exported static `kIOSurfacePlaneInfo`.
     pub static kIOSurfacePlaneInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneWidth`.
+    /// Apple SDK exported static `kIOSurfacePlaneWidth`.
     pub static kIOSurfacePlaneWidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneHeight`.
+    /// Apple SDK exported static `kIOSurfacePlaneHeight`.
     pub static kIOSurfacePlaneHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneBytesPerRow`.
+    /// Apple SDK exported static `kIOSurfacePlaneBytesPerRow`.
     pub static kIOSurfacePlaneBytesPerRow: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneOffset`.
+    /// Apple SDK exported static `kIOSurfacePlaneOffset`.
     pub static kIOSurfacePlaneOffset: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneSize`.
+    /// Apple SDK exported static `kIOSurfacePlaneSize`.
     pub static kIOSurfacePlaneSize: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneBase`.
+    /// Apple SDK exported static `kIOSurfacePlaneBase`.
     pub static kIOSurfacePlaneBase: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneBitsPerElement`.
+    /// Apple SDK exported static `kIOSurfacePlaneBitsPerElement`.
     pub static kIOSurfacePlaneBitsPerElement: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneBytesPerElement`.
+    /// Apple SDK exported static `kIOSurfacePlaneBytesPerElement`.
     pub static kIOSurfacePlaneBytesPerElement: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneElementWidth`.
+    /// Apple SDK exported static `kIOSurfacePlaneElementWidth`.
     pub static kIOSurfacePlaneElementWidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneElementHeight`.
+    /// Apple SDK exported static `kIOSurfacePlaneElementHeight`.
     pub static kIOSurfacePlaneElementHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceCacheMode`.
+    /// Apple SDK exported static `kIOSurfaceCacheMode`.
     pub static kIOSurfaceCacheMode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceIsGlobal`.
+    /// Apple SDK exported static `kIOSurfaceIsGlobal`.
     pub static kIOSurfaceIsGlobal: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePixelFormat`.
+    /// Apple SDK exported static `kIOSurfacePixelFormat`.
     pub static kIOSurfacePixelFormat: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePixelSizeCastingAllowed`.
+    /// Apple SDK exported static `kIOSurfacePixelSizeCastingAllowed`.
     pub static kIOSurfacePixelSizeCastingAllowed: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneComponentBitDepths`.
+    /// Apple SDK exported static `kIOSurfacePlaneComponentBitDepths`.
     pub static kIOSurfacePlaneComponentBitDepths: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneComponentBitOffsets`.
+    /// Apple SDK exported static `kIOSurfacePlaneComponentBitOffsets`.
     pub static kIOSurfacePlaneComponentBitOffsets: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceName`.
+    /// Apple SDK exported static `kIOSurfaceName`.
     pub static kIOSurfaceName: CFStringRef;
 }
 /// Apple SDK type alias `IOSurfaceComponentName`.
@@ -15010,7 +15010,7 @@ pub const kIOSurfaceComponentNameChromaBlue: _bindgen_ty_1670 = 7;
 /// Apple SDK type alias `_bindgen_ty_1670`.
 pub type _bindgen_ty_1670 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneComponentNames`.
+    /// Apple SDK exported static `kIOSurfacePlaneComponentNames`.
     pub static kIOSurfacePlaneComponentNames: CFStringRef;
 }
 /// Apple SDK type alias `IOSurfaceComponentType`.
@@ -15028,7 +15028,7 @@ pub const kIOSurfaceComponentTypeSignedNormalized: _bindgen_ty_1671 = 4;
 /// Apple SDK type alias `_bindgen_ty_1671`.
 pub type _bindgen_ty_1671 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneComponentTypes`.
+    /// Apple SDK exported static `kIOSurfacePlaneComponentTypes`.
     pub static kIOSurfacePlaneComponentTypes: CFStringRef;
 }
 /// Apple SDK type alias `IOSurfaceComponentRange`.
@@ -15044,7 +15044,7 @@ pub const kIOSurfaceComponentRangeWideRange: _bindgen_ty_1672 = 3;
 /// Apple SDK type alias `_bindgen_ty_1672`.
 pub type _bindgen_ty_1672 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kIOSurfacePlaneComponentRanges`.
+    /// Apple SDK exported static `kIOSurfacePlaneComponentRanges`.
     pub static kIOSurfacePlaneComponentRanges: CFStringRef;
 }
 /// Apple SDK type alias `IOSurfaceSubsampling`.
@@ -15062,27 +15062,27 @@ pub const kIOSurfaceSubsampling411: _bindgen_ty_1673 = 4;
 /// Apple SDK type alias `_bindgen_ty_1673`.
 pub type _bindgen_ty_1673 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceSubsampling`.
+    /// Apple SDK exported static `kIOSurfaceSubsampling`.
     pub static kIOSurfaceSubsampling: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetTypeID`.
+    /// Apple SDK function `IOSurfaceGetTypeID`.
     pub fn IOSurfaceGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceCreate`.
+    /// Apple SDK function `IOSurfaceCreate`.
     pub fn IOSurfaceCreate(properties: CFDictionaryRef) -> IOSurfaceRef;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceLookup`.
+    /// Apple SDK function `IOSurfaceLookup`.
     pub fn IOSurfaceLookup(csid: IOSurfaceID) -> IOSurfaceRef;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetID`.
+    /// Apple SDK function `IOSurfaceGetID`.
     pub fn IOSurfaceGetID(buffer: IOSurfaceRef) -> IOSurfaceID;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceLock`.
+    /// Apple SDK function `IOSurfaceLock`.
     pub fn IOSurfaceLock(
         buffer: IOSurfaceRef,
         options: IOSurfaceLockOptions,
@@ -15090,7 +15090,7 @@ extern "C" {
     ) -> kern_return_t;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceUnlock`.
+    /// Apple SDK function `IOSurfaceUnlock`.
     pub fn IOSurfaceUnlock(
         buffer: IOSurfaceRef,
         options: IOSurfaceLockOptions,
@@ -15098,86 +15098,86 @@ extern "C" {
     ) -> kern_return_t;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetAllocSize`.
+    /// Apple SDK function `IOSurfaceGetAllocSize`.
     pub fn IOSurfaceGetAllocSize(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetWidth`.
+    /// Apple SDK function `IOSurfaceGetWidth`.
     pub fn IOSurfaceGetWidth(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetHeight`.
+    /// Apple SDK function `IOSurfaceGetHeight`.
     pub fn IOSurfaceGetHeight(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBytesPerElement`.
+    /// Apple SDK function `IOSurfaceGetBytesPerElement`.
     pub fn IOSurfaceGetBytesPerElement(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBytesPerRow`.
+    /// Apple SDK function `IOSurfaceGetBytesPerRow`.
     pub fn IOSurfaceGetBytesPerRow(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBaseAddress`.
+    /// Apple SDK function `IOSurfaceGetBaseAddress`.
     pub fn IOSurfaceGetBaseAddress(buffer: IOSurfaceRef) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetElementWidth`.
+    /// Apple SDK function `IOSurfaceGetElementWidth`.
     pub fn IOSurfaceGetElementWidth(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetElementHeight`.
+    /// Apple SDK function `IOSurfaceGetElementHeight`.
     pub fn IOSurfaceGetElementHeight(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetPixelFormat`.
+    /// Apple SDK function `IOSurfaceGetPixelFormat`.
     pub fn IOSurfaceGetPixelFormat(buffer: IOSurfaceRef) -> OSType;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetSeed`.
+    /// Apple SDK function `IOSurfaceGetSeed`.
     pub fn IOSurfaceGetSeed(buffer: IOSurfaceRef) -> u32;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetPlaneCount`.
+    /// Apple SDK function `IOSurfaceGetPlaneCount`.
     pub fn IOSurfaceGetPlaneCount(buffer: IOSurfaceRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetWidthOfPlane`.
+    /// Apple SDK function `IOSurfaceGetWidthOfPlane`.
     pub fn IOSurfaceGetWidthOfPlane(buffer: IOSurfaceRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetHeightOfPlane`.
+    /// Apple SDK function `IOSurfaceGetHeightOfPlane`.
     pub fn IOSurfaceGetHeightOfPlane(buffer: IOSurfaceRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBytesPerElementOfPlane`.
+    /// Apple SDK function `IOSurfaceGetBytesPerElementOfPlane`.
     pub fn IOSurfaceGetBytesPerElementOfPlane(buffer: IOSurfaceRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBytesPerRowOfPlane`.
+    /// Apple SDK function `IOSurfaceGetBytesPerRowOfPlane`.
     pub fn IOSurfaceGetBytesPerRowOfPlane(buffer: IOSurfaceRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBaseAddressOfPlane`.
+    /// Apple SDK function `IOSurfaceGetBaseAddressOfPlane`.
     pub fn IOSurfaceGetBaseAddressOfPlane(
         buffer: IOSurfaceRef,
         planeIndex: usize,
     ) -> *mut ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetElementWidthOfPlane`.
+    /// Apple SDK function `IOSurfaceGetElementWidthOfPlane`.
     pub fn IOSurfaceGetElementWidthOfPlane(buffer: IOSurfaceRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetElementHeightOfPlane`.
+    /// Apple SDK function `IOSurfaceGetElementHeightOfPlane`.
     pub fn IOSurfaceGetElementHeightOfPlane(buffer: IOSurfaceRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetNumberOfComponentsOfPlane`.
+    /// Apple SDK function `IOSurfaceGetNumberOfComponentsOfPlane`.
     pub fn IOSurfaceGetNumberOfComponentsOfPlane(buffer: IOSurfaceRef, planeIndex: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetNameOfComponentOfPlane`.
+    /// Apple SDK function `IOSurfaceGetNameOfComponentOfPlane`.
     pub fn IOSurfaceGetNameOfComponentOfPlane(
         buffer: IOSurfaceRef,
         planeIndex: usize,
@@ -15185,7 +15185,7 @@ extern "C" {
     ) -> IOSurfaceComponentName;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetTypeOfComponentOfPlane`.
+    /// Apple SDK function `IOSurfaceGetTypeOfComponentOfPlane`.
     pub fn IOSurfaceGetTypeOfComponentOfPlane(
         buffer: IOSurfaceRef,
         planeIndex: usize,
@@ -15193,7 +15193,7 @@ extern "C" {
     ) -> IOSurfaceComponentType;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetRangeOfComponentOfPlane`.
+    /// Apple SDK function `IOSurfaceGetRangeOfComponentOfPlane`.
     pub fn IOSurfaceGetRangeOfComponentOfPlane(
         buffer: IOSurfaceRef,
         planeIndex: usize,
@@ -15201,7 +15201,7 @@ extern "C" {
     ) -> IOSurfaceComponentRange;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBitDepthOfComponentOfPlane`.
+    /// Apple SDK function `IOSurfaceGetBitDepthOfComponentOfPlane`.
     pub fn IOSurfaceGetBitDepthOfComponentOfPlane(
         buffer: IOSurfaceRef,
         planeIndex: usize,
@@ -15209,7 +15209,7 @@ extern "C" {
     ) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetBitOffsetOfComponentOfPlane`.
+    /// Apple SDK function `IOSurfaceGetBitOffsetOfComponentOfPlane`.
     pub fn IOSurfaceGetBitOffsetOfComponentOfPlane(
         buffer: IOSurfaceRef,
         planeIndex: usize,
@@ -15217,87 +15217,87 @@ extern "C" {
     ) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetSubsampling`.
+    /// Apple SDK function `IOSurfaceGetSubsampling`.
     pub fn IOSurfaceGetSubsampling(buffer: IOSurfaceRef) -> IOSurfaceSubsampling;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceColorSpace`.
+    /// Apple SDK exported static `kIOSurfaceColorSpace`.
     pub static kIOSurfaceColorSpace: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceICCProfile`.
+    /// Apple SDK exported static `kIOSurfaceICCProfile`.
     pub static kIOSurfaceICCProfile: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kIOSurfaceContentHeadroom`.
+    /// Apple SDK exported static `kIOSurfaceContentHeadroom`.
     pub static kIOSurfaceContentHeadroom: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceSetValue`.
+    /// Apple SDK function `IOSurfaceSetValue`.
     pub fn IOSurfaceSetValue(buffer: IOSurfaceRef, key: CFStringRef, value: CFTypeRef);
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceCopyValue`.
+    /// Apple SDK function `IOSurfaceCopyValue`.
     pub fn IOSurfaceCopyValue(buffer: IOSurfaceRef, key: CFStringRef) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceRemoveValue`.
+    /// Apple SDK function `IOSurfaceRemoveValue`.
     pub fn IOSurfaceRemoveValue(buffer: IOSurfaceRef, key: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceSetValues`.
+    /// Apple SDK function `IOSurfaceSetValues`.
     pub fn IOSurfaceSetValues(buffer: IOSurfaceRef, keysAndValues: CFDictionaryRef);
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceCopyAllValues`.
+    /// Apple SDK function `IOSurfaceCopyAllValues`.
     pub fn IOSurfaceCopyAllValues(buffer: IOSurfaceRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceRemoveAllValues`.
+    /// Apple SDK function `IOSurfaceRemoveAllValues`.
     pub fn IOSurfaceRemoveAllValues(buffer: IOSurfaceRef);
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceCreateMachPort`.
+    /// Apple SDK function `IOSurfaceCreateMachPort`.
     pub fn IOSurfaceCreateMachPort(buffer: IOSurfaceRef) -> mach_port_t;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceLookupFromMachPort`.
+    /// Apple SDK function `IOSurfaceLookupFromMachPort`.
     pub fn IOSurfaceLookupFromMachPort(port: mach_port_t) -> IOSurfaceRef;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetPropertyMaximum`.
+    /// Apple SDK function `IOSurfaceGetPropertyMaximum`.
     pub fn IOSurfaceGetPropertyMaximum(property: CFStringRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetPropertyAlignment`.
+    /// Apple SDK function `IOSurfaceGetPropertyAlignment`.
     pub fn IOSurfaceGetPropertyAlignment(property: CFStringRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceAlignProperty`.
+    /// Apple SDK function `IOSurfaceAlignProperty`.
     pub fn IOSurfaceAlignProperty(property: CFStringRef, value: usize) -> usize;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceIncrementUseCount`.
+    /// Apple SDK function `IOSurfaceIncrementUseCount`.
     pub fn IOSurfaceIncrementUseCount(buffer: IOSurfaceRef);
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceDecrementUseCount`.
+    /// Apple SDK function `IOSurfaceDecrementUseCount`.
     pub fn IOSurfaceDecrementUseCount(buffer: IOSurfaceRef);
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceGetUseCount`.
+    /// Apple SDK function `IOSurfaceGetUseCount`.
     pub fn IOSurfaceGetUseCount(buffer: IOSurfaceRef) -> i32;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceIsInUse`.
+    /// Apple SDK function `IOSurfaceIsInUse`.
     pub fn IOSurfaceIsInUse(buffer: IOSurfaceRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceAllowsPixelSizeCasting`.
+    /// Apple SDK function `IOSurfaceAllowsPixelSizeCasting`.
     pub fn IOSurfaceAllowsPixelSizeCasting(buffer: IOSurfaceRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceSetPurgeable`.
+    /// Apple SDK function `IOSurfaceSetPurgeable`.
     pub fn IOSurfaceSetPurgeable(
         buffer: IOSurfaceRef,
         newState: u32,
@@ -15325,7 +15325,7 @@ pub const kIOSurfaceMemoryLedgerFlagNoFootprint: _bindgen_ty_1675 = 1;
 /// Apple SDK type alias `_bindgen_ty_1675`.
 pub type _bindgen_ty_1675 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `IOSurfaceSetOwnershipIdentity`.
+    /// Apple SDK function `IOSurfaceSetOwnershipIdentity`.
     pub fn IOSurfaceSetOwnershipIdentity(
         buffer: IOSurfaceRef,
         task_id_token: task_id_token_t,
@@ -15334,39 +15334,39 @@ extern "C" {
     ) -> kern_return_t;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceCreateXPCObject`.
+    /// Apple SDK function `IOSurfaceCreateXPCObject`.
     pub fn IOSurfaceCreateXPCObject(aSurface: IOSurfaceRef) -> xpc_object_t;
 }
 extern "C" {
-/// Apple SDK function `IOSurfaceLookupFromXPCObject`.
+    /// Apple SDK function `IOSurfaceLookupFromXPCObject`.
     pub fn IOSurfaceLookupFromXPCObject(xobj: xpc_object_t) -> IOSurfaceRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey`.
     pub static mut kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey`.
     pub static mut kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey`.
     pub static mut kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey`.
     pub static mut kCVPixelBufferIOSurfaceOpenGLESTextureCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey`.
+    /// Apple SDK exported static `kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey`.
     pub static mut kCVPixelBufferIOSurfaceOpenGLESFBOCompatibilityKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferGetIOSurface`.
+    /// Apple SDK function `CVPixelBufferGetIOSurface`.
     pub fn CVPixelBufferGetIOSurface(pixelBuffer: CVPixelBufferRef) -> IOSurfaceRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferCreateWithIOSurface`.
+    /// Apple SDK function `CVPixelBufferCreateWithIOSurface`.
     pub fn CVPixelBufferCreateWithIOSurface(
         allocator: CFAllocatorRef,
         surface: IOSurfaceRef,
@@ -15383,27 +15383,27 @@ pub struct __CVPixelBufferPool {
 /// Apple SDK type alias `CVPixelBufferPoolRef`.
 pub type CVPixelBufferPoolRef = *mut __CVPixelBufferPool;
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferPoolMinimumBufferCountKey`.
+    /// Apple SDK exported static `kCVPixelBufferPoolMinimumBufferCountKey`.
     pub static mut kCVPixelBufferPoolMinimumBufferCountKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferPoolMaximumBufferAgeKey`.
+    /// Apple SDK exported static `kCVPixelBufferPoolMaximumBufferAgeKey`.
     pub static mut kCVPixelBufferPoolMaximumBufferAgeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolGetTypeID`.
+    /// Apple SDK function `CVPixelBufferPoolGetTypeID`.
     pub fn CVPixelBufferPoolGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolRetain`.
+    /// Apple SDK function `CVPixelBufferPoolRetain`.
     pub fn CVPixelBufferPoolRetain(pixelBufferPool: CVPixelBufferPoolRef) -> CVPixelBufferPoolRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolRelease`.
+    /// Apple SDK function `CVPixelBufferPoolRelease`.
     pub fn CVPixelBufferPoolRelease(pixelBufferPool: CVPixelBufferPoolRef);
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolCreate`.
+    /// Apple SDK function `CVPixelBufferPoolCreate`.
     pub fn CVPixelBufferPoolCreate(
         allocator: CFAllocatorRef,
         poolAttributes: CFDictionaryRef,
@@ -15412,16 +15412,16 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolGetAttributes`.
+    /// Apple SDK function `CVPixelBufferPoolGetAttributes`.
     pub fn CVPixelBufferPoolGetAttributes(pool: CVPixelBufferPoolRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolGetPixelBufferAttributes`.
+    /// Apple SDK function `CVPixelBufferPoolGetPixelBufferAttributes`.
     pub fn CVPixelBufferPoolGetPixelBufferAttributes(pool: CVPixelBufferPoolRef)
         -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolCreatePixelBuffer`.
+    /// Apple SDK function `CVPixelBufferPoolCreatePixelBuffer`.
     pub fn CVPixelBufferPoolCreatePixelBuffer(
         allocator: CFAllocatorRef,
         pixelBufferPool: CVPixelBufferPoolRef,
@@ -15429,7 +15429,7 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolCreatePixelBufferWithAuxAttributes`.
+    /// Apple SDK function `CVPixelBufferPoolCreatePixelBufferWithAuxAttributes`.
     pub fn CVPixelBufferPoolCreatePixelBufferWithAuxAttributes(
         allocator: CFAllocatorRef,
         pixelBufferPool: CVPixelBufferPoolRef,
@@ -15438,11 +15438,11 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferPoolAllocationThresholdKey`.
+    /// Apple SDK exported static `kCVPixelBufferPoolAllocationThresholdKey`.
     pub static mut kCVPixelBufferPoolAllocationThresholdKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelBufferPoolFreeBufferNotification`.
+    /// Apple SDK exported static `kCVPixelBufferPoolFreeBufferNotification`.
     pub static mut kCVPixelBufferPoolFreeBufferNotification: CFStringRef;
 }
 /// Apple SDK type alias `CVPixelBufferPoolFlushFlags`.
@@ -15452,45 +15452,45 @@ pub const kCVPixelBufferPoolFlushExcessBuffers: _bindgen_ty_1676 = 1;
 /// Apple SDK type alias `_bindgen_ty_1676`.
 pub type _bindgen_ty_1676 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CVPixelBufferPoolFlush`.
+    /// Apple SDK function `CVPixelBufferPoolFlush`.
     pub fn CVPixelBufferPoolFlush(pool: CVPixelBufferPoolRef, options: CVPixelBufferPoolFlushFlags);
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLBufferWidth`.
+    /// Apple SDK exported static `kCVOpenGLBufferWidth`.
     pub static mut kCVOpenGLBufferWidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLBufferHeight`.
+    /// Apple SDK exported static `kCVOpenGLBufferHeight`.
     pub static mut kCVOpenGLBufferHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLBufferTarget`.
+    /// Apple SDK exported static `kCVOpenGLBufferTarget`.
     pub static mut kCVOpenGLBufferTarget: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLBufferInternalFormat`.
+    /// Apple SDK exported static `kCVOpenGLBufferInternalFormat`.
     pub static mut kCVOpenGLBufferInternalFormat: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLBufferMaximumMipmapLevel`.
+    /// Apple SDK exported static `kCVOpenGLBufferMaximumMipmapLevel`.
     pub static mut kCVOpenGLBufferMaximumMipmapLevel: CFStringRef;
 }
 /// Apple SDK type alias `CVOpenGLBufferRef`.
 pub type CVOpenGLBufferRef = CVImageBufferRef;
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferGetTypeID`.
+    /// Apple SDK function `CVOpenGLBufferGetTypeID`.
     pub fn CVOpenGLBufferGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferRetain`.
+    /// Apple SDK function `CVOpenGLBufferRetain`.
     pub fn CVOpenGLBufferRetain(buffer: CVOpenGLBufferRef) -> CVOpenGLBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferRelease`.
+    /// Apple SDK function `CVOpenGLBufferRelease`.
     pub fn CVOpenGLBufferRelease(buffer: CVOpenGLBufferRef);
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferCreate`.
+    /// Apple SDK function `CVOpenGLBufferCreate`.
     pub fn CVOpenGLBufferCreate(
         allocator: CFAllocatorRef,
         width: usize,
@@ -15500,11 +15500,11 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferGetAttributes`.
+    /// Apple SDK function `CVOpenGLBufferGetAttributes`.
     pub fn CVOpenGLBufferGetAttributes(openGLBuffer: CVOpenGLBufferRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferAttach`.
+    /// Apple SDK function `CVOpenGLBufferAttach`.
     pub fn CVOpenGLBufferAttach(
         openGLBuffer: CVOpenGLBufferRef,
         cglContext: CGLContextObj,
@@ -15522,29 +15522,29 @@ pub struct __CVOpenGLBufferPool {
 /// Apple SDK type alias `CVOpenGLBufferPoolRef`.
 pub type CVOpenGLBufferPoolRef = *mut __CVOpenGLBufferPool;
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLBufferPoolMinimumBufferCountKey`.
+    /// Apple SDK exported static `kCVOpenGLBufferPoolMinimumBufferCountKey`.
     pub static mut kCVOpenGLBufferPoolMinimumBufferCountKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLBufferPoolMaximumBufferAgeKey`.
+    /// Apple SDK exported static `kCVOpenGLBufferPoolMaximumBufferAgeKey`.
     pub static mut kCVOpenGLBufferPoolMaximumBufferAgeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferPoolGetTypeID`.
+    /// Apple SDK function `CVOpenGLBufferPoolGetTypeID`.
     pub fn CVOpenGLBufferPoolGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferPoolRetain`.
+    /// Apple SDK function `CVOpenGLBufferPoolRetain`.
     pub fn CVOpenGLBufferPoolRetain(
         openGLBufferPool: CVOpenGLBufferPoolRef,
     ) -> CVOpenGLBufferPoolRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferPoolRelease`.
+    /// Apple SDK function `CVOpenGLBufferPoolRelease`.
     pub fn CVOpenGLBufferPoolRelease(openGLBufferPool: CVOpenGLBufferPoolRef);
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferPoolCreate`.
+    /// Apple SDK function `CVOpenGLBufferPoolCreate`.
     pub fn CVOpenGLBufferPoolCreate(
         allocator: CFAllocatorRef,
         poolAttributes: CFDictionaryRef,
@@ -15553,17 +15553,17 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferPoolGetAttributes`.
+    /// Apple SDK function `CVOpenGLBufferPoolGetAttributes`.
     pub fn CVOpenGLBufferPoolGetAttributes(pool: CVOpenGLBufferPoolRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferPoolGetOpenGLBufferAttributes`.
+    /// Apple SDK function `CVOpenGLBufferPoolGetOpenGLBufferAttributes`.
     pub fn CVOpenGLBufferPoolGetOpenGLBufferAttributes(
         pool: CVOpenGLBufferPoolRef,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLBufferPoolCreateOpenGLBuffer`.
+    /// Apple SDK function `CVOpenGLBufferPoolCreateOpenGLBuffer`.
     pub fn CVOpenGLBufferPoolCreateOpenGLBuffer(
         allocator: CFAllocatorRef,
         openGLBufferPool: CVOpenGLBufferPoolRef,
@@ -15573,31 +15573,31 @@ extern "C" {
 /// Apple SDK type alias `CVOpenGLTextureRef`.
 pub type CVOpenGLTextureRef = CVImageBufferRef;
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureGetTypeID`.
+    /// Apple SDK function `CVOpenGLTextureGetTypeID`.
     pub fn CVOpenGLTextureGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureRetain`.
+    /// Apple SDK function `CVOpenGLTextureRetain`.
     pub fn CVOpenGLTextureRetain(texture: CVOpenGLTextureRef) -> CVOpenGLTextureRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureRelease`.
+    /// Apple SDK function `CVOpenGLTextureRelease`.
     pub fn CVOpenGLTextureRelease(texture: CVOpenGLTextureRef);
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureGetTarget`.
+    /// Apple SDK function `CVOpenGLTextureGetTarget`.
     pub fn CVOpenGLTextureGetTarget(image: CVOpenGLTextureRef) -> GLenum;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureGetName`.
+    /// Apple SDK function `CVOpenGLTextureGetName`.
     pub fn CVOpenGLTextureGetName(image: CVOpenGLTextureRef) -> GLuint;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureIsFlipped`.
+    /// Apple SDK function `CVOpenGLTextureIsFlipped`.
     pub fn CVOpenGLTextureIsFlipped(image: CVOpenGLTextureRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureGetCleanTexCoords`.
+    /// Apple SDK function `CVOpenGLTextureGetCleanTexCoords`.
     pub fn CVOpenGLTextureGetCleanTexCoords(
         image: CVOpenGLTextureRef,
         lowerLeft: *mut GLfloat,
@@ -15615,37 +15615,37 @@ pub struct __CVOpenGLTextureCache {
 /// Apple SDK type alias `CVOpenGLTextureCacheRef`.
 pub type CVOpenGLTextureCacheRef = *mut __CVOpenGLTextureCache;
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeKey`.
+    /// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeKey`.
     pub static mut kCVOpenGLTextureCacheChromaSamplingModeKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeAutomatic`.
+    /// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeAutomatic`.
     pub static mut kCVOpenGLTextureCacheChromaSamplingModeAutomatic: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeHighestQuality`.
+    /// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeHighestQuality`.
     pub static mut kCVOpenGLTextureCacheChromaSamplingModeHighestQuality: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeBestPerformance`.
+    /// Apple SDK exported static `kCVOpenGLTextureCacheChromaSamplingModeBestPerformance`.
     pub static mut kCVOpenGLTextureCacheChromaSamplingModeBestPerformance: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureCacheGetTypeID`.
+    /// Apple SDK function `CVOpenGLTextureCacheGetTypeID`.
     pub fn CVOpenGLTextureCacheGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureCacheRetain`.
+    /// Apple SDK function `CVOpenGLTextureCacheRetain`.
     pub fn CVOpenGLTextureCacheRetain(
         textureCache: CVOpenGLTextureCacheRef,
     ) -> CVOpenGLTextureCacheRef;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureCacheRelease`.
+    /// Apple SDK function `CVOpenGLTextureCacheRelease`.
     pub fn CVOpenGLTextureCacheRelease(textureCache: CVOpenGLTextureCacheRef);
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureCacheCreate`.
+    /// Apple SDK function `CVOpenGLTextureCacheCreate`.
     pub fn CVOpenGLTextureCacheCreate(
         allocator: CFAllocatorRef,
         cacheAttributes: CFDictionaryRef,
@@ -15656,7 +15656,7 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureCacheCreateTextureFromImage`.
+    /// Apple SDK function `CVOpenGLTextureCacheCreateTextureFromImage`.
     pub fn CVOpenGLTextureCacheCreateTextureFromImage(
         allocator: CFAllocatorRef,
         textureCache: CVOpenGLTextureCacheRef,
@@ -15666,29 +15666,29 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVOpenGLTextureCacheFlush`.
+    /// Apple SDK function `CVOpenGLTextureCacheFlush`.
     pub fn CVOpenGLTextureCacheFlush(textureCache: CVOpenGLTextureCacheRef, options: CVOptionFlags);
 }
 extern "C" {
-/// Apple SDK exported static `kCVMetalTextureUsage`.
+    /// Apple SDK exported static `kCVMetalTextureUsage`.
     pub static mut kCVMetalTextureUsage: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVMetalTextureStorageMode`.
+    /// Apple SDK exported static `kCVMetalTextureStorageMode`.
     pub static mut kCVMetalTextureStorageMode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVMetalTextureCacheMaximumTextureAgeKey`.
+    /// Apple SDK exported static `kCVMetalTextureCacheMaximumTextureAgeKey`.
     pub static mut kCVMetalTextureCacheMaximumTextureAgeKey: CFStringRef;
 }
 /// Apple SDK type alias `CVMetalBufferRef`.
 pub type CVMetalBufferRef = CVBufferRef;
 extern "C" {
-/// Apple SDK function `CVMetalBufferGetTypeID`.
+    /// Apple SDK function `CVMetalBufferGetTypeID`.
     pub fn CVMetalBufferGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK exported static `kCVMetalBufferCacheMaximumBufferAgeKey`.
+    /// Apple SDK exported static `kCVMetalBufferCacheMaximumBufferAgeKey`.
     pub static mut kCVMetalBufferCacheMaximumBufferAgeKey: CFStringRef;
 }
 #[repr(C)]
@@ -15700,11 +15700,11 @@ pub struct __CVMetalBufferCache {
 /// Apple SDK type alias `CVMetalBufferCacheRef`.
 pub type CVMetalBufferCacheRef = *mut __CVMetalBufferCache;
 extern "C" {
-/// Apple SDK function `CVMetalBufferCacheGetTypeID`.
+    /// Apple SDK function `CVMetalBufferCacheGetTypeID`.
     pub fn CVMetalBufferCacheGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CVMetalBufferCacheCreateBufferFromImage`.
+    /// Apple SDK function `CVMetalBufferCacheCreateBufferFromImage`.
     pub fn CVMetalBufferCacheCreateBufferFromImage(
         allocator: CFAllocatorRef,
         bufferCache: CVMetalBufferCacheRef,
@@ -15713,135 +15713,135 @@ extern "C" {
     ) -> CVReturn;
 }
 extern "C" {
-/// Apple SDK function `CVMetalBufferCacheFlush`.
+    /// Apple SDK function `CVMetalBufferCacheFlush`.
     pub fn CVMetalBufferCacheFlush(bufferCache: CVMetalBufferCacheRef, options: CVOptionFlags);
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatName`.
+    /// Apple SDK exported static `kCVPixelFormatName`.
     pub static mut kCVPixelFormatName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatConstant`.
+    /// Apple SDK exported static `kCVPixelFormatConstant`.
     pub static mut kCVPixelFormatConstant: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatCodecType`.
+    /// Apple SDK exported static `kCVPixelFormatCodecType`.
     pub static mut kCVPixelFormatCodecType: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatFourCC`.
+    /// Apple SDK exported static `kCVPixelFormatFourCC`.
     pub static mut kCVPixelFormatFourCC: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatContainsAlpha`.
+    /// Apple SDK exported static `kCVPixelFormatContainsAlpha`.
     pub static mut kCVPixelFormatContainsAlpha: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatContainsYCbCr`.
+    /// Apple SDK exported static `kCVPixelFormatContainsYCbCr`.
     pub static mut kCVPixelFormatContainsYCbCr: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatContainsRGB`.
+    /// Apple SDK exported static `kCVPixelFormatContainsRGB`.
     pub static mut kCVPixelFormatContainsRGB: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatContainsGrayscale`.
+    /// Apple SDK exported static `kCVPixelFormatContainsGrayscale`.
     pub static mut kCVPixelFormatContainsGrayscale: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatContainsSenselArray`.
+    /// Apple SDK exported static `kCVPixelFormatContainsSenselArray`.
     pub static mut kCVPixelFormatContainsSenselArray: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatComponentRange`.
+    /// Apple SDK exported static `kCVPixelFormatComponentRange`.
     pub static mut kCVPixelFormatComponentRange: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatComponentRange_VideoRange`.
+    /// Apple SDK exported static `kCVPixelFormatComponentRange_VideoRange`.
     pub static mut kCVPixelFormatComponentRange_VideoRange: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatComponentRange_FullRange`.
+    /// Apple SDK exported static `kCVPixelFormatComponentRange_FullRange`.
     pub static mut kCVPixelFormatComponentRange_FullRange: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatComponentRange_WideRange`.
+    /// Apple SDK exported static `kCVPixelFormatComponentRange_WideRange`.
     pub static mut kCVPixelFormatComponentRange_WideRange: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatPlanes`.
+    /// Apple SDK exported static `kCVPixelFormatPlanes`.
     pub static mut kCVPixelFormatPlanes: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatBlockWidth`.
+    /// Apple SDK exported static `kCVPixelFormatBlockWidth`.
     pub static mut kCVPixelFormatBlockWidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatBlockHeight`.
+    /// Apple SDK exported static `kCVPixelFormatBlockHeight`.
     pub static mut kCVPixelFormatBlockHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatBitsPerBlock`.
+    /// Apple SDK exported static `kCVPixelFormatBitsPerBlock`.
     pub static mut kCVPixelFormatBitsPerBlock: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatBitsPerComponent`.
+    /// Apple SDK exported static `kCVPixelFormatBitsPerComponent`.
     pub static mut kCVPixelFormatBitsPerComponent: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatBlockHorizontalAlignment`.
+    /// Apple SDK exported static `kCVPixelFormatBlockHorizontalAlignment`.
     pub static mut kCVPixelFormatBlockHorizontalAlignment: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatBlockVerticalAlignment`.
+    /// Apple SDK exported static `kCVPixelFormatBlockVerticalAlignment`.
     pub static mut kCVPixelFormatBlockVerticalAlignment: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatBlackBlock`.
+    /// Apple SDK exported static `kCVPixelFormatBlackBlock`.
     pub static mut kCVPixelFormatBlackBlock: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatHorizontalSubsampling`.
+    /// Apple SDK exported static `kCVPixelFormatHorizontalSubsampling`.
     pub static mut kCVPixelFormatHorizontalSubsampling: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatVerticalSubsampling`.
+    /// Apple SDK exported static `kCVPixelFormatVerticalSubsampling`.
     pub static mut kCVPixelFormatVerticalSubsampling: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatOpenGLFormat`.
+    /// Apple SDK exported static `kCVPixelFormatOpenGLFormat`.
     pub static mut kCVPixelFormatOpenGLFormat: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatOpenGLType`.
+    /// Apple SDK exported static `kCVPixelFormatOpenGLType`.
     pub static mut kCVPixelFormatOpenGLType: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatOpenGLInternalFormat`.
+    /// Apple SDK exported static `kCVPixelFormatOpenGLInternalFormat`.
     pub static mut kCVPixelFormatOpenGLInternalFormat: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatCGBitmapInfo`.
+    /// Apple SDK exported static `kCVPixelFormatCGBitmapInfo`.
     pub static mut kCVPixelFormatCGBitmapInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatQDCompatibility`.
+    /// Apple SDK exported static `kCVPixelFormatQDCompatibility`.
     pub static mut kCVPixelFormatQDCompatibility: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatCGBitmapContextCompatibility`.
+    /// Apple SDK exported static `kCVPixelFormatCGBitmapContextCompatibility`.
     pub static mut kCVPixelFormatCGBitmapContextCompatibility: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatCGImageCompatibility`.
+    /// Apple SDK exported static `kCVPixelFormatCGImageCompatibility`.
     pub static mut kCVPixelFormatCGImageCompatibility: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatOpenGLCompatibility`.
+    /// Apple SDK exported static `kCVPixelFormatOpenGLCompatibility`.
     pub static mut kCVPixelFormatOpenGLCompatibility: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatOpenGLESCompatibility`.
+    /// Apple SDK exported static `kCVPixelFormatOpenGLESCompatibility`.
     pub static mut kCVPixelFormatOpenGLESCompatibility: CFStringRef;
 }
 /// Apple SDK type alias `CVFillExtendedPixelsCallBack`.
@@ -15860,35 +15860,35 @@ pub struct CVFillExtendedPixelsCallBackData {
     pub refCon: *mut ::core::ffi::c_void,
 }
 extern "C" {
-/// Apple SDK exported static `kCVPixelFormatFillExtendedPixelsCallback`.
+    /// Apple SDK exported static `kCVPixelFormatFillExtendedPixelsCallback`.
     pub static mut kCVPixelFormatFillExtendedPixelsCallback: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelFormatDescriptionCreateWithPixelFormatType`.
+    /// Apple SDK function `CVPixelFormatDescriptionCreateWithPixelFormatType`.
     pub fn CVPixelFormatDescriptionCreateWithPixelFormatType(
         allocator: CFAllocatorRef,
         pixelFormat: OSType,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes`.
+    /// Apple SDK function `CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes`.
     pub fn CVPixelFormatDescriptionArrayCreateWithAllPixelFormatTypes(
         allocator: CFAllocatorRef,
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType`.
+    /// Apple SDK function `CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType`.
     pub fn CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(
         description: CFDictionaryRef,
         pixelFormat: OSType,
     );
 }
 extern "C" {
-/// Apple SDK function `CVPixelFormatTypeCopyFourCharCodeString`.
+    /// Apple SDK function `CVPixelFormatTypeCopyFourCharCodeString`.
     pub fn CVPixelFormatTypeCopyFourCharCodeString(pixelFormat: OSType) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CVIsCompressedPixelFormatAvailable`.
+    /// Apple SDK function `CVIsCompressedPixelFormatAvailable`.
     pub fn CVIsCompressedPixelFormatAvailable(pixelFormatType: OSType) -> Boolean;
 }
 /// Apple SDK constant `kCMFormatDescriptionError_InvalidParameter`.
@@ -15934,7 +15934,7 @@ pub const kCMMediaType_AuxiliaryPicture: _bindgen_ty_1679 = 1635088502;
 /// Apple SDK type alias `_bindgen_ty_1679`.
 pub type _bindgen_ty_1679 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionCreate`.
+    /// Apple SDK function `CMFormatDescriptionCreate`.
     pub fn CMFormatDescriptionCreate(
         allocator: CFAllocatorRef,
         mediaType: CMMediaType,
@@ -15944,18 +15944,18 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionGetTypeID`.
+    /// Apple SDK function `CMFormatDescriptionGetTypeID`.
     pub fn CMFormatDescriptionGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionEqual`.
+    /// Apple SDK function `CMFormatDescriptionEqual`.
     pub fn CMFormatDescriptionEqual(
         formatDescription: CMFormatDescriptionRef,
         otherFormatDescription: CMFormatDescriptionRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionEqualIgnoringExtensionKeys`.
+    /// Apple SDK function `CMFormatDescriptionEqualIgnoringExtensionKeys`.
     pub fn CMFormatDescriptionEqualIgnoringExtensionKeys(
         formatDescription: CMFormatDescriptionRef,
         otherFormatDescription: CMFormatDescriptionRef,
@@ -15964,35 +15964,35 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionGetMediaType`.
+    /// Apple SDK function `CMFormatDescriptionGetMediaType`.
     pub fn CMFormatDescriptionGetMediaType(desc: CMFormatDescriptionRef) -> CMMediaType;
 }
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionGetMediaSubType`.
+    /// Apple SDK function `CMFormatDescriptionGetMediaSubType`.
     pub fn CMFormatDescriptionGetMediaSubType(desc: CMFormatDescriptionRef) -> FourCharCode;
 }
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionGetExtensions`.
+    /// Apple SDK function `CMFormatDescriptionGetExtensions`.
     pub fn CMFormatDescriptionGetExtensions(desc: CMFormatDescriptionRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_OriginalCompressionSettings`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_OriginalCompressionSettings`.
     pub static kCMFormatDescriptionExtension_OriginalCompressionSettings: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms`.
     pub static kCMFormatDescriptionExtension_SampleDescriptionExtensionAtoms: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_VerbatimSampleDescription`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_VerbatimSampleDescription`.
     pub static kCMFormatDescriptionExtension_VerbatimSampleDescription: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_VerbatimISOSampleEntry`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_VerbatimISOSampleEntry`.
     pub static kCMFormatDescriptionExtension_VerbatimISOSampleEntry: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMFormatDescriptionGetExtension`.
+    /// Apple SDK function `CMFormatDescriptionGetExtension`.
     pub fn CMFormatDescriptionGetExtension(
         desc: CMFormatDescriptionRef,
         extensionKey: CFStringRef,
@@ -16009,7 +16009,7 @@ pub type _bindgen_ty_1680 = ::core::ffi::c_uint;
 /// Apple SDK type alias `CMAudioFormatDescriptionRef`.
 pub type CMAudioFormatDescriptionRef = CMFormatDescriptionRef;
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionCreate`.
+    /// Apple SDK function `CMAudioFormatDescriptionCreate`.
     pub fn CMAudioFormatDescriptionCreate(
         allocator: CFAllocatorRef,
         asbd: *const AudioStreamBasicDescription,
@@ -16022,46 +16022,46 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionGetStreamBasicDescription`.
+    /// Apple SDK function `CMAudioFormatDescriptionGetStreamBasicDescription`.
     pub fn CMAudioFormatDescriptionGetStreamBasicDescription(
         desc: CMAudioFormatDescriptionRef,
     ) -> *const AudioStreamBasicDescription;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionGetMagicCookie`.
+    /// Apple SDK function `CMAudioFormatDescriptionGetMagicCookie`.
     pub fn CMAudioFormatDescriptionGetMagicCookie(
         desc: CMAudioFormatDescriptionRef,
         sizeOut: *mut usize,
     ) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionGetChannelLayout`.
+    /// Apple SDK function `CMAudioFormatDescriptionGetChannelLayout`.
     pub fn CMAudioFormatDescriptionGetChannelLayout(
         desc: CMAudioFormatDescriptionRef,
         sizeOut: *mut usize,
     ) -> *const AudioChannelLayout;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionGetFormatList`.
+    /// Apple SDK function `CMAudioFormatDescriptionGetFormatList`.
     pub fn CMAudioFormatDescriptionGetFormatList(
         desc: CMAudioFormatDescriptionRef,
         sizeOut: *mut usize,
     ) -> *const AudioFormatListItem;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionGetRichestDecodableFormat`.
+    /// Apple SDK function `CMAudioFormatDescriptionGetRichestDecodableFormat`.
     pub fn CMAudioFormatDescriptionGetRichestDecodableFormat(
         desc: CMAudioFormatDescriptionRef,
     ) -> *const AudioFormatListItem;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionGetMostCompatibleFormat`.
+    /// Apple SDK function `CMAudioFormatDescriptionGetMostCompatibleFormat`.
     pub fn CMAudioFormatDescriptionGetMostCompatibleFormat(
         desc: CMAudioFormatDescriptionRef,
     ) -> *const AudioFormatListItem;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionCreateSummary`.
+    /// Apple SDK function `CMAudioFormatDescriptionCreateSummary`.
     pub fn CMAudioFormatDescriptionCreateSummary(
         allocator: CFAllocatorRef,
         formatDescriptionArray: CFArrayRef,
@@ -16084,7 +16084,7 @@ pub const kCMAudioFormatDescriptionMask_All: _bindgen_ty_1681 = 15;
 /// Apple SDK type alias `_bindgen_ty_1681`.
 pub type _bindgen_ty_1681 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionEqual`.
+    /// Apple SDK function `CMAudioFormatDescriptionEqual`.
     pub fn CMAudioFormatDescriptionEqual(
         formatDescription: CMAudioFormatDescriptionRef,
         otherFormatDescription: CMAudioFormatDescriptionRef,
@@ -16220,235 +16220,235 @@ pub struct CMVideoDimensions {
     pub height: i32,
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_FormatName`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_FormatName`.
     pub static kCMFormatDescriptionExtension_FormatName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_Depth`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_Depth`.
     pub static kCMFormatDescriptionExtension_Depth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_CleanAperture`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_CleanAperture`.
     pub static kCMFormatDescriptionExtension_CleanAperture: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureWidth`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureWidth`.
     pub static kCMFormatDescriptionKey_CleanApertureWidth: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHeight`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHeight`.
     pub static kCMFormatDescriptionKey_CleanApertureHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHorizontalOffset`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHorizontalOffset`.
     pub static kCMFormatDescriptionKey_CleanApertureHorizontalOffset: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureVerticalOffset`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureVerticalOffset`.
     pub static kCMFormatDescriptionKey_CleanApertureVerticalOffset: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureWidthRational`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureWidthRational`.
     pub static kCMFormatDescriptionKey_CleanApertureWidthRational: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHeightRational`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHeightRational`.
     pub static kCMFormatDescriptionKey_CleanApertureHeightRational: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational`.
     pub static kCMFormatDescriptionKey_CleanApertureHorizontalOffsetRational: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational`.
     pub static kCMFormatDescriptionKey_CleanApertureVerticalOffsetRational: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_FieldCount`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_FieldCount`.
     pub static kCMFormatDescriptionExtension_FieldCount: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_FieldDetail`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_FieldDetail`.
     pub static kCMFormatDescriptionExtension_FieldDetail: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionFieldDetail_TemporalTopFirst`.
+    /// Apple SDK exported static `kCMFormatDescriptionFieldDetail_TemporalTopFirst`.
     pub static kCMFormatDescriptionFieldDetail_TemporalTopFirst: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionFieldDetail_TemporalBottomFirst`.
+    /// Apple SDK exported static `kCMFormatDescriptionFieldDetail_TemporalBottomFirst`.
     pub static kCMFormatDescriptionFieldDetail_TemporalBottomFirst: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly`.
+    /// Apple SDK exported static `kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly`.
     pub static kCMFormatDescriptionFieldDetail_SpatialFirstLineEarly: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionFieldDetail_SpatialFirstLineLate`.
+    /// Apple SDK exported static `kCMFormatDescriptionFieldDetail_SpatialFirstLineLate`.
     pub static kCMFormatDescriptionFieldDetail_SpatialFirstLineLate: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_PixelAspectRatio`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_PixelAspectRatio`.
     pub static kCMFormatDescriptionExtension_PixelAspectRatio: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing`.
     pub static kCMFormatDescriptionKey_PixelAspectRatioHorizontalSpacing: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing`.
+    /// Apple SDK exported static `kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing`.
     pub static kCMFormatDescriptionKey_PixelAspectRatioVerticalSpacing: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ColorPrimaries`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ColorPrimaries`.
     pub static kCMFormatDescriptionExtension_ColorPrimaries: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_ITU_R_709_2`.
+    /// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_ITU_R_709_2`.
     pub static kCMFormatDescriptionColorPrimaries_ITU_R_709_2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_EBU_3213`.
+    /// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_EBU_3213`.
     pub static kCMFormatDescriptionColorPrimaries_EBU_3213: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_SMPTE_C`.
+    /// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_SMPTE_C`.
     pub static kCMFormatDescriptionColorPrimaries_SMPTE_C: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_DCI_P3`.
+    /// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_DCI_P3`.
     pub static kCMFormatDescriptionColorPrimaries_DCI_P3: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_P3_D65`.
+    /// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_P3_D65`.
     pub static kCMFormatDescriptionColorPrimaries_P3_D65: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_ITU_R_2020`.
+    /// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_ITU_R_2020`.
     pub static kCMFormatDescriptionColorPrimaries_ITU_R_2020: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_P22`.
+    /// Apple SDK exported static `kCMFormatDescriptionColorPrimaries_P22`.
     pub static kCMFormatDescriptionColorPrimaries_P22: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_TransferFunction`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_TransferFunction`.
     pub static kCMFormatDescriptionExtension_TransferFunction: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_ITU_R_709_2`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_ITU_R_709_2`.
     pub static kCMFormatDescriptionTransferFunction_ITU_R_709_2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_SMPTE_240M_1995`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_SMPTE_240M_1995`.
     pub static kCMFormatDescriptionTransferFunction_SMPTE_240M_1995: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_UseGamma`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_UseGamma`.
     pub static kCMFormatDescriptionTransferFunction_UseGamma: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_ITU_R_2020`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_ITU_R_2020`.
     pub static kCMFormatDescriptionTransferFunction_ITU_R_2020: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1`.
     pub static kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ`.
     pub static kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG`.
     pub static kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_Linear`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_Linear`.
     pub static kCMFormatDescriptionTransferFunction_Linear: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionTransferFunction_sRGB`.
+    /// Apple SDK exported static `kCMFormatDescriptionTransferFunction_sRGB`.
     pub static kCMFormatDescriptionTransferFunction_sRGB: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_GammaLevel`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_GammaLevel`.
     pub static kCMFormatDescriptionExtension_GammaLevel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_YCbCrMatrix`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_YCbCrMatrix`.
     pub static kCMFormatDescriptionExtension_YCbCrMatrix: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2`.
+    /// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2`.
     pub static kCMFormatDescriptionYCbCrMatrix_ITU_R_709_2: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4`.
+    /// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4`.
     pub static kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995`.
+    /// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995`.
     pub static kCMFormatDescriptionYCbCrMatrix_SMPTE_240M_1995: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_ITU_R_2020`.
+    /// Apple SDK exported static `kCMFormatDescriptionYCbCrMatrix_ITU_R_2020`.
     pub static kCMFormatDescriptionYCbCrMatrix_ITU_R_2020: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_FullRangeVideo`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_FullRangeVideo`.
     pub static kCMFormatDescriptionExtension_FullRangeVideo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ICCProfile`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ICCProfile`.
     pub static kCMFormatDescriptionExtension_ICCProfile: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_BytesPerRow`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_BytesPerRow`.
     pub static kCMFormatDescriptionExtension_BytesPerRow: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ChromaLocationTopField`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ChromaLocationTopField`.
     pub static kCMFormatDescriptionExtension_ChromaLocationTopField: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ChromaLocationBottomField`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ChromaLocationBottomField`.
     pub static kCMFormatDescriptionExtension_ChromaLocationBottomField: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Left`.
+    /// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Left`.
     pub static kCMFormatDescriptionChromaLocation_Left: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Center`.
+    /// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Center`.
     pub static kCMFormatDescriptionChromaLocation_Center: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionChromaLocation_TopLeft`.
+    /// Apple SDK exported static `kCMFormatDescriptionChromaLocation_TopLeft`.
     pub static kCMFormatDescriptionChromaLocation_TopLeft: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Top`.
+    /// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Top`.
     pub static kCMFormatDescriptionChromaLocation_Top: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionChromaLocation_BottomLeft`.
+    /// Apple SDK exported static `kCMFormatDescriptionChromaLocation_BottomLeft`.
     pub static kCMFormatDescriptionChromaLocation_BottomLeft: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Bottom`.
+    /// Apple SDK exported static `kCMFormatDescriptionChromaLocation_Bottom`.
     pub static kCMFormatDescriptionChromaLocation_Bottom: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionChromaLocation_DV420`.
+    /// Apple SDK exported static `kCMFormatDescriptionChromaLocation_DV420`.
     pub static kCMFormatDescriptionChromaLocation_DV420: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionConformsToMPEG2VideoProfile`.
+    /// Apple SDK exported static `kCMFormatDescriptionConformsToMPEG2VideoProfile`.
     pub static kCMFormatDescriptionConformsToMPEG2VideoProfile: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ProtectedContentOriginalFormat`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ProtectedContentOriginalFormat`.
     pub static kCMFormatDescriptionExtension_ProtectedContentOriginalFormat: CFStringRef;
 }
 /// Apple SDK constant `kCMMPEG2VideoProfile_HDV_720p30`.
@@ -16530,241 +16530,241 @@ pub const kCMMPEG2VideoProfile_XF: _bindgen_ty_1684 = 2019981873;
 /// Apple SDK type alias `_bindgen_ty_1684`.
 pub type _bindgen_ty_1684 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_TemporalQuality`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_TemporalQuality`.
     pub static kCMFormatDescriptionExtension_TemporalQuality: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_SpatialQuality`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_SpatialQuality`.
     pub static kCMFormatDescriptionExtension_SpatialQuality: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_VerbatimImageDescription`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_VerbatimImageDescription`.
     pub static kCMFormatDescriptionExtension_VerbatimImageDescription: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_Version`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_Version`.
     pub static kCMFormatDescriptionExtension_Version: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_RevisionLevel`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_RevisionLevel`.
     pub static kCMFormatDescriptionExtension_RevisionLevel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_Vendor`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_Vendor`.
     pub static kCMFormatDescriptionExtension_Vendor: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionVendor_Apple`.
+    /// Apple SDK exported static `kCMFormatDescriptionVendor_Apple`.
     pub static kCMFormatDescriptionVendor_Apple: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_MasteringDisplayColorVolume`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_MasteringDisplayColorVolume`.
     pub static kCMFormatDescriptionExtension_MasteringDisplayColorVolume: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ContentLightLevelInfo`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ContentLightLevelInfo`.
     pub static kCMFormatDescriptionExtension_ContentLightLevelInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ContentColorVolume`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ContentColorVolume`.
     pub static kCMFormatDescriptionExtension_ContentColorVolume: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_AlternativeTransferCharacteristics`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_AlternativeTransferCharacteristics`.
     pub static kCMFormatDescriptionExtension_AlternativeTransferCharacteristics: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_AuxiliaryTypeInfo`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_AuxiliaryTypeInfo`.
     pub static kCMFormatDescriptionExtension_AuxiliaryTypeInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_AlphaChannelMode`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_AlphaChannelMode`.
     pub static kCMFormatDescriptionExtension_AlphaChannelMode: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionAlphaChannelMode_StraightAlpha`.
+    /// Apple SDK exported static `kCMFormatDescriptionAlphaChannelMode_StraightAlpha`.
     pub static kCMFormatDescriptionAlphaChannelMode_StraightAlpha: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha`.
+    /// Apple SDK exported static `kCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha`.
     pub static kCMFormatDescriptionAlphaChannelMode_PremultipliedAlpha: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ContainsAlphaChannel`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ContainsAlphaChannel`.
     pub static kCMFormatDescriptionExtension_ContainsAlphaChannel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_BitsPerComponent`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_BitsPerComponent`.
     pub static kCMFormatDescriptionExtension_BitsPerComponent: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_HorizontalFieldOfView`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_HorizontalFieldOfView`.
     pub static kCMFormatDescriptionExtension_HorizontalFieldOfView: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_LogTransferFunction`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_LogTransferFunction`.
     pub static kCMFormatDescriptionExtension_LogTransferFunction: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionLogTransferFunction_AppleLog`.
+    /// Apple SDK exported static `kCMFormatDescriptionLogTransferFunction_AppleLog`.
     pub static kCMFormatDescriptionLogTransferFunction_AppleLog: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_HeroEye`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_HeroEye`.
     pub static kCMFormatDescriptionExtension_HeroEye: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionHeroEye_Left`.
+    /// Apple SDK exported static `kCMFormatDescriptionHeroEye_Left`.
     pub static kCMFormatDescriptionHeroEye_Left: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionHeroEye_Right`.
+    /// Apple SDK exported static `kCMFormatDescriptionHeroEye_Right`.
     pub static kCMFormatDescriptionHeroEye_Right: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_StereoCameraBaseline`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_StereoCameraBaseline`.
     pub static kCMFormatDescriptionExtension_StereoCameraBaseline: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_HorizontalDisparityAdjustment`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_HorizontalDisparityAdjustment`.
     pub static kCMFormatDescriptionExtension_HorizontalDisparityAdjustment: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_HasLeftStereoEyeView`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_HasLeftStereoEyeView`.
     pub static kCMFormatDescriptionExtension_HasLeftStereoEyeView: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_HasRightStereoEyeView`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_HasRightStereoEyeView`.
     pub static kCMFormatDescriptionExtension_HasRightStereoEyeView: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_HasAdditionalViews`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_HasAdditionalViews`.
     pub static kCMFormatDescriptionExtension_HasAdditionalViews: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ProjectionKind`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ProjectionKind`.
     pub static kCMFormatDescriptionExtension_ProjectionKind: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionProjectionKind_Rectilinear`.
+    /// Apple SDK exported static `kCMFormatDescriptionProjectionKind_Rectilinear`.
     pub static kCMFormatDescriptionProjectionKind_Rectilinear: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionProjectionKind_Equirectangular`.
+    /// Apple SDK exported static `kCMFormatDescriptionProjectionKind_Equirectangular`.
     pub static kCMFormatDescriptionProjectionKind_Equirectangular: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionProjectionKind_HalfEquirectangular`.
+    /// Apple SDK exported static `kCMFormatDescriptionProjectionKind_HalfEquirectangular`.
     pub static kCMFormatDescriptionProjectionKind_HalfEquirectangular: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionProjectionKind_ParametricImmersive`.
+    /// Apple SDK exported static `kCMFormatDescriptionProjectionKind_ParametricImmersive`.
     pub static kCMFormatDescriptionProjectionKind_ParametricImmersive: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionProjectionKind_AppleImmersiveVideo`.
+    /// Apple SDK exported static `kCMFormatDescriptionProjectionKind_AppleImmersiveVideo`.
     pub static kCMFormatDescriptionProjectionKind_AppleImmersiveVideo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ViewPackingKind`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ViewPackingKind`.
     pub static kCMFormatDescriptionExtension_ViewPackingKind: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionViewPackingKind_SideBySide`.
+    /// Apple SDK exported static `kCMFormatDescriptionViewPackingKind_SideBySide`.
     pub static kCMFormatDescriptionViewPackingKind_SideBySide: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionViewPackingKind_OverUnder`.
+    /// Apple SDK exported static `kCMFormatDescriptionViewPackingKind_OverUnder`.
     pub static kCMFormatDescriptionViewPackingKind_OverUnder: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection`.
     pub static kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensAlgorithmKind`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensAlgorithmKind`.
     pub static kCMFormatDescriptionCameraCalibration_LensAlgorithmKind: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens`.
     pub static kCMFormatDescriptionCameraCalibrationLensAlgorithmKind_ParametricLens: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensDomain`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensDomain`.
     pub static kCMFormatDescriptionCameraCalibration_LensDomain: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensDomain_Color`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensDomain_Color`.
     pub static kCMFormatDescriptionCameraCalibrationLensDomain_Color: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensIdentifier`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensIdentifier`.
     pub static kCMFormatDescriptionCameraCalibration_LensIdentifier: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensRole`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensRole`.
     pub static kCMFormatDescriptionCameraCalibration_LensRole: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensRole_Mono`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensRole_Mono`.
     pub static kCMFormatDescriptionCameraCalibrationLensRole_Mono: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensRole_Left`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensRole_Left`.
     pub static kCMFormatDescriptionCameraCalibrationLensRole_Left: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensRole_Right`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationLensRole_Right`.
     pub static kCMFormatDescriptionCameraCalibrationLensRole_Right: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensDistortions`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensDistortions`.
     pub static kCMFormatDescriptionCameraCalibration_LensDistortions: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX`.
     pub static kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialX: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY`.
     pub static kCMFormatDescriptionCameraCalibration_LensFrameAdjustmentsPolynomialY: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_RadialAngleLimit`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_RadialAngleLimit`.
     pub static kCMFormatDescriptionCameraCalibration_RadialAngleLimit: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_IntrinsicMatrix`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_IntrinsicMatrix`.
     pub static kCMFormatDescriptionCameraCalibration_IntrinsicMatrix: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset`.
     pub static kCMFormatDescriptionCameraCalibration_IntrinsicMatrixProjectionOffset: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions`.
     pub static kCMFormatDescriptionCameraCalibration_IntrinsicMatrixReferenceDimensions:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource`.
     pub static kCMFormatDescriptionCameraCalibration_ExtrinsicOriginSource: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline`.
     pub static kCMFormatDescriptionCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion`.
+    /// Apple SDK exported static `kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion`.
     pub static kCMFormatDescriptionCameraCalibration_ExtrinsicOrientationQuaternion: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags`.
     pub static kCMFormatDescriptionExtension_ConvertedFromExternalSphericalTags: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCreate`.
+    /// Apple SDK function `CMVideoFormatDescriptionCreate`.
     pub fn CMVideoFormatDescriptionCreate(
         allocator: CFAllocatorRef,
         codecType: CMVideoCodecType,
@@ -16775,7 +16775,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCreateForImageBuffer`.
+    /// Apple SDK function `CMVideoFormatDescriptionCreateForImageBuffer`.
     pub fn CMVideoFormatDescriptionCreateForImageBuffer(
         allocator: CFAllocatorRef,
         imageBuffer: CVImageBufferRef,
@@ -16783,7 +16783,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCreateFromH264ParameterSets`.
+    /// Apple SDK function `CMVideoFormatDescriptionCreateFromH264ParameterSets`.
     pub fn CMVideoFormatDescriptionCreateFromH264ParameterSets(
         allocator: CFAllocatorRef,
         parameterSetCount: usize,
@@ -16794,7 +16794,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCreateFromHEVCParameterSets`.
+    /// Apple SDK function `CMVideoFormatDescriptionCreateFromHEVCParameterSets`.
     pub fn CMVideoFormatDescriptionCreateFromHEVCParameterSets(
         allocator: CFAllocatorRef,
         parameterSetCount: usize,
@@ -16806,7 +16806,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionGetH264ParameterSetAtIndex`.
+    /// Apple SDK function `CMVideoFormatDescriptionGetH264ParameterSetAtIndex`.
     pub fn CMVideoFormatDescriptionGetH264ParameterSetAtIndex(
         videoDesc: CMFormatDescriptionRef,
         parameterSetIndex: usize,
@@ -16817,7 +16817,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionGetHEVCParameterSetAtIndex`.
+    /// Apple SDK function `CMVideoFormatDescriptionGetHEVCParameterSetAtIndex`.
     pub fn CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(
         videoDesc: CMFormatDescriptionRef,
         parameterSetIndex: usize,
@@ -16828,13 +16828,13 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionGetDimensions`.
+    /// Apple SDK function `CMVideoFormatDescriptionGetDimensions`.
     pub fn CMVideoFormatDescriptionGetDimensions(
         videoDesc: CMVideoFormatDescriptionRef,
     ) -> CMVideoDimensions;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionGetPresentationDimensions`.
+    /// Apple SDK function `CMVideoFormatDescriptionGetPresentationDimensions`.
     pub fn CMVideoFormatDescriptionGetPresentationDimensions(
         videoDesc: CMVideoFormatDescriptionRef,
         usePixelAspectRatio: Boolean,
@@ -16842,25 +16842,25 @@ extern "C" {
     ) -> CGSize;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionGetCleanAperture`.
+    /// Apple SDK function `CMVideoFormatDescriptionGetCleanAperture`.
     pub fn CMVideoFormatDescriptionGetCleanAperture(
         videoDesc: CMVideoFormatDescriptionRef,
         originIsAtTopLeft: Boolean,
     ) -> CGRect;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers`.
+    /// Apple SDK function `CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers`.
     pub fn CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionMatchesImageBuffer`.
+    /// Apple SDK function `CMVideoFormatDescriptionMatchesImageBuffer`.
     pub fn CMVideoFormatDescriptionMatchesImageBuffer(
         desc: CMVideoFormatDescriptionRef,
         imageBuffer: CVImageBufferRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCopyTagCollectionArray`.
+    /// Apple SDK function `CMVideoFormatDescriptionCopyTagCollectionArray`.
     pub fn CMVideoFormatDescriptionCopyTagCollectionArray(
         formatDescription: CMVideoFormatDescriptionRef,
         tagCollectionsOut: *mut CFArrayRef,
@@ -16891,7 +16891,7 @@ pub const kCMMuxedStreamType_EmbeddedDeviceScreenRecording: _bindgen_ty_1686 = 1
 /// Apple SDK type alias `_bindgen_ty_1686`.
 pub type _bindgen_ty_1686 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMMuxedFormatDescriptionCreate`.
+    /// Apple SDK function `CMMuxedFormatDescriptionCreate`.
     pub fn CMMuxedFormatDescriptionCreate(
         allocator: CFAllocatorRef,
         muxType: CMMuxedStreamType,
@@ -16962,118 +16962,118 @@ pub const kCMTextJustification_bottom_right: _bindgen_ty_1690 = -1;
 /// Apple SDK type alias `_bindgen_ty_1690`.
 pub type _bindgen_ty_1690 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_DisplayFlags`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_DisplayFlags`.
     pub static kCMTextFormatDescriptionExtension_DisplayFlags: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_BackgroundColor`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_BackgroundColor`.
     pub static kCMTextFormatDescriptionExtension_BackgroundColor: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionColor_Red`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionColor_Red`.
     pub static kCMTextFormatDescriptionColor_Red: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionColor_Green`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionColor_Green`.
     pub static kCMTextFormatDescriptionColor_Green: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionColor_Blue`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionColor_Blue`.
     pub static kCMTextFormatDescriptionColor_Blue: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionColor_Alpha`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionColor_Alpha`.
     pub static kCMTextFormatDescriptionColor_Alpha: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_DefaultTextBox`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_DefaultTextBox`.
     pub static kCMTextFormatDescriptionExtension_DefaultTextBox: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionRect_Top`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionRect_Top`.
     pub static kCMTextFormatDescriptionRect_Top: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionRect_Left`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionRect_Left`.
     pub static kCMTextFormatDescriptionRect_Left: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionRect_Bottom`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionRect_Bottom`.
     pub static kCMTextFormatDescriptionRect_Bottom: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionRect_Right`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionRect_Right`.
     pub static kCMTextFormatDescriptionRect_Right: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_DefaultStyle`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_DefaultStyle`.
     pub static kCMTextFormatDescriptionExtension_DefaultStyle: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_StartChar`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_StartChar`.
     pub static kCMTextFormatDescriptionStyle_StartChar: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_Font`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_Font`.
     pub static kCMTextFormatDescriptionStyle_Font: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_FontFace`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_FontFace`.
     pub static kCMTextFormatDescriptionStyle_FontFace: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_ForegroundColor`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_ForegroundColor`.
     pub static kCMTextFormatDescriptionStyle_ForegroundColor: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_FontSize`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_FontSize`.
     pub static kCMTextFormatDescriptionStyle_FontSize: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_HorizontalJustification`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_HorizontalJustification`.
     pub static kCMTextFormatDescriptionExtension_HorizontalJustification: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_VerticalJustification`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_VerticalJustification`.
     pub static kCMTextFormatDescriptionExtension_VerticalJustification: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_EndChar`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_EndChar`.
     pub static kCMTextFormatDescriptionStyle_EndChar: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_FontTable`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_FontTable`.
     pub static kCMTextFormatDescriptionExtension_FontTable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_TextJustification`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_TextJustification`.
     pub static kCMTextFormatDescriptionExtension_TextJustification: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_Height`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_Height`.
     pub static kCMTextFormatDescriptionStyle_Height: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionStyle_Ascent`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionStyle_Ascent`.
     pub static kCMTextFormatDescriptionStyle_Ascent: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextFormatDescriptionExtension_DefaultFontName`.
+    /// Apple SDK exported static `kCMTextFormatDescriptionExtension_DefaultFontName`.
     pub static kCMTextFormatDescriptionExtension_DefaultFontName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtension_AmbientViewingEnvironment`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtension_AmbientViewingEnvironment`.
     pub static mut kCMFormatDescriptionExtension_AmbientViewingEnvironment: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionGetDisplayFlags`.
+    /// Apple SDK function `CMTextFormatDescriptionGetDisplayFlags`.
     pub fn CMTextFormatDescriptionGetDisplayFlags(
         desc: CMFormatDescriptionRef,
         displayFlagsOut: *mut CMTextDisplayFlags,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionGetJustification`.
+    /// Apple SDK function `CMTextFormatDescriptionGetJustification`.
     pub fn CMTextFormatDescriptionGetJustification(
         desc: CMFormatDescriptionRef,
         horizontaJustificationlOut: *mut CMTextJustificationValue,
@@ -17081,7 +17081,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionGetDefaultTextBox`.
+    /// Apple SDK function `CMTextFormatDescriptionGetDefaultTextBox`.
     pub fn CMTextFormatDescriptionGetDefaultTextBox(
         desc: CMFormatDescriptionRef,
         originIsAtTopLeft: Boolean,
@@ -17090,7 +17090,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionGetDefaultStyle`.
+    /// Apple SDK function `CMTextFormatDescriptionGetDefaultStyle`.
     pub fn CMTextFormatDescriptionGetDefaultStyle(
         desc: CMFormatDescriptionRef,
         localFontIDOut: *mut u16,
@@ -17102,7 +17102,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionGetFontName`.
+    /// Apple SDK function `CMTextFormatDescriptionGetFontName`.
     pub fn CMTextFormatDescriptionGetFontName(
         desc: CMFormatDescriptionRef,
         localFontID: u16,
@@ -17140,7 +17140,7 @@ pub const kCMTimeCodeFlag_NegTimesOK: _bindgen_ty_1693 = 4;
 /// Apple SDK type alias `_bindgen_ty_1693`.
 pub type _bindgen_ty_1693 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMTimeCodeFormatDescriptionCreate`.
+    /// Apple SDK function `CMTimeCodeFormatDescriptionCreate`.
     pub fn CMTimeCodeFormatDescriptionCreate(
         allocator: CFAllocatorRef,
         timeCodeFormatType: CMTimeCodeFormatType,
@@ -17152,32 +17152,32 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCodeFormatDescriptionGetFrameDuration`.
+    /// Apple SDK function `CMTimeCodeFormatDescriptionGetFrameDuration`.
     pub fn CMTimeCodeFormatDescriptionGetFrameDuration(
         timeCodeFormatDescription: CMTimeCodeFormatDescriptionRef,
     ) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCodeFormatDescriptionGetFrameQuanta`.
+    /// Apple SDK function `CMTimeCodeFormatDescriptionGetFrameQuanta`.
     pub fn CMTimeCodeFormatDescriptionGetFrameQuanta(
         timeCodeFormatDescription: CMTimeCodeFormatDescriptionRef,
     ) -> u32;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCodeFormatDescriptionGetTimeCodeFlags`.
+    /// Apple SDK function `CMTimeCodeFormatDescriptionGetTimeCodeFlags`.
     pub fn CMTimeCodeFormatDescriptionGetTimeCodeFlags(desc: CMTimeCodeFormatDescriptionRef)
         -> u32;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeCodeFormatDescriptionExtension_SourceReferenceName`.
+    /// Apple SDK exported static `kCMTimeCodeFormatDescriptionExtension_SourceReferenceName`.
     pub static kCMTimeCodeFormatDescriptionExtension_SourceReferenceName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeCodeFormatDescriptionKey_Value`.
+    /// Apple SDK exported static `kCMTimeCodeFormatDescriptionKey_Value`.
     pub static kCMTimeCodeFormatDescriptionKey_Value: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimeCodeFormatDescriptionKey_LangCode`.
+    /// Apple SDK exported static `kCMTimeCodeFormatDescriptionKey_LangCode`.
     pub static kCMTimeCodeFormatDescriptionKey_LangCode: CFStringRef;
 }
 /// Apple SDK type alias `CMMetadataFormatDescriptionRef`.
@@ -17195,74 +17195,74 @@ pub const kCMMetadataFormatType_EMSG: _bindgen_ty_1694 = 1701671783;
 /// Apple SDK type alias `_bindgen_ty_1694`.
 pub type _bindgen_ty_1694 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCMFormatDescriptionExtensionKey_MetadataKeyTable`.
+    /// Apple SDK exported static `kCMFormatDescriptionExtensionKey_MetadataKeyTable`.
     pub static kCMFormatDescriptionExtensionKey_MetadataKeyTable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_Namespace`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_Namespace`.
     pub static kCMMetadataFormatDescriptionKey_Namespace: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_Value`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_Value`.
     pub static kCMMetadataFormatDescriptionKey_Value: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_LocalID`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_LocalID`.
     pub static kCMMetadataFormatDescriptionKey_LocalID: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_DataType`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_DataType`.
     pub static kCMMetadataFormatDescriptionKey_DataType: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_DataTypeNamespace`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_DataTypeNamespace`.
     pub static kCMMetadataFormatDescriptionKey_DataTypeNamespace: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_ConformingDataTypes`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_ConformingDataTypes`.
     pub static kCMMetadataFormatDescriptionKey_ConformingDataTypes: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_LanguageTag`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_LanguageTag`.
     pub static kCMMetadataFormatDescriptionKey_LanguageTag: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_StructuralDependency`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_StructuralDependency`.
     pub static kCMMetadataFormatDescriptionKey_StructuralDependency: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionKey_SetupData`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionKey_SetupData`.
     pub static kCMMetadataFormatDescriptionKey_SetupData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag`.
+    /// Apple SDK exported static `kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag`.
     pub static kCMMetadataFormatDescription_StructuralDependencyKey_DependencyIsInvalidFlag:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier`.
     pub static kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType`.
     pub static kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag`.
     pub static kCMMetadataFormatDescriptionMetadataSpecificationKey_ExtendedLanguageTag:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency`.
     pub static kCMMetadataFormatDescriptionMetadataSpecificationKey_StructuralDependency:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData`.
+    /// Apple SDK exported static `kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData`.
     pub static kCMMetadataFormatDescriptionMetadataSpecificationKey_SetupData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionCreateWithKeys`.
+    /// Apple SDK function `CMMetadataFormatDescriptionCreateWithKeys`.
     pub fn CMMetadataFormatDescriptionCreateWithKeys(
         allocator: CFAllocatorRef,
         metadataType: CMMetadataFormatType,
@@ -17271,7 +17271,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionCreateWithMetadataSpecifications`.
+    /// Apple SDK function `CMMetadataFormatDescriptionCreateWithMetadataSpecifications`.
     pub fn CMMetadataFormatDescriptionCreateWithMetadataSpecifications(
         allocator: CFAllocatorRef,
         metadataType: CMMetadataFormatType,
@@ -17280,7 +17280,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications`.
+    /// Apple SDK function `CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications`.
     pub fn CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications(
         allocator: CFAllocatorRef,
         sourceDescription: CMMetadataFormatDescriptionRef,
@@ -17289,7 +17289,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions`.
+    /// Apple SDK function `CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions`.
     pub fn CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(
         allocator: CFAllocatorRef,
         sourceDescription: CMMetadataFormatDescriptionRef,
@@ -17298,14 +17298,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionGetKeyWithLocalID`.
+    /// Apple SDK function `CMMetadataFormatDescriptionGetKeyWithLocalID`.
     pub fn CMMetadataFormatDescriptionGetKeyWithLocalID(
         desc: CMMetadataFormatDescriptionRef,
         localKeyID: OSType,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionGetIdentifiers`.
+    /// Apple SDK function `CMMetadataFormatDescriptionGetIdentifiers`.
     pub fn CMMetadataFormatDescriptionGetIdentifiers(
         desc: CMMetadataFormatDescriptionRef,
     ) -> CFArrayRef;
@@ -17321,7 +17321,7 @@ pub const kCMAttachmentMode_ShouldPropagate: _bindgen_ty_1695 = 1;
 /// Apple SDK type alias `_bindgen_ty_1695`.
 pub type _bindgen_ty_1695 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMSetAttachment`.
+    /// Apple SDK function `CMSetAttachment`.
     pub fn CMSetAttachment(
         target: CMAttachmentBearerRef,
         key: CFStringRef,
@@ -17330,7 +17330,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CMGetAttachment`.
+    /// Apple SDK function `CMGetAttachment`.
     pub fn CMGetAttachment(
         target: CMAttachmentBearerRef,
         key: CFStringRef,
@@ -17338,15 +17338,15 @@ extern "C" {
     ) -> CFTypeRef;
 }
 extern "C" {
-/// Apple SDK function `CMRemoveAttachment`.
+    /// Apple SDK function `CMRemoveAttachment`.
     pub fn CMRemoveAttachment(target: CMAttachmentBearerRef, key: CFStringRef);
 }
 extern "C" {
-/// Apple SDK function `CMRemoveAllAttachments`.
+    /// Apple SDK function `CMRemoveAllAttachments`.
     pub fn CMRemoveAllAttachments(target: CMAttachmentBearerRef);
 }
 extern "C" {
-/// Apple SDK function `CMCopyDictionaryOfAttachments`.
+    /// Apple SDK function `CMCopyDictionaryOfAttachments`.
     pub fn CMCopyDictionaryOfAttachments(
         allocator: CFAllocatorRef,
         target: CMAttachmentBearerRef,
@@ -17354,7 +17354,7 @@ extern "C" {
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CMSetAttachments`.
+    /// Apple SDK function `CMSetAttachments`.
     pub fn CMSetAttachments(
         target: CMAttachmentBearerRef,
         theAttachments: CFDictionaryRef,
@@ -17362,7 +17362,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CMPropagateAttachments`.
+    /// Apple SDK function `CMPropagateAttachments`.
     pub fn CMPropagateAttachments(
         source: CMAttachmentBearerRef,
         destination: CMAttachmentBearerRef,
@@ -17435,7 +17435,7 @@ pub const kCMBlockBufferCustomBlockSourceVersion: _bindgen_ty_1698 = 0;
 /// Apple SDK type alias `_bindgen_ty_1698`.
 pub type _bindgen_ty_1698 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMBlockBufferCreateEmpty`.
+    /// Apple SDK function `CMBlockBufferCreateEmpty`.
     pub fn CMBlockBufferCreateEmpty(
         structureAllocator: CFAllocatorRef,
         subBlockCapacity: u32,
@@ -17444,7 +17444,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferCreateWithMemoryBlock`.
+    /// Apple SDK function `CMBlockBufferCreateWithMemoryBlock`.
     pub fn CMBlockBufferCreateWithMemoryBlock(
         structureAllocator: CFAllocatorRef,
         memoryBlock: *mut ::core::ffi::c_void,
@@ -17458,7 +17458,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferCreateWithBufferReference`.
+    /// Apple SDK function `CMBlockBufferCreateWithBufferReference`.
     pub fn CMBlockBufferCreateWithBufferReference(
         structureAllocator: CFAllocatorRef,
         bufferReference: CMBlockBufferRef,
@@ -17469,7 +17469,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferCreateContiguous`.
+    /// Apple SDK function `CMBlockBufferCreateContiguous`.
     pub fn CMBlockBufferCreateContiguous(
         structureAllocator: CFAllocatorRef,
         sourceBuffer: CMBlockBufferRef,
@@ -17482,11 +17482,11 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferGetTypeID`.
+    /// Apple SDK function `CMBlockBufferGetTypeID`.
     pub fn CMBlockBufferGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferAppendMemoryBlock`.
+    /// Apple SDK function `CMBlockBufferAppendMemoryBlock`.
     pub fn CMBlockBufferAppendMemoryBlock(
         theBuffer: CMBlockBufferRef,
         memoryBlock: *mut ::core::ffi::c_void,
@@ -17499,7 +17499,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferAppendBufferReference`.
+    /// Apple SDK function `CMBlockBufferAppendBufferReference`.
     pub fn CMBlockBufferAppendBufferReference(
         theBuffer: CMBlockBufferRef,
         targetBBuf: CMBlockBufferRef,
@@ -17509,11 +17509,11 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferAssureBlockMemory`.
+    /// Apple SDK function `CMBlockBufferAssureBlockMemory`.
     pub fn CMBlockBufferAssureBlockMemory(theBuffer: CMBlockBufferRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferAccessDataBytes`.
+    /// Apple SDK function `CMBlockBufferAccessDataBytes`.
     pub fn CMBlockBufferAccessDataBytes(
         theBuffer: CMBlockBufferRef,
         offset: usize,
@@ -17523,7 +17523,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferCopyDataBytes`.
+    /// Apple SDK function `CMBlockBufferCopyDataBytes`.
     pub fn CMBlockBufferCopyDataBytes(
         theSourceBuffer: CMBlockBufferRef,
         offsetToData: usize,
@@ -17532,7 +17532,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferReplaceDataBytes`.
+    /// Apple SDK function `CMBlockBufferReplaceDataBytes`.
     pub fn CMBlockBufferReplaceDataBytes(
         sourceBytes: *const ::core::ffi::c_void,
         destinationBuffer: CMBlockBufferRef,
@@ -17541,7 +17541,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferFillDataBytes`.
+    /// Apple SDK function `CMBlockBufferFillDataBytes`.
     pub fn CMBlockBufferFillDataBytes(
         fillByte: ::core::ffi::c_char,
         destinationBuffer: CMBlockBufferRef,
@@ -17550,7 +17550,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferGetDataPointer`.
+    /// Apple SDK function `CMBlockBufferGetDataPointer`.
     pub fn CMBlockBufferGetDataPointer(
         theBuffer: CMBlockBufferRef,
         offset: usize,
@@ -17560,11 +17560,11 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferGetDataLength`.
+    /// Apple SDK function `CMBlockBufferGetDataLength`.
     pub fn CMBlockBufferGetDataLength(theBuffer: CMBlockBufferRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferIsRangeContiguous`.
+    /// Apple SDK function `CMBlockBufferIsRangeContiguous`.
     pub fn CMBlockBufferIsRangeContiguous(
         theBuffer: CMBlockBufferRef,
         offset: usize,
@@ -17572,7 +17572,7 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMBlockBufferIsEmpty`.
+    /// Apple SDK function `CMBlockBufferIsEmpty`.
     pub fn CMBlockBufferIsEmpty(theBuffer: CMBlockBufferRef) -> Boolean;
 }
 /// Apple SDK constant `kCMFormatDescriptionBridgeError_InvalidParameter`.
@@ -17596,23 +17596,23 @@ pub type _bindgen_ty_1699 = ::core::ffi::c_int;
 /// Apple SDK type alias `CMImageDescriptionFlavor`.
 pub type CMImageDescriptionFlavor = CFStringRef;
 extern "C" {
-/// Apple SDK exported static `kCMImageDescriptionFlavor_QuickTimeMovie`.
+    /// Apple SDK exported static `kCMImageDescriptionFlavor_QuickTimeMovie`.
     pub static kCMImageDescriptionFlavor_QuickTimeMovie: CMImageDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK exported static `kCMImageDescriptionFlavor_ISOFamily`.
+    /// Apple SDK exported static `kCMImageDescriptionFlavor_ISOFamily`.
     pub static kCMImageDescriptionFlavor_ISOFamily: CMImageDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK exported static `kCMImageDescriptionFlavor_3GPFamily`.
+    /// Apple SDK exported static `kCMImageDescriptionFlavor_3GPFamily`.
     pub static kCMImageDescriptionFlavor_3GPFamily: CMImageDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK exported static `kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions`.
+    /// Apple SDK exported static `kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions`.
     pub static kCMImageDescriptionFlavor_ISOFamilyWithAppleExtensions: CMImageDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData`.
+    /// Apple SDK function `CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData`.
     pub fn CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(
         allocator: CFAllocatorRef,
         imageDescriptionData: *const u8,
@@ -17623,7 +17623,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer`.
+    /// Apple SDK function `CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer`.
     pub fn CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         imageDescriptionBlockBuffer: CMBlockBufferRef,
@@ -17633,7 +17633,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer`.
+    /// Apple SDK function `CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer`.
     pub fn CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         videoFormatDescription: CMVideoFormatDescriptionRef,
@@ -17643,14 +17643,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapBigEndianImageDescriptionToHost`.
+    /// Apple SDK function `CMSwapBigEndianImageDescriptionToHost`.
     pub fn CMSwapBigEndianImageDescriptionToHost(
         imageDescriptionData: *mut u8,
         imageDescriptionSize: usize,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapHostEndianImageDescriptionToBig`.
+    /// Apple SDK function `CMSwapHostEndianImageDescriptionToBig`.
     pub fn CMSwapHostEndianImageDescriptionToBig(
         imageDescriptionData: *mut u8,
         imageDescriptionSize: usize,
@@ -17659,23 +17659,23 @@ extern "C" {
 /// Apple SDK type alias `CMSoundDescriptionFlavor`.
 pub type CMSoundDescriptionFlavor = CFStringRef;
 extern "C" {
-/// Apple SDK exported static `kCMSoundDescriptionFlavor_QuickTimeMovie`.
+    /// Apple SDK exported static `kCMSoundDescriptionFlavor_QuickTimeMovie`.
     pub static kCMSoundDescriptionFlavor_QuickTimeMovie: CMSoundDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSoundDescriptionFlavor_QuickTimeMovieV2`.
+    /// Apple SDK exported static `kCMSoundDescriptionFlavor_QuickTimeMovieV2`.
     pub static kCMSoundDescriptionFlavor_QuickTimeMovieV2: CMSoundDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSoundDescriptionFlavor_ISOFamily`.
+    /// Apple SDK exported static `kCMSoundDescriptionFlavor_ISOFamily`.
     pub static kCMSoundDescriptionFlavor_ISOFamily: CMSoundDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSoundDescriptionFlavor_3GPFamily`.
+    /// Apple SDK exported static `kCMSoundDescriptionFlavor_3GPFamily`.
     pub static kCMSoundDescriptionFlavor_3GPFamily: CMSoundDescriptionFlavor;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData`.
+    /// Apple SDK function `CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData`.
     pub fn CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(
         allocator: CFAllocatorRef,
         soundDescriptionData: *const u8,
@@ -17685,7 +17685,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer`.
+    /// Apple SDK function `CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer`.
     pub fn CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         soundDescriptionBlockBuffer: CMBlockBufferRef,
@@ -17694,7 +17694,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer`.
+    /// Apple SDK function `CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer`.
     pub fn CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         audioFormatDescription: CMAudioFormatDescriptionRef,
@@ -17703,21 +17703,21 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout`.
+    /// Apple SDK function `CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout`.
     pub fn CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout(
         soundDescriptionBlockBuffer: CMBlockBufferRef,
         flavor: CMSoundDescriptionFlavor,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMSwapBigEndianSoundDescriptionToHost`.
+    /// Apple SDK function `CMSwapBigEndianSoundDescriptionToHost`.
     pub fn CMSwapBigEndianSoundDescriptionToHost(
         soundDescriptionData: *mut u8,
         soundDescriptionSize: usize,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapHostEndianSoundDescriptionToBig`.
+    /// Apple SDK function `CMSwapHostEndianSoundDescriptionToBig`.
     pub fn CMSwapHostEndianSoundDescriptionToBig(
         soundDescriptionData: *mut u8,
         soundDescriptionSize: usize,
@@ -17726,7 +17726,7 @@ extern "C" {
 /// Apple SDK type alias `CMTextDescriptionFlavor`.
 pub type CMTextDescriptionFlavor = CFStringRef;
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData`.
+    /// Apple SDK function `CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData`.
     pub fn CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(
         allocator: CFAllocatorRef,
         textDescriptionData: *const u8,
@@ -17737,7 +17737,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer`.
+    /// Apple SDK function `CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer`.
     pub fn CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         textDescriptionBlockBuffer: CMBlockBufferRef,
@@ -17747,7 +17747,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer`.
+    /// Apple SDK function `CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer`.
     pub fn CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         textFormatDescription: CMTextFormatDescriptionRef,
@@ -17756,14 +17756,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapBigEndianTextDescriptionToHost`.
+    /// Apple SDK function `CMSwapBigEndianTextDescriptionToHost`.
     pub fn CMSwapBigEndianTextDescriptionToHost(
         textDescriptionData: *mut u8,
         textDescriptionSize: usize,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapHostEndianTextDescriptionToBig`.
+    /// Apple SDK function `CMSwapHostEndianTextDescriptionToBig`.
     pub fn CMSwapHostEndianTextDescriptionToBig(
         textDescriptionData: *mut u8,
         textDescriptionSize: usize,
@@ -17772,7 +17772,7 @@ extern "C" {
 /// Apple SDK type alias `CMClosedCaptionDescriptionFlavor`.
 pub type CMClosedCaptionDescriptionFlavor = CFStringRef;
 extern "C" {
-/// Apple SDK function `CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData`.
+    /// Apple SDK function `CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData`.
     pub fn CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(
         allocator: CFAllocatorRef,
         closedCaptionDescriptionData: *const u8,
@@ -17782,7 +17782,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer`.
+    /// Apple SDK function `CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer`.
     pub fn CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         closedCaptionDescriptionBlockBuffer: CMBlockBufferRef,
@@ -17791,7 +17791,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer`.
+    /// Apple SDK function `CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer`.
     pub fn CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         closedCaptionFormatDescription: CMClosedCaptionFormatDescriptionRef,
@@ -17800,14 +17800,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapBigEndianClosedCaptionDescriptionToHost`.
+    /// Apple SDK function `CMSwapBigEndianClosedCaptionDescriptionToHost`.
     pub fn CMSwapBigEndianClosedCaptionDescriptionToHost(
         closedCaptionDescriptionData: *mut u8,
         closedCaptionDescriptionSize: usize,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapHostEndianClosedCaptionDescriptionToBig`.
+    /// Apple SDK function `CMSwapHostEndianClosedCaptionDescriptionToBig`.
     pub fn CMSwapHostEndianClosedCaptionDescriptionToBig(
         closedCaptionDescriptionData: *mut u8,
         closedCaptionDescriptionSize: usize,
@@ -17816,7 +17816,7 @@ extern "C" {
 /// Apple SDK type alias `CMTimeCodeDescriptionFlavor`.
 pub type CMTimeCodeDescriptionFlavor = CFStringRef;
 extern "C" {
-/// Apple SDK function `CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData`.
+    /// Apple SDK function `CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData`.
     pub fn CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(
         allocator: CFAllocatorRef,
         timeCodeDescriptionData: *const u8,
@@ -17826,7 +17826,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer`.
+    /// Apple SDK function `CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer`.
     pub fn CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         timeCodeDescriptionBlockBuffer: CMBlockBufferRef,
@@ -17835,7 +17835,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer`.
+    /// Apple SDK function `CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer`.
     pub fn CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         timeCodeFormatDescription: CMTimeCodeFormatDescriptionRef,
@@ -17844,14 +17844,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapBigEndianTimeCodeDescriptionToHost`.
+    /// Apple SDK function `CMSwapBigEndianTimeCodeDescriptionToHost`.
     pub fn CMSwapBigEndianTimeCodeDescriptionToHost(
         timeCodeDescriptionData: *mut u8,
         timeCodeDescriptionSize: usize,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapHostEndianTimeCodeDescriptionToBig`.
+    /// Apple SDK function `CMSwapHostEndianTimeCodeDescriptionToBig`.
     pub fn CMSwapHostEndianTimeCodeDescriptionToBig(
         timeCodeDescriptionData: *mut u8,
         timeCodeDescriptionSize: usize,
@@ -17860,7 +17860,7 @@ extern "C" {
 /// Apple SDK type alias `CMMetadataDescriptionFlavor`.
 pub type CMMetadataDescriptionFlavor = CFStringRef;
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData`.
+    /// Apple SDK function `CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData`.
     pub fn CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(
         allocator: CFAllocatorRef,
         metadataDescriptionData: *const u8,
@@ -17870,7 +17870,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer`.
+    /// Apple SDK function `CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer`.
     pub fn CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         metadataDescriptionBlockBuffer: CMBlockBufferRef,
@@ -17879,7 +17879,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer`.
+    /// Apple SDK function `CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer`.
     pub fn CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer(
         allocator: CFAllocatorRef,
         metadataFormatDescription: CMMetadataFormatDescriptionRef,
@@ -17888,14 +17888,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapBigEndianMetadataDescriptionToHost`.
+    /// Apple SDK function `CMSwapBigEndianMetadataDescriptionToHost`.
     pub fn CMSwapBigEndianMetadataDescriptionToHost(
         metadataDescriptionData: *mut u8,
         metadataDescriptionSize: usize,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSwapHostEndianMetadataDescriptionToBig`.
+    /// Apple SDK function `CMSwapHostEndianMetadataDescriptionToBig`.
     pub fn CMSwapHostEndianMetadataDescriptionToBig(
         metadataDescriptionData: *mut u8,
         metadataDescriptionSize: usize,
@@ -17989,15 +17989,15 @@ pub struct CMBufferHandlers {
     pub getSize: CMBufferGetSizeHandler,
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetCallbacksForUnsortedSampleBuffers`.
+    /// Apple SDK function `CMBufferQueueGetCallbacksForUnsortedSampleBuffers`.
     pub fn CMBufferQueueGetCallbacksForUnsortedSampleBuffers() -> *const CMBufferCallbacks;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS`.
+    /// Apple SDK function `CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS`.
     pub fn CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS() -> *const CMBufferCallbacks;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueCreate`.
+    /// Apple SDK function `CMBufferQueueCreate`.
     pub fn CMBufferQueueCreate(
         allocator: CFAllocatorRef,
         capacity: CMItemCount,
@@ -18006,7 +18006,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueCreateWithHandlers`.
+    /// Apple SDK function `CMBufferQueueCreateWithHandlers`.
     pub fn CMBufferQueueCreateWithHandlers(
         allocator: CFAllocatorRef,
         capacity: CMItemCount,
@@ -18015,51 +18015,51 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetTypeID`.
+    /// Apple SDK function `CMBufferQueueGetTypeID`.
     pub fn CMBufferQueueGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueEnqueue`.
+    /// Apple SDK function `CMBufferQueueEnqueue`.
     pub fn CMBufferQueueEnqueue(queue: CMBufferQueueRef, buf: CMBufferRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueDequeueAndRetain`.
+    /// Apple SDK function `CMBufferQueueDequeueAndRetain`.
     pub fn CMBufferQueueDequeueAndRetain(queue: CMBufferQueueRef) -> CMBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueDequeueIfDataReadyAndRetain`.
+    /// Apple SDK function `CMBufferQueueDequeueIfDataReadyAndRetain`.
     pub fn CMBufferQueueDequeueIfDataReadyAndRetain(queue: CMBufferQueueRef) -> CMBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetHead`.
+    /// Apple SDK function `CMBufferQueueGetHead`.
     pub fn CMBufferQueueGetHead(queue: CMBufferQueueRef) -> CMBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueCopyHead`.
+    /// Apple SDK function `CMBufferQueueCopyHead`.
     pub fn CMBufferQueueCopyHead(queue: CMBufferQueueRef) -> CMBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueIsEmpty`.
+    /// Apple SDK function `CMBufferQueueIsEmpty`.
     pub fn CMBufferQueueIsEmpty(queue: CMBufferQueueRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueMarkEndOfData`.
+    /// Apple SDK function `CMBufferQueueMarkEndOfData`.
     pub fn CMBufferQueueMarkEndOfData(queue: CMBufferQueueRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueContainsEndOfData`.
+    /// Apple SDK function `CMBufferQueueContainsEndOfData`.
     pub fn CMBufferQueueContainsEndOfData(queue: CMBufferQueueRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueIsAtEndOfData`.
+    /// Apple SDK function `CMBufferQueueIsAtEndOfData`.
     pub fn CMBufferQueueIsAtEndOfData(queue: CMBufferQueueRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueReset`.
+    /// Apple SDK function `CMBufferQueueReset`.
     pub fn CMBufferQueueReset(queue: CMBufferQueueRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueResetWithCallback`.
+    /// Apple SDK function `CMBufferQueueResetWithCallback`.
     pub fn CMBufferQueueResetWithCallback(
         queue: CMBufferQueueRef,
         callback: ::core::option::Option<
@@ -18069,39 +18069,39 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetBufferCount`.
+    /// Apple SDK function `CMBufferQueueGetBufferCount`.
     pub fn CMBufferQueueGetBufferCount(queue: CMBufferQueueRef) -> CMItemCount;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetDuration`.
+    /// Apple SDK function `CMBufferQueueGetDuration`.
     pub fn CMBufferQueueGetDuration(queue: CMBufferQueueRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetMinDecodeTimeStamp`.
+    /// Apple SDK function `CMBufferQueueGetMinDecodeTimeStamp`.
     pub fn CMBufferQueueGetMinDecodeTimeStamp(queue: CMBufferQueueRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetFirstDecodeTimeStamp`.
+    /// Apple SDK function `CMBufferQueueGetFirstDecodeTimeStamp`.
     pub fn CMBufferQueueGetFirstDecodeTimeStamp(queue: CMBufferQueueRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetMinPresentationTimeStamp`.
+    /// Apple SDK function `CMBufferQueueGetMinPresentationTimeStamp`.
     pub fn CMBufferQueueGetMinPresentationTimeStamp(queue: CMBufferQueueRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetFirstPresentationTimeStamp`.
+    /// Apple SDK function `CMBufferQueueGetFirstPresentationTimeStamp`.
     pub fn CMBufferQueueGetFirstPresentationTimeStamp(queue: CMBufferQueueRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetMaxPresentationTimeStamp`.
+    /// Apple SDK function `CMBufferQueueGetMaxPresentationTimeStamp`.
     pub fn CMBufferQueueGetMaxPresentationTimeStamp(queue: CMBufferQueueRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetEndPresentationTimeStamp`.
+    /// Apple SDK function `CMBufferQueueGetEndPresentationTimeStamp`.
     pub fn CMBufferQueueGetEndPresentationTimeStamp(queue: CMBufferQueueRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueGetTotalSize`.
+    /// Apple SDK function `CMBufferQueueGetTotalSize`.
     pub fn CMBufferQueueGetTotalSize(queue: CMBufferQueueRef) -> usize;
 }
 #[repr(C)]
@@ -18150,7 +18150,7 @@ pub const kCMBufferQueueTrigger_WhenDurationBecomesGreaterThanOrEqualToAndBuffer
 /// Apple SDK type alias `_bindgen_ty_1701`.
 pub type _bindgen_ty_1701 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK function `CMBufferQueueInstallTrigger`.
+    /// Apple SDK function `CMBufferQueueInstallTrigger`.
     pub fn CMBufferQueueInstallTrigger(
         queue: CMBufferQueueRef,
         callback: CMBufferQueueTriggerCallback,
@@ -18161,7 +18161,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueInstallTriggerWithIntegerThreshold`.
+    /// Apple SDK function `CMBufferQueueInstallTriggerWithIntegerThreshold`.
     pub fn CMBufferQueueInstallTriggerWithIntegerThreshold(
         queue: CMBufferQueueRef,
         callback: CMBufferQueueTriggerCallback,
@@ -18172,7 +18172,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueInstallTriggerHandler`.
+    /// Apple SDK function `CMBufferQueueInstallTriggerHandler`.
     pub fn CMBufferQueueInstallTriggerHandler(
         queue: CMBufferQueueRef,
         condition: CMBufferQueueTriggerCondition,
@@ -18182,7 +18182,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueInstallTriggerHandlerWithIntegerThreshold`.
+    /// Apple SDK function `CMBufferQueueInstallTriggerHandlerWithIntegerThreshold`.
     pub fn CMBufferQueueInstallTriggerHandlerWithIntegerThreshold(
         queue: CMBufferQueueRef,
         condition: CMBufferQueueTriggerCondition,
@@ -18192,21 +18192,21 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueRemoveTrigger`.
+    /// Apple SDK function `CMBufferQueueRemoveTrigger`.
     pub fn CMBufferQueueRemoveTrigger(
         queue: CMBufferQueueRef,
         triggerToken: CMBufferQueueTriggerToken,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueTestTrigger`.
+    /// Apple SDK function `CMBufferQueueTestTrigger`.
     pub fn CMBufferQueueTestTrigger(
         queue: CMBufferQueueRef,
         triggerToken: CMBufferQueueTriggerToken,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueCallForEachBuffer`.
+    /// Apple SDK function `CMBufferQueueCallForEachBuffer`.
     pub fn CMBufferQueueCallForEachBuffer(
         queue: CMBufferQueueRef,
         callback: ::core::option::Option<
@@ -18226,7 +18226,7 @@ pub type CMBufferValidationCallback = ::core::option::Option<
 /// Apple SDK type alias `CMBufferValidationHandler`.
 pub type CMBufferValidationHandler = *mut ::core::ffi::c_void;
 extern "C" {
-/// Apple SDK function `CMBufferQueueSetValidationCallback`.
+    /// Apple SDK function `CMBufferQueueSetValidationCallback`.
     pub fn CMBufferQueueSetValidationCallback(
         queue: CMBufferQueueRef,
         callback: CMBufferValidationCallback,
@@ -18234,7 +18234,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMBufferQueueSetValidationHandler`.
+    /// Apple SDK function `CMBufferQueueSetValidationHandler`.
     pub fn CMBufferQueueSetValidationHandler(
         queue: CMBufferQueueRef,
         handler: CMBufferValidationHandler,
@@ -18297,7 +18297,7 @@ pub struct CMSampleTimingInfo {
     pub decodeTimeStamp: CMTime,
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimingInfoInvalid`.
+    /// Apple SDK exported static `kCMTimingInfoInvalid`.
     pub static kCMTimingInfoInvalid: CMSampleTimingInfo;
 }
 /// Apple SDK type alias `CMSampleBufferMakeDataReadyCallback`.
@@ -18310,7 +18310,7 @@ pub type CMSampleBufferMakeDataReadyCallback = ::core::option::Option<
 /// Apple SDK type alias `CMSampleBufferMakeDataReadyHandler`.
 pub type CMSampleBufferMakeDataReadyHandler = *mut ::core::ffi::c_void;
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreate`.
+    /// Apple SDK function `CMSampleBufferCreate`.
     pub fn CMSampleBufferCreate(
         allocator: CFAllocatorRef,
         dataBuffer: CMBlockBufferRef,
@@ -18327,7 +18327,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateWithMakeDataReadyHandler`.
+    /// Apple SDK function `CMSampleBufferCreateWithMakeDataReadyHandler`.
     pub fn CMSampleBufferCreateWithMakeDataReadyHandler(
         allocator: CFAllocatorRef,
         dataBuffer: CMBlockBufferRef,
@@ -18343,7 +18343,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateReady`.
+    /// Apple SDK function `CMSampleBufferCreateReady`.
     pub fn CMSampleBufferCreateReady(
         allocator: CFAllocatorRef,
         dataBuffer: CMBlockBufferRef,
@@ -18357,7 +18357,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioSampleBufferCreateWithPacketDescriptions`.
+    /// Apple SDK function `CMAudioSampleBufferCreateWithPacketDescriptions`.
     pub fn CMAudioSampleBufferCreateWithPacketDescriptions(
         allocator: CFAllocatorRef,
         dataBuffer: CMBlockBufferRef,
@@ -18372,7 +18372,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler`.
+    /// Apple SDK function `CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler`.
     pub fn CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(
         allocator: CFAllocatorRef,
         dataBuffer: CMBlockBufferRef,
@@ -18386,7 +18386,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioSampleBufferCreateReadyWithPacketDescriptions`.
+    /// Apple SDK function `CMAudioSampleBufferCreateReadyWithPacketDescriptions`.
     pub fn CMAudioSampleBufferCreateReadyWithPacketDescriptions(
         allocator: CFAllocatorRef,
         dataBuffer: CMBlockBufferRef,
@@ -18398,7 +18398,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateForImageBuffer`.
+    /// Apple SDK function `CMSampleBufferCreateForImageBuffer`.
     pub fn CMSampleBufferCreateForImageBuffer(
         allocator: CFAllocatorRef,
         imageBuffer: CVImageBufferRef,
@@ -18411,7 +18411,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler`.
+    /// Apple SDK function `CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler`.
     pub fn CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(
         allocator: CFAllocatorRef,
         imageBuffer: CVImageBufferRef,
@@ -18423,7 +18423,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateReadyWithImageBuffer`.
+    /// Apple SDK function `CMSampleBufferCreateReadyWithImageBuffer`.
     pub fn CMSampleBufferCreateReadyWithImageBuffer(
         allocator: CFAllocatorRef,
         imageBuffer: CVImageBufferRef,
@@ -18433,7 +18433,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateCopy`.
+    /// Apple SDK function `CMSampleBufferCreateCopy`.
     pub fn CMSampleBufferCreateCopy(
         allocator: CFAllocatorRef,
         sbuf: CMSampleBufferRef,
@@ -18441,7 +18441,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateCopyWithNewTiming`.
+    /// Apple SDK function `CMSampleBufferCreateCopyWithNewTiming`.
     pub fn CMSampleBufferCreateCopyWithNewTiming(
         allocator: CFAllocatorRef,
         originalSBuf: CMSampleBufferRef,
@@ -18451,7 +18451,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCopySampleBufferForRange`.
+    /// Apple SDK function `CMSampleBufferCopySampleBufferForRange`.
     pub fn CMSampleBufferCopySampleBufferForRange(
         allocator: CFAllocatorRef,
         sbuf: CMSampleBufferRef,
@@ -18460,26 +18460,26 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetTypeID`.
+    /// Apple SDK function `CMSampleBufferGetTypeID`.
     pub fn CMSampleBufferGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferSetDataBuffer`.
+    /// Apple SDK function `CMSampleBufferSetDataBuffer`.
     pub fn CMSampleBufferSetDataBuffer(
         sbuf: CMSampleBufferRef,
         dataBuffer: CMBlockBufferRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetDataBuffer`.
+    /// Apple SDK function `CMSampleBufferGetDataBuffer`.
     pub fn CMSampleBufferGetDataBuffer(sbuf: CMSampleBufferRef) -> CMBlockBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetImageBuffer`.
+    /// Apple SDK function `CMSampleBufferGetImageBuffer`.
     pub fn CMSampleBufferGetImageBuffer(sbuf: CMSampleBufferRef) -> CVImageBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferSetDataBufferFromAudioBufferList`.
+    /// Apple SDK function `CMSampleBufferSetDataBufferFromAudioBufferList`.
     pub fn CMSampleBufferSetDataBufferFromAudioBufferList(
         sbuf: CMSampleBufferRef,
         blockBufferStructureAllocator: CFAllocatorRef,
@@ -18489,7 +18489,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer`.
+    /// Apple SDK function `CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer`.
     pub fn CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
         sbuf: CMSampleBufferRef,
         bufferListSizeNeededOut: *mut usize,
@@ -18502,7 +18502,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetAudioStreamPacketDescriptions`.
+    /// Apple SDK function `CMSampleBufferGetAudioStreamPacketDescriptions`.
     pub fn CMSampleBufferGetAudioStreamPacketDescriptions(
         sbuf: CMSampleBufferRef,
         packetDescriptionsSize: usize,
@@ -18511,7 +18511,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetAudioStreamPacketDescriptionsPtr`.
+    /// Apple SDK function `CMSampleBufferGetAudioStreamPacketDescriptionsPtr`.
     pub fn CMSampleBufferGetAudioStreamPacketDescriptionsPtr(
         sbuf: CMSampleBufferRef,
         packetDescriptionsPointerOut: *mut *const AudioStreamPacketDescription,
@@ -18519,7 +18519,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCopyPCMDataIntoAudioBufferList`.
+    /// Apple SDK function `CMSampleBufferCopyPCMDataIntoAudioBufferList`.
     pub fn CMSampleBufferCopyPCMDataIntoAudioBufferList(
         sbuf: CMSampleBufferRef,
         frameOffset: i32,
@@ -18528,44 +18528,44 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferSetDataReady`.
+    /// Apple SDK function `CMSampleBufferSetDataReady`.
     pub fn CMSampleBufferSetDataReady(sbuf: CMSampleBufferRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferDataIsReady`.
+    /// Apple SDK function `CMSampleBufferDataIsReady`.
     pub fn CMSampleBufferDataIsReady(sbuf: CMSampleBufferRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferSetDataFailed`.
+    /// Apple SDK function `CMSampleBufferSetDataFailed`.
     pub fn CMSampleBufferSetDataFailed(sbuf: CMSampleBufferRef, status: OSStatus) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferHasDataFailed`.
+    /// Apple SDK function `CMSampleBufferHasDataFailed`.
     pub fn CMSampleBufferHasDataFailed(
         sbuf: CMSampleBufferRef,
         statusOut: *mut OSStatus,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferMakeDataReady`.
+    /// Apple SDK function `CMSampleBufferMakeDataReady`.
     pub fn CMSampleBufferMakeDataReady(sbuf: CMSampleBufferRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferTrackDataReadiness`.
+    /// Apple SDK function `CMSampleBufferTrackDataReadiness`.
     pub fn CMSampleBufferTrackDataReadiness(
         sbuf: CMSampleBufferRef,
         sampleBufferToTrack: CMSampleBufferRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferInvalidate`.
+    /// Apple SDK function `CMSampleBufferInvalidate`.
     pub fn CMSampleBufferInvalidate(sbuf: CMSampleBufferRef) -> OSStatus;
 }
 /// Apple SDK type alias `CMSampleBufferInvalidateCallback`.
 pub type CMSampleBufferInvalidateCallback =
     ::core::option::Option<unsafe extern "C" fn(sbuf: CMSampleBufferRef, invalidateRefCon: u64)>;
 extern "C" {
-/// Apple SDK function `CMSampleBufferSetInvalidateCallback`.
+    /// Apple SDK function `CMSampleBufferSetInvalidateCallback`.
     pub fn CMSampleBufferSetInvalidateCallback(
         sbuf: CMSampleBufferRef,
         invalidateCallback: CMSampleBufferInvalidateCallback,
@@ -18575,98 +18575,98 @@ extern "C" {
 /// Apple SDK type alias `CMSampleBufferInvalidateHandler`.
 pub type CMSampleBufferInvalidateHandler = *mut ::core::ffi::c_void;
 extern "C" {
-/// Apple SDK function `CMSampleBufferSetInvalidateHandler`.
+    /// Apple SDK function `CMSampleBufferSetInvalidateHandler`.
     pub fn CMSampleBufferSetInvalidateHandler(
         sbuf: CMSampleBufferRef,
         invalidateHandler: CMSampleBufferInvalidateHandler,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferIsValid`.
+    /// Apple SDK function `CMSampleBufferIsValid`.
     pub fn CMSampleBufferIsValid(sbuf: CMSampleBufferRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferNotification_DataBecameReady`.
+    /// Apple SDK exported static `kCMSampleBufferNotification_DataBecameReady`.
     pub static kCMSampleBufferNotification_DataBecameReady: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferNotification_DataFailed`.
+    /// Apple SDK exported static `kCMSampleBufferNotification_DataFailed`.
     pub static kCMSampleBufferNotification_DataFailed: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferNotificationParameter_OSStatus`.
+    /// Apple SDK exported static `kCMSampleBufferNotificationParameter_OSStatus`.
     pub static kCMSampleBufferNotificationParameter_OSStatus: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConduitNotification_InhibitOutputUntil`.
+    /// Apple SDK exported static `kCMSampleBufferConduitNotification_InhibitOutputUntil`.
     pub static kCMSampleBufferConduitNotification_InhibitOutputUntil: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_ResumeTag`.
+    /// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_ResumeTag`.
     pub static kCMSampleBufferConduitNotificationParameter_ResumeTag: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConduitNotification_ResetOutput`.
+    /// Apple SDK exported static `kCMSampleBufferConduitNotification_ResetOutput`.
     pub static kCMSampleBufferConduitNotification_ResetOutput: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged`.
+    /// Apple SDK exported static `kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged`.
     pub static kCMSampleBufferConduitNotification_UpcomingOutputPTSRangeChanged: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange`.
+    /// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange`.
     pub static kCMSampleBufferConduitNotificationParameter_UpcomingOutputPTSRangeMayOverlapQueuedOutputPTSRange:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS`.
+    /// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS`.
     pub static kCMSampleBufferConduitNotificationParameter_MinUpcomingOutputPTS: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS`.
+    /// Apple SDK exported static `kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS`.
     pub static kCMSampleBufferConduitNotificationParameter_MaxUpcomingOutputPTS: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferConsumerNotification_BufferConsumed`.
+    /// Apple SDK exported static `kCMSampleBufferConsumerNotification_BufferConsumed`.
     pub static kCMSampleBufferConsumerNotification_BufferConsumed: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetNumSamples`.
+    /// Apple SDK function `CMSampleBufferGetNumSamples`.
     pub fn CMSampleBufferGetNumSamples(sbuf: CMSampleBufferRef) -> CMItemCount;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetDuration`.
+    /// Apple SDK function `CMSampleBufferGetDuration`.
     pub fn CMSampleBufferGetDuration(sbuf: CMSampleBufferRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetPresentationTimeStamp`.
+    /// Apple SDK function `CMSampleBufferGetPresentationTimeStamp`.
     pub fn CMSampleBufferGetPresentationTimeStamp(sbuf: CMSampleBufferRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetDecodeTimeStamp`.
+    /// Apple SDK function `CMSampleBufferGetDecodeTimeStamp`.
     pub fn CMSampleBufferGetDecodeTimeStamp(sbuf: CMSampleBufferRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetOutputDuration`.
+    /// Apple SDK function `CMSampleBufferGetOutputDuration`.
     pub fn CMSampleBufferGetOutputDuration(sbuf: CMSampleBufferRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetOutputPresentationTimeStamp`.
+    /// Apple SDK function `CMSampleBufferGetOutputPresentationTimeStamp`.
     pub fn CMSampleBufferGetOutputPresentationTimeStamp(sbuf: CMSampleBufferRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferSetOutputPresentationTimeStamp`.
+    /// Apple SDK function `CMSampleBufferSetOutputPresentationTimeStamp`.
     pub fn CMSampleBufferSetOutputPresentationTimeStamp(
         sbuf: CMSampleBufferRef,
         outputPresentationTimeStamp: CMTime,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetOutputDecodeTimeStamp`.
+    /// Apple SDK function `CMSampleBufferGetOutputDecodeTimeStamp`.
     pub fn CMSampleBufferGetOutputDecodeTimeStamp(sbuf: CMSampleBufferRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetSampleTimingInfoArray`.
+    /// Apple SDK function `CMSampleBufferGetSampleTimingInfoArray`.
     pub fn CMSampleBufferGetSampleTimingInfoArray(
         sbuf: CMSampleBufferRef,
         numSampleTimingEntries: CMItemCount,
@@ -18675,7 +18675,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetOutputSampleTimingInfoArray`.
+    /// Apple SDK function `CMSampleBufferGetOutputSampleTimingInfoArray`.
     pub fn CMSampleBufferGetOutputSampleTimingInfoArray(
         sbuf: CMSampleBufferRef,
         timingArrayEntries: CMItemCount,
@@ -18684,7 +18684,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetSampleTimingInfo`.
+    /// Apple SDK function `CMSampleBufferGetSampleTimingInfo`.
     pub fn CMSampleBufferGetSampleTimingInfo(
         sbuf: CMSampleBufferRef,
         sampleIndex: CMItemIndex,
@@ -18692,7 +18692,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetSampleSizeArray`.
+    /// Apple SDK function `CMSampleBufferGetSampleSizeArray`.
     pub fn CMSampleBufferGetSampleSizeArray(
         sbuf: CMSampleBufferRef,
         sizeArrayEntries: CMItemCount,
@@ -18701,238 +18701,238 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetSampleSize`.
+    /// Apple SDK function `CMSampleBufferGetSampleSize`.
     pub fn CMSampleBufferGetSampleSize(sbuf: CMSampleBufferRef, sampleIndex: CMItemIndex) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetTotalSampleSize`.
+    /// Apple SDK function `CMSampleBufferGetTotalSampleSize`.
     pub fn CMSampleBufferGetTotalSampleSize(sbuf: CMSampleBufferRef) -> usize;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetFormatDescription`.
+    /// Apple SDK function `CMSampleBufferGetFormatDescription`.
     pub fn CMSampleBufferGetFormatDescription(sbuf: CMSampleBufferRef) -> CMFormatDescriptionRef;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetSampleAttachmentsArray`.
+    /// Apple SDK function `CMSampleBufferGetSampleAttachmentsArray`.
     pub fn CMSampleBufferGetSampleAttachmentsArray(
         sbuf: CMSampleBufferRef,
         createIfNecessary: Boolean,
     ) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_NotSync`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_NotSync`.
     pub static kCMSampleAttachmentKey_NotSync: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_PartialSync`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_PartialSync`.
     pub static kCMSampleAttachmentKey_PartialSync: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_HasRedundantCoding`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_HasRedundantCoding`.
     pub static kCMSampleAttachmentKey_HasRedundantCoding: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_IsDependedOnByOthers`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_IsDependedOnByOthers`.
     pub static kCMSampleAttachmentKey_IsDependedOnByOthers: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_DependsOnOthers`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_DependsOnOthers`.
     pub static kCMSampleAttachmentKey_DependsOnOthers: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_EarlierDisplayTimesAllowed`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_EarlierDisplayTimesAllowed`.
     pub static kCMSampleAttachmentKey_EarlierDisplayTimesAllowed: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_DisplayImmediately`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_DisplayImmediately`.
     pub static kCMSampleAttachmentKey_DisplayImmediately: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_DoNotDisplay`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_DoNotDisplay`.
     pub static kCMSampleAttachmentKey_DoNotDisplay: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding`.
     pub static kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_DrainAfterDecoding`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_DrainAfterDecoding`.
     pub static kCMSampleBufferAttachmentKey_DrainAfterDecoding: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed`.
     pub static kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_ResumeOutput`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_ResumeOutput`.
     pub static kCMSampleBufferAttachmentKey_ResumeOutput: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_HEVCTemporalLevelInfo`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_HEVCTemporalLevelInfo`.
     pub static kCMSampleAttachmentKey_HEVCTemporalLevelInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_TemporalLevel`.
+    /// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_TemporalLevel`.
     pub static kCMHEVCTemporalLevelInfoKey_TemporalLevel: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ProfileSpace`.
+    /// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ProfileSpace`.
     pub static kCMHEVCTemporalLevelInfoKey_ProfileSpace: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_TierFlag`.
+    /// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_TierFlag`.
     pub static kCMHEVCTemporalLevelInfoKey_TierFlag: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ProfileIndex`.
+    /// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ProfileIndex`.
     pub static kCMHEVCTemporalLevelInfoKey_ProfileIndex: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags`.
+    /// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags`.
     pub static kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags`.
+    /// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags`.
     pub static kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_LevelIndex`.
+    /// Apple SDK exported static `kCMHEVCTemporalLevelInfoKey_LevelIndex`.
     pub static kCMHEVCTemporalLevelInfoKey_LevelIndex: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess`.
     pub static kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess`.
     pub static kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType`.
     pub static kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount`.
     pub static kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_TransitionID`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_TransitionID`.
     pub static kCMSampleBufferAttachmentKey_TransitionID: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_TrimDurationAtStart`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_TrimDurationAtStart`.
     pub static kCMSampleBufferAttachmentKey_TrimDurationAtStart: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_TrimDurationAtEnd`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_TrimDurationAtEnd`.
     pub static kCMSampleBufferAttachmentKey_TrimDurationAtEnd: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_SpeedMultiplier`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_SpeedMultiplier`.
     pub static kCMSampleBufferAttachmentKey_SpeedMultiplier: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_Reverse`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_Reverse`.
     pub static kCMSampleBufferAttachmentKey_Reverse: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence`.
     pub static kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_EmptyMedia`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_EmptyMedia`.
     pub static kCMSampleBufferAttachmentKey_EmptyMedia: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_PermanentEmptyMedia`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_PermanentEmptyMedia`.
     pub static kCMSampleBufferAttachmentKey_PermanentEmptyMedia: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately`.
     pub static kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration`.
     pub static kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_SampleReferenceURL`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_SampleReferenceURL`.
     pub static kCMSampleBufferAttachmentKey_SampleReferenceURL: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_SampleReferenceByteOffset`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_SampleReferenceByteOffset`.
     pub static kCMSampleBufferAttachmentKey_SampleReferenceByteOffset: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_GradualDecoderRefresh`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_GradualDecoderRefresh`.
     pub static kCMSampleBufferAttachmentKey_GradualDecoderRefresh: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_DroppedFrameReason`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_DroppedFrameReason`.
     pub static kCMSampleBufferAttachmentKey_DroppedFrameReason: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferDroppedFrameReason_FrameWasLate`.
+    /// Apple SDK exported static `kCMSampleBufferDroppedFrameReason_FrameWasLate`.
     pub static kCMSampleBufferDroppedFrameReason_FrameWasLate: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferDroppedFrameReason_OutOfBuffers`.
+    /// Apple SDK exported static `kCMSampleBufferDroppedFrameReason_OutOfBuffers`.
     pub static kCMSampleBufferDroppedFrameReason_OutOfBuffers: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferDroppedFrameReason_Discontinuity`.
+    /// Apple SDK exported static `kCMSampleBufferDroppedFrameReason_Discontinuity`.
     pub static kCMSampleBufferDroppedFrameReason_Discontinuity: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo`.
     pub static kCMSampleBufferAttachmentKey_DroppedFrameReasonInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch`.
+    /// Apple SDK exported static `kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch`.
     pub static kCMSampleBufferDroppedFrameReasonInfo_CameraModeSwitch: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo`.
     pub static kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_Active`.
+    /// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_Active`.
     pub static kCMSampleBufferLensStabilizationInfo_Active: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_OutOfRange`.
+    /// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_OutOfRange`.
     pub static kCMSampleBufferLensStabilizationInfo_OutOfRange: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_Unavailable`.
+    /// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_Unavailable`.
     pub static kCMSampleBufferLensStabilizationInfo_Unavailable: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_Off`.
+    /// Apple SDK exported static `kCMSampleBufferLensStabilizationInfo_Off`.
     pub static kCMSampleBufferLensStabilizationInfo_Off: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix`.
     pub static kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleBufferAttachmentKey_ForceKeyFrame`.
+    /// Apple SDK exported static `kCMSampleBufferAttachmentKey_ForceKeyFrame`.
     pub static kCMSampleBufferAttachmentKey_ForceKeyFrame: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData`.
     pub static kCMSampleAttachmentKey_CryptorSubsampleAuxiliaryData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_HDR10PlusPerFrameData`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_HDR10PlusPerFrameData`.
     pub static kCMSampleAttachmentKey_HDR10PlusPerFrameData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMSampleAttachmentKey_PostDecodeProcessingMetadata`.
+    /// Apple SDK exported static `kCMSampleAttachmentKey_PostDecodeProcessingMetadata`.
     pub static kCMSampleAttachmentKey_PostDecodeProcessingMetadata: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCallForEachSample`.
+    /// Apple SDK function `CMSampleBufferCallForEachSample`.
     pub fn CMSampleBufferCallForEachSample(
         sbuf: CMSampleBufferRef,
         callback: ::core::option::Option<
@@ -18946,7 +18946,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCallBlockForEachSample`.
+    /// Apple SDK function `CMSampleBufferCallBlockForEachSample`.
     pub fn CMSampleBufferCallBlockForEachSample(
         sbuf: CMSampleBufferRef,
         handler: *mut ::core::ffi::c_void,
@@ -19011,27 +19011,27 @@ pub struct CMTag {
     pub value: CMTagValue,
 }
 extern "C" {
-/// Apple SDK function `CMTagGetValueDataType`.
+    /// Apple SDK function `CMTagGetValueDataType`.
     pub fn CMTagGetValueDataType(tag: CMTag) -> CMTagDataType;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagInvalid`.
+    /// Apple SDK exported static `kCMTagInvalid`.
     pub static kCMTagInvalid: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagMediaTypeVideo`.
+    /// Apple SDK exported static `kCMTagMediaTypeVideo`.
     pub static kCMTagMediaTypeVideo: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagMediaSubTypeMebx`.
+    /// Apple SDK exported static `kCMTagMediaSubTypeMebx`.
     pub static kCMTagMediaSubTypeMebx: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagMediaTypeAudio`.
+    /// Apple SDK exported static `kCMTagMediaTypeAudio`.
     pub static kCMTagMediaTypeAudio: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagMediaTypeMetadata`.
+    /// Apple SDK exported static `kCMTagMediaTypeMetadata`.
     pub static kCMTagMediaTypeMetadata: CMTag;
 }
 /// Apple SDK type alias `CMStereoViewComponents`.
@@ -19045,19 +19045,19 @@ pub const kCMStereoView_RightEye: _bindgen_ty_1707 = 2;
 /// Apple SDK type alias `_bindgen_ty_1707`.
 pub type _bindgen_ty_1707 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCMTagStereoLeftEye`.
+    /// Apple SDK exported static `kCMTagStereoLeftEye`.
     pub static kCMTagStereoLeftEye: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagStereoRightEye`.
+    /// Apple SDK exported static `kCMTagStereoRightEye`.
     pub static kCMTagStereoRightEye: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagStereoLeftAndRightEye`.
+    /// Apple SDK exported static `kCMTagStereoLeftAndRightEye`.
     pub static kCMTagStereoLeftAndRightEye: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagStereoNone`.
+    /// Apple SDK exported static `kCMTagStereoNone`.
     pub static kCMTagStereoNone: CMTag;
 }
 /// Apple SDK type alias `CMStereoViewInterpretationOptions`.
@@ -19071,7 +19071,7 @@ pub const kCMStereoViewInterpretation_AdditionalViews: _bindgen_ty_1708 = 2;
 /// Apple SDK type alias `_bindgen_ty_1708`.
 pub type _bindgen_ty_1708 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCMTagStereoInterpretationOrderReversed`.
+    /// Apple SDK exported static `kCMTagStereoInterpretationOrderReversed`.
     pub static kCMTagStereoInterpretationOrderReversed: CMTag;
 }
 /// Apple SDK type alias `CMProjectionType`.
@@ -19089,23 +19089,23 @@ pub const kCMProjectionType_ParametricImmersive: _bindgen_ty_1709 = 1886546285;
 /// Apple SDK type alias `_bindgen_ty_1709`.
 pub type _bindgen_ty_1709 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCMTagProjectionTypeRectangular`.
+    /// Apple SDK exported static `kCMTagProjectionTypeRectangular`.
     pub static kCMTagProjectionTypeRectangular: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagProjectionTypeEquirectangular`.
+    /// Apple SDK exported static `kCMTagProjectionTypeEquirectangular`.
     pub static kCMTagProjectionTypeEquirectangular: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagProjectionTypeHalfEquirectangular`.
+    /// Apple SDK exported static `kCMTagProjectionTypeHalfEquirectangular`.
     pub static kCMTagProjectionTypeHalfEquirectangular: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagProjectionTypeFisheye`.
+    /// Apple SDK exported static `kCMTagProjectionTypeFisheye`.
     pub static kCMTagProjectionTypeFisheye: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagProjectionTypeParametricImmersive`.
+    /// Apple SDK exported static `kCMTagProjectionTypeParametricImmersive`.
     pub static kCMTagProjectionTypeParametricImmersive: CMTag;
 }
 /// Apple SDK type alias `CMPackingType`.
@@ -19119,99 +19119,99 @@ pub const kCMPackingType_OverUnder: _bindgen_ty_1710 = 1870030194;
 /// Apple SDK type alias `_bindgen_ty_1710`.
 pub type _bindgen_ty_1710 = ::core::ffi::c_uint;
 extern "C" {
-/// Apple SDK exported static `kCMTagPackingTypeNone`.
+    /// Apple SDK exported static `kCMTagPackingTypeNone`.
     pub static kCMTagPackingTypeNone: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagPackingTypeSideBySide`.
+    /// Apple SDK exported static `kCMTagPackingTypeSideBySide`.
     pub static kCMTagPackingTypeSideBySide: CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagPackingTypeOverUnder`.
+    /// Apple SDK exported static `kCMTagPackingTypeOverUnder`.
     pub static kCMTagPackingTypeOverUnder: CMTag;
 }
 extern "C" {
-/// Apple SDK function `CMTagHasSInt64Value`.
+    /// Apple SDK function `CMTagHasSInt64Value`.
     pub fn CMTagHasSInt64Value(tag: CMTag) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagGetSInt64Value`.
+    /// Apple SDK function `CMTagGetSInt64Value`.
     pub fn CMTagGetSInt64Value(tag: CMTag) -> i64;
 }
 extern "C" {
-/// Apple SDK function `CMTagHasFloat64Value`.
+    /// Apple SDK function `CMTagHasFloat64Value`.
     pub fn CMTagHasFloat64Value(tag: CMTag) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagGetFloat64Value`.
+    /// Apple SDK function `CMTagGetFloat64Value`.
     pub fn CMTagGetFloat64Value(tag: CMTag) -> Float64;
 }
 extern "C" {
-/// Apple SDK function `CMTagHasOSTypeValue`.
+    /// Apple SDK function `CMTagHasOSTypeValue`.
     pub fn CMTagHasOSTypeValue(tag: CMTag) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagGetOSTypeValue`.
+    /// Apple SDK function `CMTagGetOSTypeValue`.
     pub fn CMTagGetOSTypeValue(tag: CMTag) -> OSType;
 }
 extern "C" {
-/// Apple SDK function `CMTagHasFlagsValue`.
+    /// Apple SDK function `CMTagHasFlagsValue`.
     pub fn CMTagHasFlagsValue(tag: CMTag) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagGetFlagsValue`.
+    /// Apple SDK function `CMTagGetFlagsValue`.
     pub fn CMTagGetFlagsValue(tag: CMTag) -> u64;
 }
 extern "C" {
-/// Apple SDK function `CMTagMakeWithSInt64Value`.
+    /// Apple SDK function `CMTagMakeWithSInt64Value`.
     pub fn CMTagMakeWithSInt64Value(category: CMTagCategory, value: i64) -> CMTag;
 }
 extern "C" {
-/// Apple SDK function `CMTagMakeWithFloat64Value`.
+    /// Apple SDK function `CMTagMakeWithFloat64Value`.
     pub fn CMTagMakeWithFloat64Value(category: CMTagCategory, value: Float64) -> CMTag;
 }
 extern "C" {
-/// Apple SDK function `CMTagMakeWithOSTypeValue`.
+    /// Apple SDK function `CMTagMakeWithOSTypeValue`.
     pub fn CMTagMakeWithOSTypeValue(category: CMTagCategory, value: OSType) -> CMTag;
 }
 extern "C" {
-/// Apple SDK function `CMTagMakeWithFlagsValue`.
+    /// Apple SDK function `CMTagMakeWithFlagsValue`.
     pub fn CMTagMakeWithFlagsValue(category: CMTagCategory, flagsForTag: u64) -> CMTag;
 }
 extern "C" {
-/// Apple SDK function `CMTagEqualToTag`.
+    /// Apple SDK function `CMTagEqualToTag`.
     pub fn CMTagEqualToTag(tag1: CMTag, tag2: CMTag) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagCompare`.
+    /// Apple SDK function `CMTagCompare`.
     pub fn CMTagCompare(tag1: CMTag, tag2: CMTag) -> CFComparisonResult;
 }
 extern "C" {
-/// Apple SDK function `CMTagHash`.
+    /// Apple SDK function `CMTagHash`.
     pub fn CMTagHash(tag: CMTag) -> CFHashCode;
 }
 extern "C" {
-/// Apple SDK function `CMTagCopyDescription`.
+    /// Apple SDK function `CMTagCopyDescription`.
     pub fn CMTagCopyDescription(allocator: CFAllocatorRef, tag: CMTag) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTagCopyAsDictionary`.
+    /// Apple SDK function `CMTagCopyAsDictionary`.
     pub fn CMTagCopyAsDictionary(tag: CMTag, allocator: CFAllocatorRef) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CMTagMakeFromDictionary`.
+    /// Apple SDK function `CMTagMakeFromDictionary`.
     pub fn CMTagMakeFromDictionary(dict: CFDictionaryRef) -> CMTag;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagValueKey`.
+    /// Apple SDK exported static `kCMTagValueKey`.
     pub static kCMTagValueKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagCategoryKey`.
+    /// Apple SDK exported static `kCMTagCategoryKey`.
     pub static kCMTagCategoryKey: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagDataTypeKey`.
+    /// Apple SDK exported static `kCMTagDataTypeKey`.
     pub static kCMTagDataTypeKey: CFStringRef;
 }
 /// Apple SDK type alias `CMTagCollectionError`.
@@ -19249,7 +19249,7 @@ pub type CMTagCollectionRef = *const OpaqueCMTagCollection;
 /// Apple SDK type alias `CMMutableTagCollectionRef`.
 pub type CMMutableTagCollectionRef = *mut OpaqueCMTagCollection;
 extern "C" {
-/// Apple SDK function `CMTagCollectionGetTypeID`.
+    /// Apple SDK function `CMTagCollectionGetTypeID`.
     pub fn CMTagCollectionGetTypeID() -> CFTypeID;
 }
 /// Apple SDK type alias `CMTagCollectionApplierFunction`.
@@ -19260,7 +19260,7 @@ pub type CMTagCollectionTagFilterFunction = ::core::option::Option<
     unsafe extern "C" fn(tag: CMTag, context: *mut ::core::ffi::c_void) -> Boolean,
 >;
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreate`.
+    /// Apple SDK function `CMTagCollectionCreate`.
     pub fn CMTagCollectionCreate(
         allocator: CFAllocatorRef,
         tags: *const CMTag,
@@ -19269,7 +19269,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateMutable`.
+    /// Apple SDK function `CMTagCollectionCreateMutable`.
     pub fn CMTagCollectionCreateMutable(
         allocator: CFAllocatorRef,
         capacity: CFIndex,
@@ -19277,7 +19277,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateCopy`.
+    /// Apple SDK function `CMTagCollectionCreateCopy`.
     pub fn CMTagCollectionCreateCopy(
         tagCollection: CMTagCollectionRef,
         allocator: CFAllocatorRef,
@@ -19285,7 +19285,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateMutableCopy`.
+    /// Apple SDK function `CMTagCollectionCreateMutableCopy`.
     pub fn CMTagCollectionCreateMutableCopy(
         tagCollection: CMTagCollectionRef,
         allocator: CFAllocatorRef,
@@ -19293,29 +19293,29 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCopyDescription`.
+    /// Apple SDK function `CMTagCollectionCopyDescription`.
     pub fn CMTagCollectionCopyDescription(
         allocator: CFAllocatorRef,
         tagCollection: CMTagCollectionRef,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionGetCount`.
+    /// Apple SDK function `CMTagCollectionGetCount`.
     pub fn CMTagCollectionGetCount(tagCollection: CMTagCollectionRef) -> CMItemCount;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionContainsTag`.
+    /// Apple SDK function `CMTagCollectionContainsTag`.
     pub fn CMTagCollectionContainsTag(tagCollection: CMTagCollectionRef, tag: CMTag) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionContainsTagsOfCollection`.
+    /// Apple SDK function `CMTagCollectionContainsTagsOfCollection`.
     pub fn CMTagCollectionContainsTagsOfCollection(
         tagCollection: CMTagCollectionRef,
         containedTagCollection: CMTagCollectionRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionContainsSpecifiedTags`.
+    /// Apple SDK function `CMTagCollectionContainsSpecifiedTags`.
     pub fn CMTagCollectionContainsSpecifiedTags(
         tagCollection: CMTagCollectionRef,
         containedTags: *const CMTag,
@@ -19323,21 +19323,21 @@ extern "C" {
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionContainsCategory`.
+    /// Apple SDK function `CMTagCollectionContainsCategory`.
     pub fn CMTagCollectionContainsCategory(
         tagCollection: CMTagCollectionRef,
         category: CMTagCategory,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionGetCountOfCategory`.
+    /// Apple SDK function `CMTagCollectionGetCountOfCategory`.
     pub fn CMTagCollectionGetCountOfCategory(
         tagCollection: CMTagCollectionRef,
         category: CMTagCategory,
     ) -> CMItemCount;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionGetTags`.
+    /// Apple SDK function `CMTagCollectionGetTags`.
     pub fn CMTagCollectionGetTags(
         tagCollection: CMTagCollectionRef,
         tagBuffer: *mut CMTag,
@@ -19346,7 +19346,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionGetTagsWithCategory`.
+    /// Apple SDK function `CMTagCollectionGetTagsWithCategory`.
     pub fn CMTagCollectionGetTagsWithCategory(
         tagCollection: CMTagCollectionRef,
         category: CMTagCategory,
@@ -19356,7 +19356,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCountTagsWithFilterFunction`.
+    /// Apple SDK function `CMTagCollectionCountTagsWithFilterFunction`.
     pub fn CMTagCollectionCountTagsWithFilterFunction(
         tagCollection: CMTagCollectionRef,
         filterApplier: CMTagCollectionTagFilterFunction,
@@ -19364,7 +19364,7 @@ extern "C" {
     ) -> CMItemCount;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionGetTagsWithFilterFunction`.
+    /// Apple SDK function `CMTagCollectionGetTagsWithFilterFunction`.
     pub fn CMTagCollectionGetTagsWithFilterFunction(
         tagCollection: CMTagCollectionRef,
         tagBuffer: *mut CMTag,
@@ -19375,7 +19375,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCopyTagsOfCategories`.
+    /// Apple SDK function `CMTagCollectionCopyTagsOfCategories`.
     pub fn CMTagCollectionCopyTagsOfCategories(
         allocator: CFAllocatorRef,
         tagCollection: CMTagCollectionRef,
@@ -19385,7 +19385,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionApply`.
+    /// Apple SDK function `CMTagCollectionApply`.
     pub fn CMTagCollectionApply(
         tagCollection: CMTagCollectionRef,
         applier: CMTagCollectionApplierFunction,
@@ -19393,7 +19393,7 @@ extern "C" {
     );
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionApplyUntil`.
+    /// Apple SDK function `CMTagCollectionApplyUntil`.
     pub fn CMTagCollectionApplyUntil(
         tagCollection: CMTagCollectionRef,
         applier: CMTagCollectionTagFilterFunction,
@@ -19401,11 +19401,11 @@ extern "C" {
     ) -> CMTag;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionIsEmpty`.
+    /// Apple SDK function `CMTagCollectionIsEmpty`.
     pub fn CMTagCollectionIsEmpty(tagCollection: CMTagCollectionRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateIntersection`.
+    /// Apple SDK function `CMTagCollectionCreateIntersection`.
     pub fn CMTagCollectionCreateIntersection(
         tagCollection1: CMTagCollectionRef,
         tagCollection2: CMTagCollectionRef,
@@ -19413,7 +19413,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateUnion`.
+    /// Apple SDK function `CMTagCollectionCreateUnion`.
     pub fn CMTagCollectionCreateUnion(
         tagCollection1: CMTagCollectionRef,
         tagCollection2: CMTagCollectionRef,
@@ -19421,7 +19421,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateDifference`.
+    /// Apple SDK function `CMTagCollectionCreateDifference`.
     pub fn CMTagCollectionCreateDifference(
         tagCollectionMinuend: CMTagCollectionRef,
         tagCollectionSubtrahend: CMTagCollectionRef,
@@ -19429,7 +19429,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateExclusiveOr`.
+    /// Apple SDK function `CMTagCollectionCreateExclusiveOr`.
     pub fn CMTagCollectionCreateExclusiveOr(
         tagCollection1: CMTagCollectionRef,
         tagCollection2: CMTagCollectionRef,
@@ -19437,39 +19437,39 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionAddTag`.
+    /// Apple SDK function `CMTagCollectionAddTag`.
     pub fn CMTagCollectionAddTag(
         tagCollection: CMMutableTagCollectionRef,
         tagToAdd: CMTag,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionRemoveTag`.
+    /// Apple SDK function `CMTagCollectionRemoveTag`.
     pub fn CMTagCollectionRemoveTag(
         tagCollection: CMMutableTagCollectionRef,
         tagToRemove: CMTag,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionRemoveAllTags`.
+    /// Apple SDK function `CMTagCollectionRemoveAllTags`.
     pub fn CMTagCollectionRemoveAllTags(tagCollection: CMMutableTagCollectionRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionRemoveAllTagsOfCategory`.
+    /// Apple SDK function `CMTagCollectionRemoveAllTagsOfCategory`.
     pub fn CMTagCollectionRemoveAllTagsOfCategory(
         tagCollection: CMMutableTagCollectionRef,
         category: CMTagCategory,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionAddTagsFromCollection`.
+    /// Apple SDK function `CMTagCollectionAddTagsFromCollection`.
     pub fn CMTagCollectionAddTagsFromCollection(
         tagCollection: CMMutableTagCollectionRef,
         collectionWithTagsToAdd: CMTagCollectionRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionAddTagsFromArray`.
+    /// Apple SDK function `CMTagCollectionAddTagsFromArray`.
     pub fn CMTagCollectionAddTagsFromArray(
         tagCollection: CMMutableTagCollectionRef,
         tags: *mut CMTag,
@@ -19477,14 +19477,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCopyAsDictionary`.
+    /// Apple SDK function `CMTagCollectionCopyAsDictionary`.
     pub fn CMTagCollectionCopyAsDictionary(
         tagCollection: CMTagCollectionRef,
         allocator: CFAllocatorRef,
     ) -> CFDictionaryRef;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateFromDictionary`.
+    /// Apple SDK function `CMTagCollectionCreateFromDictionary`.
     pub fn CMTagCollectionCreateFromDictionary(
         dict: CFDictionaryRef,
         allocator: CFAllocatorRef,
@@ -19492,14 +19492,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCopyAsData`.
+    /// Apple SDK function `CMTagCollectionCopyAsData`.
     pub fn CMTagCollectionCopyAsData(
         tagCollection: CMTagCollectionRef,
         allocator: CFAllocatorRef,
     ) -> CFDataRef;
 }
 extern "C" {
-/// Apple SDK function `CMTagCollectionCreateFromData`.
+    /// Apple SDK function `CMTagCollectionCreateFromData`.
     pub fn CMTagCollectionCreateFromData(
         data: CFDataRef,
         allocator: CFAllocatorRef,
@@ -19507,7 +19507,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTagCollectionTagsArrayKey`.
+    /// Apple SDK exported static `kCMTagCollectionTagsArrayKey`.
     pub static kCMTagCollectionTagsArrayKey: CFStringRef;
 }
 /// Apple SDK type alias `CMTaggedBufferGroupError`.
@@ -19529,11 +19529,11 @@ pub struct OpaqueCMTaggedBufferGroup {
 /// Apple SDK type alias `CMTaggedBufferGroupRef`.
 pub type CMTaggedBufferGroupRef = *mut OpaqueCMTaggedBufferGroup;
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetTypeID`.
+    /// Apple SDK function `CMTaggedBufferGroupGetTypeID`.
     pub fn CMTaggedBufferGroupGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupCreate`.
+    /// Apple SDK function `CMTaggedBufferGroupCreate`.
     pub fn CMTaggedBufferGroupCreate(
         allocator: CFAllocatorRef,
         tagCollections: CFArrayRef,
@@ -19542,7 +19542,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupCreateCombined`.
+    /// Apple SDK function `CMTaggedBufferGroupCreateCombined`.
     pub fn CMTaggedBufferGroupCreateCombined(
         allocator: CFAllocatorRef,
         taggedBufferGroups: CFArrayRef,
@@ -19550,25 +19550,25 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetCount`.
+    /// Apple SDK function `CMTaggedBufferGroupGetCount`.
     pub fn CMTaggedBufferGroupGetCount(group: CMTaggedBufferGroupRef) -> CMItemCount;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetTagCollectionAtIndex`.
+    /// Apple SDK function `CMTaggedBufferGroupGetTagCollectionAtIndex`.
     pub fn CMTaggedBufferGroupGetTagCollectionAtIndex(
         group: CMTaggedBufferGroupRef,
         index: CFIndex,
     ) -> CMTagCollectionRef;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetCVPixelBufferAtIndex`.
+    /// Apple SDK function `CMTaggedBufferGroupGetCVPixelBufferAtIndex`.
     pub fn CMTaggedBufferGroupGetCVPixelBufferAtIndex(
         group: CMTaggedBufferGroupRef,
         index: CFIndex,
     ) -> CVPixelBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetCVPixelBufferForTag`.
+    /// Apple SDK function `CMTaggedBufferGroupGetCVPixelBufferForTag`.
     pub fn CMTaggedBufferGroupGetCVPixelBufferForTag(
         group: CMTaggedBufferGroupRef,
         tag: CMTag,
@@ -19576,7 +19576,7 @@ extern "C" {
     ) -> CVPixelBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetCVPixelBufferForTagCollection`.
+    /// Apple SDK function `CMTaggedBufferGroupGetCVPixelBufferForTagCollection`.
     pub fn CMTaggedBufferGroupGetCVPixelBufferForTagCollection(
         group: CMTaggedBufferGroupRef,
         tagCollection: CMTagCollectionRef,
@@ -19584,14 +19584,14 @@ extern "C" {
     ) -> CVPixelBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetCMSampleBufferAtIndex`.
+    /// Apple SDK function `CMTaggedBufferGroupGetCMSampleBufferAtIndex`.
     pub fn CMTaggedBufferGroupGetCMSampleBufferAtIndex(
         group: CMTaggedBufferGroupRef,
         index: CFIndex,
     ) -> CMSampleBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetCMSampleBufferForTag`.
+    /// Apple SDK function `CMTaggedBufferGroupGetCMSampleBufferForTag`.
     pub fn CMTaggedBufferGroupGetCMSampleBufferForTag(
         group: CMTaggedBufferGroupRef,
         tag: CMTag,
@@ -19599,7 +19599,7 @@ extern "C" {
     ) -> CMSampleBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetCMSampleBufferForTagCollection`.
+    /// Apple SDK function `CMTaggedBufferGroupGetCMSampleBufferForTagCollection`.
     pub fn CMTaggedBufferGroupGetCMSampleBufferForTagCollection(
         group: CMTaggedBufferGroupRef,
         tagCollection: CMTagCollectionRef,
@@ -19607,14 +19607,14 @@ extern "C" {
     ) -> CMSampleBufferRef;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupGetNumberOfMatchesForTagCollection`.
+    /// Apple SDK function `CMTaggedBufferGroupGetNumberOfMatchesForTagCollection`.
     pub fn CMTaggedBufferGroupGetNumberOfMatchesForTagCollection(
         group: CMTaggedBufferGroupRef,
         tagCollection: CMTagCollectionRef,
     ) -> CMItemCount;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup`.
+    /// Apple SDK function `CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup`.
     pub fn CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup(
         allocator: CFAllocatorRef,
         taggedBufferGroup: CMTaggedBufferGroupRef,
@@ -19622,7 +19622,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions`.
+    /// Apple SDK function `CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions`.
     pub fn CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions(
         allocator: CFAllocatorRef,
         taggedBufferGroup: CMTaggedBufferGroupRef,
@@ -19631,14 +19631,14 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup`.
+    /// Apple SDK function `CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup`.
     pub fn CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup(
         desc: CMTaggedBufferGroupFormatDescriptionRef,
         taggedBufferGroup: CMTaggedBufferGroupRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferCreateForTaggedBufferGroup`.
+    /// Apple SDK function `CMSampleBufferCreateForTaggedBufferGroup`.
     pub fn CMSampleBufferCreateForTaggedBufferGroup(
         allocator: CFAllocatorRef,
         taggedBufferGroup: CMTaggedBufferGroupRef,
@@ -19649,7 +19649,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSampleBufferGetTaggedBufferGroup`.
+    /// Apple SDK function `CMSampleBufferGetTaggedBufferGroup`.
     pub fn CMSampleBufferGetTaggedBufferGroup(sbuf: CMSampleBufferRef) -> CMTaggedBufferGroupRef;
 }
 /// Apple SDK constant `kCMSimpleQueueError_AllocationFailed`.
@@ -19671,11 +19671,11 @@ pub struct opaqueCMSimpleQueue {
 /// Apple SDK type alias `CMSimpleQueueRef`.
 pub type CMSimpleQueueRef = *mut opaqueCMSimpleQueue;
 extern "C" {
-/// Apple SDK function `CMSimpleQueueGetTypeID`.
+    /// Apple SDK function `CMSimpleQueueGetTypeID`.
     pub fn CMSimpleQueueGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMSimpleQueueCreate`.
+    /// Apple SDK function `CMSimpleQueueCreate`.
     pub fn CMSimpleQueueCreate(
         allocator: CFAllocatorRef,
         capacity: i32,
@@ -19683,30 +19683,30 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSimpleQueueEnqueue`.
+    /// Apple SDK function `CMSimpleQueueEnqueue`.
     pub fn CMSimpleQueueEnqueue(
         queue: CMSimpleQueueRef,
         element: *const ::core::ffi::c_void,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSimpleQueueDequeue`.
+    /// Apple SDK function `CMSimpleQueueDequeue`.
     pub fn CMSimpleQueueDequeue(queue: CMSimpleQueueRef) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CMSimpleQueueGetHead`.
+    /// Apple SDK function `CMSimpleQueueGetHead`.
     pub fn CMSimpleQueueGetHead(queue: CMSimpleQueueRef) -> *const ::core::ffi::c_void;
 }
 extern "C" {
-/// Apple SDK function `CMSimpleQueueReset`.
+    /// Apple SDK function `CMSimpleQueueReset`.
     pub fn CMSimpleQueueReset(queue: CMSimpleQueueRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSimpleQueueGetCapacity`.
+    /// Apple SDK function `CMSimpleQueueGetCapacity`.
     pub fn CMSimpleQueueGetCapacity(queue: CMSimpleQueueRef) -> i32;
 }
 extern "C" {
-/// Apple SDK function `CMSimpleQueueGetCount`.
+    /// Apple SDK function `CMSimpleQueueGetCount`.
     pub fn CMSimpleQueueGetCount(queue: CMSimpleQueueRef) -> i32;
 }
 #[repr(C)]
@@ -19724,27 +19724,27 @@ pub const kCMMemoryPoolError_InvalidParameter: _bindgen_ty_1714 = -15491;
 /// Apple SDK type alias `_bindgen_ty_1714`.
 pub type _bindgen_ty_1714 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK function `CMMemoryPoolGetTypeID`.
+    /// Apple SDK function `CMMemoryPoolGetTypeID`.
     pub fn CMMemoryPoolGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMemoryPoolOption_AgeOutPeriod`.
+    /// Apple SDK exported static `kCMMemoryPoolOption_AgeOutPeriod`.
     pub static mut kCMMemoryPoolOption_AgeOutPeriod: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMMemoryPoolCreate`.
+    /// Apple SDK function `CMMemoryPoolCreate`.
     pub fn CMMemoryPoolCreate(options: CFDictionaryRef) -> CMMemoryPoolRef;
 }
 extern "C" {
-/// Apple SDK function `CMMemoryPoolGetAllocator`.
+    /// Apple SDK function `CMMemoryPoolGetAllocator`.
     pub fn CMMemoryPoolGetAllocator(pool: CMMemoryPoolRef) -> CFAllocatorRef;
 }
 extern "C" {
-/// Apple SDK function `CMMemoryPoolFlush`.
+    /// Apple SDK function `CMMemoryPoolFlush`.
     pub fn CMMemoryPoolFlush(pool: CMMemoryPoolRef);
 }
 extern "C" {
-/// Apple SDK function `CMMemoryPoolInvalidate`.
+    /// Apple SDK function `CMMemoryPoolInvalidate`.
     pub fn CMMemoryPoolInvalidate(pool: CMMemoryPoolRef);
 }
 #[repr(C)]
@@ -19798,27 +19798,27 @@ pub const kCMSyncError_RateMustBeNonZero: _bindgen_ty_1717 = -12755;
 /// Apple SDK type alias `_bindgen_ty_1717`.
 pub type _bindgen_ty_1717 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK function `CMClockGetTypeID`.
+    /// Apple SDK function `CMClockGetTypeID`.
     pub fn CMClockGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMClockGetHostTimeClock`.
+    /// Apple SDK function `CMClockGetHostTimeClock`.
     pub fn CMClockGetHostTimeClock() -> CMClockRef;
 }
 extern "C" {
-/// Apple SDK function `CMClockConvertHostTimeToSystemUnits`.
+    /// Apple SDK function `CMClockConvertHostTimeToSystemUnits`.
     pub fn CMClockConvertHostTimeToSystemUnits(hostTime: CMTime) -> u64;
 }
 extern "C" {
-/// Apple SDK function `CMClockMakeHostTimeFromSystemUnits`.
+    /// Apple SDK function `CMClockMakeHostTimeFromSystemUnits`.
     pub fn CMClockMakeHostTimeFromSystemUnits(hostTime: u64) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMClockGetTime`.
+    /// Apple SDK function `CMClockGetTime`.
     pub fn CMClockGetTime(clock: CMClockRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMClockGetAnchorTime`.
+    /// Apple SDK function `CMClockGetAnchorTime`.
     pub fn CMClockGetAnchorTime(
         clock: CMClockRef,
         clockTimeOut: *mut CMTime,
@@ -19826,19 +19826,19 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMClockMightDrift`.
+    /// Apple SDK function `CMClockMightDrift`.
     pub fn CMClockMightDrift(clock: CMClockRef, otherClock: CMClockRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMClockInvalidate`.
+    /// Apple SDK function `CMClockInvalidate`.
     pub fn CMClockInvalidate(clock: CMClockRef);
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetTypeID`.
+    /// Apple SDK function `CMTimebaseGetTypeID`.
     pub fn CMTimebaseGetTypeID() -> CFTypeID;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseCreateWithSourceClock`.
+    /// Apple SDK function `CMTimebaseCreateWithSourceClock`.
     pub fn CMTimebaseCreateWithSourceClock(
         allocator: CFAllocatorRef,
         sourceClock: CMClockRef,
@@ -19846,7 +19846,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseCreateWithSourceTimebase`.
+    /// Apple SDK function `CMTimebaseCreateWithSourceTimebase`.
     pub fn CMTimebaseCreateWithSourceTimebase(
         allocator: CFAllocatorRef,
         sourceTimebase: CMTimebaseRef,
@@ -19854,57 +19854,57 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseCopySourceTimebase`.
+    /// Apple SDK function `CMTimebaseCopySourceTimebase`.
     pub fn CMTimebaseCopySourceTimebase(timebase: CMTimebaseRef) -> CMTimebaseRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseCopySourceClock`.
+    /// Apple SDK function `CMTimebaseCopySourceClock`.
     pub fn CMTimebaseCopySourceClock(timebase: CMTimebaseRef) -> CMClockRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseCopySource`.
+    /// Apple SDK function `CMTimebaseCopySource`.
     pub fn CMTimebaseCopySource(timebase: CMTimebaseRef) -> CMClockOrTimebaseRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseCopyUltimateSourceClock`.
+    /// Apple SDK function `CMTimebaseCopyUltimateSourceClock`.
     pub fn CMTimebaseCopyUltimateSourceClock(timebase: CMTimebaseRef) -> CMClockRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetMasterTimebase`.
+    /// Apple SDK function `CMTimebaseGetMasterTimebase`.
     pub fn CMTimebaseGetMasterTimebase(timebase: CMTimebaseRef) -> CMTimebaseRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetMasterClock`.
+    /// Apple SDK function `CMTimebaseGetMasterClock`.
     pub fn CMTimebaseGetMasterClock(timebase: CMTimebaseRef) -> CMClockRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetMaster`.
+    /// Apple SDK function `CMTimebaseGetMaster`.
     pub fn CMTimebaseGetMaster(timebase: CMTimebaseRef) -> CMClockOrTimebaseRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetUltimateMasterClock`.
+    /// Apple SDK function `CMTimebaseGetUltimateMasterClock`.
     pub fn CMTimebaseGetUltimateMasterClock(timebase: CMTimebaseRef) -> CMClockRef;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetSourceClock`.
+    /// Apple SDK function `CMTimebaseSetSourceClock`.
     pub fn CMTimebaseSetSourceClock(
         timebase: CMTimebaseRef,
         newSourceClock: CMClockRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetSourceTimebase`.
+    /// Apple SDK function `CMTimebaseSetSourceTimebase`.
     pub fn CMTimebaseSetSourceTimebase(
         timebase: CMTimebaseRef,
         newSourceTimebase: CMTimebaseRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetTime`.
+    /// Apple SDK function `CMTimebaseGetTime`.
     pub fn CMTimebaseGetTime(timebase: CMTimebaseRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetTimeWithTimeScale`.
+    /// Apple SDK function `CMTimebaseGetTimeWithTimeScale`.
     pub fn CMTimebaseGetTimeWithTimeScale(
         timebase: CMTimebaseRef,
         timescale: CMTimeScale,
@@ -19912,11 +19912,11 @@ extern "C" {
     ) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetTime`.
+    /// Apple SDK function `CMTimebaseSetTime`.
     pub fn CMTimebaseSetTime(timebase: CMTimebaseRef, time: CMTime) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetAnchorTime`.
+    /// Apple SDK function `CMTimebaseSetAnchorTime`.
     pub fn CMTimebaseSetAnchorTime(
         timebase: CMTimebaseRef,
         timebaseTime: CMTime,
@@ -19924,11 +19924,11 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetRate`.
+    /// Apple SDK function `CMTimebaseGetRate`.
     pub fn CMTimebaseGetRate(timebase: CMTimebaseRef) -> Float64;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetTimeAndRate`.
+    /// Apple SDK function `CMTimebaseGetTimeAndRate`.
     pub fn CMTimebaseGetTimeAndRate(
         timebase: CMTimebaseRef,
         timeOut: *mut CMTime,
@@ -19936,11 +19936,11 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetRate`.
+    /// Apple SDK function `CMTimebaseSetRate`.
     pub fn CMTimebaseSetRate(timebase: CMTimebaseRef, rate: Float64) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetRateAndAnchorTime`.
+    /// Apple SDK function `CMTimebaseSetRateAndAnchorTime`.
     pub fn CMTimebaseSetRateAndAnchorTime(
         timebase: CMTimebaseRef,
         rate: Float64,
@@ -19949,11 +19949,11 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseGetEffectiveRate`.
+    /// Apple SDK function `CMTimebaseGetEffectiveRate`.
     pub fn CMTimebaseGetEffectiveRate(timebase: CMTimebaseRef) -> Float64;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseAddTimer`.
+    /// Apple SDK function `CMTimebaseAddTimer`.
     pub fn CMTimebaseAddTimer(
         timebase: CMTimebaseRef,
         timer: CFRunLoopTimerRef,
@@ -19961,11 +19961,11 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseRemoveTimer`.
+    /// Apple SDK function `CMTimebaseRemoveTimer`.
     pub fn CMTimebaseRemoveTimer(timebase: CMTimebaseRef, timer: CFRunLoopTimerRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetTimerNextFireTime`.
+    /// Apple SDK function `CMTimebaseSetTimerNextFireTime`.
     pub fn CMTimebaseSetTimerNextFireTime(
         timebase: CMTimebaseRef,
         timer: CFRunLoopTimerRef,
@@ -19974,28 +19974,28 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetTimerToFireImmediately`.
+    /// Apple SDK function `CMTimebaseSetTimerToFireImmediately`.
     pub fn CMTimebaseSetTimerToFireImmediately(
         timebase: CMTimebaseRef,
         timer: CFRunLoopTimerRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseAddTimerDispatchSource`.
+    /// Apple SDK function `CMTimebaseAddTimerDispatchSource`.
     pub fn CMTimebaseAddTimerDispatchSource(
         timebase: CMTimebaseRef,
         timerSource: dispatch_source_t,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseRemoveTimerDispatchSource`.
+    /// Apple SDK function `CMTimebaseRemoveTimerDispatchSource`.
     pub fn CMTimebaseRemoveTimerDispatchSource(
         timebase: CMTimebaseRef,
         timerSource: dispatch_source_t,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetTimerDispatchSourceNextFireTime`.
+    /// Apple SDK function `CMTimebaseSetTimerDispatchSourceNextFireTime`.
     pub fn CMTimebaseSetTimerDispatchSourceNextFireTime(
         timebase: CMTimebaseRef,
         timerSource: dispatch_source_t,
@@ -20004,21 +20004,21 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseSetTimerDispatchSourceToFireImmediately`.
+    /// Apple SDK function `CMTimebaseSetTimerDispatchSourceToFireImmediately`.
     pub fn CMTimebaseSetTimerDispatchSourceToFireImmediately(
         timebase: CMTimebaseRef,
         timerSource: dispatch_source_t,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSyncGetRelativeRate`.
+    /// Apple SDK function `CMSyncGetRelativeRate`.
     pub fn CMSyncGetRelativeRate(
         ofClockOrTimebase: CMClockOrTimebaseRef,
         relativeToClockOrTimebase: CMClockOrTimebaseRef,
     ) -> Float64;
 }
 extern "C" {
-/// Apple SDK function `CMSyncGetRelativeRateAndAnchorTime`.
+    /// Apple SDK function `CMSyncGetRelativeRateAndAnchorTime`.
     pub fn CMSyncGetRelativeRateAndAnchorTime(
         ofClockOrTimebase: CMClockOrTimebaseRef,
         relativeToClockOrTimebase: CMClockOrTimebaseRef,
@@ -20028,7 +20028,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMSyncConvertTime`.
+    /// Apple SDK function `CMSyncConvertTime`.
     pub fn CMSyncConvertTime(
         time: CMTime,
         fromClockOrTimebase: CMClockOrTimebaseRef,
@@ -20036,195 +20036,195 @@ extern "C" {
     ) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMSyncMightDrift`.
+    /// Apple SDK function `CMSyncMightDrift`.
     pub fn CMSyncMightDrift(
         clockOrTimebase1: CMClockOrTimebaseRef,
         clockOrTimebase2: CMClockOrTimebaseRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMSyncGetTime`.
+    /// Apple SDK function `CMSyncGetTime`.
     pub fn CMSyncGetTime(clockOrTimebase: CMClockOrTimebaseRef) -> CMTime;
 }
 extern "C" {
-/// Apple SDK function `CMTimebaseNotificationBarrier`.
+    /// Apple SDK function `CMTimebaseNotificationBarrier`.
     pub fn CMTimebaseNotificationBarrier(timebase: CMTimebaseRef) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimebaseNotification_EffectiveRateChanged`.
+    /// Apple SDK exported static `kCMTimebaseNotification_EffectiveRateChanged`.
     pub static kCMTimebaseNotification_EffectiveRateChanged: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimebaseNotification_TimeJumped`.
+    /// Apple SDK exported static `kCMTimebaseNotification_TimeJumped`.
     pub static kCMTimebaseNotification_TimeJumped: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTimebaseNotificationKey_EventTime`.
+    /// Apple SDK exported static `kCMTimebaseNotificationKey_EventTime`.
     pub static kCMTimebaseNotificationKey_EventTime: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_ForegroundColorARGB`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_ForegroundColorARGB`.
     pub static kCMTextMarkupAttribute_ForegroundColorARGB: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_BackgroundColorARGB`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_BackgroundColorARGB`.
     pub static kCMTextMarkupAttribute_BackgroundColorARGB: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_CharacterBackgroundColorARGB`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_CharacterBackgroundColorARGB`.
     pub static kCMTextMarkupAttribute_CharacterBackgroundColorARGB: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_BoldStyle`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_BoldStyle`.
     pub static kCMTextMarkupAttribute_BoldStyle: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_ItalicStyle`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_ItalicStyle`.
     pub static kCMTextMarkupAttribute_ItalicStyle: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_UnderlineStyle`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_UnderlineStyle`.
     pub static kCMTextMarkupAttribute_UnderlineStyle: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_FontFamilyName`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_FontFamilyName`.
     pub static kCMTextMarkupAttribute_FontFamilyName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_FontFamilyNameList`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_FontFamilyNameList`.
     pub static kCMTextMarkupAttribute_FontFamilyNameList: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_GenericFontFamilyName`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_GenericFontFamilyName`.
     pub static kCMTextMarkupAttribute_GenericFontFamilyName: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_Default`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_Default`.
     pub static kCMTextMarkupGenericFontName_Default: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_Serif`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_Serif`.
     pub static kCMTextMarkupGenericFontName_Serif: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_SansSerif`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_SansSerif`.
     pub static kCMTextMarkupGenericFontName_SansSerif: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_Monospace`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_Monospace`.
     pub static kCMTextMarkupGenericFontName_Monospace: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_ProportionalSerif`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_ProportionalSerif`.
     pub static kCMTextMarkupGenericFontName_ProportionalSerif: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_ProportionalSansSerif`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_ProportionalSansSerif`.
     pub static kCMTextMarkupGenericFontName_ProportionalSansSerif: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_MonospaceSerif`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_MonospaceSerif`.
     pub static kCMTextMarkupGenericFontName_MonospaceSerif: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_MonospaceSansSerif`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_MonospaceSansSerif`.
     pub static kCMTextMarkupGenericFontName_MonospaceSansSerif: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_Casual`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_Casual`.
     pub static kCMTextMarkupGenericFontName_Casual: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_Cursive`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_Cursive`.
     pub static kCMTextMarkupGenericFontName_Cursive: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_Fantasy`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_Fantasy`.
     pub static kCMTextMarkupGenericFontName_Fantasy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupGenericFontName_SmallCapital`.
+    /// Apple SDK exported static `kCMTextMarkupGenericFontName_SmallCapital`.
     pub static kCMTextMarkupGenericFontName_SmallCapital: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight`.
     pub static kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_RelativeFontSize`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_RelativeFontSize`.
     pub static kCMTextMarkupAttribute_RelativeFontSize: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_VerticalLayout`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_VerticalLayout`.
     pub static kCMTextMarkupAttribute_VerticalLayout: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextVerticalLayout_LeftToRight`.
+    /// Apple SDK exported static `kCMTextVerticalLayout_LeftToRight`.
     pub static kCMTextVerticalLayout_LeftToRight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextVerticalLayout_RightToLeft`.
+    /// Apple SDK exported static `kCMTextVerticalLayout_RightToLeft`.
     pub static kCMTextVerticalLayout_RightToLeft: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_Alignment`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_Alignment`.
     pub static kCMTextMarkupAttribute_Alignment: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAlignmentType_Start`.
+    /// Apple SDK exported static `kCMTextMarkupAlignmentType_Start`.
     pub static kCMTextMarkupAlignmentType_Start: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAlignmentType_Middle`.
+    /// Apple SDK exported static `kCMTextMarkupAlignmentType_Middle`.
     pub static kCMTextMarkupAlignmentType_Middle: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAlignmentType_End`.
+    /// Apple SDK exported static `kCMTextMarkupAlignmentType_End`.
     pub static kCMTextMarkupAlignmentType_End: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAlignmentType_Left`.
+    /// Apple SDK exported static `kCMTextMarkupAlignmentType_Left`.
     pub static kCMTextMarkupAlignmentType_Left: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAlignmentType_Right`.
+    /// Apple SDK exported static `kCMTextMarkupAlignmentType_Right`.
     pub static kCMTextMarkupAlignmentType_Right: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection`.
     pub static kCMTextMarkupAttribute_TextPositionPercentageRelativeToWritingDirection: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection`.
     pub static kCMTextMarkupAttribute_OrthogonalLinePositionPercentageRelativeToWritingDirection:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_WritingDirectionSizePercentage`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_WritingDirectionSizePercentage`.
     pub static kCMTextMarkupAttribute_WritingDirectionSizePercentage: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupAttribute_CharacterEdgeStyle`.
+    /// Apple SDK exported static `kCMTextMarkupAttribute_CharacterEdgeStyle`.
     pub static kCMTextMarkupAttribute_CharacterEdgeStyle: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_None`.
+    /// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_None`.
     pub static kCMTextMarkupCharacterEdgeStyle_None: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_Raised`.
+    /// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_Raised`.
     pub static kCMTextMarkupCharacterEdgeStyle_Raised: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_Depressed`.
+    /// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_Depressed`.
     pub static kCMTextMarkupCharacterEdgeStyle_Depressed: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_Uniform`.
+    /// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_Uniform`.
     pub static kCMTextMarkupCharacterEdgeStyle_Uniform: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_DropShadow`.
+    /// Apple SDK exported static `kCMTextMarkupCharacterEdgeStyle_DropShadow`.
     pub static kCMTextMarkupCharacterEdgeStyle_DropShadow: CFStringRef;
 }
 /// Apple SDK constant `kCMMetadataIdentifierError_AllocationFailed`.
@@ -20262,88 +20262,88 @@ pub const kCMMetadataDataTypeRegistryError_MultipleConformingBaseTypes: _bindgen
 /// Apple SDK type alias `_bindgen_ty_1719`.
 pub type _bindgen_ty_1719 = ::core::ffi::c_int;
 extern "C" {
-/// Apple SDK exported static `kCMMetadataKeySpace_QuickTimeUserData`.
+    /// Apple SDK exported static `kCMMetadataKeySpace_QuickTimeUserData`.
     pub static kCMMetadataKeySpace_QuickTimeUserData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataKeySpace_ISOUserData`.
+    /// Apple SDK exported static `kCMMetadataKeySpace_ISOUserData`.
     pub static kCMMetadataKeySpace_ISOUserData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataKeySpace_QuickTimeMetadata`.
+    /// Apple SDK exported static `kCMMetadataKeySpace_QuickTimeMetadata`.
     pub static kCMMetadataKeySpace_QuickTimeMetadata: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataKeySpace_iTunes`.
+    /// Apple SDK exported static `kCMMetadataKeySpace_iTunes`.
     pub static kCMMetadataKeySpace_iTunes: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataKeySpace_ID3`.
+    /// Apple SDK exported static `kCMMetadataKeySpace_ID3`.
     pub static kCMMetadataKeySpace_ID3: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataKeySpace_Icy`.
+    /// Apple SDK exported static `kCMMetadataKeySpace_Icy`.
     pub static kCMMetadataKeySpace_Icy: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataKeySpace_HLSDateRange`.
+    /// Apple SDK exported static `kCMMetadataKeySpace_HLSDateRange`.
     pub static kCMMetadataKeySpace_HLSDateRange: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataDirection_Facing: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataPreferredAffineTransform: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataVideoOrientation: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransform: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataLivePhotoStillImageTransformReferenceDimensions:
         CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataSegmentIdentifier: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia`.
+    /// Apple SDK exported static `kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia`.
     pub static kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataCreateIdentifierForKeyAndKeySpace`.
+    /// Apple SDK function `CMMetadataCreateIdentifierForKeyAndKeySpace`.
     pub fn CMMetadataCreateIdentifierForKeyAndKeySpace(
         allocator: CFAllocatorRef,
         key: CFTypeRef,
@@ -20352,7 +20352,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataCreateKeyFromIdentifier`.
+    /// Apple SDK function `CMMetadataCreateKeyFromIdentifier`.
     pub fn CMMetadataCreateKeyFromIdentifier(
         allocator: CFAllocatorRef,
         identifier: CFStringRef,
@@ -20360,7 +20360,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataCreateKeyFromIdentifierAsCFData`.
+    /// Apple SDK function `CMMetadataCreateKeyFromIdentifierAsCFData`.
     pub fn CMMetadataCreateKeyFromIdentifierAsCFData(
         allocator: CFAllocatorRef,
         identifier: CFStringRef,
@@ -20368,7 +20368,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataCreateKeySpaceFromIdentifier`.
+    /// Apple SDK function `CMMetadataCreateKeySpaceFromIdentifier`.
     pub fn CMMetadataCreateKeySpaceFromIdentifier(
         allocator: CFAllocatorRef,
         identifier: CFStringRef,
@@ -20376,131 +20376,131 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_RawData`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_RawData`.
     pub static kCMMetadataBaseDataType_RawData: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_UTF8`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_UTF8`.
     pub static kCMMetadataBaseDataType_UTF8: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_UTF16`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_UTF16`.
     pub static kCMMetadataBaseDataType_UTF16: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_GIF`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_GIF`.
     pub static kCMMetadataBaseDataType_GIF: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_JPEG`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_JPEG`.
     pub static kCMMetadataBaseDataType_JPEG: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_PNG`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_PNG`.
     pub static kCMMetadataBaseDataType_PNG: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_BMP`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_BMP`.
     pub static kCMMetadataBaseDataType_BMP: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_Float32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_Float32`.
     pub static kCMMetadataBaseDataType_Float32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_Float64`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_Float64`.
     pub static kCMMetadataBaseDataType_Float64: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_SInt8`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_SInt8`.
     pub static kCMMetadataBaseDataType_SInt8: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_SInt16`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_SInt16`.
     pub static kCMMetadataBaseDataType_SInt16: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_SInt32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_SInt32`.
     pub static kCMMetadataBaseDataType_SInt32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_SInt64`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_SInt64`.
     pub static kCMMetadataBaseDataType_SInt64: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_UInt8`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_UInt8`.
     pub static kCMMetadataBaseDataType_UInt8: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_UInt16`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_UInt16`.
     pub static kCMMetadataBaseDataType_UInt16: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_UInt32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_UInt32`.
     pub static kCMMetadataBaseDataType_UInt32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_UInt64`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_UInt64`.
     pub static kCMMetadataBaseDataType_UInt64: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_PointF32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_PointF32`.
     pub static kCMMetadataBaseDataType_PointF32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_DimensionsF32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_DimensionsF32`.
     pub static kCMMetadataBaseDataType_DimensionsF32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_RectF32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_RectF32`.
     pub static kCMMetadataBaseDataType_RectF32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_AffineTransformF64`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_AffineTransformF64`.
     pub static kCMMetadataBaseDataType_AffineTransformF64: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_PolygonF32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_PolygonF32`.
     pub static kCMMetadataBaseDataType_PolygonF32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_PolylineF32`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_PolylineF32`.
     pub static kCMMetadataBaseDataType_PolylineF32: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_JSON`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_JSON`.
     pub static kCMMetadataBaseDataType_JSON: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_PerspectiveTransformF64`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_PerspectiveTransformF64`.
     pub static kCMMetadataBaseDataType_PerspectiveTransformF64: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_RasterRectangleValue`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_RasterRectangleValue`.
     pub static kCMMetadataBaseDataType_RasterRectangleValue: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataBaseDataType_ExtendedRasterRectangleValue`.
+    /// Apple SDK exported static `kCMMetadataBaseDataType_ExtendedRasterRectangleValue`.
     pub static kCMMetadataBaseDataType_ExtendedRasterRectangleValue: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709`.
+    /// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709`.
     pub static kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataDirection`.
+    /// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataDirection`.
     pub static kCMMetadataDataType_QuickTimeMetadataDirection: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataUUID`.
+    /// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataUUID`.
     pub static kCMMetadataDataType_QuickTimeMetadataUUID: CFStringRef;
 }
 extern "C" {
-/// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataMilliLux`.
+    /// Apple SDK exported static `kCMMetadataDataType_QuickTimeMetadataMilliLux`.
     pub static kCMMetadataDataType_QuickTimeMetadataMilliLux: CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryRegisterDataType`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryRegisterDataType`.
     pub fn CMMetadataDataTypeRegistryRegisterDataType(
         dataType: CFStringRef,
         description: CFStringRef,
@@ -20508,40 +20508,40 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryDataTypeIsRegistered`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryDataTypeIsRegistered`.
     pub fn CMMetadataDataTypeRegistryDataTypeIsRegistered(dataType: CFStringRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryGetDataTypeDescription`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryGetDataTypeDescription`.
     pub fn CMMetadataDataTypeRegistryGetDataTypeDescription(dataType: CFStringRef) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryGetConformingDataTypes`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryGetConformingDataTypes`.
     pub fn CMMetadataDataTypeRegistryGetConformingDataTypes(dataType: CFStringRef) -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryDataTypeConformsToDataType`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryDataTypeConformsToDataType`.
     pub fn CMMetadataDataTypeRegistryDataTypeConformsToDataType(
         dataType: CFStringRef,
         conformsToDataType: CFStringRef,
     ) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryGetBaseDataTypes`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryGetBaseDataTypes`.
     pub fn CMMetadataDataTypeRegistryGetBaseDataTypes() -> CFArrayRef;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryDataTypeIsBaseDataType`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryDataTypeIsBaseDataType`.
     pub fn CMMetadataDataTypeRegistryDataTypeIsBaseDataType(dataType: CFStringRef) -> Boolean;
 }
 extern "C" {
-/// Apple SDK function `CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType`.
+    /// Apple SDK function `CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType`.
     pub fn CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(
         dataType: CFStringRef,
     ) -> CFStringRef;
 }
 extern "C" {
-/// Apple SDK function `CMAudioClockCreate`.
+    /// Apple SDK function `CMAudioClockCreate`.
     pub fn CMAudioClockCreate(allocator: CFAllocatorRef, clockOut: *mut CMClockRef) -> OSStatus;
 }
 /// Apple SDK type alias `AudioObjectID`.
@@ -20549,7 +20549,7 @@ pub type AudioObjectID = UInt32;
 /// Apple SDK type alias `AudioDeviceID`.
 pub type AudioDeviceID = AudioObjectID;
 extern "C" {
-/// Apple SDK function `CMAudioDeviceClockCreate`.
+    /// Apple SDK function `CMAudioDeviceClockCreate`.
     pub fn CMAudioDeviceClockCreate(
         allocator: CFAllocatorRef,
         deviceUID: CFStringRef,
@@ -20557,7 +20557,7 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioDeviceClockCreateFromAudioDeviceID`.
+    /// Apple SDK function `CMAudioDeviceClockCreateFromAudioDeviceID`.
     pub fn CMAudioDeviceClockCreateFromAudioDeviceID(
         allocator: CFAllocatorRef,
         deviceID: AudioDeviceID,
@@ -20565,21 +20565,21 @@ extern "C" {
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioDeviceClockSetAudioDeviceUID`.
+    /// Apple SDK function `CMAudioDeviceClockSetAudioDeviceUID`.
     pub fn CMAudioDeviceClockSetAudioDeviceUID(
         clock: CMClockRef,
         deviceUID: CFStringRef,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioDeviceClockSetAudioDeviceID`.
+    /// Apple SDK function `CMAudioDeviceClockSetAudioDeviceID`.
     pub fn CMAudioDeviceClockSetAudioDeviceID(
         clock: CMClockRef,
         deviceID: AudioDeviceID,
     ) -> OSStatus;
 }
 extern "C" {
-/// Apple SDK function `CMAudioDeviceClockGetAudioDevice`.
+    /// Apple SDK function `CMAudioDeviceClockGetAudioDevice`.
     pub fn CMAudioDeviceClockGetAudioDevice(
         clock: CMClockRef,
         deviceUIDOut: *mut CFStringRef,

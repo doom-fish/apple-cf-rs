@@ -507,13 +507,13 @@ pub type CVMetalTextureCacheRef = *mut __CVMetalTextureCache;
 pub type CVMetalTextureRef = CVImageBufferRef;
 
 extern "C" {
-/// Apple SDK function `CVMetalTextureGetTypeID`.
+    /// Apple SDK function `CVMetalTextureGetTypeID`.
     pub fn CVMetalTextureGetTypeID() -> CFTypeID;
-/// Apple SDK function `CVMetalTextureGetTexture`.
+    /// Apple SDK function `CVMetalTextureGetTexture`.
     pub fn CVMetalTextureGetTexture(image: CVMetalTextureRef) -> *mut core::ffi::c_void;
-/// Apple SDK function `CVMetalTextureIsFlipped`.
+    /// Apple SDK function `CVMetalTextureIsFlipped`.
     pub fn CVMetalTextureIsFlipped(image: CVMetalTextureRef) -> Boolean;
-/// Apple SDK function `CVMetalTextureGetCleanTexCoords`.
+    /// Apple SDK function `CVMetalTextureGetCleanTexCoords`.
     pub fn CVMetalTextureGetCleanTexCoords(
         image: CVMetalTextureRef,
         lowerLeft: *mut f32,
@@ -521,7 +521,7 @@ extern "C" {
         upperRight: *mut f32,
         upperLeft: *mut f32,
     );
-/// Apple SDK function `CVMetalTextureCacheCreateTextureFromImage`.
+    /// Apple SDK function `CVMetalTextureCacheCreateTextureFromImage`.
     pub fn CVMetalTextureCacheCreateTextureFromImage(
         allocator: CFAllocatorRef,
         textureCache: CVMetalTextureCacheRef,
@@ -533,9 +533,9 @@ extern "C" {
         planeIndex: usize,
         textureOut: *mut CVMetalTextureRef,
     ) -> CVReturn;
-/// Apple SDK function `CVMetalBufferGetBuffer`.
+    /// Apple SDK function `CVMetalBufferGetBuffer`.
     pub fn CVMetalBufferGetBuffer(buffer: CVMetalBufferRef) -> *mut core::ffi::c_void;
-/// Apple SDK function `CVMetalBufferCacheCreate`.
+    /// Apple SDK function `CVMetalBufferCacheCreate`.
     pub fn CVMetalBufferCacheCreate(
         allocator: CFAllocatorRef,
         cacheAttributes: CFDictionaryRef,
