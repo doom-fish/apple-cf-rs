@@ -205,10 +205,7 @@ impl CGImage {
         if unsafe { bridge_ffi::cgimage_save_png(self.ptr, c_path.as_ptr()) } {
             Ok(())
         } else {
-            Err(io::Error::new(
-                io::ErrorKind::Other,
-                "cgimage_save_png returned false",
-            ))
+            Err(io::Error::other("cgimage_save_png returned false"))
         }
     }
 
