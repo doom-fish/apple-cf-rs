@@ -77,24 +77,15 @@ impl CFType {
     }
 }
 
-impl Clone for CFType {
-    fn clone(&self) -> Self {
-        let retained = unsafe { ffi::cf_type_retain(self.0) };
-        Self(retained)
-    }
-}
+crate::utils::retained::cf_retained!(
+    CFType,
+    retain = ffi::cf_type_retain,
+    release = ffi::cf_type_release,
+);
 
 impl AsCFType for CFType {
     fn as_ptr(&self) -> *mut c_void {
         self.0
-    }
-}
-
-impl Drop for CFType {
-    fn drop(&mut self) {
-        if !self.0.is_null() {
-            unsafe { ffi::cf_type_release(self.0) };
-        }
     }
 }
 
@@ -149,20 +140,11 @@ impl SwiftObject {
     }
 }
 
-impl Clone for SwiftObject {
-    fn clone(&self) -> Self {
-        let retained = unsafe { ffi::acf_object_retain(self.0) };
-        Self(retained)
-    }
-}
-
-impl Drop for SwiftObject {
-    fn drop(&mut self) {
-        if !self.0.is_null() {
-            unsafe { ffi::acf_object_release(self.0) };
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    SwiftObject,
+    retain = ffi::acf_object_retain,
+    release = ffi::acf_object_release,
+);
 
 impl PartialEq for SwiftObject {
     fn eq(&self, other: &Self) -> bool {

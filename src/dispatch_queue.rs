@@ -126,23 +126,13 @@ impl DispatchQueue {
     }
 }
 
-impl Clone for DispatchQueue {
-    fn clone(&self) -> Self {
-        unsafe {
-            Self {
-                ptr: crate::ffi::dispatch_queue_retain(self.ptr),
-            }
-        }
-    }
-}
-
-impl Drop for DispatchQueue {
-    fn drop(&mut self) {
-        unsafe {
-            crate::ffi::dispatch_queue_release(self.ptr);
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    DispatchQueue,
+    field = ptr,
+    retain = crate::ffi::dispatch_queue_retain,
+    release = crate::ffi::dispatch_queue_release,
+    drop = unchecked,
+);
 
 impl fmt::Debug for DispatchQueue {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -293,19 +283,13 @@ impl Default for DispatchGroup {
     }
 }
 
-impl Clone for DispatchGroup {
-    fn clone(&self) -> Self {
-        Self {
-            ptr: unsafe { crate::ffi::acf_object_retain(self.ptr) },
-        }
-    }
-}
-
-impl Drop for DispatchGroup {
-    fn drop(&mut self) {
-        unsafe { crate::ffi::acf_object_release(self.ptr) };
-    }
-}
+crate::utils::retained::cf_retained!(
+    DispatchGroup,
+    field = ptr,
+    retain = crate::ffi::acf_object_retain,
+    release = crate::ffi::acf_object_release,
+    drop = unchecked,
+);
 
 impl fmt::Debug for DispatchGroup {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -348,19 +332,13 @@ impl DispatchSemaphore {
     }
 }
 
-impl Clone for DispatchSemaphore {
-    fn clone(&self) -> Self {
-        Self {
-            ptr: unsafe { crate::ffi::acf_object_retain(self.ptr) },
-        }
-    }
-}
-
-impl Drop for DispatchSemaphore {
-    fn drop(&mut self) {
-        unsafe { crate::ffi::acf_object_release(self.ptr) };
-    }
-}
+crate::utils::retained::cf_retained!(
+    DispatchSemaphore,
+    field = ptr,
+    retain = crate::ffi::acf_object_retain,
+    release = crate::ffi::acf_object_release,
+    drop = unchecked,
+);
 
 impl fmt::Debug for DispatchSemaphore {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -410,19 +388,13 @@ impl DispatchSource {
     }
 }
 
-impl Clone for DispatchSource {
-    fn clone(&self) -> Self {
-        Self {
-            ptr: unsafe { crate::ffi::acf_object_retain(self.ptr) },
-        }
-    }
-}
-
-impl Drop for DispatchSource {
-    fn drop(&mut self) {
-        unsafe { crate::ffi::acf_object_release(self.ptr) };
-    }
-}
+crate::utils::retained::cf_retained!(
+    DispatchSource,
+    field = ptr,
+    retain = crate::ffi::acf_object_retain,
+    release = crate::ffi::acf_object_release,
+    drop = unchecked,
+);
 
 impl fmt::Debug for DispatchSource {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

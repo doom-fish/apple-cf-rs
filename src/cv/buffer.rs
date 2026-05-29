@@ -133,18 +133,12 @@ impl CVBuffer {
     }
 }
 
-impl Clone for CVBuffer {
-    fn clone(&self) -> Self {
-        let retained = unsafe { CVBufferRetain(self.0) };
-        Self(retained)
-    }
-}
-
-impl Drop for CVBuffer {
-    fn drop(&mut self) {
-        unsafe { CVBufferRelease(self.0) };
-    }
-}
+crate::utils::retained::cf_retained!(
+    CVBuffer,
+    retain = CVBufferRetain,
+    release = CVBufferRelease,
+    drop = unchecked,
+);
 
 impl PartialEq for CVBuffer {
     fn eq(&self, other: &Self) -> bool {
@@ -212,18 +206,12 @@ impl CVImageBuffer {
     }
 }
 
-impl Clone for CVImageBuffer {
-    fn clone(&self) -> Self {
-        let retained = unsafe { CVBufferRetain(self.0) };
-        Self(retained)
-    }
-}
-
-impl Drop for CVImageBuffer {
-    fn drop(&mut self) {
-        unsafe { CVBufferRelease(self.0) };
-    }
-}
+crate::utils::retained::cf_retained!(
+    CVImageBuffer,
+    retain = CVBufferRetain,
+    release = CVBufferRelease,
+    drop = unchecked,
+);
 
 impl PartialEq for CVImageBuffer {
     fn eq(&self, other: &Self) -> bool {

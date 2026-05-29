@@ -388,22 +388,12 @@ impl CMFormatDescription {
     }
 }
 
-impl Clone for CMFormatDescription {
-    fn clone(&self) -> Self {
-        unsafe {
-            let ptr = ffi::cm_format_description_retain(self.0);
-            Self(ptr)
-        }
-    }
-}
-
-impl Drop for CMFormatDescription {
-    fn drop(&mut self) {
-        unsafe {
-            ffi::cm_format_description_release(self.0);
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    CMFormatDescription,
+    retain = ffi::cm_format_description_retain,
+    release = ffi::cm_format_description_release,
+    drop = unchecked,
+);
 
 // SAFETY: `CMFormatDescriptionRef` is a Core Foundation type; Apple documents
 // its retain/release as thread-safe and the description data is immutable after

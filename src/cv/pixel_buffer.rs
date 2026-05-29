@@ -793,24 +793,11 @@ impl std::ops::Deref for CVPixelBufferLockGuard<'_> {
     }
 }
 
-impl Clone for CVPixelBuffer {
-    fn clone(&self) -> Self {
-        unsafe {
-            let ptr = ffi::cv_pixel_buffer_retain(self.0);
-            Self(ptr)
-        }
-    }
-}
-
-impl Drop for CVPixelBuffer {
-    fn drop(&mut self) {
-        if !self.0.is_null() {
-            unsafe {
-                ffi::cv_pixel_buffer_release(self.0);
-            }
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    CVPixelBuffer,
+    retain = ffi::cv_pixel_buffer_retain,
+    release = ffi::cv_pixel_buffer_release,
+);
 
 // SAFETY: `CVPixelBufferRef` is a Core Foundation type whose retain/release
 // operations are thread-safe.  Our wrapper only holds the opaque pointer; pixel
@@ -1019,24 +1006,11 @@ impl CVPixelBufferPool {
     }
 }
 
-impl Clone for CVPixelBufferPool {
-    fn clone(&self) -> Self {
-        unsafe {
-            let ptr = ffi::cv_pixel_buffer_pool_retain(self.0);
-            Self(ptr)
-        }
-    }
-}
-
-impl Drop for CVPixelBufferPool {
-    fn drop(&mut self) {
-        if !self.0.is_null() {
-            unsafe {
-                ffi::cv_pixel_buffer_pool_release(self.0);
-            }
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    CVPixelBufferPool,
+    retain = ffi::cv_pixel_buffer_pool_retain,
+    release = ffi::cv_pixel_buffer_pool_release,
+);
 
 // SAFETY: `CVPixelBufferPoolRef` is a Core Foundation type whose retain/release
 // operations are thread-safe.  Pool creation and pixel-buffer allocation use

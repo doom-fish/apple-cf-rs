@@ -22,22 +22,13 @@ pub struct CGContext {
     ptr: *mut c_void,
 }
 
-impl Drop for CGContext {
-    fn drop(&mut self) {
-        if !self.ptr.is_null() {
-            unsafe { ffi::CGContextRelease(self.ptr) };
-            self.ptr = ptr::null_mut();
-        }
-    }
-}
-
-impl Clone for CGContext {
-    fn clone(&self) -> Self {
-        Self {
-            ptr: unsafe { ffi::CGContextRetain(self.ptr) },
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    CGContext,
+    field = ptr,
+    retain = ffi::CGContextRetain,
+    release = ffi::CGContextRelease,
+    drop = null_out,
+);
 
 impl CGContext {
     /// Wrap a raw `CGContextRef` pointer — takes ownership without retaining.

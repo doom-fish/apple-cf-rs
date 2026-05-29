@@ -14,3 +14,5 @@ pub use doom_fish_utils::panic_safe;
 
 /// FFI string helpers that free bridge-owned strings.
 pub mod ffi_string;
+
+pub(crate) mod retained;

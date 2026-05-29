@@ -493,24 +493,11 @@ impl CMBlockBuffer {
     }
 }
 
-impl Clone for CMBlockBuffer {
-    fn clone(&self) -> Self {
-        unsafe {
-            let ptr = ffi::cm_block_buffer_retain(self.0);
-            Self(ptr)
-        }
-    }
-}
-
-impl Drop for CMBlockBuffer {
-    fn drop(&mut self) {
-        if !self.0.is_null() {
-            unsafe {
-                ffi::cm_block_buffer_release(self.0);
-            }
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    CMBlockBuffer,
+    retain = ffi::cm_block_buffer_retain,
+    release = ffi::cm_block_buffer_release,
+);
 
 // SAFETY: `CMBlockBufferRef` is a Core Foundation type; Apple documents its
 // retain/release operations as thread-safe.  Our wrapper never mutates the

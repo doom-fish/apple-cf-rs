@@ -198,20 +198,11 @@ impl CMSampleBuffer {
     }
 }
 
-impl Clone for CMSampleBuffer {
-    fn clone(&self) -> Self {
-        let retained = unsafe { ffi::cm_sample_buffer_retain(self.0) };
-        Self(retained)
-    }
-}
-
-impl Drop for CMSampleBuffer {
-    fn drop(&mut self) {
-        if !self.0.is_null() {
-            unsafe { ffi::cm_sample_buffer_release(self.0) };
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    CMSampleBuffer,
+    retain = ffi::cm_sample_buffer_retain,
+    release = ffi::cm_sample_buffer_release,
+);
 
 impl PartialEq for CMSampleBuffer {
     fn eq(&self, other: &Self) -> bool {

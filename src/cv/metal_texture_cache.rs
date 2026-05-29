@@ -58,20 +58,11 @@ impl CVMetalTextureCache {
     }
 }
 
-impl Clone for CVMetalTextureCache {
-    fn clone(&self) -> Self {
-        let retained = unsafe { ffi::cf_type_retain(self.0) };
-        Self(retained)
-    }
-}
-
-impl Drop for CVMetalTextureCache {
-    fn drop(&mut self) {
-        if !self.0.is_null() {
-            unsafe { ffi::cf_type_release(self.0) };
-        }
-    }
-}
+crate::utils::retained::cf_retained!(
+    CVMetalTextureCache,
+    retain = ffi::cf_type_retain,
+    release = ffi::cf_type_release,
+);
 
 impl PartialEq for CVMetalTextureCache {
     fn eq(&self, other: &Self) -> bool {
