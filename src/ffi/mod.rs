@@ -424,3 +424,103 @@ extern "C" {
     /// Swift bridge function `cv_pixel_buffer_pool_get_pixel_buffer_attributes` for the corresponding Apple API.
     pub fn cv_pixel_buffer_pool_get_pixel_buffer_attributes(pool: *mut c_void) -> *const c_void;
 }
+
+// MARK: - ABI Layout Assertions
+//
+// The hand-written `#[repr(C)]` value types below are passed across the FFI
+// boundary by value (e.g. `CMTimeRangeGetEnd(range: CMTimeRange) -> CMTime`,
+// `CVImageBufferGetCleanRect(...) -> CVImageRect`) or read out of buffers that
+// Apple's frameworks / the Swift bridge populate (`AudioBuffer`,
+// `AudioBufferListRaw`). Their layout must match the matching C / Swift struct
+// exactly: any change to a field type, field order, or padding silently
+// corrupts marshalled data at runtime.
+//
+// These compile-time assertions pin the size and alignment of every such
+// struct so accidental field reordering / type changes fail the build
+// immediately. The MSRV (1.76) predates `core::mem::offset_of!` (stable in
+// 1.77), so field offsets are pinned indirectly via size + alignment rather
+// than per-field `offset_of!`. The runtime `verify_ffi_layout` check in
+// `tests/ffi_layout_tests.rs` guards the same invariants.
+
+use core::mem::{align_of, size_of};
+
+#[cfg(feature = "cg")]
+const _: () = {
+    use crate::cg::{CGAffineTransform, CGPoint, CGRect, CGSize, CGVector};
+    assert!(size_of::<CGPoint>() == 16);
+    assert!(align_of::<CGPoint>() == 8);
+    assert!(size_of::<CGSize>() == 16);
+    assert!(align_of::<CGSize>() == 8);
+    assert!(size_of::<CGRect>() == 32);
+    assert!(align_of::<CGRect>() == 8);
+    assert!(size_of::<CGVector>() == 16);
+    assert!(align_of::<CGVector>() == 8);
+    assert!(size_of::<CGAffineTransform>() == 48);
+    assert!(align_of::<CGAffineTransform>() == 8);
+};
+
+#[cfg(feature = "cv")]
+const _: () = {
+    use crate::cv::{CVImageRect, CVImageSize};
+    assert!(size_of::<CVImageSize>() == 16);
+    assert!(align_of::<CVImageSize>() == 8);
+    assert!(size_of::<CVImageRect>() == 32);
+    assert!(align_of::<CVImageRect>() == 8);
+};
+
+#[cfg(feature = "cm")]
+const _: () = {
+    use crate::cm::{AudioBuffer, AudioBufferListRaw, CMSampleTimingInfo, CMTime, CMTimeRange};
+    assert!(size_of::<CMTime>() == 24);
+    assert!(align_of::<CMTime>() == 8);
+    assert!(size_of::<CMSampleTimingInfo>() == 72);
+    assert!(align_of::<CMSampleTimingInfo>() == 8);
+    assert!(size_of::<CMTimeRange>() == 48);
+    assert!(align_of::<CMTimeRange>() == 8);
+    assert!(size_of::<AudioBuffer>() == 16);
+    assert!(align_of::<AudioBuffer>() == 8);
+    assert!(size_of::<AudioBufferListRaw>() == 24);
+    assert!(align_of::<AudioBufferListRaw>() == 8);
+};
+
+/// Verify the ABI layout (size + alignment) of every by-value `#[repr(C)]`
+/// FFI value type at runtime.
+///
+/// Returns `true` only if all enabled-framework structs still match the layout
+/// pinned by the compile-time assertions above. This mirrors those `const`
+/// assertions in a form the integration tests in `tests/ffi_layout_tests.rs`
+/// can exercise, so a layout regression is caught as a test failure as well as
+/// a build failure.
+#[must_use]
+pub const fn verify_ffi_layout() -> bool {
+    let mut ok = true;
+
+    #[cfg(feature = "cg")]
+    {
+        use crate::cg::{CGAffineTransform, CGPoint, CGRect, CGSize, CGVector};
+        ok = ok && size_of::<CGPoint>() == 16 && align_of::<CGPoint>() == 8;
+        ok = ok && size_of::<CGSize>() == 16 && align_of::<CGSize>() == 8;
+        ok = ok && size_of::<CGRect>() == 32 && align_of::<CGRect>() == 8;
+        ok = ok && size_of::<CGVector>() == 16 && align_of::<CGVector>() == 8;
+        ok = ok && size_of::<CGAffineTransform>() == 48 && align_of::<CGAffineTransform>() == 8;
+    }
+
+    #[cfg(feature = "cv")]
+    {
+        use crate::cv::{CVImageRect, CVImageSize};
+        ok = ok && size_of::<CVImageSize>() == 16 && align_of::<CVImageSize>() == 8;
+        ok = ok && size_of::<CVImageRect>() == 32 && align_of::<CVImageRect>() == 8;
+    }
+
+    #[cfg(feature = "cm")]
+    {
+        use crate::cm::{AudioBuffer, AudioBufferListRaw, CMSampleTimingInfo, CMTime, CMTimeRange};
+        ok = ok && size_of::<CMTime>() == 24 && align_of::<CMTime>() == 8;
+        ok = ok && size_of::<CMSampleTimingInfo>() == 72 && align_of::<CMSampleTimingInfo>() == 8;
+        ok = ok && size_of::<CMTimeRange>() == 48 && align_of::<CMTimeRange>() == 8;
+        ok = ok && size_of::<AudioBuffer>() == 16 && align_of::<AudioBuffer>() == 8;
+        ok = ok && size_of::<AudioBufferListRaw>() == 24 && align_of::<AudioBufferListRaw>() == 8;
+    }
+
+    ok
+}
