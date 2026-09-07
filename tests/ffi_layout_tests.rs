@@ -41,7 +41,7 @@ fn cg_value_type_layout() {
 #[cfg(feature = "cv")]
 #[test]
 fn cv_value_type_layout() {
-    use apple_cf::cv::{CVImageRect, CVImageSize};
+    use apple_cf::cv::{CVImageRect, CVImageSize, CVPixelBufferLockFlags};
 
     assert_eq!(size_of::<CVImageSize>(), 16, "CVImageSize size drifted");
     assert_eq!(
@@ -55,6 +55,22 @@ fn cv_value_type_layout() {
         align_of::<CVImageRect>(),
         8,
         "CVImageRect alignment drifted"
+    );
+
+    assert_eq!(
+        size_of::<CVPixelBufferLockFlags>(),
+        8,
+        "CVPixelBufferLockFlags size drifted"
+    );
+    assert_eq!(
+        align_of::<CVPixelBufferLockFlags>(),
+        8,
+        "CVPixelBufferLockFlags alignment drifted"
+    );
+    assert_eq!(
+        CVPixelBufferLockFlags::from_bits(1_u64 << 40).bits(),
+        1_u64 << 40,
+        "CVPixelBufferLockFlags truncated upper CVOptionFlags bits"
     );
 }
 

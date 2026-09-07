@@ -271,7 +271,7 @@ public func cf_set_get_value_if_present(
     let set = Unmanaged<CFSet>.fromOpaque(value).takeUnretainedValue()
     var raw: UnsafeRawPointer?
     let present = CFSetGetValueIfPresent(set, UnsafeRawPointer(candidate), &raw)
-    outValue.pointee = acfRetainedCFType(UnsafeMutableRawPointer(mutating: raw))
+    outValue.pointee = present ? acfRetainedCFType(UnsafeMutableRawPointer(mutating: raw)) : nil
     return present
 }
 
@@ -301,8 +301,11 @@ public func cf_set_apply_function(
     if count > 0 {
         CFSetGetValues(set, &values)
     }
-    for raw in values {
-        callback(acfRetainedCFType(UnsafeMutableRawPointer(mutating: raw)), context)
+    let retainedValues = values.map {
+        acfRetainedCFType(UnsafeMutableRawPointer(mutating: $0))
+    }
+    for retained in retainedValues {
+        callback(retained, context)
     }
 }
 

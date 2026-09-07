@@ -44,7 +44,7 @@ impl CFString {
     pub fn new(value: &str) -> Self {
         let value = to_cstring(value);
         let ptr = unsafe { ffi::cf_string_create_with_cstring(value.as_ptr()) };
-        Self::from_raw(ptr).expect("CFStringCreateWithCString returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFStringCreateWithCString returned NULL")
     }
 
     /// Number of Unicode scalar values in the string.
@@ -91,21 +91,21 @@ impl CFNumber {
     #[must_use]
     pub fn from_i64(value: i64) -> Self {
         let ptr = unsafe { ffi::cf_number_create_i64(value) };
-        Self::from_raw(ptr).expect("CFNumberCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFNumberCreate returned NULL")
     }
 
     /// Create an unsigned integer number.
     #[must_use]
     pub fn from_u64(value: u64) -> Self {
         let ptr = unsafe { ffi::cf_number_create_u64(value) };
-        Self::from_raw(ptr).expect("CFNumberCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFNumberCreate returned NULL")
     }
 
     /// Create a floating-point number.
     #[must_use]
     pub fn from_f64(value: f64) -> Self {
         let ptr = unsafe { ffi::cf_number_create_f64(value) };
-        Self::from_raw(ptr).expect("CFNumberCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFNumberCreate returned NULL")
     }
 
     /// Convert to `i64` if representable.
@@ -163,7 +163,7 @@ impl CFData {
     pub fn from_bytes<B: AsRef<[u8]>>(bytes: B) -> Self {
         let bytes = bytes.as_ref();
         let ptr = unsafe { ffi::cf_data_create(bytes.as_ptr(), bytes.len()) };
-        Self::from_raw(ptr).expect("CFDataCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFDataCreate returned NULL")
     }
 
     /// Number of bytes stored in the data blob.
@@ -194,7 +194,7 @@ impl CFDate {
     #[must_use]
     pub fn from_absolute_time(absolute_time: f64) -> Self {
         let ptr = unsafe { ffi::cf_date_create(absolute_time) };
-        Self::from_raw(ptr).expect("CFDateCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFDateCreate returned NULL")
     }
 
     /// Current wall-clock time.
@@ -240,7 +240,7 @@ impl CFUUID {
     #[must_use]
     pub fn new() -> Self {
         let ptr = unsafe { ffi::cf_uuid_create() };
-        Self::from_raw(ptr).expect("CFUUIDCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFUUIDCreate returned NULL")
     }
 
     /// Parse a UUID string.
@@ -248,14 +248,14 @@ impl CFUUID {
     pub fn parse_str(value: &str) -> Option<Self> {
         let value = to_cstring(value);
         let ptr = unsafe { ffi::cf_uuid_create_from_string(value.as_ptr()) };
-        Self::from_raw(ptr)
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Canonical textual representation.
     #[must_use]
     pub fn string(&self) -> CFString {
         let ptr = unsafe { ffi::cf_uuid_copy_string(self.as_ptr()) };
-        CFString::from_raw(ptr).expect("CFUUIDCreateString returned NULL")
+        unsafe { CFString::from_raw(ptr) }.expect("CFUUIDCreateString returned NULL")
     }
 
     /// UUID bytes in RFC-4122 order.
@@ -288,14 +288,14 @@ impl CFError {
             .as_ref()
             .map_or(std::ptr::null(), |s| s.as_ptr());
         let ptr = unsafe { ffi::cf_error_create(domain.as_ptr(), code, description_ptr) };
-        Self::from_raw(ptr).expect("CFErrorCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFErrorCreate returned NULL")
     }
 
     /// Error domain.
     #[must_use]
     pub fn domain(&self) -> CFString {
         let ptr = unsafe { ffi::cf_error_get_domain(self.as_ptr()) };
-        CFString::from_raw(ptr).expect("CFErrorGetDomain returned NULL")
+        unsafe { CFString::from_raw(ptr) }.expect("CFErrorGetDomain returned NULL")
     }
 
     /// Numeric error code.
@@ -308,14 +308,14 @@ impl CFError {
     #[must_use]
     pub fn description_string(&self) -> Option<CFString> {
         let ptr = unsafe { ffi::cf_error_copy_description(self.as_ptr()) };
-        CFString::from_raw(ptr)
+        unsafe { CFString::from_raw(ptr) }
     }
 
     /// Failure reason if present.
     #[must_use]
     pub fn failure_reason(&self) -> Option<CFString> {
         let ptr = unsafe { ffi::cf_error_copy_failure_reason(self.as_ptr()) };
-        CFString::from_raw(ptr)
+        unsafe { CFString::from_raw(ptr) }
     }
 }
 

@@ -83,3 +83,26 @@ fn cf_collection_wrappers_work() {
     assert!(root.child_at(0).is_some());
     assert!(root.value().is_some());
 }
+
+#[test]
+fn mutable_set_iteration_retains_snapshot_before_reentrant_clear() {
+    let first = CFString::new("first");
+    let second = CFString::new("second");
+    let third = CFString::new("third");
+    let set = CFMutableSet::from_values(&[&first, &second, &third]);
+    drop((first, second, third));
+
+    let mut cleared = false;
+    let mut seen = Vec::new();
+    set.for_each(|value| {
+        if !cleared {
+            cleared = true;
+            set.clear();
+        }
+        seen.push(value.description());
+    });
+
+    seen.sort();
+    assert_eq!(seen, ["first", "second", "third"]);
+    assert!(set.is_empty());
+}

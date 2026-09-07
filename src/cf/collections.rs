@@ -70,7 +70,7 @@ extern "C" fn cf_set_apply_trampoline(value: *mut c_void, context: *mut c_void) 
         return;
     }
     let callback = unsafe { &mut *context.cast::<CFSetApplyTask<'_>>() };
-    if let Some(value) = CFType::from_raw(value) {
+    if let Some(value) = unsafe { CFType::from_raw(value) } {
         panic_safe::catch_user_panic("CFSet::for_each", || callback(value));
     }
 }
@@ -82,7 +82,7 @@ impl CFArray {
         let raw_values: Vec<*mut std::ffi::c_void> =
             values.iter().map(|value| value.as_ptr()).collect();
         let ptr = unsafe { ffi::cf_array_create(raw_values.as_ptr(), raw_values.len()) };
-        Self::from_raw(ptr).expect("CFArrayCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFArrayCreate returned NULL")
     }
 
     /// Number of elements in the array.
@@ -101,7 +101,7 @@ impl CFArray {
     #[must_use]
     pub fn get(&self, index: usize) -> Option<CFType> {
         let ptr = unsafe { ffi::cf_array_get_value_at_index(self.as_ptr(), index) };
-        CFType::from_raw(ptr)
+        unsafe { CFType::from_raw(ptr) }
     }
 
     /// Copy all elements into a Rust vector.
@@ -121,7 +121,7 @@ impl CFDictionary {
         let values: Vec<*mut std::ffi::c_void> =
             pairs.iter().map(|(_, value)| value.as_ptr()).collect();
         let ptr = unsafe { ffi::cf_dictionary_create(keys.as_ptr(), values.as_ptr(), pairs.len()) };
-        Self::from_raw(ptr).expect("CFDictionaryCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFDictionaryCreate returned NULL")
     }
 
     /// Number of key/value pairs.
@@ -146,21 +146,21 @@ impl CFDictionary {
     #[must_use]
     pub fn get(&self, key: &dyn AsCFType) -> Option<CFType> {
         let ptr = unsafe { ffi::cf_dictionary_get_value(self.as_ptr(), key.as_ptr()) };
-        CFType::from_raw(ptr)
+        unsafe { CFType::from_raw(ptr) }
     }
 
     /// Copy all keys into a `CFArray`.
     #[must_use]
     pub fn keys(&self) -> CFArray {
         let ptr = unsafe { ffi::cf_dictionary_copy_keys(self.as_ptr()) };
-        CFArray::from_raw(ptr).expect("CFDictionary keys array should be non-null")
+        unsafe { CFArray::from_raw(ptr) }.expect("CFDictionary keys array should be non-null")
     }
 
     /// Copy all values into a `CFArray`.
     #[must_use]
     pub fn values(&self) -> CFArray {
         let ptr = unsafe { ffi::cf_dictionary_copy_values(self.as_ptr()) };
-        CFArray::from_raw(ptr).expect("CFDictionary values array should be non-null")
+        unsafe { CFArray::from_raw(ptr) }.expect("CFDictionary values array should be non-null")
     }
 }
 
@@ -171,7 +171,7 @@ impl CFBag {
         let raw_values: Vec<*mut std::ffi::c_void> =
             values.iter().map(|value| value.as_ptr()).collect();
         let ptr = unsafe { ffi::cf_bag_create(raw_values.as_ptr(), raw_values.len()) };
-        Self::from_raw(ptr).expect("CFBagCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFBagCreate returned NULL")
     }
 
     /// Number of values in the bag.
@@ -212,21 +212,21 @@ impl CFSet {
         let raw_values: Vec<*mut c_void> = values.iter().map(|value| value.as_ptr()).collect();
         let ptr =
             unsafe { ffi::cf_set_create(raw_values.as_ptr(), raw_values.len(), callbacks as i32) };
-        Self::from_raw(ptr).expect("CFSetCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFSetCreate returned NULL")
     }
 
     /// Create an immutable retained copy of this set.
     #[must_use]
     pub fn copy(&self) -> Self {
         let ptr = unsafe { ffi::cf_set_create_copy(self.as_ptr()) };
-        Self::from_raw(ptr).expect("CFSetCreateCopy returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFSetCreateCopy returned NULL")
     }
 
     /// Create a mutable retained copy of this set.
     #[must_use]
     pub fn mutable_copy(&self, capacity: usize) -> CFMutableSet {
         let ptr = unsafe { ffi::cf_set_create_mutable_copy(self.as_ptr(), capacity) };
-        CFMutableSet::from_raw(ptr).expect("CFSetCreateMutableCopy returned NULL")
+        unsafe { CFMutableSet::from_raw(ptr) }.expect("CFSetCreateMutableCopy returned NULL")
     }
 
     /// Number of values in the set.
@@ -257,7 +257,7 @@ impl CFSet {
     #[must_use]
     pub fn get(&self, candidate: &dyn AsCFType) -> Option<CFType> {
         let ptr = unsafe { ffi::cf_set_get_value(self.as_ptr(), candidate.as_ptr()) };
-        CFType::from_raw(ptr)
+        unsafe { CFType::from_raw(ptr) }
     }
 
     /// Copy a matching value using `CFSetGetValueIfPresent` semantics.
@@ -267,7 +267,7 @@ impl CFSet {
         let present = unsafe {
             ffi::cf_set_get_value_if_present(self.as_ptr(), candidate.as_ptr(), &mut ptr)
         };
-        present.then(|| CFType::from_raw(ptr)).flatten()
+        present.then(|| unsafe { CFType::from_raw(ptr) }).flatten()
     }
 
     /// Copy all values into a Rust vector.
@@ -280,7 +280,7 @@ impl CFSet {
         }
         raw_values
             .into_iter()
-            .filter_map(CFType::from_raw)
+            .filter_map(|ptr| unsafe { CFType::from_raw(ptr) })
             .collect()
     }
 
@@ -311,7 +311,7 @@ impl CFMutableSet {
     #[must_use]
     pub fn with_callbacks(capacity: usize, callbacks: CFSetCallbacks) -> Self {
         let ptr = unsafe { ffi::cf_set_create_mutable(capacity, callbacks as i32) };
-        Self::from_raw(ptr).expect("CFSetCreateMutable returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFSetCreateMutable returned NULL")
     }
 
     /// Create a mutable set from borrowed Core Foundation values using type callbacks.
@@ -334,14 +334,14 @@ impl CFMutableSet {
     #[must_use]
     pub fn copy(&self) -> CFSet {
         let ptr = unsafe { ffi::cf_set_create_copy(self.as_ptr()) };
-        CFSet::from_raw(ptr).expect("CFSetCreateCopy returned NULL")
+        unsafe { CFSet::from_raw(ptr) }.expect("CFSetCreateCopy returned NULL")
     }
 
     /// Create a mutable retained copy of this set.
     #[must_use]
     pub fn mutable_copy(&self, capacity: usize) -> Self {
         let ptr = unsafe { ffi::cf_set_create_mutable_copy(self.as_ptr(), capacity) };
-        Self::from_raw(ptr).expect("CFSetCreateMutableCopy returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFSetCreateMutableCopy returned NULL")
     }
 
     /// Number of values in the set.
@@ -378,7 +378,7 @@ impl CFMutableSet {
         }
         raw_values
             .into_iter()
-            .filter_map(CFType::from_raw)
+            .filter_map(|ptr| unsafe { CFType::from_raw(ptr) })
             .collect()
     }
 
@@ -434,14 +434,14 @@ impl CFAttributedString {
     #[must_use]
     pub fn new(string: &CFString) -> Self {
         let ptr = unsafe { ffi::cf_attributed_string_create(string.as_ptr()) };
-        Self::from_raw(ptr).expect("CFAttributedStringCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFAttributedStringCreate returned NULL")
     }
 
     /// Underlying plain string.
     #[must_use]
     pub fn string(&self) -> CFString {
         let ptr = unsafe { ffi::cf_attributed_string_get_string(self.as_ptr()) };
-        CFString::from_raw(ptr).expect("CFAttributedStringGetString returned NULL")
+        unsafe { CFString::from_raw(ptr) }.expect("CFAttributedStringGetString returned NULL")
     }
 
     /// Character length.
@@ -467,13 +467,13 @@ impl CFTree {
     pub fn new(value: Option<&dyn AsCFType>) -> Self {
         let ptr =
             unsafe { ffi::cf_tree_create(value.map_or(std::ptr::null_mut(), AsCFType::as_ptr)) };
-        Self(SwiftObject::from_raw(ptr).expect("tree bridge returned NULL"))
+        Self(SwiftObject::from_raw_owned(ptr).expect("tree bridge returned NULL"))
     }
 
     /// Wraps a +1 retained tree helper pointer and returns `None` for null.
     #[must_use]
-    pub(crate) fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
-        SwiftObject::from_raw(ptr).map(Self)
+    pub(crate) fn from_raw_owned(ptr: *mut std::ffi::c_void) -> Option<Self> {
+        SwiftObject::from_raw_owned(ptr).map(Self)
     }
 
     /// Borrow the raw tree handle.
@@ -497,14 +497,14 @@ impl CFTree {
     #[must_use]
     pub fn child_at(&self, index: usize) -> Option<Self> {
         let ptr = unsafe { ffi::cf_tree_get_child_at_index(self.as_ptr(), index) };
-        Self::from_raw(ptr)
+        Self::from_raw_owned(ptr)
     }
 
     /// Copy the payload value if present.
     #[must_use]
     pub fn value(&self) -> Option<CFType> {
         let ptr = unsafe { ffi::cf_tree_copy_value(self.as_ptr()) };
-        CFType::from_raw(ptr)
+        unsafe { CFType::from_raw(ptr) }
     }
 }
 

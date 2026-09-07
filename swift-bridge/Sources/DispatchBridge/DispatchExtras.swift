@@ -54,20 +54,73 @@ private func dispatchDeadline(timeoutMs: Int64) -> DispatchTime {
 }
 
 final class DispatchSourceTimerHolder {
+    private enum State {
+        case inactive
+        case active
+        case cancelled
+    }
+
     let source: DispatchSourceTimer
-    private(set) var fireCount: UInt64 = 0
+    private let lock = NSLock()
+    private var state = State.inactive
+    private var fireCount: UInt64 = 0
 
     init(intervalMs: UInt64, leewayMs: UInt64) {
         let queue = DispatchQueue(label: "com.doomfish.apple-cf.dispatch-source")
         source = DispatchSource.makeTimerSource(queue: queue)
         source.setEventHandler { [weak self] in
-            self?.fireCount += 1
+            self?.recordFire()
         }
         source.schedule(
             deadline: .now() + .milliseconds(Int(intervalMs)),
             repeating: .milliseconds(Int(intervalMs)),
             leeway: .milliseconds(Int(leewayMs))
         )
+    }
+
+    deinit {
+        cancel()
+    }
+
+    func resume() {
+        lock.lock()
+        guard state == .inactive else {
+            lock.unlock()
+            return
+        }
+        state = .active
+        lock.unlock()
+        source.activate()
+    }
+
+    func cancel() {
+        lock.lock()
+        let activateAfterCancel = state == .inactive
+        guard state != .cancelled else {
+            lock.unlock()
+            return
+        }
+        state = .cancelled
+        lock.unlock()
+
+        source.cancel()
+        if activateAfterCancel {
+            source.activate()
+        }
+    }
+
+    func currentFireCount() -> UInt64 {
+        lock.lock()
+        defer { lock.unlock() }
+        return fireCount
+    }
+
+    private func recordFire() {
+        let delta = UInt64(source.data)
+        lock.lock()
+        let (newValue, overflow) = fireCount.addingReportingOverflow(delta)
+        fireCount = overflow ? UInt64.max : newValue
+        lock.unlock()
     }
 }
 
@@ -119,17 +172,17 @@ public func acf_dispatch_source_timer_create(_ intervalMs: UInt64, _ leewayMs: U
 @_cdecl("acf_dispatch_source_timer_resume")
 public func acf_dispatch_source_timer_resume(_ source: UnsafeMutableRawPointer) {
     let source = Unmanaged<DispatchSourceTimerHolder>.fromOpaque(source).takeUnretainedValue()
-    source.source.resume()
+    source.resume()
 }
 
 @_cdecl("acf_dispatch_source_timer_cancel")
 public func acf_dispatch_source_timer_cancel(_ source: UnsafeMutableRawPointer) {
     let source = Unmanaged<DispatchSourceTimerHolder>.fromOpaque(source).takeUnretainedValue()
-    source.source.cancel()
+    source.cancel()
 }
 
 @_cdecl("acf_dispatch_source_timer_fire_count")
 public func acf_dispatch_source_timer_fire_count(_ source: UnsafeMutableRawPointer) -> UInt64 {
     let source = Unmanaged<DispatchSourceTimerHolder>.fromOpaque(source).takeUnretainedValue()
-    return source.fireCount
+    return source.currentFireCount()
 }

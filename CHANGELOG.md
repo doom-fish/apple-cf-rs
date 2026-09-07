@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.10.0] - 2026-09-07
+
+### Changed (breaking)
+
+- **BREAKING:** ownership-adopting `from_raw` constructors are now unsafe across Core Foundation, Core Media, Core Video, and IOSurface wrappers. Borrowed imports use the explicit `from_raw_borrowed` name, and `AsCFType` is now an unsafe trait.
+- **BREAKING:** `CVPixelBuffer` and `IOSurface` raw lock/unlock calls and zero-copy slice, row, plane, and cursor views now require unsafe caller guarantees; lock-guard `Deref` implementations were removed. `CGContext` byte views are also unsafe because retained clones share the same mutable context.
+- **BREAKING:** `CVPixelBufferLockFlags` now uses the native 64-bit `CVOptionFlags` ABI.
+- **BREAKING:** `CVPixelBufferPool::try_create_pixel_buffer` now returns `Result<Option<_>, i32>`, the misleading `is_empty` and ignored `flush_with_options` APIs were removed, and pool attribute getters now return owned `CFDictionary` values.
+- `CVPixelBufferPool` now uses direct Core Video calls, applies `max_buffers` as an allocation threshold on every wrapper allocation, shares that policy across clones, honors per-call auxiliary attributes, and exposes native flush flags.
+- `CVPixelBufferPool` remains `Send + Sync`; clones share the same immutable allocation policy across threads.
+- `CMTime` now matches SDK flag values, zero/indefinite representations, numeric predicates, seconds conversion, and default half-away-from-zero scale conversion.
+- Dispatch timer resume/cancel/drop transitions are synchronized and idempotent across retained clones, and fire counts are synchronized.
+- `CMSampleBuffer` now exposes an explicit borrowed image-buffer pointer and an owned typed `image_buffer()` getter; the retained bridge export is named `cm_sample_buffer_copy_image_buffer`.
+- Raised the `doom-fish-utils` requirement to `>=0.4, <0.5`.
+- Kept the explicitly aliased `apple_cf_compat_04` and VideoToolbox 0.10 dev fixtures for the cross-version `03_cm_sample_buffer` smoke test; using VideoToolbox 0.20 would create a dev-dependency cycle back to apple-cf 0.10.
+
+### Fixed
+
+- `CFSet` callback snapshots retain every value before invoking the first callback, allowing reentrant mutation such as clearing a mutable set.
+
 ## [0.9.3] - 2026-05-20
 
 - Clippy hygiene sweep: cleared all `-D warnings` lints across the crate. No public API change.

@@ -42,9 +42,15 @@ impl CMTimebase {
         }
     }
 
-    /// Wraps a +1 retained `CMTimebaseRef` and returns `None` for null.
+    /// Adopts a +1 retained `CMTimebaseRef` and returns `None` for null.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live `CMTimebaseRef` of the exact type
+    /// carrying one retain transferred to this wrapper. The caller must not
+    /// release or separately adopt that transferred retain.
     #[must_use]
-    pub fn from_raw(ptr: *const c_void) -> Option<Self> {
+    pub unsafe fn from_raw(ptr: *const c_void) -> Option<Self> {
         if ptr.is_null() {
             None
         } else {
@@ -52,7 +58,26 @@ impl CMTimebase {
         }
     }
 
-    /// Borrow the underlying `CMTimebaseRef`.
+    /// Retains a +0 borrowed `CMTimebaseRef` and returns an owned wrapper.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live `CMTimebaseRef` of the exact type for
+    /// the duration of the retain call.
+    #[must_use]
+    pub unsafe fn from_raw_borrowed(ptr: *const c_void) -> Option<Self> {
+        if ptr.is_null() {
+            None
+        } else {
+            extern "C" {
+                fn CFRetain(cf: *const c_void) -> *const c_void;
+            }
+            let retained = unsafe { CFRetain(ptr) };
+            unsafe { Self::from_raw(retained) }
+        }
+    }
+
+    /// Borrow the underlying +0 `CMTimebaseRef` while `self` remains alive.
     #[must_use]
     pub const fn as_ptr(&self) -> *const c_void {
         self.ptr
@@ -101,7 +126,7 @@ impl CMTimebase {
             fn CMTimebaseCopyMasterClock(timebase: *const c_void) -> *const c_void;
         }
         let ptr = unsafe { CMTimebaseCopyMasterClock(self.ptr) };
-        CMClock::from_raw(ptr)
+        unsafe { CMClock::from_raw(ptr) }
     }
 }
 

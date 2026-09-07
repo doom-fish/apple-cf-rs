@@ -68,8 +68,8 @@ public func cm_sample_buffer_get_format_description(
     return Unmanaged.passUnretained(fd).toOpaque()
 }
 
-@_cdecl("cm_sample_buffer_get_image_buffer")
-public func cm_sample_buffer_get_image_buffer(
+@_cdecl("cm_sample_buffer_copy_image_buffer")
+public func cm_sample_buffer_copy_image_buffer(
     _ buffer: UnsafeMutableRawPointer
 ) -> UnsafeMutableRawPointer? {
     let buf = Unmanaged<CMSampleBuffer>.fromOpaque(buffer).takeUnretainedValue()

@@ -59,7 +59,7 @@ fn cm_metadata_format_description_helpers_work() {
     let identifiers = by_specs.identifiers().expect("metadata identifiers");
     assert_eq!(identifiers.len(), 1);
     let identifier = identifiers.get(0).expect("identifier");
-    let identifier = unsafe { CFString::from_raw_retained(identifier.as_ptr()) }
+    let identifier = unsafe { CFString::from_raw_borrowed(identifier.as_ptr()) }
         .expect("metadata identifier string");
     assert_eq!(identifier.to_string(), "mdta/com.example.title");
 

@@ -54,3 +54,80 @@ fn dispatch_sync_primitives_work() {
     });
     assert_eq!(total.load(Ordering::SeqCst), 10);
 }
+
+#[test]
+fn dispatch_source_lifecycle_is_balanced_and_idempotent() {
+    drop(DispatchSource::timer(
+        Duration::from_millis(5),
+        Duration::from_millis(1),
+    ));
+
+    let cancelled_before_resume =
+        DispatchSource::timer(Duration::from_millis(5), Duration::from_millis(1));
+    cancelled_before_resume.cancel();
+    cancelled_before_resume.cancel();
+    cancelled_before_resume.resume();
+    drop(cancelled_before_resume);
+
+    let source = DispatchSource::timer(Duration::from_millis(1), Duration::from_millis(1));
+    let resume_threads: Vec<_> = (0..8)
+        .map(|_| {
+            let source = source.clone();
+            thread::spawn(move || {
+                for _ in 0..100 {
+                    source.resume();
+                }
+            })
+        })
+        .collect();
+    for thread in resume_threads {
+        thread.join().expect("resume thread");
+    }
+
+    thread::sleep(Duration::from_millis(20));
+    let retained = source.clone();
+    drop(source);
+    assert!(retained.fire_count() > 0);
+
+    let cancel_threads: Vec<_> = (0..8)
+        .map(|_| {
+            let source = retained.clone();
+            thread::spawn(move || {
+                for _ in 0..100 {
+                    source.cancel();
+                }
+            })
+        })
+        .collect();
+    for thread in cancel_threads {
+        thread.join().expect("cancel thread");
+    }
+
+    retained.cancel();
+    retained.resume();
+}
+
+#[test]
+fn dispatch_source_fire_count_is_monotonic_across_threads() {
+    let source = DispatchSource::timer(Duration::from_millis(1), Duration::from_millis(1));
+    source.resume();
+
+    let readers: Vec<_> = (0..4)
+        .map(|_| {
+            let source = source.clone();
+            thread::spawn(move || {
+                let mut previous = 0;
+                for _ in 0..1_000 {
+                    let current = source.fire_count();
+                    assert!(current >= previous);
+                    previous = current;
+                }
+            })
+        })
+        .collect();
+
+    for reader in readers {
+        reader.join().expect("fire-count reader");
+    }
+    source.cancel();
+}

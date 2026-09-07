@@ -111,7 +111,7 @@ fn property_list_error(
     operation: &'static str,
     error_ptr: *mut std::ffi::c_void,
 ) -> CFPropertyListError {
-    CoreFoundationError::from_raw(error_ptr).map_or_else(
+    unsafe { CoreFoundationError::from_raw(error_ptr) }.map_or_else(
         || CFPropertyListError::Null(crate::CFError::new(operation)),
         CFPropertyListError::CoreFoundation,
     )
@@ -135,7 +135,7 @@ impl CFPropertyList {
         let ptr = unsafe {
             ffi::cf_property_list_create_deep_copy(property_list.as_ptr(), options.as_u64())
         };
-        CFType::from_raw(ptr).ok_or(crate::CFError::new("CFPropertyListCreateDeepCopy"))
+        unsafe { CFType::from_raw(ptr) }.ok_or(crate::CFError::new("CFPropertyListCreateDeepCopy"))
     }
 
     /// Decode a property list from an in-memory data blob.
@@ -153,7 +153,7 @@ impl CFPropertyList {
                 &mut error,
             )
         };
-        CFType::from_raw(ptr)
+        unsafe { CFType::from_raw(ptr) }
             .map(|value| (value, property_list_format(format)))
             .ok_or_else(|| property_list_error("CFPropertyListCreateWithData", error))
     }
@@ -176,7 +176,7 @@ impl CFPropertyList {
                 &mut error,
             )
         };
-        CFType::from_raw(ptr)
+        unsafe { CFType::from_raw(ptr) }
             .map(|value| (value, property_list_format(format)))
             .ok_or_else(|| property_list_error("CFPropertyListCreateWithStream", error))
     }
@@ -196,7 +196,8 @@ impl CFPropertyList {
                 &mut error,
             )
         };
-        CFData::from_raw(ptr).ok_or_else(|| property_list_error("CFPropertyListCreateData", error))
+        unsafe { CFData::from_raw(ptr) }
+            .ok_or_else(|| property_list_error("CFPropertyListCreateData", error))
     }
 
     /// Write a serialized property list to an already-open Core Foundation write stream.

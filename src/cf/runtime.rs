@@ -71,21 +71,23 @@ impl CFNotificationCenter {
     #[must_use]
     pub fn local() -> Self {
         let ptr = unsafe { ffi::cf_notification_center_get_local() };
-        Self::from_raw(ptr).expect("CFNotificationCenterGetLocalCenter returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFNotificationCenterGetLocalCenter returned NULL")
     }
 
     /// Distributed notification center.
     #[must_use]
     pub fn distributed() -> Self {
         let ptr = unsafe { ffi::cf_notification_center_get_distributed() };
-        Self::from_raw(ptr).expect("CFNotificationCenterGetDistributedCenter returned NULL")
+        unsafe { Self::from_raw(ptr) }
+            .expect("CFNotificationCenterGetDistributedCenter returned NULL")
     }
 
     /// Darwin notification center.
     #[must_use]
     pub fn darwin() -> Self {
         let ptr = unsafe { ffi::cf_notification_center_get_darwin() };
-        Self::from_raw(ptr).expect("CFNotificationCenterGetDarwinNotifyCenter returned NULL")
+        unsafe { Self::from_raw(ptr) }
+            .expect("CFNotificationCenterGetDarwinNotifyCenter returned NULL")
     }
 
     /// Post a notification with an optional user-info dictionary.
@@ -111,14 +113,14 @@ impl CFRunLoop {
     #[must_use]
     pub fn current() -> Self {
         let ptr = unsafe { ffi::cf_run_loop_get_current() };
-        Self::from_raw(ptr).expect("CFRunLoopGetCurrent returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFRunLoopGetCurrent returned NULL")
     }
 
     /// Main thread run loop.
     #[must_use]
     pub fn main() -> Self {
         let ptr = unsafe { ffi::cf_run_loop_get_main() };
-        Self::from_raw(ptr).expect("CFRunLoopGetMain returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFRunLoopGetMain returned NULL")
     }
 
     /// Run the current thread's run loop in the default mode for `duration`.
@@ -163,7 +165,7 @@ impl CFTimer {
     #[must_use]
     pub fn new(interval: Duration, repeats: bool) -> Self {
         let ptr = unsafe { ffi::cf_run_loop_timer_create(duration_to_seconds(interval), repeats) };
-        Self::from_raw(ptr).expect("CFRunLoopTimerCreate returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFRunLoopTimerCreate returned NULL")
     }
 
     /// Whether the timer is still valid.
@@ -190,7 +192,7 @@ impl CFMessagePort {
         let name =
             std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
         let ptr = unsafe { ffi::cf_message_port_create_echo_local(name.as_ptr()) };
-        Self::from_raw(ptr).expect("CFMessagePortCreateLocal returned NULL")
+        unsafe { Self::from_raw(ptr) }.expect("CFMessagePortCreateLocal returned NULL")
     }
 
     /// Connect to an existing remote message port.
@@ -199,7 +201,7 @@ impl CFMessagePort {
         let name =
             std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
         let ptr = unsafe { ffi::cf_message_port_create_remote(name.as_ptr()) };
-        Self::from_raw(ptr)
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Send a request and copy the reply bytes.
@@ -248,9 +250,9 @@ impl CFStreamPair {
         let mut write = std::ptr::null_mut();
         unsafe { ffi::cf_stream_create_bound_pair(transfer_buffer_size, &mut read, &mut write) };
         Self {
-            read: CFReadStream::from_raw(read)
+            read: unsafe { CFReadStream::from_raw(read) }
                 .expect("CFStreamCreateBoundPair read stream was NULL"),
-            write: CFWriteStream::from_raw(write)
+            write: unsafe { CFWriteStream::from_raw(write) }
                 .expect("CFStreamCreateBoundPair write stream was NULL"),
         }
     }
@@ -309,7 +311,7 @@ impl CFSocket {
     #[must_use]
     pub fn udp_ipv4() -> Option<Self> {
         let ptr = unsafe { ffi::cf_socket_create_udp_ipv4() };
-        Self::from_raw(ptr)
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Native file descriptor.
@@ -335,7 +337,7 @@ impl CFFileDescriptor {
     #[must_use]
     pub fn from_raw_fd(native_fd: i32, close_on_invalidate: bool) -> Option<Self> {
         let ptr = unsafe { ffi::cf_file_descriptor_create(native_fd, close_on_invalidate) };
-        Self::from_raw(ptr)
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Underlying native file descriptor.

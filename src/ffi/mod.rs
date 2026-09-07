@@ -133,8 +133,8 @@ extern "C" {
     pub fn cm_sample_buffer_get_data_buffer(sample_buffer: *mut c_void) -> *mut c_void;
     /// Swift bridge function `cm_sample_buffer_get_format_description` for the corresponding Apple API.
     pub fn cm_sample_buffer_get_format_description(sample_buffer: *mut c_void) -> *mut c_void;
-    /// Swift bridge function `cm_sample_buffer_get_image_buffer` for the corresponding Apple API.
-    pub fn cm_sample_buffer_get_image_buffer(sample_buffer: *mut c_void) -> *mut c_void;
+    /// Swift bridge function that returns a +1 retained image buffer.
+    pub fn cm_sample_buffer_copy_image_buffer(sample_buffer: *mut c_void) -> *mut c_void;
     /// Swift bridge function `cm_sample_buffer_get_presentation_timestamp` for the corresponding Apple API.
     pub fn cm_sample_buffer_get_presentation_timestamp(
         sample_buffer: *mut c_void,
@@ -346,9 +346,9 @@ extern "C" {
     /// Swift bridge function `cv_pixel_buffer_get_base_address` for the corresponding Apple API.
     pub fn cv_pixel_buffer_get_base_address(pixel_buffer: *mut c_void) -> *mut c_void;
     /// Swift bridge function `cv_pixel_buffer_lock_base_address` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_lock_base_address(pixel_buffer: *mut c_void, flags: u32) -> i32;
+    pub fn cv_pixel_buffer_lock_base_address(pixel_buffer: *mut c_void, flags: u64) -> i32;
     /// Swift bridge function `cv_pixel_buffer_unlock_base_address` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_unlock_base_address(pixel_buffer: *mut c_void, flags: u32) -> i32;
+    pub fn cv_pixel_buffer_unlock_base_address(pixel_buffer: *mut c_void, flags: u64) -> i32;
     /// Swift bridge function `cv_pixel_buffer_get_io_surface` for the corresponding Apple API.
     pub fn cv_pixel_buffer_get_io_surface(pixel_buffer: *mut c_void) -> *mut c_void;
     /// Swift bridge function `cv_pixel_buffer_get_extended_pixels` for the corresponding Apple API.
@@ -395,34 +395,6 @@ extern "C" {
         pixel_buffer_out: *mut *mut c_void,
     ) -> i32;
 
-    // ---- CVPixelBufferPool ----
-    /// Swift bridge function `cv_pixel_buffer_pool_release` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_release(pool: *mut c_void);
-    /// Swift bridge function `cv_pixel_buffer_pool_retain` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_retain(pool: *mut c_void) -> *mut c_void;
-    /// Swift bridge function `cv_pixel_buffer_pool_hash` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_hash(pool: *mut c_void) -> usize;
-    /// Swift bridge function `cv_pixel_buffer_pool_get_type_id` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_get_type_id() -> usize;
-    /// Swift bridge function `cv_pixel_buffer_pool_create` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_create(
-        width: usize,
-        height: usize,
-        pixel_format_type: u32,
-        max_buffers: usize,
-        pool_out: *mut *mut c_void,
-    ) -> i32;
-    /// Swift bridge function `cv_pixel_buffer_pool_create_pixel_buffer` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_create_pixel_buffer(
-        pool: *mut c_void,
-        pixel_buffer_out: *mut *mut c_void,
-    ) -> i32;
-    /// Swift bridge function `cv_pixel_buffer_pool_flush` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_flush(pool: *mut c_void);
-    /// Swift bridge function `cv_pixel_buffer_pool_get_attributes` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_get_attributes(pool: *mut c_void) -> *const c_void;
-    /// Swift bridge function `cv_pixel_buffer_pool_get_pixel_buffer_attributes` for the corresponding Apple API.
-    pub fn cv_pixel_buffer_pool_get_pixel_buffer_attributes(pool: *mut c_void) -> *const c_void;
 }
 
 // MARK: - ABI Layout Assertions
@@ -442,6 +414,7 @@ extern "C" {
 // than per-field `offset_of!`. The runtime `verify_ffi_layout` check in
 // `tests/ffi_layout_tests.rs` guards the same invariants.
 
+#[cfg(any(feature = "cg", feature = "cm", feature = "cv"))]
 use core::mem::{align_of, size_of};
 
 #[cfg(feature = "cg")]
@@ -461,11 +434,13 @@ const _: () = {
 
 #[cfg(feature = "cv")]
 const _: () = {
-    use crate::cv::{CVImageRect, CVImageSize};
+    use crate::cv::{CVImageRect, CVImageSize, CVPixelBufferLockFlags};
     assert!(size_of::<CVImageSize>() == 16);
     assert!(align_of::<CVImageSize>() == 8);
     assert!(size_of::<CVImageRect>() == 32);
     assert!(align_of::<CVImageRect>() == 8);
+    assert!(size_of::<CVPixelBufferLockFlags>() == 8);
+    assert!(align_of::<CVPixelBufferLockFlags>() == 8);
 };
 
 #[cfg(feature = "cm")]
@@ -493,6 +468,7 @@ const _: () = {
 /// a build failure.
 #[must_use]
 pub const fn verify_ffi_layout() -> bool {
+    #[allow(unused_mut)]
     let mut ok = true;
 
     #[cfg(feature = "cg")]
@@ -507,9 +483,12 @@ pub const fn verify_ffi_layout() -> bool {
 
     #[cfg(feature = "cv")]
     {
-        use crate::cv::{CVImageRect, CVImageSize};
+        use crate::cv::{CVImageRect, CVImageSize, CVPixelBufferLockFlags};
         ok = ok && size_of::<CVImageSize>() == 16 && align_of::<CVImageSize>() == 8;
         ok = ok && size_of::<CVImageRect>() == 32 && align_of::<CVImageRect>() == 8;
+        ok = ok
+            && size_of::<CVPixelBufferLockFlags>() == 8
+            && align_of::<CVPixelBufferLockFlags>() == 8;
     }
 
     #[cfg(feature = "cm")]

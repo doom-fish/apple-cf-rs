@@ -90,7 +90,7 @@ impl CMBlockBuffer {
             ffi::cm_block_buffer_create_with_data(data.as_ptr().cast(), data.len(), &mut ptr)
         };
         if status == 0 && !ptr.is_null() {
-            Some(Self(ptr))
+            unsafe { Self::from_raw(ptr) }
         } else {
             None
         }
@@ -115,14 +115,20 @@ impl CMBlockBuffer {
         let mut ptr: *mut std::ffi::c_void = std::ptr::null_mut();
         let status = unsafe { ffi::cm_block_buffer_create_empty(&mut ptr) };
         if status == 0 && !ptr.is_null() {
-            Some(Self(ptr))
+            unsafe { Self::from_raw(ptr) }
         } else {
             None
         }
     }
 
-    /// Wraps a +1 retained `CMBlockBufferRef` and returns `None` for null.
-    pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
+    /// Adopts a +1 retained `CMBlockBufferRef` and returns `None` for null.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live `CMBlockBufferRef` of the exact type
+    /// carrying one retain transferred to this wrapper. The caller must not
+    /// release or separately adopt that transferred retain.
+    pub unsafe fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         if ptr.is_null() {
             None
         } else {
@@ -130,15 +136,32 @@ impl CMBlockBuffer {
         }
     }
 
+    /// Retains a +0 borrowed `CMBlockBufferRef` and returns an owned wrapper.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live `CMBlockBufferRef` of the exact type for
+    /// the duration of the retain call.
+    #[must_use]
+    pub unsafe fn from_raw_borrowed(ptr: *mut std::ffi::c_void) -> Option<Self> {
+        if ptr.is_null() {
+            None
+        } else {
+            let retained = unsafe { ffi::cm_block_buffer_retain(ptr) };
+            unsafe { Self::from_raw(retained) }
+        }
+    }
+
     /// Wraps a raw `CMBlockBufferRef` by taking ownership without retaining it.
     ///
     /// # Safety
-    /// The caller must ensure `ptr` is a valid +1 retained `CMBlockBufferRef`.
+    /// `ptr` must be a non-null, live `CMBlockBufferRef` of the exact type
+    /// carrying one retain transferred to this wrapper.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
-    /// Get the raw pointer to the block buffer
+    /// Borrow the raw +0 block-buffer pointer while `self` remains alive.
     #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0

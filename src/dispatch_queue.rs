@@ -354,9 +354,8 @@ pub struct DispatchSource {
     ptr: *mut c_void,
 }
 
-// SAFETY: `dispatch_source_t` is a thread-safe GCD primitive.  The bridge
-// wraps the opaque pointer without interior mutation; GCD ensures safe
-// cross-thread access.
+// SAFETY: `dispatch_source_t` is a thread-safe GCD primitive, and the bridge
+// holder synchronizes its activation, cancellation, and fire-count state.
 unsafe impl Send for DispatchSource {}
 unsafe impl Sync for DispatchSource {}
 
@@ -371,12 +370,17 @@ impl DispatchSource {
         Self { ptr }
     }
 
-    /// Resume the timer source after creation.
+    /// Activate the timer source after creation.
+    ///
+    /// Repeated or concurrent calls are idempotent.
     pub fn resume(&self) {
         unsafe { crate::ffi::acf_dispatch_source_timer_resume(self.ptr) };
     }
 
     /// Cancel the source.
+    ///
+    /// Repeated or concurrent calls are idempotent. Activating after
+    /// cancellation is a no-op.
     pub fn cancel(&self) {
         unsafe { crate::ffi::acf_dispatch_source_timer_cancel(self.ptr) };
     }

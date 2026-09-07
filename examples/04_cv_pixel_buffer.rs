@@ -17,7 +17,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut g = surface
             .lock(IOSurfaceLockOptions::NONE)
             .map_err(|c| format!("lock: {c}"))?;
-        if let Some(b) = g.as_slice_mut() {
+        // SAFETY: the surface has no other retained or native aliases yet.
+        if let Some(b) = unsafe { g.as_slice_mut() } {
             b[0] = 0xDE;
             b[1] = 0xAD;
             b[2] = 0xBE;
@@ -51,7 +52,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 3. Lock the pixel buffer for read and verify the sentinel pixel
     //    written via the IOSurface is visible.
     let guard = pb.lock_read_only().map_err(|c| format!("CV lock: {c}"))?;
-    let bytes = guard.as_slice();
+    // SAFETY: the surface and pixel-buffer aliases are not mutated during this read.
+    let bytes = unsafe { guard.as_slice() }.ok_or("pixel buffer is not contiguous")?;
     assert!(!bytes.is_empty(), "locked pixel buffer should expose data");
     println!(
         "  pixel[0..4] = [{:02x}, {:02x}, {:02x}, {:02x}]",

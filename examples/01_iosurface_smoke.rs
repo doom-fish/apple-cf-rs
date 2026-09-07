@@ -27,7 +27,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut guard = surface
             .lock(IOSurfaceLockOptions::NONE)
             .map_err(|c| format!("lock failed: {c}"))?;
-        if let Some(bytes) = guard.as_slice_mut() {
+        // SAFETY: this locally owned surface has no retained or native aliases.
+        if let Some(bytes) = unsafe { guard.as_slice_mut() } {
             bytes[0] = 0xFF;
             bytes[1] = 0x00;
             bytes[2] = 0x80;
@@ -38,7 +39,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let guard = surface
         .lock(IOSurfaceLockOptions::READ_ONLY)
         .map_err(|c| format!("read lock failed: {c}"))?;
-    let bytes = guard.as_slice();
+    // SAFETY: no alias mutates or remaps the surface during this read.
+    let bytes = unsafe { guard.as_slice() }.ok_or("surface has no contiguous base address")?;
     println!(
         "  pixel[0] = B={:02x} G={:02x} R={:02x} A={:02x}",
         bytes[0], bytes[1], bytes[2], bytes[3]

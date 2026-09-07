@@ -19,7 +19,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut g = surface
             .lock(IOSurfaceLockOptions::NONE)
             .map_err(|c| format!("lock: {c}"))?;
-        if let Some(b) = g.as_slice_mut() {
+        if let Some(ptr) = g.as_mut_ptr() {
+            let len = g.data_size();
+            // SAFETY: this locally owned surface has no retained or native aliases.
+            let b = unsafe { std::slice::from_raw_parts_mut(ptr, len) };
             for px in b.chunks_exact_mut(4) {
                 px[0] = 0x40;
                 px[1] = 0x80;
@@ -44,7 +47,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // The wrapper retains-on-take so videotoolbox's EncodedFrame still owns
     // the original.
     let raw_ptr = frame.cm_sample_buffer_ptr();
-    let sample_buffer = unsafe { CMSampleBuffer::from_raw_retained(raw_ptr) }
+    let sample_buffer = unsafe { CMSampleBuffer::from_raw_borrowed(raw_ptr) }
         .ok_or("CMSampleBuffer wrap returned None")?;
 
     println!("CMSampleBuffer:");

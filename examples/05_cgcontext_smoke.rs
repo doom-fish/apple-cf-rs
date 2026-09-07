@@ -7,7 +7,7 @@ use std::path::PathBuf;
 
 use apple_cf::cg::CGContext;
 
-fn pixel_rgba(bytes: &[u8], bytes_per_row: usize, x: usize, y: usize) -> [u8; 4] {
+const fn pixel_rgba(bytes: &[u8], bytes_per_row: usize, x: usize, y: usize) -> [u8; 4] {
     let offset = y * bytes_per_row + x * 4;
     [
         bytes[offset],
@@ -52,7 +52,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     let png_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("target/cgcontext_smoke.png");
     image.save_png(&png_path)?;
 
-    let bytes = context.as_bytes();
+    // SAFETY: drawing is complete and no retained alias mutates the context.
+    let bytes = unsafe { context.as_bytes() };
     let bottom_left = pixel_rgba(bytes, context.bytes_per_row(), 0, 0);
     let top_right = pixel_rgba(bytes, context.bytes_per_row(), 63, 63);
     assert_eq!(bottom_left, [255, 0, 0, 255]);

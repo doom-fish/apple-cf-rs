@@ -384,11 +384,14 @@ fn cm_sample_buffer_api_coverage() {
         &[header],
     ));
 
-    let ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
+    let mut ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
         .into_iter()
         .filter(|n| n.starts_with("cm_sample_buffer_"))
         .map(|n| snake_to_pascal_with_prefix(&n, "CMSampleBuffer", "cm_sample_buffer_"))
         .collect();
+    if ours.remove("CMSampleBufferCopyImageBuffer") {
+        ours.insert("CMSampleBufferGetImageBuffer".to_string());
+    }
 
     // CF-inherited (CFRetain/CFRelease/CFHash on a CFTypeRef).
     let bridge_only: BTreeSet<String> = [
@@ -656,14 +659,10 @@ fn cv_pixel_buffer_api_coverage() {
 }
 
 fn cv_pixel_buffer_pool_omitted() -> BTreeSet<String> {
-    [
-        "CVPixelBufferPoolGetTypeID",
-        "CVPixelBufferPoolCreatePixelBufferWithAuxAttributes",
-        "CVPixelBufferPoolCreateWithMinimumBufferCount",
-    ]
-    .into_iter()
-    .map(String::from)
-    .collect()
+    ["CVPixelBufferPoolCreateWithMinimumBufferCount"]
+        .into_iter()
+        .map(String::from)
+        .collect()
 }
 
 #[test]
@@ -672,19 +671,11 @@ fn cv_pixel_buffer_pool_api_coverage() {
     let header =
         sdk.join("System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferPool.h");
     let apple = extract_c_function_names("CVPixelBufferPool", &[header]);
-    let ours: BTreeSet<String> = extract_rust_extern_names("src/ffi/mod.rs")
+    let ours: BTreeSet<String> = extract_rust_extern_names("src/raw/generated.rs")
         .into_iter()
-        .filter(|n| n.starts_with("cv_pixel_buffer_pool_"))
-        .map(|n| snake_to_pascal_with_prefix(&n, "CVPixelBufferPool", "cv_pixel_buffer_pool_"))
+        .filter(|n| n.starts_with("CVPixelBufferPool"))
         .collect();
-    let bridge_only: BTreeSet<String> = [
-        "CVPixelBufferPoolRetain",
-        "CVPixelBufferPoolRelease",
-        "CVPixelBufferPoolHash",
-    ]
-    .into_iter()
-    .map(String::from)
-    .collect();
+    let bridge_only = BTreeSet::new();
 
     assert!(report(
         "CVPixelBufferPool",
@@ -708,8 +699,8 @@ fn cv_pixel_buffer_pool_api_coverage() {
 
 // ---- CVPixelBuffer attribute-key constants ----
 
-/// Read the bridge file for textual matches against named keys.
-fn read_bridge_files() -> String {
+/// Read wrapper sources for textual matches against named keys.
+fn read_wrapper_sources() -> String {
     let mut blob = String::new();
     let bridge_root = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("swift-bridge/Sources");
     for entry in std::fs::read_dir(&bridge_root)
@@ -731,6 +722,12 @@ fn read_bridge_files() -> String {
             }
         }
     }
+    blob.push_str(
+        &std::fs::read_to_string(
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("src/cv/pixel_buffer.rs"),
+        )
+        .unwrap(),
+    );
     blob
 }
 
@@ -754,12 +751,12 @@ fn cv_pixel_buffer_attribute_keys_coverage() {
         .map(|c| c[1].to_string())
         .collect();
 
-    let bridge = read_bridge_files();
+    let sources = read_wrapper_sources();
     let our_keys: BTreeSet<String> = apple
         .iter()
         .filter(|name| {
             let needle = format!(r"\b{}\b", regex_lite::escape(name));
-            regex_lite::Regex::new(&needle).unwrap().is_match(&bridge)
+            regex_lite::Regex::new(&needle).unwrap().is_match(&sources)
         })
         .cloned()
         .collect();
@@ -812,9 +809,8 @@ fn cv_pixel_buffer_attribute_keys_coverage() {
 
 #[test]
 fn cv_pixel_buffer_pool_attribute_keys_coverage() {
-    // CVPixelBufferPool creation is configured via a `[kCVPixelBufferPool*Key:
-    // value]` attribute dictionary. Same rationale as above — verify the
-    // keys our pool bridge passes are real Apple constants.
+    // Pool allocation policy uses native auxiliary-attribute keys. Verify
+    // every key named by the wrapper exists in the SDK.
     let sdk = sdk_root();
     let header =
         sdk.join("System/Library/Frameworks/CoreVideo.framework/Headers/CVPixelBufferPool.h");
@@ -829,17 +825,17 @@ fn cv_pixel_buffer_pool_attribute_keys_coverage() {
         .map(|c| c[1].to_string())
         .collect();
 
-    let bridge = read_bridge_files();
+    let sources = read_wrapper_sources();
     let our_keys: BTreeSet<String> = apple
         .iter()
         .filter(|name| {
             let needle = format!(r"\b{}\b", regex_lite::escape(name));
-            regex_lite::Regex::new(&needle).unwrap().is_match(&bridge)
+            regex_lite::Regex::new(&needle).unwrap().is_match(&sources)
         })
         .cloned()
         .collect();
 
-    let kept: BTreeSet<&str> = ["kCVPixelBufferPoolMinimumBufferCountKey"]
+    let kept: BTreeSet<&str> = ["kCVPixelBufferPoolAllocationThresholdKey"]
         .into_iter()
         .collect();
     let omitted: BTreeSet<String> = apple

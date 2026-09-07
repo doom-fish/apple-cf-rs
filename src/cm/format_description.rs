@@ -98,7 +98,8 @@ macro_rules! cfstring_constant_fn {
         #[must_use]
         $vis fn $name() -> CFString {
             let ptr = unsafe { ffi::$ffi_name() };
-            CFString::from_raw(ptr).expect(concat!(stringify!($ffi_name), " returned NULL"))
+            unsafe { CFString::from_raw(ptr) }
+                .expect(concat!(stringify!($ffi_name), " returned NULL"))
         }
     };
 }
@@ -144,8 +145,14 @@ pub mod metadata_structural_dependency_keys {
 }
 
 impl CMFormatDescription {
-    /// Wraps a +1 retained `CMFormatDescriptionRef` and returns `None` for null.
-    pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
+    /// Adopts a +1 retained `CMFormatDescriptionRef` and returns `None` for null.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live `CMFormatDescriptionRef` of the exact
+    /// type carrying one retain transferred to this wrapper. The caller must
+    /// not release or separately adopt that transferred retain.
+    pub unsafe fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
         if ptr.is_null() {
             None
         } else {
@@ -153,15 +160,32 @@ impl CMFormatDescription {
         }
     }
 
+    /// Retains a +0 borrowed `CMFormatDescriptionRef` and returns an owned wrapper.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live `CMFormatDescriptionRef` of the exact
+    /// type for the duration of the retain call.
+    #[must_use]
+    pub unsafe fn from_raw_borrowed(ptr: *mut std::ffi::c_void) -> Option<Self> {
+        if ptr.is_null() {
+            None
+        } else {
+            let retained = unsafe { ffi::cm_format_description_retain(ptr) };
+            unsafe { Self::from_raw(retained) }
+        }
+    }
+
     /// Wraps a raw `CMFormatDescriptionRef` by taking ownership without retaining it.
     ///
     /// # Safety
-    /// The caller must ensure `ptr` is a valid +1 retained `CMFormatDescriptionRef`.
+    /// `ptr` must be a non-null, live `CMFormatDescriptionRef` of the exact
+    /// type carrying one retain transferred to this wrapper.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
         Self(ptr)
     }
 
-    /// Returns the wrapped raw `CMFormatDescriptionRef`.
+    /// Borrows the raw +0 `CMFormatDescriptionRef` while `self` remains alive.
     #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0
@@ -426,21 +450,39 @@ impl fmt::Display for CMFormatDescription {
 pub struct CMMetadataFormatDescription(CMFormatDescription);
 
 impl CMMetadataFormatDescription {
-    /// Wraps a +1 retained raw metadata format-description pointer and returns `None` for null.
+    /// Adopts a +1 retained metadata format-description pointer.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live metadata `CMFormatDescriptionRef`
+    /// carrying one retain transferred to this wrapper. The caller must not
+    /// release or separately adopt that transferred retain.
     #[must_use]
-    pub fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
-        CMFormatDescription::from_raw(ptr).map(Self)
+    pub unsafe fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
+        unsafe { CMFormatDescription::from_raw(ptr) }.map(Self)
+    }
+
+    /// Retains a +0 borrowed metadata format-description pointer.
+    ///
+    /// # Safety
+    ///
+    /// A non-null `ptr` must be a live metadata `CMFormatDescriptionRef` for
+    /// the duration of the retain call.
+    #[must_use]
+    pub unsafe fn from_raw_borrowed(ptr: *mut std::ffi::c_void) -> Option<Self> {
+        unsafe { CMFormatDescription::from_raw_borrowed(ptr) }.map(Self)
     }
 
     /// Wraps a raw metadata `CMFormatDescriptionRef` by taking ownership without retaining it.
     ///
     /// # Safety
-    /// The caller must ensure `ptr` is a valid +1 retained metadata `CMFormatDescriptionRef`.
+    /// `ptr` must be a non-null, live metadata `CMFormatDescriptionRef`
+    /// carrying one retain transferred to this wrapper.
     pub const unsafe fn from_ptr(ptr: *mut std::ffi::c_void) -> Self {
-        Self(CMFormatDescription::from_ptr(ptr))
+        Self(unsafe { CMFormatDescription::from_ptr(ptr) })
     }
 
-    /// Returns the wrapped raw metadata format-description pointer.
+    /// Borrows the raw +0 metadata format-description pointer while `self` remains alive.
     #[must_use]
     pub const fn as_ptr(&self) -> *mut std::ffi::c_void {
         self.0.as_ptr()
@@ -476,7 +518,7 @@ impl CMMetadataFormatDescription {
             )
         };
         if status == 0 && !ptr.is_null() {
-            Self::from_raw(ptr).ok_or(status)
+            unsafe { Self::from_raw(ptr) }.ok_or(status)
         } else {
             Err(status)
         }
@@ -500,7 +542,7 @@ impl CMMetadataFormatDescription {
             )
         };
         if status == 0 && !ptr.is_null() {
-            Self::from_raw(ptr).ok_or(status)
+            unsafe { Self::from_raw(ptr) }.ok_or(status)
         } else {
             Err(status)
         }
@@ -524,7 +566,7 @@ impl CMMetadataFormatDescription {
             )
         };
         if status == 0 && !ptr.is_null() {
-            Self::from_raw(ptr).ok_or(status)
+            unsafe { Self::from_raw(ptr) }.ok_or(status)
         } else {
             Err(status)
         }
@@ -545,7 +587,7 @@ impl CMMetadataFormatDescription {
             )
         };
         if status == 0 && !ptr.is_null() {
-            Self::from_raw(ptr).ok_or(status)
+            unsafe { Self::from_raw(ptr) }.ok_or(status)
         } else {
             Err(status)
         }
@@ -555,7 +597,7 @@ impl CMMetadataFormatDescription {
     #[must_use]
     pub fn identifiers(&self) -> Option<CFArray> {
         let ptr = unsafe { ffi::cm_metadata_format_description_get_identifiers(self.as_ptr()) };
-        CFArray::from_raw(ptr)
+        unsafe { CFArray::from_raw(ptr) }
     }
 
     /// Copy the metadata key dictionary for `local_id`, if present.
@@ -564,7 +606,7 @@ impl CMMetadataFormatDescription {
         let ptr = unsafe {
             ffi::cm_metadata_format_description_get_key_with_local_id(self.as_ptr(), local_id)
         };
-        CFDictionary::from_raw(ptr)
+        unsafe { CFDictionary::from_raw(ptr) }
     }
 }
 

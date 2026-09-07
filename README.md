@@ -2,7 +2,7 @@
 
 Safe, dependency-free Rust bindings for Apple's shared **Core\*** frameworks — the foundation underneath the [doom-fish](https://github.com/doom-fish) macOS Rust suite.
 
-> **Status:** `v0.7.1` tightens the safety documentation — every `unsafe impl Send/Sync` now carries a `// SAFETY:` justification comment, Drop implementations uniformly null-guard their release calls, and the `doom-fish-utils` version constraint follows the crate-family `>=X.Y, <X.(Y+2)` convention. See [`COVERAGE.md`](COVERAGE.md) for the framework summary and [`COVERAGE_AUDIT_V2.md`](COVERAGE_AUDIT_V2.md) for the full symbol audit.
+> **Status:** Active correctness and FFI-contract maintenance. See [`COVERAGE.md`](COVERAGE.md) for the framework summary and [`COVERAGE_AUDIT_V2.md`](COVERAGE_AUDIT_V2.md) for the full symbol audit.
 
 ## What's in the box
 
@@ -39,14 +39,14 @@ Safe Rust wrappers
 
 ```toml
 [dependencies]
-apple-cf = "0.7"
+apple-cf = "0.10"
 ```
 
 Or pick only the frameworks you need:
 
 ```toml
 [dependencies]
-apple-cf = { version = ">=0.7, <0.9", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
+apple-cf = { version = ">=0.10, <0.11", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
 ```
 
 ## Quick examples
@@ -95,6 +95,14 @@ This crate uses the same Swift-bridge pattern as the rest of the doom-fish crate
 - `src/<framework>/` provides the safe Rust API on top
 
 The Rust crate has **zero runtime dependencies**.
+
+## Ownership and mapped-memory contracts
+
+Raw `from_raw` constructors adopt one caller-owned `+1` retain and are therefore `unsafe`. Use `from_raw_borrowed` when importing a live `+0` pointer that the wrapper must retain. `AsCFType` is an unsafe trait because implementations promise a valid Core Foundation object pointer.
+
+`CVPixelBuffer` and `IOSurface` lock guards balance native synchronization and mapping only; they do not establish Rust exclusivity across retained, native, GPU, or cross-process aliases. Raw pointers remain available, while slice, row, plane, and zero-copy cursor views require `unsafe` with an explicit no-alias/no-mutation guarantee. `CGContext` clones likewise share one mutable native context, so its byte-slice views are unsafe even though drawing methods remain safe.
+
+`CVPixelBufferPool::create(..., max_buffers)` enforces the cap through Core Video's per-allocation threshold. Clones share that immutable policy across threads. Per-call auxiliary attributes are honored, flush flags map directly to the native API, and `try_create_pixel_buffer` distinguishes threshold exhaustion from other errors.
 
 ## Examples and tests
 

@@ -1,6 +1,6 @@
 [package]
 name = "apple-cf"
-version = "0.9.3"
+version = "0.10.0"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 homepage = "https://github.com/doom-fish/apple-cf-rs"
@@ -52,15 +52,18 @@ all-frameworks = ["cg", "iosurface", "dispatch", "cm", "cv"]
 # Deprecated: the Metal interop module moved to its own crate,
 # `apple-metal`, in v0.1.2. This feature is now a no-op and will be
 # removed in a future major release. Switch your dependency to
-# `apple-metal = "0.1"` and use `apple_metal::{MetalDevice,
+# `apple-metal = "0.9"` and use `apple_metal::{MetalDevice,
 # IOSurfaceMetalExt}` instead.
 metal = []
 
 [dependencies]
-doom-fish-utils = { path = "../doom-fish-utils", version = ">=0.1, <0.4" }
+doom-fish-utils = { path = "../doom-fish-utils", version = ">=0.4, <0.5" }
 
 [dev-dependencies]
 regex-lite = "0.1"
+# `03_cm_sample_buffer` intentionally exercises the published VideoToolbox
+# 0.10 / apple-cf 0.4 boundary. Using VideoToolbox 0.20 here would create a
+# dev-dependency cycle because it depends on apple-cf 0.10.
 apple_cf_compat_04 = { package = "apple-cf", version = "0.4.0" }
 videotoolbox = "0.10.0"
 
