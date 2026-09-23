@@ -147,3 +147,33 @@ fn panicking_notification_observer_does_not_unwind_into_core_foundation() {
     center.post(&name, None, true);
     assert_eq!(*calls.lock().expect("calls"), 2);
 }
+
+#[test]
+fn run_loops_can_be_stopped_from_another_thread() {
+    fn assert_send_sync<T: Send + Sync>() {}
+    assert_send_sync::<CFRunLoop>();
+
+    let (run_loop_tx, run_loop_rx) = std::sync::mpsc::channel();
+    let (result_tx, result_rx) = std::sync::mpsc::channel();
+    let worker = std::thread::spawn(move || {
+        let timer = CFTimer::new(Duration::from_secs(60), true);
+        let run_loop = CFRunLoop::current();
+        run_loop.add_timer(&timer);
+        run_loop_tx.send(run_loop).expect("send run loop");
+        let result = CFRunLoop::run_in_default_mode(Duration::from_secs(20), false);
+        timer.invalidate();
+        result_tx.send(result).expect("send result");
+    });
+
+    let worker_run_loop = run_loop_rx.recv().expect("worker run loop");
+    assert_ne!(worker_run_loop, CFRunLoop::current());
+    let result = loop {
+        worker_run_loop.stop();
+        worker_run_loop.wake_up();
+        if let Ok(result) = result_rx.recv_timeout(Duration::from_millis(20)) {
+            break result;
+        }
+    };
+    assert_eq!(result, CFRunLoopRunResult::Stopped);
+    worker.join().expect("join worker");
+}

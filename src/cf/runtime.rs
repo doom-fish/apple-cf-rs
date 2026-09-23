@@ -52,6 +52,9 @@ use std::time::Duration;
 
 impl_cf_type_wrapper!(CFNotificationCenter, cf_notification_center_get_type_id);
 impl_cf_type_wrapper!(CFRunLoop, cf_run_loop_get_type_id);
+#[allow(clippy::non_send_fields_in_send_ty)]
+unsafe impl Send for CFRunLoop {}
+unsafe impl Sync for CFRunLoop {}
 impl_cf_type_wrapper!(CFTimer, cf_run_loop_timer_get_type_id);
 impl_cf_type_wrapper!(CFMessagePort, cf_message_port_get_type_id);
 impl_cf_type_wrapper!(CFReadStream, cf_read_stream_get_type_id);

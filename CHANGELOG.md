@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CMSampleBuffer::sample_attachments` and `is_sync_sample` (`kCMSampleAttachmentKey_NotSync`).
 - `CMFormatDescription::video_dimensions` and `video_parameter_sets` (H.264 or HEVC parameter sets plus NAL unit header length, as `CMVideoParameterSets`).
 - `CFFileDescriptor::from_owned_fd` and `from_borrowed_fd`.
+- `CFRunLoop` is `Send` and `Sync`, so another thread's run loop can be passed around and targeted. Its methods (`wake_up`, `stop`, `add_timer`) are thread-safe Core Foundation calls, and running a loop stays an associated function that runs the calling thread's own loop.
 
 ### Removed
 
