@@ -1,5 +1,62 @@
 # Changelog
 
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.11.0] - Unreleased
+
+### Security
+
+- `CFFileDescriptor::from_raw_fd(fd, true)` let safe code make Core Foundation close a descriptor it didn't own (double close, or closing an unrelated file after reuse). It is replaced by `from_owned_fd(OwnedFd)`, which hands the descriptor to Core Foundation, and `from_borrowed_fd(BorrowedFd)`, which never closes it.
+
+### Fixed
+
+- Process aborts reachable from safe code:
+  - `CFURL::file_system_path` trapped in Swift when `CFURLCopyFileSystemPath` returned NULL (for example `file:///tmp/%FF` or `mailto:` URLs).
+  - Hashing a `CFType` wrapper trapped whenever `CFHash` exceeded `isize::MAX`, which happens for negative floating-point `CFNumber`s, so putting one in a `HashSet` aborted.
+  - `IOSurface::create` overflowed `width * bytes_per_element * height`; the CGImage render and copy exports and the planar `CVPixelBuffer` export had the same kind of trap. Exported names and signatures are unchanged.
+  - `DispatchSource::timer(Duration::MAX, ..)` trapped converting the interval; intervals are now passed in nanoseconds, so sub-millisecond intervals no longer collapse to a 1 ns busy timer.
+  - GCD aborted when a `DispatchSemaphore` was released below its initial count, when a `DispatchGroup` was released while entered, and on an unbalanced `DispatchGroup::leave`.
+  - `CFFileSecurity::set_mode` with a value above `u16::MAX`, and force-unwrapped formatter styles and CF getters in the bridge.
+- Panics on ordinary input: interior NUL in `CFString::new`, `CFUUID::parse_str`, `CFError::new`, `CFLocale::new`, `CFBundle::resource_url`, `CFMessagePort::connect_remote` and `DispatchQueue::new`; huge dates in `CFDate::to_system_time`; an unknown format from `CFPropertyList` decoding.
+- `CFData::to_vec`, `CFSet::values` and `CFMutableSet::values` pass their buffer capacity to the bridge, which no longer writes a re-read length into a buffer sized by an earlier call.
+- `CFNumber::from_u64` stores values above `i64::MAX` as unsigned, and `to_i64`/`to_u64` only succeed when the value is exactly representable (no more `Some(i64::MAX)` for `1e19`, or `Some(u64::MAX)` for `-1`).
+- `CFCharacterSet::contains` works for characters outside the Basic Multilingual Plane.
+- `CFURL::absolute_string` resolves relative URLs against their base.
+- `CFString::to_string_lossy` and `CFType::description` keep embedded NUL and replace unpaired surrogates instead of returning an empty string; `CFString::len` is documented as UTF-16 code units.
+- C strings returned by the bridge are allocated with `malloc`, matching the `free` in `acf_free_string`.
+- `CMClock::time` returns the clock's time; it used to always return `CMTime::INVALID`.
+- IOSurface `plane_data` and `plane_row` check that the plane lies inside the surface allocation.
+- Docs: the README IOSurface-backed `CVPixelBuffer` example really is IOSurface-backed, the crate no longer claims to be dependency-free, feature flags are documented as gating only the Rust modules, and `COVERAGE*.md` state that most `VERIFIED` rows are raw bindgen declarations, that V2 is a self-selected sample, and that `CFTree.h` is not wrapped.
+
+### Changed
+
+- **BREAKING:** `CFURL::from_string`, `CFURL::from_file_system_path`, `CFTimeZone::new`, `CFCalendar::new`, `CFMessagePort::create_echo_local` and `DispatchSemaphore::new` return `Option<Self>`, and `CFURL::file_system_path` returns `Option<CFString>`.
+- **BREAKING:** `CFRunLoop::run_in_default_mode(duration, return_after_source_handled)` is an associated function; it always runs the current thread's run loop.
+- **BREAKING:** `CMBlockBuffer::as_slice` and `cursor_ref` are `unsafe`, like the other zero-copy views of framework-owned memory; `cursor` always copies.
+- **BREAKING:** `CMTimebase::with_master_clock` and `master_clock` are now `with_source_clock` and `source_clock`, backed by the non-deprecated `CMTimebaseCreateWithSourceClock`/`CMTimebaseCopySourceClock`.
+- **BREAKING:** `CMClock::time` is no longer a `const fn`.
+- **BREAKING:** the crate-root `CFError` null-pointer error is now `NullPointerError`; `apple_cf::CFError` remains as a deprecated alias, and `apple_cf::cf::CFError` still wraps `CFErrorRef`.
+- **BREAKING:** `CFPropertyListError` has a new `UnknownFormat(isize)` variant.
+- **BREAKING:** `apple_cf::ffi`: the capacity-less `cf_data_copy_bytes` and `cf_set_get_values` are replaced by `acf_cf_data_copy_bytes` and `acf_cf_set_copy_values`, and the group and semaphore functions are renamed to `acf_dispatch_group_holder_*` and `acf_dispatch_semaphore_holder_*` because their handles are now bridge holders. The bridge exports used directly by dependents (`cgimage_*`, `io_surface_*`, the legacy `iosurface_*`, `cm_*`, `cv_pixel_buffer_*`, `dispatch_queue_retain`/`release`) keep their names and signatures.
+- `rust-version` is 1.82 (was 1.76), and `doom-fish-utils` is required at `>=0.4.1, <0.5`.
+
+### Added
+
+- `DispatchQueue::main`, `DispatchQueue::global(qos)`, `DispatchQueue::concurrent(label, qos)` and `dispatch_after(delay, queue, work)`.
+- `CFNotificationCenter::add_observer(name, callback)`, returning a `CFNotificationObserver` that unregisters when dropped. Callbacks may run on any thread and a panic in one is contained.
+- `CMSampleBuffer::audio_buffer_list`, which makes `cm::AudioBufferList` constructible; its views are read-only and keep the backing block buffer alive.
+- `CMSampleBuffer::sample_attachments` and `is_sync_sample` (`kCMSampleAttachmentKey_NotSync`).
+- `CMFormatDescription::video_dimensions` and `video_parameter_sets` (H.264 or HEVC parameter sets plus NAL unit header length, as `CMVideoParameterSets`).
+- `CFFileDescriptor::from_owned_fd` and `from_borrowed_fd`.
+
+### Removed
+
+- `CFFileDescriptor::from_raw_fd`, replaced by `from_owned_fd` and `from_borrowed_fd`.
+- `AudioBuffer::data_mut` and `AudioBufferList::get_mut`: the buffers alias Core Media memory that other sample buffers can see. Neither was reachable before, because nothing could construct an `AudioBufferList`.
+
 ## [0.10.0] - 2026-09-07
 
 ### Changed (breaking)
@@ -31,11 +88,6 @@
 ## [0.9.1] - 2026-05-19
 
 - Bump MSRV from 1.70 to 1.76 to match fleet baseline.
-
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.9.0] - 2026-05-18
 
