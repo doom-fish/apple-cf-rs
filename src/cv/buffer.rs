@@ -123,7 +123,7 @@ impl CVBuffer {
     #[must_use]
     pub fn attachment(&self, key: &CFString) -> Option<CFType> {
         let mut attachment_mode = 0_u32;
-        let ptr = unsafe { CVBufferCopyAttachment(self.0, key.as_ptr(), &mut attachment_mode) };
+        let ptr = unsafe { CVBufferCopyAttachment(self.0, key.as_ptr(), &raw mut attachment_mode) };
         unsafe { CFType::from_raw(ptr) }
     }
 

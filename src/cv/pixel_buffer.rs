@@ -165,7 +165,7 @@ impl CVPixelBuffer {
         unsafe {
             let mut pixel_buffer_ptr: *mut std::ffi::c_void = std::ptr::null_mut();
             let status =
-                ffi::cv_pixel_buffer_create(width, height, pixel_format, &mut pixel_buffer_ptr);
+                ffi::cv_pixel_buffer_create(width, height, pixel_format, &raw mut pixel_buffer_ptr);
 
             if status == 0 && !pixel_buffer_ptr.is_null() {
                 Ok(Self(pixel_buffer_ptr))
@@ -247,7 +247,7 @@ impl CVPixelBuffer {
             pixel_format,
             base_address,
             bytes_per_row,
-            &mut pixel_buffer_ptr,
+            &raw mut pixel_buffer_ptr,
         );
 
         if status == 0 && !pixel_buffer_ptr.is_null() {
@@ -314,7 +314,7 @@ impl CVPixelBuffer {
             plane_widths.as_ptr(),
             plane_heights.as_ptr(),
             plane_bytes_per_row.as_ptr(),
-            &mut pixel_buffer_ptr,
+            &raw mut pixel_buffer_ptr,
         );
 
         if status == 0 && !pixel_buffer_ptr.is_null() {
@@ -334,7 +334,7 @@ impl CVPixelBuffer {
             let mut pixel_buffer_ptr: *mut std::ffi::c_void = std::ptr::null_mut();
             let status = ffi::cv_pixel_buffer_create_with_io_surface(
                 surface.as_ptr(),
-                &mut pixel_buffer_ptr,
+                &raw mut pixel_buffer_ptr,
             );
 
             if status == 0 && !pixel_buffer_ptr.is_null() {
@@ -412,10 +412,10 @@ impl CVPixelBuffer {
             let mut bottom: usize = 0;
             ffi::cv_pixel_buffer_get_extended_pixels(
                 self.0,
-                &mut left,
-                &mut right,
-                &mut top,
-                &mut bottom,
+                &raw mut left,
+                &raw mut right,
+                &raw mut top,
+                &raw mut bottom,
             );
             (left, right, top, bottom)
         }
@@ -978,6 +978,7 @@ struct CVPixelBufferPoolPolicy {
 
 // SAFETY: The policy is immutable after construction. Its cached dictionary is
 // immutable and only shared for Core Foundation reads and retain/release.
+#[allow(clippy::non_send_fields_in_send_ty)]
 unsafe impl Send for CVPixelBufferPoolPolicy {}
 unsafe impl Sync for CVPixelBufferPoolPolicy {}
 
@@ -1222,7 +1223,7 @@ impl CVPixelBufferPool {
                 std::ptr::null(),
                 pool_attributes.as_ptr().cast(),
                 pixel_buffer_attributes.as_ptr().cast(),
-                &mut pool_ptr,
+                &raw mut pool_ptr,
             );
 
             if status == 0 && !pool_ptr.is_null() {
@@ -1247,13 +1248,13 @@ impl CVPixelBufferPool {
                     std::ptr::null(),
                     self.ptr.cast(),
                     attributes.as_ptr().cast(),
-                    &mut pixel_buffer_ptr,
+                    &raw mut pixel_buffer_ptr,
                 )
             } else {
                 raw::CVPixelBufferPoolCreatePixelBuffer(
                     std::ptr::null(),
                     self.ptr.cast(),
-                    &mut pixel_buffer_ptr,
+                    &raw mut pixel_buffer_ptr,
                 )
             }
         };

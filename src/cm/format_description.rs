@@ -514,7 +514,7 @@ impl CMMetadataFormatDescription {
             ffi::cm_metadata_format_description_create_with_keys(
                 metadata_type.into(),
                 keys.map_or(std::ptr::null_mut(), CFArray::as_ptr),
-                &mut ptr,
+                &raw mut ptr,
             )
         };
         if status == 0 && !ptr.is_null() {
@@ -538,7 +538,7 @@ impl CMMetadataFormatDescription {
             ffi::cm_metadata_format_description_create_with_metadata_specifications(
                 metadata_type.into(),
                 metadata_specifications.as_ptr(),
-                &mut ptr,
+                &raw mut ptr,
             )
         };
         if status == 0 && !ptr.is_null() {
@@ -562,7 +562,7 @@ impl CMMetadataFormatDescription {
             ffi::cm_metadata_format_description_create_with_description_and_metadata_specifications(
                 self.as_ptr(),
                 metadata_specifications.as_ptr(),
-                &mut ptr,
+                &raw mut ptr,
             )
         };
         if status == 0 && !ptr.is_null() {
@@ -583,7 +583,7 @@ impl CMMetadataFormatDescription {
             ffi::cm_metadata_format_description_create_by_merging_descriptions(
                 self.as_ptr(),
                 other.as_ptr(),
-                &mut ptr,
+                &raw mut ptr,
             )
         };
         if status == 0 && !ptr.is_null() {

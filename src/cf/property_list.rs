@@ -157,8 +157,8 @@ impl CFPropertyList {
             ffi::cf_property_list_create_with_data(
                 data.as_ptr(),
                 options.as_u64(),
-                &mut format,
-                &mut error,
+                &raw mut format,
+                &raw mut error,
             )
         };
         decoded_property_list(ptr, format, "CFPropertyListCreateWithData", error)
@@ -178,8 +178,8 @@ impl CFPropertyList {
                 stream.as_ptr(),
                 stream_length,
                 options.as_u64(),
-                &mut format,
-                &mut error,
+                &raw mut format,
+                &raw mut error,
             )
         };
         decoded_property_list(ptr, format, "CFPropertyListCreateWithStream", error)
@@ -197,7 +197,7 @@ impl CFPropertyList {
                 property_list.as_ptr(),
                 format as isize,
                 options,
-                &mut error,
+                &raw mut error,
             )
         };
         unsafe { CFData::from_raw(ptr) }
@@ -218,7 +218,7 @@ impl CFPropertyList {
                 stream.as_ptr(),
                 format as isize,
                 options,
-                &mut error,
+                &raw mut error,
             )
         };
         if written > 0 {

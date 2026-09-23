@@ -13,7 +13,7 @@ fn sample_buffer_image_getters_preserve_ownership() {
         raw::CMVideoFormatDescriptionCreateForImageBuffer(
             std::ptr::null(),
             pixel_buffer.as_ptr().cast(),
-            &mut format_ptr,
+            &raw mut format_ptr,
         )
     };
     assert_eq!(format_status, 0);
@@ -46,8 +46,8 @@ fn sample_buffer_image_getters_preserve_ownership() {
             std::ptr::null(),
             pixel_buffer.as_ptr().cast(),
             format.as_ptr().cast(),
-            &timing,
-            &mut sample_ptr,
+            &raw const timing,
+            &raw mut sample_ptr,
         )
     };
     assert_eq!(sample_status, 0);

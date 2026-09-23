@@ -286,7 +286,7 @@ impl CFSet {
     pub fn get_if_present(&self, candidate: &dyn AsCFType) -> Option<CFType> {
         let mut ptr = std::ptr::null_mut();
         let present = unsafe {
-            ffi::cf_set_get_value_if_present(self.as_ptr(), candidate.as_ptr(), &mut ptr)
+            ffi::cf_set_get_value_if_present(self.as_ptr(), candidate.as_ptr(), &raw mut ptr)
         };
         present.then(|| unsafe { CFType::from_raw(ptr) }).flatten()
     }

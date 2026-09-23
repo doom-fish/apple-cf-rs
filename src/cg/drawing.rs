@@ -74,7 +74,7 @@ impl CGColorSpace {
     #[must_use]
     pub fn srgb() -> Self {
         unsafe {
-            let n = CFStringCreateWithCStringLite(b"kCGColorSpaceSRGB\0".as_ptr());
+            let n = CFStringCreateWithCStringLite(c"kCGColorSpaceSRGB".as_ptr().cast());
             let p = cg_ffi::CGColorSpaceCreateWithName(n);
             CFReleaseLite(n);
             Self { ptr: p }
@@ -85,7 +85,7 @@ impl CGColorSpace {
     #[must_use]
     pub fn display_p3() -> Self {
         unsafe {
-            let n = CFStringCreateWithCStringLite(b"kCGColorSpaceDisplayP3\0".as_ptr());
+            let n = CFStringCreateWithCStringLite(c"kCGColorSpaceDisplayP3".as_ptr().cast());
             let p = cg_ffi::CGColorSpaceCreateWithName(n);
             CFReleaseLite(n);
             Self { ptr: p }

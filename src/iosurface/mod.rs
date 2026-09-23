@@ -219,7 +219,7 @@ impl IOSurface {
     ) -> Option<Self> {
         let mut ptr: *mut c_void = std::ptr::null_mut();
         let status = unsafe {
-            crate::ffi::io_surface_create(width, height, pixel_format, bytes_per_element, &mut ptr)
+            crate::ffi::io_surface_create(width, height, pixel_format, bytes_per_element, &raw mut ptr)
         };
         if status == 0 && !ptr.is_null() {
             Some(Self(ptr))
@@ -366,7 +366,7 @@ impl IOSurface {
                 } else {
                     std::ptr::null()
                 },
-                &mut ptr,
+                &raw mut ptr,
             )
         };
 
@@ -589,7 +589,7 @@ impl IOSurface {
     /// Returns `kern_return_t` error code if the lock fails.
     pub unsafe fn lock_raw(&self, options: IOSurfaceLockOptions) -> Result<u32, i32> {
         let mut seed: u32 = 0;
-        let status = unsafe { ffi::io_surface_lock(self.0, options.as_u32(), &mut seed) };
+        let status = unsafe { ffi::io_surface_lock(self.0, options.as_u32(), &raw mut seed) };
         if status == 0 {
             Ok(seed)
         } else {
@@ -613,7 +613,7 @@ impl IOSurface {
     /// Returns `kern_return_t` error code if the unlock fails.
     pub unsafe fn unlock_raw(&self, options: IOSurfaceLockOptions) -> Result<u32, i32> {
         let mut seed: u32 = 0;
-        let status = unsafe { ffi::io_surface_unlock(self.0, options.as_u32(), &mut seed) };
+        let status = unsafe { ffi::io_surface_unlock(self.0, options.as_u32(), &raw mut seed) };
         if status == 0 {
             Ok(seed)
         } else {

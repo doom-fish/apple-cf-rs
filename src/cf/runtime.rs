@@ -214,8 +214,8 @@ impl CFMessagePort {
                 bytes.as_ptr(),
                 bytes.len(),
                 duration_to_seconds(timeout),
-                &mut out_bytes,
-                &mut out_len,
+                &raw mut out_bytes,
+                &raw mut out_len,
             )
         };
         if status != 0 {
@@ -248,7 +248,7 @@ impl CFStreamPair {
     pub fn new(transfer_buffer_size: usize) -> Self {
         let mut read = std::ptr::null_mut();
         let mut write = std::ptr::null_mut();
-        unsafe { ffi::cf_stream_create_bound_pair(transfer_buffer_size, &mut read, &mut write) };
+        unsafe { ffi::cf_stream_create_bound_pair(transfer_buffer_size, &raw mut read, &raw mut write) };
         Self {
             read: unsafe { CFReadStream::from_raw(read) }
                 .expect("CFStreamCreateBoundPair read stream was NULL"),

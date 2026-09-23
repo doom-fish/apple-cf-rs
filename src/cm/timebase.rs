@@ -33,7 +33,7 @@ impl CMTimebase {
         }
         let mut ptr = std::ptr::null();
         let status = unsafe {
-            CMTimebaseCreateWithSourceClock(std::ptr::null(), source_clock.as_ptr(), &mut ptr)
+            CMTimebaseCreateWithSourceClock(std::ptr::null(), source_clock.as_ptr(), &raw mut ptr)
         };
         if status == 0 && !ptr.is_null() {
             Ok(Self { ptr })

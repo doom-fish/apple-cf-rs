@@ -369,7 +369,7 @@ impl CFFileSecurity {
     #[must_use]
     pub fn mode(&self) -> Option<u32> {
         let mut mode = 0_u32;
-        let ok = unsafe { ffi::cf_file_security_get_mode(self.as_ptr(), &mut mode) };
+        let ok = unsafe { ffi::cf_file_security_get_mode(self.as_ptr(), &raw mut mode) };
         ok.then_some(mode)
     }
 

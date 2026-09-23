@@ -113,7 +113,7 @@ impl CFNumber {
     #[must_use]
     pub fn to_i64(&self) -> Option<i64> {
         let mut out = 0_i64;
-        let ok = unsafe { ffi::cf_number_get_i64(self.as_ptr(), &mut out) };
+        let ok = unsafe { ffi::cf_number_get_i64(self.as_ptr(), &raw mut out) };
         ok.then_some(out)
     }
 
@@ -121,7 +121,7 @@ impl CFNumber {
     #[must_use]
     pub fn to_u64(&self) -> Option<u64> {
         let mut out = 0_u64;
-        let ok = unsafe { ffi::cf_number_get_u64(self.as_ptr(), &mut out) };
+        let ok = unsafe { ffi::cf_number_get_u64(self.as_ptr(), &raw mut out) };
         ok.then_some(out)
     }
 
@@ -129,7 +129,7 @@ impl CFNumber {
     #[must_use]
     pub fn to_f64(&self) -> Option<f64> {
         let mut out = 0.0_f64;
-        let ok = unsafe { ffi::cf_number_get_f64(self.as_ptr(), &mut out) };
+        let ok = unsafe { ffi::cf_number_get_f64(self.as_ptr(), &raw mut out) };
         ok.then_some(out)
     }
 

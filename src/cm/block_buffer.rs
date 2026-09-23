@@ -87,7 +87,7 @@ impl CMBlockBuffer {
         }
         let mut ptr: *mut std::ffi::c_void = std::ptr::null_mut();
         let status = unsafe {
-            ffi::cm_block_buffer_create_with_data(data.as_ptr().cast(), data.len(), &mut ptr)
+            ffi::cm_block_buffer_create_with_data(data.as_ptr().cast(), data.len(), &raw mut ptr)
         };
         if status == 0 && !ptr.is_null() {
             unsafe { Self::from_raw(ptr) }
@@ -113,7 +113,7 @@ impl CMBlockBuffer {
     #[must_use]
     pub fn create_empty() -> Option<Self> {
         let mut ptr: *mut std::ffi::c_void = std::ptr::null_mut();
-        let status = unsafe { ffi::cm_block_buffer_create_empty(&mut ptr) };
+        let status = unsafe { ffi::cm_block_buffer_create_empty(&raw mut ptr) };
         if status == 0 && !ptr.is_null() {
             unsafe { Self::from_raw(ptr) }
         } else {
@@ -256,9 +256,9 @@ impl CMBlockBuffer {
             let status = ffi::cm_block_buffer_get_data_pointer(
                 self.0,
                 offset,
-                &mut length_at_offset,
-                &mut total_length,
-                &mut data_pointer,
+                &raw mut length_at_offset,
+                &raw mut total_length,
+                &raw mut data_pointer,
             );
 
             if status == 0 && !data_pointer.is_null() {
@@ -284,9 +284,9 @@ impl CMBlockBuffer {
         let status = ffi::cm_block_buffer_get_data_pointer(
             self.0,
             offset,
-            &mut length_at_offset,
-            &mut total_length,
-            &mut data_pointer,
+            &raw mut length_at_offset,
+            &raw mut total_length,
+            &raw mut data_pointer,
         );
 
         if status == 0 && !data_pointer.is_null() {

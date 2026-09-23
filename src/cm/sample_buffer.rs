@@ -117,10 +117,10 @@ impl CMSampleBuffer {
         unsafe {
             ffi::cm_sample_buffer_get_presentation_timestamp(
                 self.0,
-                &mut t.value,
-                &mut t.timescale,
-                &mut t.flags,
-                &mut t.epoch,
+                &raw mut t.value,
+                &raw mut t.timescale,
+                &raw mut t.flags,
+                &raw mut t.epoch,
             );
         }
         t
@@ -134,10 +134,10 @@ impl CMSampleBuffer {
         unsafe {
             ffi::cm_sample_buffer_get_decode_timestamp(
                 self.0,
-                &mut t.value,
-                &mut t.timescale,
-                &mut t.flags,
-                &mut t.epoch,
+                &raw mut t.value,
+                &raw mut t.timescale,
+                &raw mut t.flags,
+                &raw mut t.epoch,
             );
         }
         t
@@ -150,10 +150,10 @@ impl CMSampleBuffer {
         unsafe {
             ffi::cm_sample_buffer_get_duration(
                 self.0,
-                &mut t.value,
-                &mut t.timescale,
-                &mut t.flags,
-                &mut t.epoch,
+                &raw mut t.value,
+                &raw mut t.timescale,
+                &raw mut t.flags,
+                &raw mut t.epoch,
             );
         }
         t
@@ -217,10 +217,10 @@ impl CMSampleBuffer {
         let status = unsafe {
             ffi::acf_cm_sample_buffer_copy_audio_buffer_list(
                 self.0,
-                &mut num_buffers,
-                &mut buffers_ptr,
-                &mut buffers_len,
-                &mut block_buffer_ptr,
+                &raw mut num_buffers,
+                &raw mut buffers_ptr,
+                &raw mut buffers_len,
+                &raw mut block_buffer_ptr,
             )
         };
         let list = unsafe {
