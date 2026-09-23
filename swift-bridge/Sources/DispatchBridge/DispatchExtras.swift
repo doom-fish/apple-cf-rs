@@ -125,45 +125,103 @@ final class DispatchSourceTimerHolder {
     }
 }
 
+final class DispatchGroupHolder {
+    let group = DispatchGroup()
+    private let lock = NSLock()
+    private var entered = 0
+
+    func enter() {
+        lock.lock()
+        defer { lock.unlock() }
+        entered += 1
+        group.enter()
+    }
+
+    func leave() {
+        lock.lock()
+        defer { lock.unlock() }
+        guard entered > 0 else { return }
+        entered -= 1
+        group.leave()
+    }
+
+    deinit {
+        for _ in 0..<entered {
+            group.leave()
+        }
+    }
+}
+
+final class DispatchSemaphoreHolder {
+    let semaphore: DispatchSemaphore
+    private let lock = NSLock()
+    private var consumed = 0
+
+    init(value: Int) {
+        semaphore = DispatchSemaphore(value: value)
+    }
+
+    func signal() -> Int {
+        lock.lock()
+        defer { lock.unlock() }
+        consumed &-= 1
+        return semaphore.signal()
+    }
+
+    func wait(timeout: DispatchTime) -> Bool {
+        guard semaphore.wait(timeout: timeout) == .success else { return false }
+        lock.lock()
+        consumed &+= 1
+        lock.unlock()
+        return true
+    }
+
+    deinit {
+        for _ in 0..<max(consumed, 0) {
+            semaphore.signal()
+        }
+    }
+}
+
 @_cdecl("acf_dispatch_group_create")
 public func acf_dispatch_group_create() -> UnsafeMutableRawPointer {
-    return Unmanaged.passRetained(DispatchGroup()).toOpaque()
+    return Unmanaged.passRetained(DispatchGroupHolder()).toOpaque()
 }
 
 @_cdecl("acf_dispatch_group_enter")
 public func acf_dispatch_group_enter(_ group: UnsafeMutableRawPointer) {
-    let group = Unmanaged<DispatchGroup>.fromOpaque(group).takeUnretainedValue()
+    let group = Unmanaged<DispatchGroupHolder>.fromOpaque(group).takeUnretainedValue()
     group.enter()
 }
 
 @_cdecl("acf_dispatch_group_leave")
 public func acf_dispatch_group_leave(_ group: UnsafeMutableRawPointer) {
-    let group = Unmanaged<DispatchGroup>.fromOpaque(group).takeUnretainedValue()
+    let group = Unmanaged<DispatchGroupHolder>.fromOpaque(group).takeUnretainedValue()
     group.leave()
 }
 
 @_cdecl("acf_dispatch_group_wait")
 public func acf_dispatch_group_wait(_ group: UnsafeMutableRawPointer, _ timeoutMs: Int64) -> Bool {
-    let group = Unmanaged<DispatchGroup>.fromOpaque(group).takeUnretainedValue()
-    return group.wait(timeout: dispatchDeadline(timeoutMs: timeoutMs)) == .success
+    let group = Unmanaged<DispatchGroupHolder>.fromOpaque(group).takeUnretainedValue()
+    return group.group.wait(timeout: dispatchDeadline(timeoutMs: timeoutMs)) == .success
 }
 
 @_cdecl("acf_dispatch_semaphore_create")
 public func acf_dispatch_semaphore_create(_ value: Int64) -> UnsafeMutableRawPointer? {
     guard value >= 0, let value = Int(exactly: value) else { return nil }
-    return Unmanaged.passRetained(DispatchSemaphore(value: value)).toOpaque()
+    return Unmanaged.passRetained(DispatchSemaphoreHolder(value: value)).toOpaque()
 }
 
 @_cdecl("acf_dispatch_semaphore_signal")
 public func acf_dispatch_semaphore_signal(_ semaphore: UnsafeMutableRawPointer) -> Int64 {
-    let semaphore = Unmanaged<DispatchSemaphore>.fromOpaque(semaphore).takeUnretainedValue()
+    let semaphore = Unmanaged<DispatchSemaphoreHolder>.fromOpaque(semaphore).takeUnretainedValue()
     return Int64(semaphore.signal())
 }
 
 @_cdecl("acf_dispatch_semaphore_wait")
 public func acf_dispatch_semaphore_wait(_ semaphore: UnsafeMutableRawPointer, _ timeoutMs: Int64) -> Bool {
-    let semaphore = Unmanaged<DispatchSemaphore>.fromOpaque(semaphore).takeUnretainedValue()
-    return semaphore.wait(timeout: dispatchDeadline(timeoutMs: timeoutMs)) == .success
+    let semaphore = Unmanaged<DispatchSemaphoreHolder>.fromOpaque(semaphore).takeUnretainedValue()
+    return semaphore.wait(timeout: dispatchDeadline(timeoutMs: timeoutMs))
 }
 
 @_cdecl("acf_dispatch_source_timer_create")
