@@ -894,16 +894,8 @@ impl IOSurfaceLockGuard<'_> {
     /// immovable, locked, and immutable through every Rust and native alias.
     #[must_use]
     pub unsafe fn plane_data(&self, plane_index: usize) -> Option<&[u8]> {
-        if self.plane_count() == 0 || plane_index >= self.plane_count() {
-            return None;
-        }
-        let base = self.base_address_of_plane(plane_index)?;
-        let height = self.surface.height_of_plane(plane_index);
-        let bytes_per_row = self.surface.bytes_per_row_of_plane(plane_index);
+        let (base, height, bytes_per_row) = self.plane_extent(plane_index)?;
         let len = height.checked_mul(bytes_per_row)?;
-        if isize::try_from(len).is_err() {
-            return None;
-        }
         Some(unsafe { std::slice::from_raw_parts(base, len) })
     }
 
@@ -917,22 +909,32 @@ impl IOSurfaceLockGuard<'_> {
     /// immovable, locked, and immutable through every Rust and native alias.
     #[must_use]
     pub unsafe fn plane_row(&self, plane_index: usize, row_index: usize) -> Option<&[u8]> {
-        if self.plane_count() == 0 || plane_index >= self.plane_count() {
-            return None;
-        }
-        let height = self.surface.height_of_plane(plane_index);
+        let (base, height, bytes_per_row) = self.plane_extent(plane_index)?;
         if row_index >= height {
             return None;
         }
-        let base = self.base_address_of_plane(plane_index)?;
-        let bytes_per_row = self.surface.bytes_per_row_of_plane(plane_index);
-        let plane_len = height.checked_mul(bytes_per_row)?;
         let offset = row_index.checked_mul(bytes_per_row)?;
-        let end = offset.checked_add(bytes_per_row)?;
-        if end > plane_len || isize::try_from(bytes_per_row).is_err() {
+        Some(unsafe { std::slice::from_raw_parts(base.add(offset), bytes_per_row) })
+    }
+
+    fn plane_extent(&self, plane_index: usize) -> Option<(*const u8, usize, usize)> {
+        if self.plane_count() == 0 || plane_index >= self.plane_count() {
             return None;
         }
-        Some(unsafe { std::slice::from_raw_parts(base.add(offset), bytes_per_row) })
+        let allocation = self.base_address();
+        let base = self.base_address_of_plane(plane_index)?;
+        if allocation.is_null() {
+            return None;
+        }
+        let height = self.surface.height_of_plane(plane_index);
+        let bytes_per_row = self.surface.bytes_per_row_of_plane(plane_index);
+        let len = height.checked_mul(bytes_per_row)?;
+        let offset = (base as usize).checked_sub(allocation as usize)?;
+        let end = offset.checked_add(len)?;
+        if end > self.alloc_size() || isize::try_from(len).is_err() {
+            return None;
+        }
+        Some((base, height, bytes_per_row))
     }
 
     /// Access surface with a standard `std::io::Cursor`

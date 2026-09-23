@@ -154,6 +154,10 @@ public func cv_pixel_buffer_create_with_planar_bytes(
     _ pixelBufferOut: UnsafeMutablePointer<UnsafeMutableRawPointer?>
 ) -> Int32 {
     var pixelBuffer: CVPixelBuffer?
+    guard numPlanes >= 0 else {
+        pixelBufferOut.pointee = nil
+        return kCVReturnInvalidArgument
+    }
 
     var planeBaseAddressesCopy = Array(UnsafeBufferPointer(start: planeBaseAddresses, count: numPlanes))
     var planeWidthsCopy = Array(UnsafeBufferPointer(start: planeWidths, count: numPlanes))
