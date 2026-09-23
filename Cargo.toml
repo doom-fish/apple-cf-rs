@@ -39,7 +39,8 @@ crate-type = ["lib"]
 [features]
 default = ["cg", "iosurface", "dispatch", "cm", "cv"]
 
-# Per-framework feature flags. Downstream crates can opt into only what they need.
+# Per-framework feature flags. They gate the Rust modules only; the Swift
+# bridge and every framework it uses are always built and linked.
 cg = []
 iosurface = []
 dispatch = []

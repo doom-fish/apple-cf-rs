@@ -435,9 +435,8 @@ extern "C" {
 //
 // These compile-time assertions pin the size and alignment of every such
 // struct so accidental field reordering / type changes fail the build
-// immediately. The MSRV (1.76) predates `core::mem::offset_of!` (stable in
-// 1.77), so field offsets are pinned indirectly via size + alignment rather
-// than per-field `offset_of!`. The runtime `verify_ffi_layout` check in
+// immediately. Field offsets are pinned indirectly via size + alignment
+// rather than per-field `offset_of!`. The runtime `verify_ffi_layout` check in
 // `tests/ffi_layout_tests.rs` guards the same invariants.
 
 #[cfg(any(feature = "cg", feature = "cm", feature = "cv"))]

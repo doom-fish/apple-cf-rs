@@ -1,5 +1,7 @@
 # apple-cf-rs coverage audit (vs MacOSX26.2.sdk)
 
+> **What this audit measures.** `VERIFIED` counts SDK declarations that are reachable from Rust. 2371 of the 2727 verified rows are bindgen declarations in `apple_cf::raw` (unsafe `extern` items with no safe wrapper) and only 356 are used by a safe wrapper, so the 100% figure is raw-binding coverage, not safe-API coverage. The table was generated for 0.10.0 against MacOSX26.2.sdk and has not been regenerated for newer SDKs or for 0.11.0; for example `cm::CMTimebase` now uses `CMTimebaseCreateWithSourceClock`, and `cf::CFTree` is a Swift-side tree helper rather than a `CFTreeRef` wrapper. [`COVERAGE.md`](COVERAGE.md) summarizes the safe surface.
+
 SDK_PUBLIC_SYMBOLS: 2865
 VERIFIED: 2727
 GAPS: 0

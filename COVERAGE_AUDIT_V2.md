@@ -1,5 +1,7 @@
 # apple-cf-rs coverage audit v2 (vs MacOSX26.2.sdk)
 
+> **What this audit measures.** This is a self-selected sample, not an independent full audit: for CoreFoundation and CoreMedia it keeps the 300 symbols with the densest safe-wrapper use, which biases it toward symbols that are already wrapped, and 879 of its 1235 `VERIFIED` rows are bindgen declarations in `apple_cf::raw` rather than safe wrappers. Its 100% says nothing about the unsampled 55% of the SDK surface. It was generated for 0.10.0 against MacOSX26.2.sdk and has not been regenerated; [`COVERAGE.md`](COVERAGE.md) summarizes the safe surface.
+
 SDK_PUBLIC_SYMBOLS: 1297
 VERIFIED: 1235
 GAPS: 0

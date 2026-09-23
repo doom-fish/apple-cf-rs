@@ -1,6 +1,6 @@
 //! Safe Core Foundation wrappers.
 //!
-//! This module provides lightweight, dependency-free wrappers for the most
+//! This module provides lightweight wrappers for the most
 //! common Core Foundation value, collection, locale, formatter, and runtime
 //! types used throughout the Apple media stack.
 
