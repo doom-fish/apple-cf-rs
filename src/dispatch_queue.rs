@@ -300,25 +300,25 @@ impl DispatchGroup {
     /// Create a new empty group.
     #[must_use]
     pub fn new() -> Self {
-        let ptr = unsafe { crate::ffi::acf_dispatch_group_create() };
+        let ptr = unsafe { crate::ffi::acf_dispatch_group_holder_create() };
         assert!(!ptr.is_null(), "failed to create DispatchGroup");
         Self { ptr }
     }
 
     /// Enter the group.
     pub fn enter(&self) {
-        unsafe { crate::ffi::acf_dispatch_group_enter(self.ptr) };
+        unsafe { crate::ffi::acf_dispatch_group_holder_enter(self.ptr) };
     }
 
     /// Leave the group.
     pub fn leave(&self) {
-        unsafe { crate::ffi::acf_dispatch_group_leave(self.ptr) };
+        unsafe { crate::ffi::acf_dispatch_group_holder_leave(self.ptr) };
     }
 
     /// Wait for the group to finish.
     #[must_use]
     pub fn wait(&self, timeout: Option<Duration>) -> bool {
-        unsafe { crate::ffi::acf_dispatch_group_wait(self.ptr, timeout_ms(timeout)) }
+        unsafe { crate::ffi::acf_dispatch_group_holder_wait(self.ptr, timeout_ms(timeout)) }
     }
 }
 
@@ -362,7 +362,7 @@ impl DispatchSemaphore {
         if value < 0 {
             return None;
         }
-        let ptr = unsafe { crate::ffi::acf_dispatch_semaphore_create(value) };
+        let ptr = unsafe { crate::ffi::acf_dispatch_semaphore_holder_create(value) };
         if ptr.is_null() {
             None
         } else {
@@ -373,13 +373,13 @@ impl DispatchSemaphore {
     /// Signal the semaphore.
     #[must_use]
     pub fn signal(&self) -> i64 {
-        unsafe { crate::ffi::acf_dispatch_semaphore_signal(self.ptr) }
+        unsafe { crate::ffi::acf_dispatch_semaphore_holder_signal(self.ptr) }
     }
 
     /// Wait for the semaphore.
     #[must_use]
     pub fn wait(&self, timeout: Option<Duration>) -> bool {
-        unsafe { crate::ffi::acf_dispatch_semaphore_wait(self.ptr, timeout_ms(timeout)) }
+        unsafe { crate::ffi::acf_dispatch_semaphore_holder_wait(self.ptr, timeout_ms(timeout)) }
     }
 }
 
