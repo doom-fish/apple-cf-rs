@@ -88,9 +88,9 @@ fn cm_time_range_helpers_work() {
 #[test]
 fn cm_timebase_smoke() {
     let clock = CMClock::host_time_clock();
-    let timebase = CMTimebase::with_master_clock(&clock).expect("timebase");
+    let timebase = CMTimebase::with_source_clock(&clock).expect("timebase");
     assert_eq!(timebase.set_rate(1.0), 0);
     assert_eq!(timebase.set_time(CMTime::new(0, 600)), 0);
     assert!(timebase.time().is_valid());
-    assert!(timebase.master_clock().is_some());
+    assert!(timebase.source_clock().is_some());
 }

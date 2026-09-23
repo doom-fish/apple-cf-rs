@@ -1,5 +1,5 @@
 use crate::ffi;
-use std::ffi::{c_void, CStr};
+use std::ffi::c_void;
 use std::fmt;
 
 /// Trait for Core Foundation values that can be inserted into CF collections.
@@ -78,15 +78,9 @@ impl CFType {
     /// Human-readable Core Foundation description.
     #[must_use]
     pub fn description(&self) -> String {
-        let ptr = unsafe { ffi::cf_type_copy_description(self.0) };
-        if ptr.is_null() {
-            return String::new();
-        }
-        let string = unsafe { CStr::from_ptr(ptr) }
-            .to_string_lossy()
-            .into_owned();
-        unsafe { ffi::acf_free_string(ptr) };
-        string
+        let ptr = unsafe { ffi::acf_cf_type_copy_description_string(self.0) };
+        unsafe { crate::cf::CFString::from_raw(ptr) }
+            .map_or_else(String::new, |description| description.to_string_lossy())
     }
 }
 

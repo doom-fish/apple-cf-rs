@@ -9,7 +9,7 @@
 //!     CFTimeZone, CFURL, CFUUID, CFXML,
 //! };
 //!
-//! let url = CFURL::from_file_system_path("/System/Library", true);
+//! let url = CFURL::from_file_system_path("/System/Library", true).expect("file URL");
 //! assert!(url.has_directory_path());
 //!
 //! let locale = CFLocale::current();
@@ -45,10 +45,6 @@ use super::base::{impl_cf_type_wrapper, AsCFType, CFType};
 use super::{CFDate, CFNumber, CFString, CFUUID};
 use crate::ffi;
 use std::ffi::CString;
-
-fn to_cstring(value: &str) -> CString {
-    CString::new(value).expect("Core Foundation strings may not contain interior NUL bytes")
-}
 
 impl_cf_type_wrapper!(CFURL, cf_url_get_type_id);
 impl_cf_type_wrapper!(CFBundle, cf_bundle_get_type_id);
@@ -86,18 +82,18 @@ pub enum CFDateFormatterStyle {
 impl CFURL {
     /// Create a URL from an absolute string.
     #[must_use]
-    pub fn from_string(value: &str) -> Self {
-        let value = to_cstring(value);
+    pub fn from_string(value: &str) -> Option<Self> {
+        let value = CString::new(value).ok()?;
         let ptr = unsafe { ffi::cf_url_create_with_string(value.as_ptr()) };
-        unsafe { Self::from_raw(ptr) }.expect("CFURLCreateWithString returned NULL")
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Create a file URL from a POSIX path.
     #[must_use]
-    pub fn from_file_system_path(path: &str, is_directory: bool) -> Self {
-        let path = to_cstring(path);
+    pub fn from_file_system_path(path: &str, is_directory: bool) -> Option<Self> {
+        let path = CString::new(path).ok()?;
         let ptr = unsafe { ffi::cf_url_create_file_path(path.as_ptr(), is_directory) };
-        unsafe { Self::from_raw(ptr) }.expect("CFURLCreateWithFileSystemPath returned NULL")
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Absolute string form of the URL.
@@ -109,9 +105,9 @@ impl CFURL {
 
     /// File-system path (POSIX style) for file URLs.
     #[must_use]
-    pub fn file_system_path(&self) -> CFString {
+    pub fn file_system_path(&self) -> Option<CFString> {
         let ptr = unsafe { ffi::cf_url_copy_file_system_path(self.as_ptr()) };
-        unsafe { CFString::from_raw(ptr) }.expect("CFURLCopyFileSystemPath returned NULL")
+        unsafe { CFString::from_raw(ptr) }
     }
 
     /// Whether the URL ends with a directory path separator.
@@ -158,9 +154,9 @@ impl CFBundle {
         extension: Option<&str>,
         subdir: Option<&str>,
     ) -> Option<CFURL> {
-        let name = to_cstring(name);
-        let extension = extension.map(to_cstring);
-        let subdir = subdir.map(to_cstring);
+        let name = CString::new(name).ok()?;
+        let extension = extension.map(CString::new).transpose().ok()?;
+        let subdir = subdir.map(CString::new).transpose().ok()?;
         let ptr = unsafe {
             ffi::cf_bundle_copy_resource_url(
                 self.as_ptr(),
@@ -184,7 +180,7 @@ impl CFLocale {
     /// Create a locale from an identifier such as `en_US`.
     #[must_use]
     pub fn new(identifier: &str) -> Self {
-        let identifier = to_cstring(identifier);
+        let identifier = crate::utils::ffi_string::cstring_until_nul(identifier);
         let ptr = unsafe { ffi::cf_locale_create(identifier.as_ptr()) };
         unsafe { Self::from_raw(ptr) }.expect("CFLocaleCreate returned NULL")
     }
@@ -207,10 +203,10 @@ impl CFCalendar {
 
     /// Create a calendar by identifier (for example `gregorian`).
     #[must_use]
-    pub fn new(identifier: &str) -> Self {
-        let identifier = to_cstring(identifier);
+    pub fn new(identifier: &str) -> Option<Self> {
+        let identifier = CString::new(identifier).ok()?;
         let ptr = unsafe { ffi::cf_calendar_create(identifier.as_ptr()) };
-        unsafe { Self::from_raw(ptr) }.expect("CFCalendarCreateWithIdentifier returned NULL")
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Calendar identifier.
@@ -243,10 +239,10 @@ impl CFTimeZone {
 
     /// Create a time zone by name, for example `UTC`.
     #[must_use]
-    pub fn new(name: &str) -> Self {
-        let name = to_cstring(name);
+    pub fn new(name: &str) -> Option<Self> {
+        let name = CString::new(name).ok()?;
         let ptr = unsafe { ffi::cf_time_zone_create(name.as_ptr()) };
-        unsafe { Self::from_raw(ptr) }.expect("CFTimeZoneCreateWithName returned NULL")
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Time zone name.

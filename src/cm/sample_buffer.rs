@@ -9,7 +9,7 @@
 //! `screencapturekit-rs`'s SC-attachment readers don't get pulled into
 //! `videotoolbox-rs`.
 
-use super::{CMBlockBuffer, CMFormatDescription, CMTime};
+use super::{AudioBufferList, CMBlockBuffer, CMFormatDescription, CMTime};
 use crate::ffi;
 use std::fmt;
 
@@ -206,6 +206,35 @@ impl CMSampleBuffer {
             ) -> *mut std::ffi::c_void;
         }
         unsafe { CMSampleBufferGetImageBuffer(self.0) }
+    }
+
+    #[allow(clippy::missing_errors_doc)]
+    pub fn audio_buffer_list(&self) -> Result<AudioBufferList, i32> {
+        let mut num_buffers = 0_u32;
+        let mut buffers_ptr: *mut std::ffi::c_void = std::ptr::null_mut();
+        let mut buffers_len = 0_usize;
+        let mut block_buffer_ptr = std::ptr::null_mut();
+        let status = unsafe {
+            ffi::acf_cm_sample_buffer_copy_audio_buffer_list(
+                self.0,
+                &mut num_buffers,
+                &mut buffers_ptr,
+                &mut buffers_len,
+                &mut block_buffer_ptr,
+            )
+        };
+        let list = unsafe {
+            AudioBufferList::from_bridge(
+                num_buffers,
+                buffers_ptr.cast(),
+                buffers_len,
+                block_buffer_ptr,
+            )
+        };
+        if status != 0 {
+            return Err(status);
+        }
+        list.ok_or(-50)
     }
 
     /// Copy the sample buffer's image buffer into an independently owned wrapper.

@@ -583,14 +583,15 @@ impl CMClock {
     }
 
     /// Get the current time from this clock
-    ///
-    /// Note: Returns invalid time. Use `as_ptr()` with Core Media APIs directly
-    /// for full clock functionality.
     #[must_use]
-    pub const fn time(&self) -> CMTime {
-        // This would require FFI to CMClockGetTime - for now return invalid
-        // Users can use the pointer directly with Core Media APIs
-        CMTime::INVALID
+    pub fn time(&self) -> CMTime {
+        extern "C" {
+            fn CMClockGetTime(clock: *const c_void) -> CMTime;
+        }
+        if self.ptr.is_null() {
+            return CMTime::INVALID;
+        }
+        unsafe { CMClockGetTime(self.ptr) }
     }
 }
 

@@ -6,13 +6,14 @@ use apple_cf::cf::{
 
 fn main() {
     let bundle_url =
-        CFURL::from_file_system_path("/System/Library/Frameworks/CoreFoundation.framework", true);
+        CFURL::from_file_system_path("/System/Library/Frameworks/CoreFoundation.framework", true)
+            .expect("bundle URL");
     let bundle = CFBundle::from_url(&bundle_url).expect("bundle");
     assert!(bundle.bundle_url().has_directory_path());
 
     let locale = CFLocale::new("en_US");
-    let calendar = CFCalendar::new("gregorian");
-    let time_zone = CFTimeZone::new("GMT");
+    let calendar = CFCalendar::new("gregorian").expect("gregorian calendar");
+    let time_zone = CFTimeZone::new("GMT").expect("GMT time zone");
     calendar.set_time_zone(&time_zone);
     assert_eq!(calendar.time_zone().name().to_string(), "GMT");
     assert_eq!(locale.identifier().to_string(), "en_US");

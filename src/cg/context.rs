@@ -3,7 +3,7 @@
 use core::ffi::c_void;
 use core::ptr;
 
-use crate::CFError;
+use crate::NullPointerError;
 
 use super::drawing::{CGColorSpace, CGImage};
 use super::ffi;
@@ -50,7 +50,7 @@ impl CGContext {
         height: usize,
         color_space: &CGColorSpace,
         bitmap_info: u32,
-    ) -> Result<Self, CFError> {
+    ) -> Result<Self, NullPointerError> {
         let context = unsafe {
             ffi::CGBitmapContextCreate(
                 ptr::null_mut(),
@@ -64,7 +64,7 @@ impl CGContext {
         };
 
         if context.is_null() {
-            Err(CFError::new("CGBitmapContextCreate"))
+            Err(NullPointerError::new("CGBitmapContextCreate"))
         } else {
             let context = Self { ptr: context };
             let data = context.data();
@@ -80,8 +80,8 @@ impl CGContext {
     ///
     /// # Errors
     ///
-    /// Returns [`CFError`] if Core Graphics fails to create the bitmap context.
-    pub fn new_rgba8(width: usize, height: usize) -> Result<Self, CFError> {
+    /// Returns [`NullPointerError`] if Core Graphics fails to create the bitmap context.
+    pub fn new_rgba8(width: usize, height: usize) -> Result<Self, NullPointerError> {
         let color_space = CGColorSpace::device_rgb();
         Self::new_bitmap(width, height, &color_space, RGBA8_BITMAP_INFO)
     }
@@ -90,8 +90,8 @@ impl CGContext {
     ///
     /// # Errors
     ///
-    /// Returns [`CFError`] if Core Graphics fails to create the bitmap context.
-    pub fn new_grayscale(width: usize, height: usize) -> Result<Self, CFError> {
+    /// Returns [`NullPointerError`] if Core Graphics fails to create the bitmap context.
+    pub fn new_grayscale(width: usize, height: usize) -> Result<Self, NullPointerError> {
         let color_space = CGColorSpace::device_gray();
         Self::new_bitmap(width, height, &color_space, GRAYSCALE8_BITMAP_INFO)
     }

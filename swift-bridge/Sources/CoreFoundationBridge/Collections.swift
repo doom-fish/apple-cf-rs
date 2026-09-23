@@ -275,10 +275,15 @@ public func cf_set_get_value_if_present(
     return present
 }
 
-@_cdecl("cf_set_get_values")
-public func cf_set_get_values(_ value: UnsafeMutableRawPointer, _ outValues: UnsafeMutablePointer<UnsafeMutableRawPointer?>) {
+@_cdecl("acf_cf_set_copy_values")
+public func acf_cf_set_copy_values(
+    _ value: UnsafeMutableRawPointer,
+    _ outValues: UnsafeMutablePointer<UnsafeMutableRawPointer?>?,
+    _ capacity: Int
+) -> Int {
     let set = Unmanaged<CFSet>.fromOpaque(value).takeUnretainedValue()
     let count = CFSetGetCount(set)
+    guard let outValues, count <= capacity else { return count }
     var values = Array<UnsafeRawPointer?>(repeating: nil, count: count)
     if count > 0 {
         CFSetGetValues(set, &values)
@@ -286,6 +291,7 @@ public func cf_set_get_values(_ value: UnsafeMutableRawPointer, _ outValues: Uns
     for (index, raw) in values.enumerated() {
         outValues.advanced(by: index).pointee = acfRetainedCFType(UnsafeMutableRawPointer(mutating: raw))
     }
+    return count
 }
 
 @_cdecl("cf_set_apply_function")
@@ -432,7 +438,8 @@ public func cf_attributed_string_create(_ string: UnsafeMutableRawPointer) -> Un
 @_cdecl("cf_attributed_string_get_string")
 public func cf_attributed_string_get_string(_ value: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
     let attributed = Unmanaged<CFAttributedString>.fromOpaque(value).takeUnretainedValue()
-    return Unmanaged.passRetained(CFAttributedStringGetString(attributed)).toOpaque()
+    guard let string = CFAttributedStringGetString(attributed) else { return nil }
+    return Unmanaged.passRetained(string).toOpaque()
 }
 
 @_cdecl("cf_attributed_string_get_length")

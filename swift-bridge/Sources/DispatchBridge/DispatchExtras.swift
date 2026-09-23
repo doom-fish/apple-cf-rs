@@ -65,16 +65,17 @@ final class DispatchSourceTimerHolder {
     private var state = State.inactive
     private var fireCount: UInt64 = 0
 
-    init(intervalMs: UInt64, leewayMs: UInt64) {
+    init(intervalNs: UInt64, leewayNs: UInt64) {
         let queue = DispatchQueue(label: "com.doomfish.apple-cf.dispatch-source")
         source = DispatchSource.makeTimerSource(queue: queue)
         source.setEventHandler { [weak self] in
             self?.recordFire()
         }
+        let interval = DispatchTimeInterval.nanoseconds(Int(clamping: intervalNs))
         source.schedule(
-            deadline: .now() + .milliseconds(Int(intervalMs)),
-            repeating: .milliseconds(Int(intervalMs)),
-            leeway: .milliseconds(Int(leewayMs))
+            deadline: .now() + interval,
+            repeating: interval,
+            leeway: .nanoseconds(Int(clamping: leewayNs))
         )
     }
 
@@ -148,8 +149,9 @@ public func acf_dispatch_group_wait(_ group: UnsafeMutableRawPointer, _ timeoutM
 }
 
 @_cdecl("acf_dispatch_semaphore_create")
-public func acf_dispatch_semaphore_create(_ value: Int64) -> UnsafeMutableRawPointer {
-    return Unmanaged.passRetained(DispatchSemaphore(value: Int(value))).toOpaque()
+public func acf_dispatch_semaphore_create(_ value: Int64) -> UnsafeMutableRawPointer? {
+    guard value >= 0, let value = Int(exactly: value) else { return nil }
+    return Unmanaged.passRetained(DispatchSemaphore(value: value)).toOpaque()
 }
 
 @_cdecl("acf_dispatch_semaphore_signal")
@@ -166,7 +168,17 @@ public func acf_dispatch_semaphore_wait(_ semaphore: UnsafeMutableRawPointer, _ 
 
 @_cdecl("acf_dispatch_source_timer_create")
 public func acf_dispatch_source_timer_create(_ intervalMs: UInt64, _ leewayMs: UInt64) -> UnsafeMutableRawPointer {
-    return Unmanaged.passRetained(DispatchSourceTimerHolder(intervalMs: intervalMs, leewayMs: leewayMs)).toOpaque()
+    let (intervalNs, intervalOverflow) = intervalMs.multipliedReportingOverflow(by: 1_000_000)
+    let (leewayNs, leewayOverflow) = leewayMs.multipliedReportingOverflow(by: 1_000_000)
+    return acf_dispatch_source_timer_create_ns(
+        intervalOverflow ? UInt64.max : intervalNs,
+        leewayOverflow ? UInt64.max : leewayNs
+    )
+}
+
+@_cdecl("acf_dispatch_source_timer_create_ns")
+public func acf_dispatch_source_timer_create_ns(_ intervalNs: UInt64, _ leewayNs: UInt64) -> UnsafeMutableRawPointer {
+    return Unmanaged.passRetained(DispatchSourceTimerHolder(intervalNs: intervalNs, leewayNs: leewayNs)).toOpaque()
 }
 
 @_cdecl("acf_dispatch_source_timer_resume")

@@ -6,7 +6,7 @@
 //! use apple_cf::cm::{CMClock, CMTime, CMTimebase};
 //!
 //! let clock = CMClock::host_time_clock();
-//! let timebase = CMTimebase::with_master_clock(&clock).expect("timebase");
+//! let timebase = CMTimebase::with_source_clock(&clock).expect("timebase");
 //! assert!(timebase.time().is_valid());
 //! assert_eq!(timebase.set_rate(1.0), 0);
 //! assert_eq!(timebase.set_time(CMTime::new(0, 600)), 0);
@@ -22,18 +22,18 @@ pub struct CMTimebase {
 }
 
 impl CMTimebase {
-    /// Create a timebase that uses `master_clock` as its time source.
-    pub fn with_master_clock(master_clock: &CMClock) -> Result<Self, i32> {
+    /// Create a timebase that uses `source_clock` as its time source.
+    pub fn with_source_clock(source_clock: &CMClock) -> Result<Self, i32> {
         extern "C" {
-            fn CMTimebaseCreateWithMasterClock(
+            fn CMTimebaseCreateWithSourceClock(
                 allocator: *const c_void,
-                masterClock: *const c_void,
+                sourceClock: *const c_void,
                 timebaseOut: *mut *const c_void,
             ) -> i32;
         }
         let mut ptr = std::ptr::null();
         let status = unsafe {
-            CMTimebaseCreateWithMasterClock(std::ptr::null(), master_clock.as_ptr(), &mut ptr)
+            CMTimebaseCreateWithSourceClock(std::ptr::null(), source_clock.as_ptr(), &mut ptr)
         };
         if status == 0 && !ptr.is_null() {
             Ok(Self { ptr })
@@ -101,7 +101,7 @@ impl CMTimebase {
         unsafe { CMTimebaseSetTime(self.ptr, time) }
     }
 
-    /// Playback rate relative to the master clock.
+    /// Playback rate relative to the source clock.
     #[must_use]
     pub fn rate(&self) -> f64 {
         extern "C" {
@@ -110,7 +110,7 @@ impl CMTimebase {
         unsafe { CMTimebaseGetRate(self.ptr) }
     }
 
-    /// Set the playback rate relative to the master clock.
+    /// Set the playback rate relative to the source clock.
     #[must_use]
     pub fn set_rate(&self, rate: f64) -> i32 {
         extern "C" {
@@ -119,13 +119,13 @@ impl CMTimebase {
         unsafe { CMTimebaseSetRate(self.ptr, rate) }
     }
 
-    /// Copy the master clock.
+    /// Copy the source clock.
     #[must_use]
-    pub fn master_clock(&self) -> Option<CMClock> {
+    pub fn source_clock(&self) -> Option<CMClock> {
         extern "C" {
-            fn CMTimebaseCopyMasterClock(timebase: *const c_void) -> *const c_void;
+            fn CMTimebaseCopySourceClock(timebase: *const c_void) -> *const c_void;
         }
-        let ptr = unsafe { CMTimebaseCopyMasterClock(self.ptr) };
+        let ptr = unsafe { CMTimebaseCopySourceClock(self.ptr) };
         unsafe { CMClock::from_raw(ptr) }
     }
 }

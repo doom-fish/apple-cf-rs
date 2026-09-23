@@ -15,10 +15,10 @@
 //! let timer = CFTimer::new(Duration::from_millis(10), false);
 //! let run_loop = CFRunLoop::current();
 //! run_loop.add_timer(&timer);
-//! let result = run_loop.run_in_default_mode(Duration::from_millis(20), true);
+//! let result = CFRunLoop::run_in_default_mode(Duration::from_millis(20), true);
 //! assert!(matches!(result, CFRunLoopRunResult::HandledSource | CFRunLoopRunResult::TimedOut));
 //!
-//! let local = CFMessagePort::create_echo_local("com.doomfish.apple-cf.echo");
+//! let local = CFMessagePort::create_echo_local("com.doomfish.apple-cf.echo").unwrap();
 //! let remote = CFMessagePort::connect_remote("com.doomfish.apple-cf.echo").unwrap();
 //! let reply = remote.send_request(b"ping", Duration::from_millis(100)).unwrap();
 //! assert_eq!(reply, b"ping");
@@ -34,13 +34,16 @@
 //! let socket = CFSocket::udp_ipv4().unwrap();
 //! assert!(socket.is_valid());
 //!
-//! let fd = CFFileDescriptor::from_raw_fd(0, false).unwrap();
+//! let stdin = std::io::stdin();
+//! let fd = CFFileDescriptor::from_borrowed_fd(std::os::fd::AsFd::as_fd(&stdin)).unwrap();
 //! assert_eq!(fd.native_descriptor(), 0);
 //! ```
 
 use super::base::impl_cf_type_wrapper;
 use super::{CFDictionary, CFString};
 use crate::ffi;
+use std::ffi::CString;
+use std::os::fd::{AsRawFd, BorrowedFd, IntoRawFd, OwnedFd};
 use std::time::Duration;
 
 impl_cf_type_wrapper!(CFNotificationCenter, cf_notification_center_get_type_id);
@@ -126,7 +129,6 @@ impl CFRunLoop {
     /// Run the current thread's run loop in the default mode for `duration`.
     #[must_use]
     pub fn run_in_default_mode(
-        &self,
         duration: Duration,
         return_after_source_handled: bool,
     ) -> CFRunLoopRunResult {
@@ -188,18 +190,16 @@ impl CFTimer {
 impl CFMessagePort {
     /// Create a local message port that echoes request data back as the reply.
     #[must_use]
-    pub fn create_echo_local(name: &str) -> Self {
-        let name =
-            std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
+    pub fn create_echo_local(name: &str) -> Option<Self> {
+        let name = CString::new(name).ok()?;
         let ptr = unsafe { ffi::cf_message_port_create_echo_local(name.as_ptr()) };
-        unsafe { Self::from_raw(ptr) }.expect("CFMessagePortCreateLocal returned NULL")
+        unsafe { Self::from_raw(ptr) }
     }
 
     /// Connect to an existing remote message port.
     #[must_use]
     pub fn connect_remote(name: &str) -> Option<Self> {
-        let name =
-            std::ffi::CString::new(name).expect("message-port name may not contain NUL bytes");
+        let name = CString::new(name).ok()?;
         let ptr = unsafe { ffi::cf_message_port_create_remote(name.as_ptr()) };
         unsafe { Self::from_raw(ptr) }
     }
@@ -335,8 +335,16 @@ impl CFSocket {
 impl CFFileDescriptor {
     /// Wrap a native file descriptor with a no-op callback.
     #[must_use]
-    pub fn from_raw_fd(native_fd: i32, close_on_invalidate: bool) -> Option<Self> {
-        let ptr = unsafe { ffi::cf_file_descriptor_create(native_fd, close_on_invalidate) };
+    pub fn from_owned_fd(fd: OwnedFd) -> Option<Self> {
+        let ptr = unsafe { ffi::cf_file_descriptor_create(fd.as_raw_fd(), true) };
+        let descriptor = unsafe { Self::from_raw(ptr) }?;
+        let _ = fd.into_raw_fd();
+        Some(descriptor)
+    }
+
+    #[must_use]
+    pub fn from_borrowed_fd(fd: BorrowedFd<'_>) -> Option<Self> {
+        let ptr = unsafe { ffi::cf_file_descriptor_create(fd.as_raw_fd(), false) };
         unsafe { Self::from_raw(ptr) }
     }
 

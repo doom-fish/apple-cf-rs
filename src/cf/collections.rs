@@ -75,6 +75,27 @@ extern "C" fn cf_set_apply_trampoline(value: *mut c_void, context: *mut c_void) 
     }
 }
 
+fn copy_set_values(set: *mut c_void, expected_len: usize) -> Vec<CFType> {
+    let mut raw_values: Vec<*mut c_void> = vec![std::ptr::null_mut(); expected_len];
+    loop {
+        let capacity = raw_values.len();
+        let buffer = if capacity == 0 {
+            std::ptr::null_mut()
+        } else {
+            raw_values.as_mut_ptr()
+        };
+        let len = unsafe { ffi::acf_cf_set_copy_values(set, buffer, capacity) };
+        if len <= capacity {
+            raw_values.truncate(len);
+            return raw_values
+                .into_iter()
+                .filter_map(|ptr| unsafe { CFType::from_raw(ptr) })
+                .collect();
+        }
+        raw_values.resize(len, std::ptr::null_mut());
+    }
+}
+
 impl CFArray {
     /// Create an array from borrowed Core Foundation values.
     #[must_use]
@@ -273,15 +294,7 @@ impl CFSet {
     /// Copy all values into a Rust vector.
     #[must_use]
     pub fn values(&self) -> Vec<CFType> {
-        let len = self.len();
-        let mut raw_values = vec![std::ptr::null_mut(); len];
-        if !raw_values.is_empty() {
-            unsafe { ffi::cf_set_get_values(self.as_ptr(), raw_values.as_mut_ptr()) };
-        }
-        raw_values
-            .into_iter()
-            .filter_map(|ptr| unsafe { CFType::from_raw(ptr) })
-            .collect()
+        copy_set_values(self.as_ptr(), self.len())
     }
 
     /// Call `callback` once for each value in the set.
@@ -371,15 +384,7 @@ impl CFMutableSet {
     /// Copy all values into a Rust vector.
     #[must_use]
     pub fn values(&self) -> Vec<CFType> {
-        let len = self.len();
-        let mut raw_values = vec![std::ptr::null_mut(); len];
-        if !raw_values.is_empty() {
-            unsafe { ffi::cf_set_get_values(self.as_ptr(), raw_values.as_mut_ptr()) };
-        }
-        raw_values
-            .into_iter()
-            .filter_map(|ptr| unsafe { CFType::from_raw(ptr) })
-            .collect()
+        copy_set_values(self.as_ptr(), self.len())
     }
 
     /// Add `candidate` if it is not already present.

@@ -16,7 +16,7 @@ fn dispatch_sync_primitives_work() {
     group.leave();
     assert!(group.wait(Some(Duration::from_millis(10))));
 
-    let semaphore = DispatchSemaphore::new(0);
+    let semaphore = DispatchSemaphore::new(0).expect("semaphore");
     assert_eq!(semaphore.signal(), 0);
     assert!(semaphore.wait(Some(Duration::from_millis(10))));
 

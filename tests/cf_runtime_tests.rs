@@ -18,7 +18,7 @@ fn cf_runtime_wrappers_work() {
     let run_loop = CFRunLoop::current();
     run_loop.add_timer(&timer);
     assert!(timer.is_valid());
-    let result = run_loop.run_in_default_mode(Duration::from_millis(20), true);
+    let result = CFRunLoop::run_in_default_mode(Duration::from_millis(20), true);
     assert!(matches!(
         result,
         CFRunLoopRunResult::Finished
@@ -28,7 +28,7 @@ fn cf_runtime_wrappers_work() {
     ));
 
     let name = format!("com.doomfish.apple-cf.echo.test.{}", process::id());
-    let _local = CFMessagePort::create_echo_local(&name);
+    let _local = CFMessagePort::create_echo_local(&name).expect("local port");
     let remote = CFMessagePort::connect_remote(&name).expect("remote port");
     let reply = remote
         .send_request(b"ping", Duration::from_millis(100))
@@ -49,6 +49,8 @@ fn cf_runtime_wrappers_work() {
     assert!(socket.is_valid());
     assert!(socket.native() >= 0);
 
-    let fd = CFFileDescriptor::from_raw_fd(0, false).expect("file descriptor");
+    let stdin = std::io::stdin();
+    let fd = CFFileDescriptor::from_borrowed_fd(std::os::fd::AsFd::as_fd(&stdin))
+        .expect("file descriptor");
     assert_eq!(fd.native_descriptor(), 0);
 }

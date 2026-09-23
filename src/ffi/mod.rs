@@ -165,6 +165,14 @@ extern "C" {
     pub fn cm_sample_buffer_is_valid(sample_buffer: *mut c_void) -> bool;
     /// Swift bridge function `cm_sample_buffer_data_is_ready` for the corresponding Apple API.
     pub fn cm_sample_buffer_data_is_ready(sample_buffer: *mut c_void) -> bool;
+    pub fn acf_cm_sample_buffer_copy_audio_buffer_list(
+        sample_buffer: *mut c_void,
+        out_num_buffers: *mut u32,
+        out_buffers: *mut *mut c_void,
+        out_buffers_len: *mut usize,
+        out_block_buffer: *mut *mut c_void,
+    ) -> i32;
+    pub fn acf_cm_audio_buffer_array_free(buffers: *mut c_void);
 
     // ---- CMBlockBuffer ----
     /// Swift bridge function `cm_block_buffer_release` for the corresponding Apple API.

@@ -41,6 +41,7 @@ extern "C" {
 
     /// Swift bridge function `acf_dispatch_source_timer_create` for the corresponding Apple API.
     pub fn acf_dispatch_source_timer_create(interval_ms: u64, leeway_ms: u64) -> *mut c_void;
+    pub fn acf_dispatch_source_timer_create_ns(interval_ns: u64, leeway_ns: u64) -> *mut c_void;
     /// Swift bridge function `acf_dispatch_source_timer_resume` for the corresponding Apple API.
     pub fn acf_dispatch_source_timer_resume(source: *mut c_void);
     /// Swift bridge function `acf_dispatch_source_timer_cancel` for the corresponding Apple API.

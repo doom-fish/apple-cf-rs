@@ -27,7 +27,7 @@
 //! ```
 
 use crate::utils::panic_safe;
-use std::ffi::{c_void, CString};
+use std::ffi::c_void;
 use std::fmt;
 use std::time::Duration;
 
@@ -101,12 +101,14 @@ impl DispatchQueue {
     /// // Use the queue with SCStream's add_output_handler_with_queue
     /// ```
     ///
+    /// The label is truncated at its first NUL byte.
+    ///
     /// # Panics
     ///
-    /// Panics if the label contains null bytes or if queue creation fails
+    /// Panics if queue creation fails
     #[must_use]
     pub fn new(label: &str, qos: DispatchQoS) -> Self {
-        let c_label = CString::new(label).expect("Label contains null byte");
+        let c_label = crate::utils::ffi_string::cstring_until_nul(label);
         let ptr = unsafe { crate::ffi::acf_dispatch_queue_create(c_label.as_ptr(), qos as i32) };
         assert!(!ptr.is_null(), "Failed to create dispatch queue");
         Self { ptr }
@@ -313,10 +315,16 @@ unsafe impl Sync for DispatchSemaphore {}
 impl DispatchSemaphore {
     /// Create a semaphore with an initial signal count.
     #[must_use]
-    pub fn new(value: i64) -> Self {
+    pub fn new(value: i64) -> Option<Self> {
+        if value < 0 {
+            return None;
+        }
         let ptr = unsafe { crate::ffi::acf_dispatch_semaphore_create(value) };
-        assert!(!ptr.is_null(), "failed to create DispatchSemaphore");
-        Self { ptr }
+        if ptr.is_null() {
+            None
+        } else {
+            Some(Self { ptr })
+        }
     }
 
     /// Signal the semaphore.
@@ -363,9 +371,10 @@ impl DispatchSource {
     /// Create a repeating timer source.
     #[must_use]
     pub fn timer(interval: Duration, leeway: Duration) -> Self {
-        let interval_ms = u64::try_from(interval.as_millis()).unwrap_or(u64::MAX);
-        let leeway_ms = u64::try_from(leeway.as_millis()).unwrap_or(u64::MAX);
-        let ptr = unsafe { crate::ffi::acf_dispatch_source_timer_create(interval_ms, leeway_ms) };
+        let interval_ns = u64::try_from(interval.as_nanos()).unwrap_or(u64::MAX);
+        let leeway_ns = u64::try_from(leeway.as_nanos()).unwrap_or(u64::MAX);
+        let ptr =
+            unsafe { crate::ffi::acf_dispatch_source_timer_create_ns(interval_ns, leeway_ns) };
         assert!(!ptr.is_null(), "failed to create DispatchSource timer");
         Self { ptr }
     }

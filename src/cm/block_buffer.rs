@@ -406,7 +406,7 @@ impl CMBlockBuffer {
     /// use apple_cf::cm::CMBlockBuffer;
     ///
     /// fn process_contiguous(buffer: &CMBlockBuffer) {
-    ///     if let Some(data) = buffer.as_slice() {
+    ///     if let Some(data) = unsafe { buffer.as_slice() } {
     ///         println!("Processing {} contiguous bytes", data.len());
     ///     } else {
     ///         // Fall back to copying
@@ -417,7 +417,8 @@ impl CMBlockBuffer {
     /// }
     /// ```
     #[must_use]
-    pub fn as_slice(&self) -> Option<&[u8]> {
+    #[allow(clippy::missing_safety_doc)]
+    pub unsafe fn as_slice(&self) -> Option<&[u8]> {
         let len = self.data_length();
         if len == 0 {
             return Some(&[]);
@@ -469,15 +470,6 @@ impl CMBlockBuffer {
     /// }
     /// ```
     pub fn cursor(&self) -> Option<io::Cursor<Vec<u8>>> {
-        // Try the zero-copy path first: if the buffer is contiguous we can hand
-        // out a `Vec` cloned from a borrowed slice (single allocation, no FFI
-        // round-trip), instead of going through `copy_data_bytes` which would
-        // call `CMBlockBufferCopyDataBytes` even though every byte is already
-        // reachable in process. For discontiguous buffers we fall back to the
-        // FFI copy path.
-        if let Some(slice) = self.as_slice() {
-            return Some(io::Cursor::new(slice.to_vec()));
-        }
         self.copy_data_bytes(0, self.data_length())
             .map(io::Cursor::new)
     }
@@ -499,7 +491,7 @@ impl CMBlockBuffer {
     ///
     /// fn read_contiguous(buffer: &CMBlockBuffer) {
     ///     // Try zero-copy first
-    ///     if let Some(mut cursor) = buffer.cursor_ref() {
+    ///     if let Some(mut cursor) = unsafe { buffer.cursor_ref() } {
     ///         let mut header = [0u8; 4];
     ///         cursor.read_exact(&mut header).unwrap();
     ///     } else {
@@ -511,8 +503,9 @@ impl CMBlockBuffer {
     ///     }
     /// }
     /// ```
-    pub fn cursor_ref(&self) -> Option<io::Cursor<&[u8]>> {
-        self.as_slice().map(io::Cursor::new)
+    #[allow(clippy::missing_safety_doc)]
+    pub unsafe fn cursor_ref(&self) -> Option<io::Cursor<&[u8]>> {
+        unsafe { self.as_slice() }.map(io::Cursor::new)
     }
 }
 

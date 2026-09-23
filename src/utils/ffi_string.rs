@@ -10,6 +10,11 @@ pub use doom_fish_utils::ffi_string::{
     ffi_string_from_buffer, ffi_string_from_buffer_or_empty, DEFAULT_BUFFER_SIZE, SMALL_BUFFER_SIZE,
 };
 
+pub(crate) fn cstring_until_nul(value: &str) -> std::ffi::CString {
+    let prefix = value.split('\0').next().unwrap_or_default();
+    std::ffi::CString::new(prefix).unwrap_or_default()
+}
+
 /// Retrieves a string from an FFI function that returns an owned C string
 /// pointer allocated by Swift (typically via `strdup`), freeing it with
 /// `acf_free_string`.
