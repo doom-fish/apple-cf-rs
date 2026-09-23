@@ -1,13 +1,13 @@
 use apple_cf::dispatch_queue::{
-    dispatch_apply, dispatch_async, dispatch_async_and_wait, DispatchGroup, DispatchQoS,
-    DispatchQueue, DispatchSemaphore, DispatchSource,
+    dispatch_after, dispatch_apply, dispatch_async, dispatch_async_and_wait, DispatchGroup,
+    DispatchQoS, DispatchQueue, DispatchSemaphore, DispatchSource,
 };
 use std::sync::{
     atomic::{AtomicUsize, Ordering},
-    Arc,
+    mpsc, Arc,
 };
 use std::thread;
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 #[test]
 fn dispatch_sync_primitives_work() {
@@ -130,4 +130,102 @@ fn dispatch_source_fire_count_is_monotonic_across_threads() {
         reader.join().expect("fire-count reader");
     }
     source.cancel();
+}
+
+#[test]
+fn semaphore_rejects_negative_initial_counts() {
+    assert!(DispatchSemaphore::new(-1).is_none());
+    assert!(DispatchSemaphore::new(i64::MIN).is_none());
+    let semaphore = DispatchSemaphore::new(1).expect("semaphore");
+    assert!(semaphore.wait(Some(Duration::ZERO)));
+    assert!(!semaphore.wait(Some(Duration::ZERO)));
+}
+
+#[test]
+fn semaphore_released_below_its_initial_count_does_not_abort() {
+    let semaphore = DispatchSemaphore::new(2).expect("semaphore");
+    let clone = semaphore.clone();
+    assert!(semaphore.wait(Some(Duration::ZERO)));
+    assert!(clone.wait(Some(Duration::ZERO)));
+    drop(semaphore);
+    drop(clone);
+}
+
+#[test]
+fn group_tolerates_unbalanced_leave_and_release_while_entered() {
+    let group = DispatchGroup::new();
+    group.leave();
+    assert!(group.wait(Some(Duration::ZERO)));
+    group.enter();
+    assert!(!group.wait(Some(Duration::ZERO)));
+    group.enter();
+    group.leave();
+    assert!(!group.wait(Some(Duration::ZERO)));
+    drop(group);
+}
+
+#[test]
+fn timer_source_accepts_extreme_and_sub_millisecond_durations() {
+    let never = DispatchSource::timer(Duration::MAX, Duration::MAX);
+    never.resume();
+    thread::sleep(Duration::from_millis(5));
+    never.cancel();
+    assert_eq!(never.fire_count(), 0);
+
+    let fast = DispatchSource::timer(Duration::from_micros(500), Duration::ZERO);
+    fast.resume();
+    thread::sleep(Duration::from_millis(30));
+    fast.cancel();
+    assert!(fast.fire_count() > 0);
+}
+
+#[test]
+fn queue_labels_may_contain_nul() {
+    let queue = DispatchQueue::new("com.doomfish.apple-cf\0ignored", DispatchQoS::Default);
+    let (sender, receiver) = mpsc::channel();
+    dispatch_async(&queue, move || sender.send(()).expect("send"));
+    receiver
+        .recv_timeout(Duration::from_secs(5))
+        .expect("queue ran the work item");
+}
+
+#[test]
+fn dispatch_after_runs_work_on_a_global_queue_after_the_delay() {
+    let (sender, receiver) = mpsc::channel();
+    let started = Instant::now();
+    dispatch_after(
+        Duration::from_millis(20),
+        &DispatchQueue::global(DispatchQoS::Utility),
+        move || sender.send(started.elapsed()).expect("send"),
+    );
+    let elapsed = receiver
+        .recv_timeout(Duration::from_secs(5))
+        .expect("delayed work ran");
+    assert!(elapsed >= Duration::from_millis(20));
+}
+
+#[test]
+fn concurrent_queue_runs_every_apply_iteration() {
+    let queue = DispatchQueue::concurrent(
+        "com.doomfish.apple-cf.concurrent-tests",
+        DispatchQoS::UserInitiated,
+    );
+    let counter = Arc::new(AtomicUsize::new(0));
+    let iterations = Arc::clone(&counter);
+    dispatch_apply(16, &queue, move |_| {
+        iterations.fetch_add(1, Ordering::SeqCst);
+    });
+    assert_eq!(counter.load(Ordering::SeqCst), 16);
+}
+
+#[test]
+fn main_queue_handles_share_the_main_queue() {
+    let main = DispatchQueue::main();
+    let clone = main.clone();
+    assert_eq!(main.as_ptr(), clone.as_ptr());
+    assert_eq!(DispatchQueue::main().as_ptr(), main.as_ptr());
+    assert_ne!(
+        DispatchQueue::global(DispatchQoS::Background).as_ptr(),
+        main.as_ptr()
+    );
 }

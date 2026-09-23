@@ -1,4 +1,6 @@
 use apple_cf::cm::{CMClock, CMTime, CMTimeRange, CMTimebase};
+use std::thread;
+use std::time::Duration;
 
 #[test]
 fn cm_time_zero_is_numeric_zero() {
@@ -93,4 +95,18 @@ fn cm_timebase_smoke() {
     assert_eq!(timebase.set_time(CMTime::new(0, 600)), 0);
     assert!(timebase.time().is_valid());
     assert!(timebase.source_clock().is_some());
+}
+
+#[test]
+fn host_time_clock_reports_an_advancing_valid_time() {
+    let clock = CMClock::host_time_clock();
+    let first = clock.time();
+    assert!(first.is_valid());
+    thread::sleep(Duration::from_millis(5));
+    let second = clock.time();
+    assert!(second.is_valid());
+    assert!(second.as_seconds() > first.as_seconds());
+    let clone = clock.clone();
+    drop(clock);
+    assert!(clone.time().is_valid());
 }
