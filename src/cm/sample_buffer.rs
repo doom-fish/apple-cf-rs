@@ -10,6 +10,7 @@
 //! `videotoolbox-rs`.
 
 use super::{AudioBufferList, CMBlockBuffer, CMFormatDescription, CMTime};
+use crate::cf::{CFArray, CFDictionary};
 use crate::ffi;
 use std::fmt;
 
@@ -206,6 +207,25 @@ impl CMSampleBuffer {
             ) -> *mut std::ffi::c_void;
         }
         unsafe { CMSampleBufferGetImageBuffer(self.0) }
+    }
+
+    #[must_use]
+    pub fn sample_attachments(&self) -> Vec<CFDictionary> {
+        let ptr = unsafe { ffi::acf_cm_sample_buffer_copy_sample_attachments(self.0) };
+        let Some(attachments) = (unsafe { CFArray::from_raw(ptr) }) else {
+            return Vec::new();
+        };
+        attachments
+            .values()
+            .into_iter()
+            .filter(|value| value.type_id() == CFDictionary::type_id())
+            .filter_map(|value| unsafe { CFDictionary::from_raw_borrowed(value.as_ptr()) })
+            .collect()
+    }
+
+    #[must_use]
+    pub fn is_sync_sample(&self) -> bool {
+        unsafe { ffi::acf_cm_sample_buffer_is_sync_sample(self.0) }
     }
 
     #[allow(clippy::missing_errors_doc)]

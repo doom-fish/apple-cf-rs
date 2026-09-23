@@ -3,13 +3,19 @@
 #![allow(dead_code)]
 
 use crate::{
-    cf::{CFArray, CFDictionary},
+    cf::{CFArray, CFData, CFDictionary},
     ffi,
 };
 use std::{fmt, ops::Deref};
 
 /// Owned wrapper around `CMFormatDescriptionRef`.
 pub struct CMFormatDescription(*mut std::ffi::c_void);
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct CMVideoParameterSets {
+    pub parameter_sets: Vec<Vec<u8>>,
+    pub nal_unit_header_length: i32,
+}
 
 impl PartialEq for CMFormatDescription {
     fn eq(&self, other: &Self) -> bool {
@@ -318,6 +324,56 @@ impl CMFormatDescription {
     #[must_use]
     pub fn is_alac(&self) -> bool {
         self.media_subtype() == codec_types::ALAC
+    }
+
+    #[must_use]
+    pub fn video_dimensions(&self) -> Option<(i32, i32)> {
+        let mut width = 0_i32;
+        let mut height = 0_i32;
+        let is_video = unsafe {
+            ffi::acf_cm_video_format_description_get_dimensions(
+                self.0,
+                &raw mut width,
+                &raw mut height,
+            )
+        };
+        is_video.then_some((width, height))
+    }
+
+    #[allow(clippy::missing_errors_doc)]
+    pub fn video_parameter_sets(&self) -> Result<CMVideoParameterSets, i32> {
+        let hevc = if self.is_h264() {
+            false
+        } else if self.is_hevc() {
+            true
+        } else {
+            return Err(-12710);
+        };
+        let mut parameter_sets = Vec::new();
+        let mut nal_unit_header_length = 0_i32;
+        let mut count = 1_usize;
+        while parameter_sets.len() < count {
+            let mut status = 0_i32;
+            let ptr = unsafe {
+                ffi::acf_cm_video_format_description_copy_parameter_set(
+                    self.0,
+                    hevc,
+                    parameter_sets.len(),
+                    &raw mut count,
+                    &raw mut nal_unit_header_length,
+                    &raw mut status,
+                )
+            };
+            let data = unsafe { CFData::from_raw(ptr) };
+            if status != 0 {
+                return Err(status);
+            }
+            parameter_sets.push(data.ok_or(-12710)?.to_vec());
+        }
+        Ok(CMVideoParameterSets {
+            parameter_sets,
+            nal_unit_header_length,
+        })
     }
 
     // Audio format description methods

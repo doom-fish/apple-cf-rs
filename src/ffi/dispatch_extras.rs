@@ -15,6 +15,12 @@ extern "C" {
         context: *mut c_void,
         work: extern "C" fn(*mut c_void),
     );
+    pub fn acf_dispatch_after_f(
+        delay_ns: u64,
+        queue: *mut c_void,
+        context: *mut c_void,
+        work: extern "C" fn(*mut c_void),
+    );
     /// Swift bridge function `acf_dispatch_apply_f` for the corresponding Apple API.
     pub fn acf_dispatch_apply_f(
         iterations: usize,

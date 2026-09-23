@@ -42,8 +42,12 @@
 use super::base::impl_cf_type_wrapper;
 use super::{CFDictionary, CFString};
 use crate::ffi;
-use std::ffi::CString;
+use crate::utils::panic_safe;
+use std::collections::BTreeMap;
+use std::ffi::{c_void, CString};
 use std::os::fd::{AsRawFd, BorrowedFd, IntoRawFd, OwnedFd};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex, PoisonError};
 use std::time::Duration;
 
 impl_cf_type_wrapper!(CFNotificationCenter, cf_notification_center_get_type_id);
@@ -54,6 +58,78 @@ impl_cf_type_wrapper!(CFReadStream, cf_read_stream_get_type_id);
 impl_cf_type_wrapper!(CFWriteStream, cf_write_stream_get_type_id);
 impl_cf_type_wrapper!(CFSocket, cf_socket_get_type_id);
 impl_cf_type_wrapper!(CFFileDescriptor, cf_file_descriptor_get_type_id);
+
+type NotificationCallback = dyn Fn(&CFString, Option<&CFDictionary>) + Send + Sync;
+
+static NOTIFICATION_OBSERVERS: Mutex<BTreeMap<usize, Arc<NotificationCallback>>> =
+    Mutex::new(BTreeMap::new());
+static NEXT_NOTIFICATION_OBSERVER: AtomicUsize = AtomicUsize::new(1);
+const CF_NOTIFICATION_SUSPENSION_BEHAVIOR_DELIVER_IMMEDIATELY: isize = 4;
+
+extern "C" {
+    fn CFNotificationCenterAddObserver(
+        center: *mut c_void,
+        observer: *const c_void,
+        callback: extern "C" fn(*mut c_void, *mut c_void, *mut c_void, *const c_void, *mut c_void),
+        name: *mut c_void,
+        object: *const c_void,
+        suspension_behavior: isize,
+    );
+    fn CFNotificationCenterRemoveEveryObserver(center: *mut c_void, observer: *const c_void);
+}
+
+extern "C" fn notification_observer_trampoline(
+    _center: *mut c_void,
+    observer: *mut c_void,
+    name: *mut c_void,
+    _object: *const c_void,
+    user_info: *mut c_void,
+) {
+    panic_safe::catch_user_panic("CFNotificationCenter observer", || {
+        let callback = NOTIFICATION_OBSERVERS
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner)
+            .get(&(observer as usize))
+            .cloned();
+        let Some(callback) = callback else {
+            return;
+        };
+        let Some(name) = (unsafe { CFString::from_raw_borrowed(name) }) else {
+            return;
+        };
+        let user_info = unsafe { CFDictionary::from_raw_borrowed(user_info) };
+        callback(&name, user_info.as_ref());
+    });
+}
+
+pub struct CFNotificationObserver {
+    center: CFNotificationCenter,
+    token: usize,
+}
+
+impl Drop for CFNotificationObserver {
+    fn drop(&mut self) {
+        unsafe {
+            CFNotificationCenterRemoveEveryObserver(
+                self.center.as_ptr(),
+                self.token as *const c_void,
+            );
+        }
+        NOTIFICATION_OBSERVERS
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner)
+            .remove(&self.token);
+    }
+}
+
+impl std::fmt::Debug for CFNotificationObserver {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("CFNotificationObserver")
+            .field("center", &self.center.as_ptr())
+            .field("token", &self.token)
+            .finish()
+    }
+}
 
 fn duration_to_seconds(duration: Duration) -> f64 {
     duration.as_secs_f64()
@@ -91,6 +167,32 @@ impl CFNotificationCenter {
         let ptr = unsafe { ffi::cf_notification_center_get_darwin() };
         unsafe { Self::from_raw(ptr) }
             .expect("CFNotificationCenterGetDarwinNotifyCenter returned NULL")
+    }
+
+    #[must_use]
+    pub fn add_observer<F>(&self, name: &CFString, callback: F) -> CFNotificationObserver
+    where
+        F: Fn(&CFString, Option<&CFDictionary>) + Send + Sync + 'static,
+    {
+        let token = NEXT_NOTIFICATION_OBSERVER.fetch_add(1, Ordering::Relaxed);
+        NOTIFICATION_OBSERVERS
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner)
+            .insert(token, Arc::new(callback));
+        unsafe {
+            CFNotificationCenterAddObserver(
+                self.as_ptr(),
+                token as *const c_void,
+                notification_observer_trampoline,
+                name.as_ptr(),
+                std::ptr::null(),
+                CF_NOTIFICATION_SUSPENSION_BEHAVIOR_DELIVER_IMMEDIATELY,
+            );
+        }
+        CFNotificationObserver {
+            center: self.clone(),
+            token,
+        }
     }
 
     /// Post a notification with an optional user-info dictionary.

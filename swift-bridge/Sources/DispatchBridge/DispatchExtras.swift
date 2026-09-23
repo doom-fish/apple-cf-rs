@@ -26,6 +26,20 @@ public func acf_dispatch_async_and_wait_f(
     }
 }
 
+@_cdecl("acf_dispatch_after_f")
+public func acf_dispatch_after_f(
+    _ delayNs: UInt64,
+    _ queue: UnsafeMutableRawPointer,
+    _ context: UnsafeMutableRawPointer?,
+    _ work: (@convention(c) (UnsafeMutableRawPointer?) -> Void)?
+) {
+    guard let work else { return }
+    let queue = Unmanaged<DispatchQueue>.fromOpaque(queue).takeUnretainedValue()
+    queue.asyncAfter(deadline: .now() + .nanoseconds(Int(clamping: delayNs))) {
+        work(context)
+    }
+}
+
 @_cdecl("acf_dispatch_apply_f")
 public func acf_dispatch_apply_f(
     _ iterations: Int,

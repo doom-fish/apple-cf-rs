@@ -114,6 +114,30 @@ impl DispatchQueue {
         Self { ptr }
     }
 
+    #[must_use]
+    pub fn concurrent(label: &str, qos: DispatchQoS) -> Self {
+        let c_label = crate::utils::ffi_string::cstring_until_nul(label);
+        let ptr = unsafe {
+            crate::ffi::acf_dispatch_queue_create_concurrent(c_label.as_ptr(), qos as i32)
+        };
+        assert!(!ptr.is_null(), "Failed to create dispatch queue");
+        Self { ptr }
+    }
+
+    #[must_use]
+    pub fn main() -> Self {
+        let ptr = unsafe { crate::ffi::acf_dispatch_queue_main() };
+        assert!(!ptr.is_null(), "dispatch main queue is NULL");
+        Self { ptr }
+    }
+
+    #[must_use]
+    pub fn global(qos: DispatchQoS) -> Self {
+        let ptr = unsafe { crate::ffi::acf_dispatch_queue_global(qos as i32) };
+        assert!(!ptr.is_null(), "dispatch global queue is NULL");
+        Self { ptr }
+    }
+
     /// Returns the raw pointer to the dispatch queue
     ///
     /// This is used internally for FFI calls (and for testing)
@@ -212,6 +236,25 @@ where
     });
     unsafe {
         crate::ffi::acf_dispatch_async_and_wait_f(
+            queue.as_mut_ptr(),
+            Box::into_raw(task).cast(),
+            dispatch_once_trampoline,
+        );
+    }
+}
+
+pub fn dispatch_after<F>(delay: Duration, queue: &DispatchQueue, work: F)
+where
+    F: FnOnce() + Send + 'static,
+{
+    let task = Box::new(DispatchOnceTask {
+        site: "dispatch_after",
+        work: Some(Box::new(work)),
+    });
+    let delay_ns = u64::try_from(delay.as_nanos()).unwrap_or(u64::MAX);
+    unsafe {
+        crate::ffi::acf_dispatch_after_f(
+            delay_ns,
             queue.as_mut_ptr(),
             Box::into_raw(task).cast(),
             dispatch_once_trampoline,

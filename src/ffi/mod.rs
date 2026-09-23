@@ -34,6 +34,9 @@ extern "C" {
     // ---- dispatch ----
     /// Swift bridge function `acf_dispatch_queue_create` for the corresponding Apple API.
     pub fn acf_dispatch_queue_create(label: *const c_char, qos: i32) -> *const c_void;
+    pub fn acf_dispatch_queue_create_concurrent(label: *const c_char, qos: i32) -> *const c_void;
+    pub fn acf_dispatch_queue_main() -> *const c_void;
+    pub fn acf_dispatch_queue_global(qos: i32) -> *const c_void;
     /// Swift bridge function `dispatch_queue_release` for the corresponding Apple API.
     pub fn dispatch_queue_release(queue: *const c_void);
     /// Swift bridge function `dispatch_queue_retain` for the corresponding Apple API.
@@ -173,6 +176,21 @@ extern "C" {
         out_block_buffer: *mut *mut c_void,
     ) -> i32;
     pub fn acf_cm_audio_buffer_array_free(buffers: *mut c_void);
+    pub fn acf_cm_sample_buffer_copy_sample_attachments(sample_buffer: *mut c_void) -> *mut c_void;
+    pub fn acf_cm_sample_buffer_is_sync_sample(sample_buffer: *mut c_void) -> bool;
+    pub fn acf_cm_video_format_description_get_dimensions(
+        format_description: *mut c_void,
+        out_width: *mut i32,
+        out_height: *mut i32,
+    ) -> bool;
+    pub fn acf_cm_video_format_description_copy_parameter_set(
+        format_description: *mut c_void,
+        hevc: bool,
+        index: usize,
+        out_count: *mut usize,
+        out_nal_unit_header_length: *mut i32,
+        out_status: *mut i32,
+    ) -> *mut c_void;
 
     // ---- CMBlockBuffer ----
     /// Swift bridge function `cm_block_buffer_release` for the corresponding Apple API.
