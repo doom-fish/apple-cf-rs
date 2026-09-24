@@ -111,9 +111,31 @@ fn locale_calendar_and_time_zone_constructors_handle_bad_names() {
 #[test]
 fn character_set_membership_covers_non_bmp_characters() {
     let charset = CFCharacterSet::from_characters_in_string(&CFString::new("a😀"));
+    assert!(charset.contains('a'));
     assert!(charset.contains('😀'));
+    assert!(!charset.contains('\u{F600}'));
     assert!(!charset.contains('😁'));
     assert!(charset.inverted().contains('😁'));
+    assert!(!charset.inverted().contains('😀'));
+
+    let planes = CFCharacterSet::from_characters_in_string(&CFString::new("é中b𠀀\u{10FFFF}"));
+    for member in ['é', '中', 'b', '𠀀', '\u{10FFFF}'] {
+        assert!(planes.contains(member), "{member:?}");
+    }
+    for non_member in ['\0', '\u{FFFF}', 'a'] {
+        assert!(!planes.contains(non_member), "{non_member:?}");
+    }
+}
+
+#[test]
+fn character_set_from_unpaired_surrogates_holds_the_replacement_character() {
+    let units = [0x61_u16, 0xD83D];
+    let ptr = unsafe { raw::CFStringCreateWithCharacters(std::ptr::null(), units.as_ptr(), 2) };
+    let string = unsafe { CFString::from_raw(ptr.cast_mut().cast()) }.expect("string");
+    let charset = CFCharacterSet::from_characters_in_string(&string);
+    assert!(charset.contains('a'));
+    assert!(charset.contains('\u{FFFD}'));
+    assert!(!charset.contains('😀'));
 }
 
 #[test]

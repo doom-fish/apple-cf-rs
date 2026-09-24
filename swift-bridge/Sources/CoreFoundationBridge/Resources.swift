@@ -203,8 +203,15 @@ public func cf_character_set_get_type_id() -> Int {
 @_cdecl("cf_character_set_create_with_characters_in_string")
 public func cf_character_set_create_with_characters_in_string(_ value: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
     let string = Unmanaged<CFString>.fromOpaque(value).takeUnretainedValue()
-    guard let characterSet = CFCharacterSetCreateWithCharactersInString(nil, string) else { return nil }
-    return Unmanaged.passRetained(characterSet).toOpaque()
+    let length = CFStringGetLength(string)
+    var units = [UniChar](repeating: 0, count: length)
+    CFStringGetCharacters(string, CFRange(location: 0, length: length), &units)
+    guard let characterSet = CFCharacterSetCreateMutable(nil) else { return nil }
+    for scalar in String(decoding: units, as: UTF16.self).unicodeScalars {
+        CFCharacterSetAddCharactersInRange(characterSet, CFRange(location: CFIndex(scalar.value), length: 1))
+    }
+    guard let immutable = CFCharacterSetCreateCopy(nil, characterSet) else { return nil }
+    return Unmanaged.passRetained(immutable).toOpaque()
 }
 
 @_cdecl("cf_character_set_create_inverted_set")

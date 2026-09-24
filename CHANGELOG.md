@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Panics on ordinary input: interior NUL in `CFString::new`, `CFUUID::parse_str`, `CFError::new`, `CFLocale::new`, `CFBundle::resource_url`, `CFMessagePort::connect_remote` and `DispatchQueue::new`; huge dates in `CFDate::to_system_time`; an unknown format from `CFPropertyList` decoding.
 - `CFData::to_vec`, `CFSet::values` and `CFMutableSet::values` pass their buffer capacity to the bridge, which no longer writes a re-read length into a buffer sized by an earlier call.
 - `CFNumber::from_u64` stores values above `i64::MAX` as unsigned, and `to_i64`/`to_u64` only succeed when the value is exactly representable (no more `Some(i64::MAX)` for `1e19`, or `Some(u64::MAX)` for `-1`).
-- `CFCharacterSet::contains` works for characters outside the Basic Multilingual Plane.
+- `CFCharacterSet::contains` works for characters outside the Basic Multilingual Plane, and `CFCharacterSet::from_characters_in_string` keeps them on every release: through macOS 26, `CFCharacterSetCreateWithCharactersInString` truncated them to 16 bits when a string under 64 UTF-16 units also held BMP characters (`"a😀"` gave U+F600, `"b𠀀"` gave U+0000). The set is now built one scalar at a time, with unpaired surrogates mapped to U+FFFD as macOS 27 does.
 - `CFURL::absolute_string` resolves relative URLs against their base.
 - `CFString::to_string_lossy` and `CFType::description` keep embedded NUL and replace unpaired surrogates instead of returning an empty string; `CFString::len` is documented as UTF-16 code units.
 - C strings returned by the bridge are allocated with `malloc`, matching the `free` in `acf_free_string`.
