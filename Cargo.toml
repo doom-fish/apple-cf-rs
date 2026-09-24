@@ -66,7 +66,7 @@ regex-lite = "0.1"
 # 0.10 / apple-cf 0.4 boundary. Using VideoToolbox 0.20 here would create a
 # dev-dependency cycle because it depends on apple-cf 0.10.
 apple_cf_compat_04 = { package = "apple-cf", version = "0.4.0" }
-videotoolbox = "0.10.0"
+videotoolbox = "=0.10.0"
 
 [package.metadata.docs.rs]
 all-features = true
