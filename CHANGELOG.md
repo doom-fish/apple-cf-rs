@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CMClock::time` returns the clock's time; it used to always return `CMTime::INVALID`.
 - Describing a `CFRunLoop` (its `Debug` output, and `CFType::description`, `Debug` and `Display` for an erased run loop) no longer calls `CFCopyDescription`, which walks the loop's mode, source and timer sets without taking the loop's lock and so raced with any thread scheduling on that loop. It prints `<CFRunLoop 0x…>`.
 - IOSurface `plane_data` and `plane_row` check that the plane lies inside the surface allocation.
-- Docs: the README IOSurface-backed `CVPixelBuffer` example really is IOSurface-backed, the crate no longer claims to be dependency-free, feature flags are documented as gating only the Rust modules, and `COVERAGE*.md` state that most `VERIFIED` rows are raw bindgen declarations, that V2 is a self-selected sample, and that `CFTree.h` is not wrapped.
+- Docs: the README IOSurface-backed `CVPixelBuffer` example really is IOSurface-backed, the crate no longer claims to be dependency-free, feature flags are documented as gating only the Rust modules, the README lists the URL strings that `CFURL::from_string` rejects on macOS 27 but earlier releases accept, and `COVERAGE*.md` state that most `VERIFIED` rows are raw bindgen declarations, that V2 is a self-selected sample, and that `CFTree.h` is not wrapped.
 
 ### Changed
 

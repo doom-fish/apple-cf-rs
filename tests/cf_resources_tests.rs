@@ -63,12 +63,40 @@ fn cf_resource_wrappers_work() {
 
 #[test]
 fn cf_url_constructors_reject_invalid_input() {
-    assert!(CFURL::from_string("http://[bad").is_none());
+    assert!(CFURL::from_string("http://example.com/a b").is_none());
+    assert!(CFURL::from_string("http://example.com/%zz").is_none());
     assert!(CFURL::from_string("http://example.com/\0").is_none());
     assert!(CFURL::from_file_system_path("", false).is_none());
     assert!(CFURL::from_file_system_path("/tmp/a\0b", false).is_none());
     let url = CFURL::from_string("https://example.com/a").expect("url");
     assert_eq!(url.absolute_string().to_string(), "https://example.com/a");
+}
+
+fn macos_major_version() -> u32 {
+    let output = process::Command::new("/usr/bin/sw_vers")
+        .arg("-productVersion")
+        .output()
+        .expect("sw_vers");
+    String::from_utf8(output.stdout)
+        .expect("sw_vers output")
+        .trim()
+        .split('.')
+        .next()
+        .and_then(|major| major.parse().ok())
+        .expect("macOS major version")
+}
+
+#[test]
+fn cf_url_from_string_rejects_malformed_authorities_from_macos_27() {
+    let rejects = macos_major_version() >= 27;
+    for malformed in ["http://[bad", "http://bad]", "http://user@@host/"] {
+        let parsed = CFURL::from_string(malformed).map(|url| url.absolute_string().to_string());
+        if rejects {
+            assert_eq!(parsed, None, "{malformed:?}");
+        } else {
+            assert_eq!(parsed.as_deref(), Some(malformed));
+        }
+    }
 }
 
 #[test]
