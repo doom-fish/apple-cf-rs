@@ -177,3 +177,49 @@ fn run_loops_can_be_stopped_from_another_thread() {
     assert_eq!(result, CFRunLoopRunResult::Stopped);
     worker.join().expect("join worker");
 }
+
+#[test]
+fn run_loop_descriptions_do_not_read_the_loop_state() {
+    let run_loop = CFRunLoop::current();
+    let expected = format!("<CFRunLoop {:p}>", run_loop.as_ptr());
+    let debug = format!("{run_loop:?}");
+    assert!(debug.contains(&expected), "{debug}");
+    assert!(!debug.contains("modes"), "{debug}");
+    let erased = run_loop.into_cf_type();
+    assert_eq!(erased.description(), expected);
+    assert_eq!(erased.to_string(), expected);
+    assert!(!format!("{erased:?}").contains("modes"));
+}
+
+#[test]
+fn run_loops_can_be_described_while_another_thread_mutates_them() {
+    let (run_loop_tx, run_loop_rx) = std::sync::mpsc::channel();
+    let (done_tx, done_rx) = std::sync::mpsc::channel::<()>();
+    let worker = std::thread::spawn(move || {
+        let keep_alive = CFTimer::new(Duration::from_secs(60), true);
+        CFRunLoop::current().add_timer(&keep_alive);
+        run_loop_tx.send(CFRunLoop::current()).expect("send run loop");
+        while done_rx.try_recv().is_err() {
+            let _ = CFRunLoop::run_in_default_mode(Duration::from_millis(5), false);
+        }
+        keep_alive.invalidate();
+    });
+    let worker_run_loop = run_loop_rx.recv().expect("worker run loop");
+    let describer = {
+        let run_loop = worker_run_loop.clone();
+        std::thread::spawn(move || {
+            for _ in 0..2_000 {
+                assert!(format!("{run_loop:?}").starts_with("CFRunLoop"));
+            }
+        })
+    };
+    for _ in 0..2_000 {
+        let timer = CFTimer::new(Duration::from_secs(60), false);
+        worker_run_loop.add_timer(&timer);
+        assert!(timer.is_valid());
+        timer.invalidate();
+    }
+    describer.join().expect("join describer");
+    done_tx.send(()).expect("stop worker");
+    worker.join().expect("join worker");
+}

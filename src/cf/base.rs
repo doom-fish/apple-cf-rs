@@ -78,6 +78,9 @@ impl CFType {
     /// Human-readable Core Foundation description.
     #[must_use]
     pub fn description(&self) -> String {
+        if self.type_id() == unsafe { ffi::cf_run_loop_get_type_id() } {
+            return format!("<CFRunLoop {:p}>", self.0);
+        }
         let ptr = unsafe { ffi::acf_cf_type_copy_description_string(self.0) };
         unsafe { crate::cf::CFString::from_raw(ptr) }
             .map_or_else(String::new, |description| description.to_string_lossy())
