@@ -6,6 +6,7 @@
 
 mod affine;
 mod context;
+mod display;
 mod drawing;
 mod point;
 mod rect;
@@ -143,6 +144,7 @@ pub use crate::raw::CGContextRef;
 pub use crate::raw::CGKeyCode;
 pub use affine::{CGAffineTransform, CGVector};
 pub use context::CGContext;
+pub use display::{Display, DisplayMode};
 pub use drawing::{CGColorSpace, CGImage};
 pub use point::CGPoint;
 pub use rect::CGRect;
