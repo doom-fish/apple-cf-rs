@@ -303,6 +303,30 @@ public func cgimageHash(_ image: OpaquePointer) -> Int {
     return cgImage.hashValue
 }
 
+@_cdecl("acf_cg_context_create_bitmap")
+public func acfCGContextCreateBitmap(
+    _ width: Int,
+    _ height: Int,
+    _ bytesPerRow: Int,
+    _ colorSpace: UnsafeMutableRawPointer?,
+    _ bitmapInfo: UInt32
+) -> UnsafeMutableRawPointer? {
+    guard let colorSpace, width > 0, height > 0, bytesPerRow > 0 else { return nil }
+    let space = Unmanaged<CGColorSpace>.fromOpaque(colorSpace).takeUnretainedValue()
+    guard let context = CGContext(
+        data: nil,
+        width: width,
+        height: height,
+        bitsPerComponent: 8,
+        bytesPerRow: bytesPerRow,
+        space: space,
+        bitmapInfo: bitmapInfo
+    ) else {
+        return nil
+    }
+    return Unmanaged.passRetained(context).toOpaque()
+}
+
 @_cdecl("acf_cg_context_set_gray_fill_color")
 public func acfCGContextSetGrayFillColor(_ context: UnsafeMutableRawPointer?, _ gray: Double, _ alpha: Double) {
     guard let context else { return }

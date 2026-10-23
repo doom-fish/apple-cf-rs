@@ -54,15 +54,25 @@ impl CGContext {
         bitmap_info: u32,
     ) -> Result<Self, NullPointerError> {
         let context = unsafe {
-            ffi::CGBitmapContextCreate(
-                ptr::null_mut(),
-                width,
-                height,
-                BITS_PER_COMPONENT_8,
-                bytes_per_row,
-                color_space.as_ptr(),
-                bitmap_info,
-            )
+            if bytes_per_row == 0 {
+                ffi::CGBitmapContextCreate(
+                    ptr::null_mut(),
+                    width,
+                    height,
+                    BITS_PER_COMPONENT_8,
+                    0,
+                    color_space.as_ptr(),
+                    bitmap_info,
+                )
+            } else {
+                crate::ffi::acf_cg_context_create_bitmap(
+                    width,
+                    height,
+                    bytes_per_row,
+                    color_space.as_ptr(),
+                    bitmap_info,
+                )
+            }
         };
 
         if context.is_null() {

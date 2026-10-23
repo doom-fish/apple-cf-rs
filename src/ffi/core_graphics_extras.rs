@@ -1,6 +1,13 @@
 use core::ffi::c_void;
 
 extern "C" {
+    pub fn acf_cg_context_create_bitmap(
+        width: usize,
+        height: usize,
+        bytes_per_row: usize,
+        color_space: *mut c_void,
+        bitmap_info: u32,
+    ) -> *mut c_void;
     pub fn acf_cg_context_set_gray_fill_color(context: *mut c_void, gray: f64, alpha: f64);
     pub fn acf_cg_context_set_text_fill_mode(context: *mut c_void);
     pub fn acf_cg_context_set_allows_antialiasing(context: *mut c_void, allowed: bool);
