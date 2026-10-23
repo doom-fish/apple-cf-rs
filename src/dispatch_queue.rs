@@ -27,8 +27,12 @@
 //! ```
 
 use crate::utils::panic_safe;
+use std::cell::RefCell;
 use std::ffi::c_void;
 use std::fmt;
+use std::marker::PhantomData;
+use std::rc::Rc;
+use std::sync::Arc;
 use std::time::Duration;
 
 /// Quality of Service levels for dispatch queues
@@ -502,5 +506,344 @@ impl fmt::Debug for DispatchSource {
             .field("ptr", &self.ptr)
             .field("fire_count", &self.fire_count())
             .finish()
+    }
+}
+
+struct DataAddHandler {
+    callback: RefCell<Box<dyn FnMut(u64)>>,
+}
+
+extern "C" fn data_add_event(context: *mut c_void, value: u64) {
+    if context.is_null() {
+        return;
+    }
+    let handler = unsafe { &*context.cast::<DataAddHandler>() };
+    panic_safe::catch_user_panic("dispatch_data_add", || {
+        if let Ok(mut callback) = handler.callback.try_borrow_mut() {
+            callback(value);
+        }
+    });
+}
+
+extern "C" fn data_add_release(context: *mut c_void) {
+    if context.is_null() {
+        return;
+    }
+    panic_safe::catch_user_panic("dispatch_data_add_release", || {
+        drop(unsafe { Box::from_raw(context.cast::<DataAddHandler>()) });
+    });
+}
+
+extern "C" {
+    fn acf_dispatch_source_data_add_is_main_thread() -> bool;
+    fn acf_dispatch_source_data_add_create(
+        queue: *mut c_void,
+        context: *mut c_void,
+        event: extern "C" fn(*mut c_void, u64),
+        release: extern "C" fn(*mut c_void),
+    ) -> *mut c_void;
+    fn acf_dispatch_source_data_add_resume(source: *mut c_void);
+    fn acf_dispatch_source_data_add_cancel(source: *mut c_void);
+    fn acf_dispatch_source_data_add_merge(source: *mut c_void, value: u64);
+}
+
+struct DataAddSourceInner {
+    ptr: *mut c_void,
+}
+
+unsafe impl Send for DataAddSourceInner {}
+unsafe impl Sync for DataAddSourceInner {}
+
+impl Drop for DataAddSourceInner {
+    fn drop(&mut self) {
+        unsafe { crate::ffi::acf_object_release(self.ptr) };
+    }
+}
+
+pub struct DispatchDataAddSource {
+    inner: Arc<DataAddSourceInner>,
+    main_thread: PhantomData<Rc<()>>,
+}
+
+impl DispatchDataAddSource {
+    #[must_use]
+    pub fn new<F>(callback: F) -> Self
+    where
+        F: FnMut(u64) + 'static,
+    {
+        assert!(
+            unsafe { acf_dispatch_source_data_add_is_main_thread() },
+            "data-add sources must be created on the main thread"
+        );
+        unsafe { Self::with_queue(&DispatchQueue::main(), callback) }
+    }
+
+    unsafe fn with_queue<F>(queue: &DispatchQueue, callback: F) -> Self
+    where
+        F: FnMut(u64) + 'static,
+    {
+        let handler = Box::new(DataAddHandler {
+            callback: RefCell::new(Box::new(callback)),
+        });
+        let context = Box::into_raw(handler).cast();
+        let ptr = unsafe {
+            acf_dispatch_source_data_add_create(
+                queue.as_mut_ptr(),
+                context,
+                data_add_event,
+                data_add_release,
+            )
+        };
+        if ptr.is_null() {
+            data_add_release(context);
+            panic!("failed to create data-add source");
+        }
+        Self {
+            inner: Arc::new(DataAddSourceInner { ptr }),
+            main_thread: PhantomData,
+        }
+    }
+
+    #[must_use]
+    pub fn merge_handle(&self) -> DispatchDataAddMergeHandle {
+        DispatchDataAddMergeHandle(Arc::clone(&self.inner))
+    }
+
+    pub fn resume(&self) {
+        unsafe { acf_dispatch_source_data_add_resume(self.inner.ptr) };
+    }
+
+    pub fn cancel(&self) {
+        unsafe { acf_dispatch_source_data_add_cancel(self.inner.ptr) };
+    }
+}
+
+impl Drop for DispatchDataAddSource {
+    fn drop(&mut self) {
+        self.cancel();
+    }
+}
+
+impl fmt::Debug for DispatchDataAddSource {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("DispatchDataAddSource")
+            .field("ptr", &self.inner.ptr)
+            .finish()
+    }
+}
+
+#[derive(Clone)]
+pub struct DispatchDataAddMergeHandle(Arc<DataAddSourceInner>);
+
+impl DispatchDataAddMergeHandle {
+    pub fn merge_data(&self, value: u64) {
+        if value != 0 {
+            unsafe { acf_dispatch_source_data_add_merge(self.0.ptr, value) };
+        }
+    }
+}
+
+impl fmt::Debug for DispatchDataAddMergeHandle {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("DispatchDataAddMergeHandle")
+            .field("ptr", &self.0.ptr)
+            .finish()
+    }
+}
+
+#[cfg(test)]
+mod data_add_tests {
+    use super::{
+        dispatch_async, DispatchDataAddMergeHandle, DispatchDataAddSource, DispatchQoS,
+        DispatchQueue,
+    };
+    use std::sync::{
+        atomic::{AtomicUsize, Ordering},
+        mpsc, Arc,
+    };
+    use std::thread;
+    use std::time::Duration;
+
+    struct ReleaseNotification(mpsc::Sender<()>);
+
+    impl Drop for ReleaseNotification {
+        fn drop(&mut self) {
+            let _ = self.0.send(());
+        }
+    }
+
+    #[test]
+    fn data_add_merges_across_threads_and_coalesces_before_resume() {
+        fn assert_send_sync<T: Send + Sync>() {}
+        assert_send_sync::<DispatchDataAddMergeHandle>();
+
+        let queue = DispatchQueue::new(
+            "com.doomfish.apple-cf.data-add-coalesce",
+            DispatchQoS::Default,
+        );
+        let (received_tx, received_rx) = mpsc::channel();
+        let (released_tx, released_rx) = mpsc::channel();
+        let released = ReleaseNotification(released_tx);
+        let handler: Box<dyn FnMut(u64) + Send> = Box::new(move |value| {
+            let _keep_alive = &released;
+            received_tx.send(value).expect("merged count");
+        });
+        let source = unsafe { DispatchDataAddSource::with_queue(&queue, handler) };
+        let handle = source.merge_handle();
+
+        let threads: Vec<_> = (0..8)
+            .map(|_| {
+                let handle = handle.clone();
+                thread::spawn(move || {
+                    for _ in 0..10 {
+                        handle.merge_data(1);
+                    }
+                })
+            })
+            .collect();
+        for thread in threads {
+            thread.join().expect("merge thread");
+        }
+
+        source.resume();
+        assert_eq!(
+            received_rx
+                .recv_timeout(Duration::from_secs(5))
+                .expect("merged event"),
+            80
+        );
+        source.cancel();
+        released_rx
+            .recv_timeout(Duration::from_secs(5))
+            .expect("cancel handler");
+        assert!(received_rx.try_recv().is_err());
+    }
+
+    #[test]
+    fn data_add_cancel_then_merge_keeps_context_until_cancel_handler() {
+        let queue = DispatchQueue::new(
+            "com.doomfish.apple-cf.data-add-cancel",
+            DispatchQoS::Default,
+        );
+        let (entered_tx, entered_rx) = mpsc::channel();
+        let (unblock_tx, unblock_rx) = mpsc::channel();
+        dispatch_async(&queue, move || {
+            entered_tx.send(()).expect("queue entered");
+            unblock_rx
+                .recv_timeout(Duration::from_secs(5))
+                .expect("queue unblocked");
+        });
+        entered_rx
+            .recv_timeout(Duration::from_secs(5))
+            .expect("queue blocked");
+
+        let (received_tx, received_rx) = mpsc::channel();
+        let (released_tx, released_rx) = mpsc::channel();
+        let released = ReleaseNotification(released_tx);
+        let handler: Box<dyn FnMut(u64) + Send> = Box::new(move |value| {
+            let _keep_alive = &released;
+            received_tx.send(value).expect("merged count");
+        });
+        let source = unsafe { DispatchDataAddSource::with_queue(&queue, handler) };
+        let handle = source.merge_handle();
+        source.cancel();
+        handle.merge_data(7);
+        assert!(matches!(
+            released_rx.try_recv(),
+            Err(mpsc::TryRecvError::Empty)
+        ));
+
+        unblock_tx.send(()).expect("unblock queue");
+        released_rx
+            .recv_timeout(Duration::from_secs(5))
+            .expect("cancel handler");
+        handle.merge_data(1);
+        assert!(received_rx.try_recv().is_err());
+    }
+
+    #[test]
+    fn data_add_drop_then_merge_is_inert() {
+        let queue = DispatchQueue::new("com.doomfish.apple-cf.data-add-drop", DispatchQoS::Default);
+        let (entered_tx, entered_rx) = mpsc::channel();
+        let (unblock_tx, unblock_rx) = mpsc::channel();
+        dispatch_async(&queue, move || {
+            entered_tx.send(()).expect("queue entered");
+            unblock_rx
+                .recv_timeout(Duration::from_secs(5))
+                .expect("queue unblocked");
+        });
+        entered_rx
+            .recv_timeout(Duration::from_secs(5))
+            .expect("queue blocked");
+
+        let (received_tx, received_rx) = mpsc::channel();
+        let (released_tx, released_rx) = mpsc::channel();
+        let released = ReleaseNotification(released_tx);
+        let handler: Box<dyn FnMut(u64) + Send> = Box::new(move |value| {
+            let _keep_alive = &released;
+            received_tx.send(value).expect("merged count");
+        });
+        let source = unsafe { DispatchDataAddSource::with_queue(&queue, handler) };
+        let handle = source.merge_handle();
+        source.resume();
+        drop(source);
+
+        let threads: Vec<_> = (0..8)
+            .map(|_| {
+                let handle = handle.clone();
+                thread::spawn(move || {
+                    for _ in 0..100 {
+                        handle.merge_data(1);
+                    }
+                })
+            })
+            .collect();
+        for thread in threads {
+            thread.join().expect("merge thread");
+        }
+        assert!(matches!(
+            released_rx.try_recv(),
+            Err(mpsc::TryRecvError::Empty)
+        ));
+        unblock_tx.send(()).expect("unblock queue");
+        released_rx
+            .recv_timeout(Duration::from_secs(5))
+            .expect("cancel handler");
+        handle.merge_data(1);
+        assert!(received_rx.try_recv().is_err());
+    }
+
+    #[test]
+    fn data_add_handler_panics_stay_inside_c_boundary() {
+        let queue =
+            DispatchQueue::new("com.doomfish.apple-cf.data-add-panic", DispatchQoS::Default);
+        let calls = Arc::new(AtomicUsize::new(0));
+        let observed = Arc::clone(&calls);
+        let (received_tx, received_rx) = mpsc::channel();
+        let (released_tx, released_rx) = mpsc::channel();
+        let released = ReleaseNotification(released_tx);
+        let handler: Box<dyn FnMut(u64) + Send> = Box::new(move |_| {
+            let _keep_alive = &released;
+            let count = observed.fetch_add(1, Ordering::SeqCst) + 1;
+            received_tx.send(count).expect("callback observed");
+            panic!("data-add handler panic");
+        });
+        let source = unsafe { DispatchDataAddSource::with_queue(&queue, handler) };
+        let handle = source.merge_handle();
+        source.resume();
+        for expected in 1..=2 {
+            handle.merge_data(1);
+            assert_eq!(
+                received_rx
+                    .recv_timeout(Duration::from_secs(5))
+                    .expect("callback returned"),
+                expected
+            );
+        }
+        source.cancel();
+        released_rx
+            .recv_timeout(Duration::from_secs(5))
+            .expect("cancel handler");
+        assert_eq!(calls.load(Ordering::SeqCst), 2);
     }
 }
