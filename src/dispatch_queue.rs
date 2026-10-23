@@ -150,6 +150,50 @@ impl DispatchQueue {
     const fn as_mut_ptr(&self) -> *mut c_void {
         self.ptr.cast_mut()
     }
+
+    #[allow(clippy::missing_safety_doc)]
+    pub unsafe fn exec_async_f(
+        &self,
+        context: *mut c_void,
+        work: unsafe extern "C" fn(*mut c_void),
+    ) {
+        unsafe { dispatch_async_f(self.as_mut_ptr(), context, work) };
+    }
+
+    #[allow(clippy::missing_safety_doc)]
+    pub unsafe fn exec_after_f(
+        &self,
+        delay: Duration,
+        context: *mut c_void,
+        work: unsafe extern "C" fn(*mut c_void),
+    ) {
+        let delta = i64::try_from(delay.as_nanos()).unwrap_or(i64::MAX);
+        unsafe {
+            dispatch_after_f(
+                dispatch_time(DISPATCH_TIME_NOW, delta),
+                self.as_mut_ptr(),
+                context,
+                work,
+            );
+        };
+    }
+}
+
+const DISPATCH_TIME_NOW: u64 = 0;
+
+extern "C" {
+    fn dispatch_async_f(
+        queue: *mut c_void,
+        context: *mut c_void,
+        work: unsafe extern "C" fn(*mut c_void),
+    );
+    fn dispatch_after_f(
+        when: u64,
+        queue: *mut c_void,
+        context: *mut c_void,
+        work: unsafe extern "C" fn(*mut c_void),
+    );
+    fn dispatch_time(when: u64, delta: i64) -> u64;
 }
 
 crate::utils::retained::cf_retained!(

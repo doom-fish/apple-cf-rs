@@ -10,6 +10,7 @@
 //! }
 //! ```
 
+use crate::cv::CVPixelBuffer;
 use crate::ffi;
 use std::ffi::c_void;
 use std::fmt;
@@ -17,7 +18,30 @@ use std::fmt;
 #[link(name = "CoreVideo", kind = "framework")]
 extern "C" {
     fn CVMetalTextureCacheGetTypeID() -> usize;
+    fn CVMetalTextureGetTypeID() -> usize;
+    fn CVMetalTextureCacheCreate(
+        allocator: *const c_void,
+        cache_attributes: *const c_void,
+        metal_device: *mut c_void,
+        texture_attributes: *const c_void,
+        cache_out: *mut *mut c_void,
+    ) -> i32;
+    fn CVMetalTextureCacheCreateTextureFromImage(
+        allocator: *const c_void,
+        texture_cache: *mut c_void,
+        source_image: *mut c_void,
+        texture_attributes: *const c_void,
+        pixel_format: usize,
+        width: usize,
+        height: usize,
+        plane_index: usize,
+        texture_out: *mut *mut c_void,
+    ) -> i32;
+    fn CVMetalTextureGetTexture(image: *mut c_void) -> *mut c_void;
 }
+
+const CV_RETURN_INVALID_ARGUMENT: i32 = -6661;
+const CV_RETURN_ALLOCATION_FAILED: i32 = -6662;
 
 /// Owned wrapper around `CVMetalTextureCacheRef`.
 pub struct CVMetalTextureCache(*mut c_void);
@@ -77,6 +101,102 @@ impl CVMetalTextureCache {
     /// Flush pending cached textures.
     pub fn flush(&self) {
         unsafe { ffi::cv_metal_texture_cache_flush(self.0) };
+    }
+
+    #[allow(clippy::missing_safety_doc, clippy::missing_errors_doc)]
+    pub unsafe fn with_device(device: *mut c_void) -> Result<Self, i32> {
+        if device.is_null() {
+            return Err(CV_RETURN_INVALID_ARGUMENT);
+        }
+        let mut cache = std::ptr::null_mut();
+        let status = unsafe {
+            CVMetalTextureCacheCreate(
+                std::ptr::null(),
+                std::ptr::null(),
+                device,
+                std::ptr::null(),
+                &raw mut cache,
+            )
+        };
+        if status != 0 {
+            return Err(status);
+        }
+        unsafe { Self::from_raw(cache) }.ok_or(CV_RETURN_ALLOCATION_FAILED)
+    }
+
+    #[allow(clippy::missing_errors_doc)]
+    pub fn create_texture_from_image(
+        &self,
+        image: &CVPixelBuffer,
+        pixel_format: usize,
+        width: usize,
+        height: usize,
+        plane_index: usize,
+    ) -> Result<CVMetalTexture, i32> {
+        let mut texture = std::ptr::null_mut();
+        let status = unsafe {
+            CVMetalTextureCacheCreateTextureFromImage(
+                std::ptr::null(),
+                self.0,
+                image.as_ptr(),
+                std::ptr::null(),
+                pixel_format,
+                width,
+                height,
+                plane_index,
+                &raw mut texture,
+            )
+        };
+        if status != 0 {
+            return Err(status);
+        }
+        unsafe { CVMetalTexture::from_raw(texture) }.ok_or(CV_RETURN_ALLOCATION_FAILED)
+    }
+}
+
+pub struct CVMetalTexture(*mut c_void);
+
+unsafe impl Send for CVMetalTexture {}
+unsafe impl Sync for CVMetalTexture {}
+
+impl CVMetalTexture {
+    #[allow(clippy::missing_safety_doc)]
+    #[must_use]
+    pub unsafe fn from_raw(ptr: *mut c_void) -> Option<Self> {
+        if ptr.is_null() {
+            None
+        } else {
+            Some(Self(ptr))
+        }
+    }
+
+    #[must_use]
+    pub const fn as_ptr(&self) -> *mut c_void {
+        self.0
+    }
+
+    #[must_use]
+    pub fn type_id() -> usize {
+        unsafe { CVMetalTextureGetTypeID() }
+    }
+
+    #[must_use]
+    pub fn texture(&self) -> *mut c_void {
+        unsafe { CVMetalTextureGetTexture(self.0) }
+    }
+}
+
+crate::utils::retained::cf_retained!(
+    CVMetalTexture,
+    retain = ffi::cf_type_retain,
+    release = ffi::cf_type_release,
+);
+
+impl fmt::Debug for CVMetalTexture {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("CVMetalTexture")
+            .field("ptr", &self.0)
+            .finish()
     }
 }
 

@@ -10,7 +10,7 @@ mod metal_texture_cache;
 mod pixel_buffer;
 
 pub use buffer::{CVAttachmentMode, CVBuffer, CVImageBuffer, CVImageRect, CVImageSize};
-pub use metal_texture_cache::CVMetalTextureCache;
+pub use metal_texture_cache::{CVMetalTexture, CVMetalTextureCache};
 pub use pixel_buffer::{
     CVPixelBuffer, CVPixelBufferLockFlags, CVPixelBufferLockGuard, CVPixelBufferPool,
     CVPixelBufferPoolFlushFlags, PixelBufferCursorExt,

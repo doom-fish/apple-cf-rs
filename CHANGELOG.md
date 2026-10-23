@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- `CVMetalTextureCache::with_device` makes a texture cache for a given `id<MTLDevice>`.
+- `CVMetalTextureCache::create_texture_from_image` makes a `CVMetalTexture` from one plane of a pixel buffer. `CVMetalTexture::texture` gives its `id<MTLTexture>`.
+- `DispatchQueue::exec_async_f` and `DispatchQueue::exec_after_f` give a C function and its context directly to libdispatch. They do not allocate a closure.
+
 ## [0.11.0] - 2026-09-24
 
 ### Security
