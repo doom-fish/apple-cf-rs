@@ -160,5 +160,5 @@ fn cf_error_description_may_contain_nul() {
 fn cf_data_round_trips_every_byte() {
     let bytes: Vec<u8> = (0..=255).collect();
     assert_eq!(CFData::from_bytes(&bytes).to_vec(), bytes);
-    assert!(CFData::from_bytes([]).to_vec().is_empty());
+    assert_eq!(CFData::from_bytes([]).to_vec(), [] as [u8; 0]);
 }

@@ -131,7 +131,7 @@ fn sample_attachments_report_sync_samples() {
         );
     }
     assert!(!sample.is_sync_sample());
-    assert!(!sample.sample_attachments().is_empty());
+    assert_ne!(sample.sample_attachments().len(), 0);
     assert_eq!(sample.sample_attachments()[0].len(), 1);
 
     unsafe {
