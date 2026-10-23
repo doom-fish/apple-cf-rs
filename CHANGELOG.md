@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `CGContext` makes alpha-only and premultiplied-last bitmap contexts with exact row sizes through the Swift bridge. It sets Core Graphics text rasterization options.
 - `CFPreferences::current_application_value` reads a preference for the current application. `CFType::as_number` checks the value type.
 
+### Fixed
+
+- The Swift bridge now supports macOS 12.0.
+
 ## [0.11.1] - 2026-10-23
 
 ### Added

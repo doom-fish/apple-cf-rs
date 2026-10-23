@@ -31,7 +31,7 @@ Safe Rust wrappers
 
 ## Requirements
 
-- macOS 13.0+
+- macOS 12.0+
 - Xcode toolchain (Swift 5.9+); Command Line Tools alone is **not** enough — `xcrun --sdk macosx --show-sdk-version` must succeed
 - Apple Silicon or Intel Mac
 

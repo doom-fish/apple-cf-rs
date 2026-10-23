@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "AppleCFBridge",
     platforms: [
-        .macOS(.v13)
+        .macOS(.v12)
     ],
     products: [
         .library(
