@@ -359,6 +359,13 @@ public func cf_preferences_copy_app_value(_ key: UnsafeMutableRawPointer, _ appI
     return Unmanaged.passRetained(value).toOpaque()
 }
 
+@_cdecl("cf_preferences_copy_current_app_value")
+public func cf_preferences_copy_current_app_value(_ key: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
+    let key = Unmanaged<CFString>.fromOpaque(key).takeUnretainedValue()
+    guard let value = CFPreferencesCopyAppValue(key, kCFPreferencesCurrentApplication) else { return nil }
+    return Unmanaged.passRetained(value).toOpaque()
+}
+
 @_cdecl("cf_preferences_app_synchronize")
 public func cf_preferences_app_synchronize(_ appID: UnsafeMutableRawPointer) -> Bool {
     let appID = Unmanaged<CFString>.fromOpaque(appID).takeUnretainedValue()

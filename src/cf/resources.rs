@@ -41,7 +41,7 @@
 //! assert!(escaped.to_string().contains("&lt;"));
 //! ```
 
-use super::base::{impl_cf_type_wrapper, AsCFType, CFType};
+use super::base::{AsCFType, CFType, impl_cf_type_wrapper};
 use super::{CFDate, CFNumber, CFString, CFUUID};
 use crate::ffi;
 use std::ffi::CString;
@@ -406,6 +406,12 @@ impl CFPreferences {
     #[must_use]
     pub fn app_value(key: &CFString, app_id: &CFString) -> Option<CFType> {
         let ptr = unsafe { ffi::cf_preferences_copy_app_value(key.as_ptr(), app_id.as_ptr()) };
+        unsafe { CFType::from_raw(ptr) }
+    }
+
+    #[must_use]
+    pub fn current_application_value(key: &CFString) -> Option<CFType> {
+        let ptr = unsafe { ffi::cf_preferences_copy_current_app_value(key.as_ptr()) };
         unsafe { CFType::from_raw(ptr) }
     }
 

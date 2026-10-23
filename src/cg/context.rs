@@ -5,12 +5,13 @@ use core::ptr;
 
 use crate::NullPointerError;
 
+use super::CGRect;
 use super::drawing::{CGColorSpace, CGImage};
 use super::ffi;
-use super::CGRect;
 
 const BITS_PER_COMPONENT_8: usize = 8;
 const CG_IMAGE_ALPHA_NONE: u32 = 0;
+const CG_IMAGE_ALPHA_ONLY: u32 = 7;
 const CG_IMAGE_ALPHA_PREMULTIPLIED_LAST: u32 = 1;
 const CG_BITMAP_BYTE_ORDER_32_BIG: u32 = 16_384;
 const RGBA8_BITMAP_INFO: u32 = CG_IMAGE_ALPHA_PREMULTIPLIED_LAST | CG_BITMAP_BYTE_ORDER_32_BIG;
@@ -48,6 +49,7 @@ impl CGContext {
     fn new_bitmap(
         width: usize,
         height: usize,
+        bytes_per_row: usize,
         color_space: &CGColorSpace,
         bitmap_info: u32,
     ) -> Result<Self, NullPointerError> {
@@ -57,7 +59,7 @@ impl CGContext {
                 width,
                 height,
                 BITS_PER_COMPONENT_8,
-                0,
+                bytes_per_row,
                 color_space.as_ptr(),
                 bitmap_info,
             )
@@ -83,7 +85,7 @@ impl CGContext {
     /// Returns [`NullPointerError`] if Core Graphics fails to create the bitmap context.
     pub fn new_rgba8(width: usize, height: usize) -> Result<Self, NullPointerError> {
         let color_space = CGColorSpace::device_rgb();
-        Self::new_bitmap(width, height, &color_space, RGBA8_BITMAP_INFO)
+        Self::new_bitmap(width, height, 0, &color_space, RGBA8_BITMAP_INFO)
     }
 
     /// Create an 8-bit grayscale bitmap context.
@@ -93,7 +95,28 @@ impl CGContext {
     /// Returns [`NullPointerError`] if Core Graphics fails to create the bitmap context.
     pub fn new_grayscale(width: usize, height: usize) -> Result<Self, NullPointerError> {
         let color_space = CGColorSpace::device_gray();
-        Self::new_bitmap(width, height, &color_space, GRAYSCALE8_BITMAP_INFO)
+        Self::new_bitmap(width, height, 0, &color_space, GRAYSCALE8_BITMAP_INFO)
+    }
+
+    #[allow(clippy::missing_errors_doc)]
+    pub fn new_alpha_only(width: usize, height: usize) -> Result<Self, NullPointerError> {
+        let color_space = CGColorSpace::device_gray();
+        Self::new_bitmap(width, height, width, &color_space, CG_IMAGE_ALPHA_ONLY)
+    }
+
+    #[allow(clippy::missing_errors_doc)]
+    pub fn new_premultiplied_last(width: usize, height: usize) -> Result<Self, NullPointerError> {
+        let bytes_per_row = width
+            .checked_mul(4)
+            .ok_or_else(|| NullPointerError::new("CGBitmapContextCreate"))?;
+        let color_space = CGColorSpace::device_rgb();
+        Self::new_bitmap(
+            width,
+            height,
+            bytes_per_row,
+            &color_space,
+            CG_IMAGE_ALPHA_PREMULTIPLIED_LAST,
+        )
     }
 
     fn buffer_len(&self) -> usize {
@@ -199,6 +222,46 @@ impl CGContext {
     /// Set the current fill color in `DeviceRGB`.
     pub fn set_rgb_fill_color(&self, r: f64, g: f64, b: f64, a: f64) {
         unsafe { ffi::CGContextSetRGBFillColor(self.ptr, r, g, b, a) };
+    }
+
+    pub fn set_gray_fill_color(&self, gray: f64, alpha: f64) {
+        unsafe { crate::ffi::acf_cg_context_set_gray_fill_color(self.ptr, gray, alpha) };
+    }
+
+    pub fn set_text_fill_mode(&self) {
+        unsafe { crate::ffi::acf_cg_context_set_text_fill_mode(self.ptr) };
+    }
+
+    pub fn set_allows_antialiasing(&self, allowed: bool) {
+        unsafe { crate::ffi::acf_cg_context_set_allows_antialiasing(self.ptr, allowed) };
+    }
+
+    pub fn set_should_antialias(&self, enabled: bool) {
+        unsafe { crate::ffi::acf_cg_context_set_should_antialias(self.ptr, enabled) };
+    }
+
+    pub fn set_allows_font_subpixel_positioning(&self, allowed: bool) {
+        unsafe {
+            crate::ffi::acf_cg_context_set_allows_font_subpixel_positioning(self.ptr, allowed);
+        };
+    }
+
+    pub fn set_should_subpixel_position_fonts(&self, enabled: bool) {
+        unsafe { crate::ffi::acf_cg_context_set_should_subpixel_position_fonts(self.ptr, enabled) };
+    }
+
+    pub fn set_allows_font_subpixel_quantization(&self, allowed: bool) {
+        unsafe {
+            crate::ffi::acf_cg_context_set_allows_font_subpixel_quantization(self.ptr, allowed);
+        };
+    }
+
+    pub fn set_should_subpixel_quantize_fonts(&self, enabled: bool) {
+        unsafe { crate::ffi::acf_cg_context_set_should_subpixel_quantize_fonts(self.ptr, enabled) };
+    }
+
+    pub fn set_should_smooth_fonts(&self, enabled: bool) {
+        unsafe { crate::ffi::acf_cg_context_set_should_smooth_fonts(self.ptr, enabled) };
     }
 
     /// Set the current stroke color in `DeviceRGB`.

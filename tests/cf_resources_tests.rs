@@ -28,9 +28,11 @@ fn cf_resource_wrappers_work() {
     let number_formatter = CFNumberFormatter::new(Some(&locale), CFNumberFormatterStyle::Decimal);
     let rendered = number_formatter.format_number(&CFNumber::from_i64(1234));
     assert!(!rendered.is_empty());
-    assert!(number_formatter
-        .parse_number(&CFString::new("42"))
-        .is_some());
+    assert!(
+        number_formatter
+            .parse_number(&CFString::new("42"))
+            .is_some()
+    );
 
     let date_formatter = CFDateFormatter::new(
         Some(&locale),
@@ -58,6 +60,30 @@ fn cf_resource_wrappers_work() {
     assert_eq!(
         CFXML::unescape_entities(&escaped).to_string(),
         "<tag>value</tag>"
+    );
+}
+
+#[test]
+fn current_application_preferences_and_number_type() {
+    let key = CFString::new("AppleFontSmoothing");
+    let current_application = unsafe {
+        CFString::from_raw_borrowed(raw::kCFPreferencesCurrentApplication.cast_mut().cast())
+            .expect("current application")
+    };
+    assert_eq!(
+        CFPreferences::current_application_value(&key),
+        CFPreferences::app_value(&key, &current_application)
+    );
+    let number = CFNumber::from_i64(0).into_cf_type();
+    assert_eq!(
+        number.as_number().and_then(|number| number.to_i64()),
+        Some(0)
+    );
+    assert!(
+        CFString::new("not a number")
+            .into_cf_type()
+            .as_number()
+            .is_none()
     );
 }
 
@@ -124,7 +150,10 @@ fn cf_url_absolute_string_resolves_relative_urls() {
         )
     };
     let url = unsafe { CFURL::from_raw(ptr.cast_mut().cast()) }.expect("relative url");
-    assert_eq!(url.absolute_string().to_string(), "http://example.com/a/b/c");
+    assert_eq!(
+        url.absolute_string().to_string(),
+        "http://example.com/a/b/c"
+    );
 }
 
 #[test]

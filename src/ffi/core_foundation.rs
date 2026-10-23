@@ -34,7 +34,7 @@ extern "C" {
     pub fn cf_string_get_length(value: *mut c_void) -> usize;
     pub fn acf_cf_string_create_with_bytes(bytes: *const u8, len: usize) -> *mut c_void;
     pub fn acf_cf_string_copy_utf16(value: *mut c_void, buffer: *mut u16, capacity: usize)
-        -> usize;
+    -> usize;
 
     /// Swift bridge function `cf_number_get_type_id` for the corresponding Apple API.
     pub fn cf_number_get_type_id() -> usize;
@@ -360,6 +360,7 @@ extern "C" {
     pub fn cf_preferences_set_app_value(key: *mut c_void, value: *mut c_void, app_id: *mut c_void);
     /// Swift bridge function `cf_preferences_copy_app_value` for the corresponding Apple API.
     pub fn cf_preferences_copy_app_value(key: *mut c_void, app_id: *mut c_void) -> *mut c_void;
+    pub fn cf_preferences_copy_current_app_value(key: *mut c_void) -> *mut c_void;
     /// Swift bridge function `cf_preferences_app_synchronize` for the corresponding Apple API.
     pub fn cf_preferences_app_synchronize(app_id: *mut c_void) -> bool;
 

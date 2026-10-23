@@ -34,11 +34,7 @@ impl CFType {
     /// not release or separately adopt that transferred retain.
     #[must_use]
     pub unsafe fn from_raw(ptr: *mut c_void) -> Option<Self> {
-        if ptr.is_null() {
-            None
-        } else {
-            Some(Self(ptr))
-        }
+        if ptr.is_null() { None } else { Some(Self(ptr)) }
     }
 
     /// Retains a +0 borrowed `CFTypeRef` and returns an owned wrapper.
@@ -67,6 +63,13 @@ impl CFType {
     #[must_use]
     pub fn type_id(&self) -> usize {
         unsafe { ffi::cf_type_get_type_id(self.0) }
+    }
+
+    #[must_use]
+    pub fn as_number(&self) -> Option<crate::cf::CFNumber> {
+        (self.type_id() == crate::cf::CFNumber::type_id())
+            .then(|| unsafe { crate::cf::CFNumber::from_raw_borrowed(self.0) })
+            .flatten()
     }
 
     /// `CFHash` of the wrapped object.
@@ -136,11 +139,7 @@ impl SwiftObject {
     /// Wraps a +1 retained bridge object pointer and returns `None` for null.
     #[must_use]
     pub(crate) fn from_raw_owned(ptr: *mut c_void) -> Option<Self> {
-        if ptr.is_null() {
-            None
-        } else {
-            Some(Self(ptr))
-        }
+        if ptr.is_null() { None } else { Some(Self(ptr)) }
     }
 
     /// Returns the wrapped raw bridge object pointer.

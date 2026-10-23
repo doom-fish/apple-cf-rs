@@ -17,10 +17,12 @@
 #![allow(missing_docs)]
 
 mod core_foundation;
+mod core_graphics_extras;
 mod core_video_extras;
 mod dispatch_extras;
 
 pub use core_foundation::*;
+pub use core_graphics_extras::*;
 pub use core_video_extras::*;
 pub use dispatch_extras::*;
 
@@ -100,7 +102,7 @@ extern "C" {
     pub fn io_surface_get_height_of_plane(surface: *mut c_void, plane_index: usize) -> usize;
     /// Swift bridge function `io_surface_get_bytes_per_row_of_plane` for the corresponding Apple API.
     pub fn io_surface_get_bytes_per_row_of_plane(surface: *mut c_void, plane_index: usize)
-        -> usize;
+    -> usize;
     /// Swift bridge function `io_surface_get_base_address_of_plane` for the corresponding Apple API.
     pub fn io_surface_get_base_address_of_plane(
         surface: *mut c_void,
@@ -252,7 +254,7 @@ extern "C" {
     pub fn cm_format_description_get_audio_channel_count(format_description: *mut c_void) -> u32;
     /// Swift bridge function `cm_format_description_get_audio_bits_per_channel` for the corresponding Apple API.
     pub fn cm_format_description_get_audio_bits_per_channel(format_description: *mut c_void)
-        -> u32;
+    -> u32;
     /// Swift bridge function `cm_format_description_get_audio_bytes_per_frame` for the corresponding Apple API.
     pub fn cm_format_description_get_audio_bytes_per_frame(format_description: *mut c_void) -> u32;
     /// Swift bridge function `cm_format_description_get_audio_format_flags` for the corresponding Apple API.
@@ -313,18 +315,18 @@ extern "C" {
     /// Swift bridge function `cm_metadata_format_description_metadata_specification_key_data_type` for the corresponding Apple API.
     pub fn cm_metadata_format_description_metadata_specification_key_data_type() -> *mut c_void;
     /// Swift bridge function `cm_metadata_format_description_metadata_specification_key_extended_language_tag` for the corresponding Apple API.
-    pub fn cm_metadata_format_description_metadata_specification_key_extended_language_tag(
-    ) -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_extended_language_tag()
+    -> *mut c_void;
     /// Swift bridge function `cm_metadata_format_description_metadata_specification_key_identifier` for the corresponding Apple API.
     pub fn cm_metadata_format_description_metadata_specification_key_identifier() -> *mut c_void;
     /// Swift bridge function `cm_metadata_format_description_metadata_specification_key_setup_data` for the corresponding Apple API.
     pub fn cm_metadata_format_description_metadata_specification_key_setup_data() -> *mut c_void;
     /// Swift bridge function `cm_metadata_format_description_metadata_specification_key_structural_dependency` for the corresponding Apple API.
-    pub fn cm_metadata_format_description_metadata_specification_key_structural_dependency(
-    ) -> *mut c_void;
+    pub fn cm_metadata_format_description_metadata_specification_key_structural_dependency()
+    -> *mut c_void;
     /// Swift bridge function `cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag` for the corresponding Apple API.
-    pub fn cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag(
-    ) -> *mut c_void;
+    pub fn cm_metadata_format_description_structural_dependency_key_dependency_is_invalid_flag()
+    -> *mut c_void;
 
     // ---- CVPixelBuffer ----
     /// Swift bridge function `cv_pixel_buffer_release` for the corresponding Apple API.

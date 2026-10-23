@@ -302,3 +302,57 @@ public func cgimageHash(_ image: OpaquePointer) -> Int {
     let cgImage = Unmanaged<CGImage>.fromOpaque(UnsafeRawPointer(image)).takeUnretainedValue()
     return cgImage.hashValue
 }
+
+@_cdecl("acf_cg_context_set_gray_fill_color")
+public func acfCGContextSetGrayFillColor(_ context: UnsafeMutableRawPointer?, _ gray: Double, _ alpha: Double) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setFillColor(gray: gray, alpha: alpha)
+}
+
+@_cdecl("acf_cg_context_set_text_fill_mode")
+public func acfCGContextSetTextFillMode(_ context: UnsafeMutableRawPointer?) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setTextDrawingMode(.fill)
+}
+
+@_cdecl("acf_cg_context_set_allows_antialiasing")
+public func acfCGContextSetAllowsAntialiasing(_ context: UnsafeMutableRawPointer?, _ allowed: Bool) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setAllowsAntialiasing(allowed)
+}
+
+@_cdecl("acf_cg_context_set_should_antialias")
+public func acfCGContextSetShouldAntialias(_ context: UnsafeMutableRawPointer?, _ enabled: Bool) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setShouldAntialias(enabled)
+}
+
+@_cdecl("acf_cg_context_set_allows_font_subpixel_positioning")
+public func acfCGContextSetAllowsFontSubpixelPositioning(_ context: UnsafeMutableRawPointer?, _ allowed: Bool) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setAllowsFontSubpixelPositioning(allowed)
+}
+
+@_cdecl("acf_cg_context_set_should_subpixel_position_fonts")
+public func acfCGContextSetShouldSubpixelPositionFonts(_ context: UnsafeMutableRawPointer?, _ enabled: Bool) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setShouldSubpixelPositionFonts(enabled)
+}
+
+@_cdecl("acf_cg_context_set_allows_font_subpixel_quantization")
+public func acfCGContextSetAllowsFontSubpixelQuantization(_ context: UnsafeMutableRawPointer?, _ allowed: Bool) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setAllowsFontSubpixelQuantization(allowed)
+}
+
+@_cdecl("acf_cg_context_set_should_subpixel_quantize_fonts")
+public func acfCGContextSetShouldSubpixelQuantizeFonts(_ context: UnsafeMutableRawPointer?, _ enabled: Bool) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setShouldSubpixelQuantizeFonts(enabled)
+}
+
+@_cdecl("acf_cg_context_set_should_smooth_fonts")
+public func acfCGContextSetShouldSmoothFonts(_ context: UnsafeMutableRawPointer?, _ enabled: Bool) {
+    guard let context else { return }
+    Unmanaged<CGContext>.fromOpaque(context).takeUnretainedValue().setShouldSmoothFonts(enabled)
+}
