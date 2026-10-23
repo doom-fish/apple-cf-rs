@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `cg::Display` lists the active displays and reads the bounds, the UUID and the current mode of a display. `DisplayMode` gives the size, the pixel size and the refresh rate.
+- `DispatchDataAddSource` is a GCD data-add source on the main queue. Its `DispatchDataAddMergeHandle` merges data from any thread, also after the source is cancelled or dropped.
+
 ## [0.11.2] - 2026-10-23
 
 ### Added
