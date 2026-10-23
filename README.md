@@ -10,9 +10,9 @@ Safe Rust bindings for Apple's shared **Core\*** frameworks — the foundation u
 |---|---|---|---|
 | [`cf`](src/cf) | CoreFoundation values, collections, property lists, locale/formatter helpers, runtime primitives | — | ✅ |
 | [`raw`](src/raw) | Exhaustive low-level CoreFoundation/CoreMedia/CoreVideo/IOSurface/Dispatch bindings | — | ✅ |
-| [`cg`](src/cg) | CoreGraphics value types + bitmap drawing wrappers | `cg` | ✅ |
+| [`cg`](src/cg) | CoreGraphics value types, bitmap drawing, active displays and display modes | `cg` | ✅ |
 | [`iosurface`](src/iosurface) | IOSurface (zero-copy GPU buffers, multi-planar formats) | `iosurface` | ✅ |
-| [`dispatch_queue`](src/dispatch_queue.rs) | Dispatch queues, async/apply helpers, groups, semaphores, timer sources | `dispatch` | ✅ |
+| [`dispatch_queue`](src/dispatch_queue.rs) | Dispatch queues, async/apply helpers, groups, semaphores, timer and data-add sources | `dispatch` | ✅ |
 | [`cm`](src/cm) | `CMTime`, `CMTimeRange`, `CMTimebase`, `CMSampleBuffer`, `CMBlockBuffer`, `CMFormatDescription`, `CMMetadataFormatDescription` | `cm` | ✅ |
 | [`cv`](src/cv) | `CVBuffer`, `CVImageBuffer`, `CVPixelBuffer`, `CVPixelBufferPool`, `CVMetalTextureCache` | `cv` | ✅ |
 | [`utils`](src/utils) | Shared FFI helpers (always on) | — | ✅ |
@@ -77,6 +77,26 @@ thread::sleep(Duration::from_millis(20));
 source.cancel();
 assert!(source.fire_count() > 0);
 ```
+
+`DispatchDataAddSource::new` makes a data-add source on the main queue. Call it on the main thread, then call `resume`.
+Send a `DispatchDataAddMergeHandle` to other threads to merge data. The handler runs on the main queue.
+Drop or cancel the source to stop it. Merge handles remain valid after cancellation.
+
+### Read the active displays
+
+```rust,no_run
+use apple_cf::cg::Display;
+
+for display in Display::active() {
+    println!("display {}: {:?}", display.id(), display.bounds());
+    if let Some(mode) = display.mode() {
+        println!("{} × {} pixels at {} Hz", mode.pixel_width(), mode.pixel_height(), mode.refresh_rate());
+    }
+}
+```
+
+`Display::main` gives the main display. `Display::uuid` returns its UUID if one exists.
+`DisplayMode` gives the logical size, pixel size and refresh rate of the current mode.
 
 ### Allocate an IOSurface-backed `CVPixelBuffer`
 
