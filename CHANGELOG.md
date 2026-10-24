@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.3] - 2026-10-24
+
 ### Added
 
 - `cg::Display` lists the active displays and reads the bounds, the UUID and the current mode of a display. `DisplayMode` gives the size, the pixel size and the refresh rate.
