@@ -124,6 +124,14 @@ The only runtime Rust dependency is `doom-fish-utils`.
 
 ## Ownership and mapped-memory contracts
 
+`CGContext::new_srgb_rgba8` creates an sRGB bitmap with premultiplied RGBA bytes and exact row sizes.
+The unsafe `copy_bytes` method copies pixels into owned storage.
+The caller must ensure that all bytes have values and that no native alias changes them during the copy.
+The sRGB constructor initializes all bytes.
+Quadratic and cubic paths support typed caps, joins, miter limits, fill rules, clipping, and affine transforms.
+These operations support macOS 12.
+Use a separate context for each concurrent operation.
+
 Raw `from_raw` constructors adopt one caller-owned `+1` retain and are therefore `unsafe`. Use `from_raw_borrowed` when importing a live `+0` pointer that the wrapper must retain. `AsCFType` is an unsafe trait because implementations promise a valid Core Foundation object pointer.
 
 `CVPixelBuffer` and `IOSurface` lock guards balance native synchronization and mapping only; they do not establish Rust exclusivity across retained, native, GPU, or cross-process aliases. Raw pointers remain available, while slice, row, plane, and zero-copy cursor views require `unsafe` with an explicit no-alias/no-mutation guarantee. `CGContext` clones likewise share one mutable native context, so its byte-slice views are unsafe even though drawing methods remain safe.

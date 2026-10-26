@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.5] - 2026-10-26
+
+### Added
+
+- Draw quadratic and cubic paths with typed caps, joins, fill rules, and clipping.
+- Create sRGB RGBA8 bitmap contexts with exact row sizes and copy their pixels.
+- Apply an affine transform to a context.
+
 ## [0.11.4] - 2026-10-26
 
 ### Fixed

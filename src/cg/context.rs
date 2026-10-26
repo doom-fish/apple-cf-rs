@@ -5,7 +5,7 @@ use core::ptr;
 
 use crate::NullPointerError;
 
-use super::CGRect;
+use super::{CGAffineTransform, CGRect};
 use super::drawing::{CGColorSpace, CGImage};
 use super::ffi;
 
@@ -16,6 +16,32 @@ const CG_IMAGE_ALPHA_PREMULTIPLIED_LAST: u32 = 1;
 const CG_BITMAP_BYTE_ORDER_32_BIG: u32 = 16_384;
 const RGBA8_BITMAP_INFO: u32 = CG_IMAGE_ALPHA_PREMULTIPLIED_LAST | CG_BITMAP_BYTE_ORDER_32_BIG;
 const GRAYSCALE8_BITMAP_INFO: u32 = CG_IMAGE_ALPHA_NONE;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(u32)]
+pub enum LineCap {
+    Butt = 0,
+    Round = 1,
+    Square = 2,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(u32)]
+pub enum LineJoin {
+    Miter = 0,
+    Round = 1,
+    Bevel = 2,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(u32)]
+pub enum PathDrawingMode {
+    Fill = 0,
+    EvenOddFill = 1,
+    Stroke = 2,
+    FillStroke = 3,
+    EvenOddFillStroke = 4,
+}
 
 /// Reference-counted `CGContextRef` backed by a bitmap.
 ///
@@ -96,6 +122,21 @@ impl CGContext {
     pub fn new_rgba8(width: usize, height: usize) -> Result<Self, NullPointerError> {
         let color_space = CGColorSpace::device_rgb();
         Self::new_bitmap(width, height, 0, &color_space, RGBA8_BITMAP_INFO)
+    }
+
+    #[allow(clippy::missing_errors_doc)]
+    pub fn new_srgb_rgba8(width: usize, height: usize) -> Result<Self, NullPointerError> {
+        let bytes_per_row = width
+            .checked_mul(4)
+            .ok_or_else(|| NullPointerError::new("CGBitmapContextCreate"))?;
+        let color_space = CGColorSpace::srgb();
+        Self::new_bitmap(width, height, bytes_per_row, &color_space, RGBA8_BITMAP_INFO)
+    }
+
+    #[must_use]
+    #[allow(clippy::missing_safety_doc)]
+    pub unsafe fn copy_bytes(&self) -> Vec<u8> {
+        unsafe { self.as_bytes() }.to_vec()
     }
 
     /// Create an 8-bit grayscale bitmap context.
@@ -317,6 +358,44 @@ impl CGContext {
     /// Add a line segment to the current path.
     pub fn add_line_to(&self, x: f64, y: f64) {
         unsafe { ffi::CGContextAddLineToPoint(self.ptr, x, y) };
+    }
+
+    pub fn add_quad_curve_to(&self, cx: f64, cy: f64, x: f64, y: f64) {
+        unsafe { ffi::CGContextAddQuadCurveToPoint(self.ptr, cx, cy, x, y) };
+    }
+
+    pub fn add_curve_to(&self, c1x: f64, c1y: f64, c2x: f64, c2y: f64, x: f64, y: f64) {
+        unsafe { ffi::CGContextAddCurveToPoint(self.ptr, c1x, c1y, c2x, c2y, x, y) };
+    }
+
+    pub fn set_line_cap(&self, cap: LineCap) {
+        unsafe { ffi::CGContextSetLineCap(self.ptr, cap as u32) };
+    }
+
+    pub fn set_line_join(&self, join: LineJoin) {
+        unsafe { ffi::CGContextSetLineJoin(self.ptr, join as u32) };
+    }
+
+    pub fn set_miter_limit(&self, limit: f64) {
+        unsafe { ffi::CGContextSetMiterLimit(self.ptr, limit) };
+    }
+
+    pub fn draw_path(&self, mode: PathDrawingMode) {
+        unsafe { ffi::CGContextDrawPath(self.ptr, mode as u32) };
+    }
+
+    pub fn clip(&self, even_odd: bool) {
+        unsafe {
+            if even_odd {
+                ffi::CGContextEOClip(self.ptr);
+            } else {
+                ffi::CGContextClip(self.ptr);
+            }
+        }
+    }
+
+    pub fn concat_transform(&self, transform: CGAffineTransform) {
+        unsafe { ffi::CGContextConcatCTM(self.ptr, transform) };
     }
 
     /// Add a rectangle to the current path.

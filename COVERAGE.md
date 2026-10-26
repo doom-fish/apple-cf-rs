@@ -2,6 +2,9 @@
 
 Coverage summary for `apple-cf` `v0.11.0`. The symbol counts come from the 0.10.0 audit against `MacOSX26.2.sdk` ([`COVERAGE_AUDIT.md`](COVERAGE_AUDIT.md)); they have not been regenerated against newer SDKs.
 
+The v0.11.5 path additions are listed separately below.
+They do not change the older audit totals.
+
 ## What the numbers measure
 
 - `VERIFIED`: 2727 symbols, `EXEMPT`: 138, `GAPS`: 0, i.e. 95.18% of all audited declarations and 100% of the non-exempt ones.
@@ -15,7 +18,7 @@ Legend:
 - 🔧 raw bindings only
 - ⏭️ exempt: deprecated or unavailable declaration, private inline helper, or Objective-C protocol marker without a standalone C ABI
 
-## Safe wrapper surface in v0.11.0
+## Safe wrapper surface through v0.11.5
 
 | Surface | Headers | Status | Notes |
 |---|---|---:|---|
@@ -29,6 +32,15 @@ Legend:
 | Dispatch | `dispatch/queue.h`, `dispatch/group.h`, `dispatch/semaphore.h`, `dispatch/source.h`, `dispatch/time.h` | 🟡 | Serial, concurrent, main and global queues, `dispatch_async`, `dispatch_async_and_wait`, `dispatch_apply`, `dispatch_after`, groups, semaphores, a fire-counting timer source, and a main-queue data-add source with cancel-safe merge handles. No other sources with user event handlers, no work items and no dispatch I/O. |
 | Core Graphics | `CGGeometry.h`, `CGAffineTransform.h`, `CGColorSpace.h`, `CGImage.h`, `CGBitmapContext.h`, `CGContext.h`, `CGDirectDisplay.h` | 🟡 | Value types, device and named color spaces, image metadata and PNG export, 8-bit bitmap contexts with basic drawing, and active displays with their bounds, UUIDs and modes. |
 | `raw` | CoreFoundation, CoreMedia, CoreVideo, IOSurface and Dispatch umbrella headers | 🔧 | Unsafe bindgen declarations for the whole audited surface, plus hand-written inline helpers. |
+
+### Core Graphics path additions in v0.11.5
+
+`CGContext` adds `CGContextAddQuadCurveToPoint`, `CGContextAddCurveToPoint`, `CGContextSetLineCap`,
+`CGContextSetLineJoin`, `CGContextSetMiterLimit`, `CGContextDrawPath`, `CGContextClip`,
+`CGContextEOClip`, and `CGContextConcatCTM`.
+`LineCap`, `LineJoin`, and `PathDrawingMode` restrict the native enum values.
+The sRGB bitmap constructor and pixel copy reuse the existing bitmap APIs.
+This remains a subset of Core Graphics, not an SVG parser.
 
 ## Remaining exempt families
 

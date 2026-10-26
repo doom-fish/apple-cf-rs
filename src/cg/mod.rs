@@ -16,7 +16,7 @@ mod size;
 pub(crate) mod ffi {
     use core::ffi::c_void;
 
-    use super::rect::CGRect;
+    use super::{CGAffineTransform, rect::CGRect};
 
     #[link(name = "ApplicationServices", kind = "framework")]
     extern "C" {
@@ -133,6 +133,29 @@ pub(crate) mod ffi {
         pub(crate) fn CGContextSaveGState(context: *mut c_void);
         /// Apple SDK function `CGContextRestoreGState`.
         pub(crate) fn CGContextRestoreGState(context: *mut c_void);
+        pub(crate) fn CGContextAddQuadCurveToPoint(
+            context: *mut c_void,
+            cx: f64,
+            cy: f64,
+            x: f64,
+            y: f64,
+        );
+        pub(crate) fn CGContextAddCurveToPoint(
+            context: *mut c_void,
+            c1x: f64,
+            c1y: f64,
+            c2x: f64,
+            c2y: f64,
+            x: f64,
+            y: f64,
+        );
+        pub(crate) fn CGContextSetLineCap(context: *mut c_void, cap: u32);
+        pub(crate) fn CGContextSetLineJoin(context: *mut c_void, join: u32);
+        pub(crate) fn CGContextSetMiterLimit(context: *mut c_void, limit: f64);
+        pub(crate) fn CGContextDrawPath(context: *mut c_void, mode: u32);
+        pub(crate) fn CGContextClip(context: *mut c_void);
+        pub(crate) fn CGContextEOClip(context: *mut c_void);
+        pub(crate) fn CGContextConcatCTM(context: *mut c_void, transform: CGAffineTransform);
     }
 }
 
@@ -143,7 +166,7 @@ pub use crate::raw::CGContextRef;
 #[doc(inline)]
 pub use crate::raw::CGKeyCode;
 pub use affine::{CGAffineTransform, CGVector};
-pub use context::CGContext;
+pub use context::{CGContext, LineCap, LineJoin, PathDrawingMode};
 pub use display::{Display, DisplayMode};
 pub use drawing::{CGColorSpace, CGImage};
 pub use point::CGPoint;
