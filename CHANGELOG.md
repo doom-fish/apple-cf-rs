@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.7] - 2026-10-27
+
+### Added
+
+- Parse UTF-8 URL input with an optional base through `CFURL::parse`.
+- Read encoded URL components through `CFURLComponent` and `CFURL::component`.
+
 ## [0.11.6] - 2026-10-27
 
 ### Added

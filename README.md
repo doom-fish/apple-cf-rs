@@ -76,6 +76,26 @@ Invalid indexes give `None`. Every native range has a length and a checked end w
 The system supplies Unicode data and language-specific word rules.
 `CFCharacterSet::predefined` supplies decimal-digit and non-base character sets.
 
+### Read URL components
+
+`CFURL::parse` accepts UTF-8 input and an optional base URL.
+A base URL gives an absolute URL.
+`CFURL::component` returns encoded component text without percent decoding.
+An absent component gives `None`.
+An empty component gives an empty string.
+
+```rust
+use apple_cf::cf::{CFURL, CFURLComponent};
+
+let base = CFURL::parse("https://example.com/pages/index.html", None).unwrap();
+let page = CFURL::parse("../a%20b.html?x=1#next", Some(&base)).unwrap();
+assert_eq!(page.component(CFURLComponent::Path).as_deref(), Some("/a%20b.html"));
+assert_eq!(page.component(CFURLComponent::Fragment).as_deref(), Some("next"));
+```
+
+The system parser can reject input on a newer OS.
+The application must keep its own input and normalization rules.
+
 ### Create a timer-backed dispatch source
 
 ```rust,no_run

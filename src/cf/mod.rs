@@ -11,6 +11,7 @@ mod property_list;
 mod resources;
 mod runtime;
 mod text;
+mod url;
 
 pub use base::{AsCFType, CFType};
 pub use collections::{
@@ -30,6 +31,7 @@ pub use runtime::{
     CFRunLoop, CFRunLoopRunResult, CFSocket, CFStreamPair, CFTimer, CFWriteStream,
 };
 pub use text::{CFCharacterSetKind, CFStringTokenUnit, CFStringTokenizer};
+pub use url::CFURLComponent;
 
 /// Convenience alias for the bound read/write stream pair.
 pub type CFStream = CFStreamPair;
