@@ -18,7 +18,7 @@ Legend:
 - 🔧 raw bindings only
 - ⏭️ exempt: deprecated or unavailable declaration, private inline helper, or Objective-C protocol marker without a standalone C ABI
 
-## Safe wrapper surface through v0.11.5
+## Safe wrapper surface through v0.11.6
 
 | Surface | Headers | Status | Notes |
 |---|---|---:|---|
@@ -41,6 +41,17 @@ Legend:
 `LineCap`, `LineJoin`, and `PathDrawingMode` restrict the native enum values.
 The sRGB bitmap constructor and pixel copy reuse the existing bitmap APIs.
 This remains a subset of Core Graphics, not an SVG parser.
+
+### Text boundary additions in v0.11.6
+
+`CFString::composed_character_range` and `composed_character_ranges` use `CFStringGetRangeOfComposedCharactersAtIndex`.
+`CFStringTokenizer` uses `CFStringTokenizerCreate`, `CFStringTokenizerAdvanceToNextToken`, and `CFStringTokenizerGetCurrentTokenRange`.
+`CFRelease` closes the tokenizer.
+The safe API supports word and word-boundary units and returns checked UTF-16 ranges.
+`CFCharacterSet::predefined` uses `CFCharacterSetGetPredefined` for decimal-digit and non-base character sets.
+It does not replace system Unicode data or dictionary rules.
+The additions support macOS 12.
+The older audit totals remain unchanged.
 
 ## Remaining exempt families
 

@@ -64,6 +64,18 @@ let array = CFArray::from_values(&[&first, &second]);
 assert_eq!(array.len(), 2);
 ```
 
+### Read text boundaries
+
+`CFString::composed_character_range` returns the composed-character range at a valid UTF-16 index.
+`CFString::composed_character_ranges` iterates the composed-character ranges.
+`CFStringTokenizer::new` accepts a string, a `CFStringTokenUnit`, and an optional locale.
+The tokenizer borrows the string and releases its native handle when it drops.
+`Word` returns word tokens. `WordBoundary` also returns separator ranges.
+All ranges use UTF-16 code units, not UTF-8 bytes.
+Invalid indexes give `None`. Every native range has a length and a checked end within the source string.
+The system supplies Unicode data and language-specific word rules.
+`CFCharacterSet::predefined` supplies decimal-digit and non-base character sets.
+
 ### Create a timer-backed dispatch source
 
 ```rust,no_run

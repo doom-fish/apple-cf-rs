@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.6] - 2026-10-27
+
+### Added
+
+- Read composed-character ranges from `CFString`.
+- Iterate word and word-boundary ranges with `CFStringTokenizer`.
+- Check every range against the source string length.
+- Read the predefined decimal-digit and non-base character sets.
+
 ## [0.11.5] - 2026-10-26
 
 ### Added

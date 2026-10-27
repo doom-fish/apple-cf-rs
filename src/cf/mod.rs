@@ -10,6 +10,7 @@ mod primitives;
 mod property_list;
 mod resources;
 mod runtime;
+mod text;
 
 pub use base::{AsCFType, CFType};
 pub use collections::{
@@ -28,6 +29,7 @@ pub use runtime::{
     CFFileDescriptor, CFMessagePort, CFNotificationCenter, CFNotificationObserver, CFReadStream,
     CFRunLoop, CFRunLoopRunResult, CFSocket, CFStreamPair, CFTimer, CFWriteStream,
 };
+pub use text::{CFCharacterSetKind, CFStringTokenUnit, CFStringTokenizer};
 
 /// Convenience alias for the bound read/write stream pair.
 pub type CFStream = CFStreamPair;
