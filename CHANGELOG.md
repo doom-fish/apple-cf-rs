@@ -347,3 +347,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   upstream in screencapturekit-rs.
 - `cv` (CoreVideo).
 - `metal` (Metal).
+
+## [0.4.0] - 2026-05-16
+
+### Added
+
+- Add `CGColorSpace` and `CGImage` drawing primitives.
+
+## [0.3.0] - 2026-05-16
+
+### Added
+
+- Add `CGAffineTransform` and `CGVector` bindings.
+
+## [0.2.0] - 2026-05-16
+
+### Added
+
+- Add `CMTime` arithmetic helpers.
+
+## [0.1.2] - 2026-05-16
+
+### Changed
+
+- Move the Metal bindings to the `apple-metal` crate.
+
+## [0.1.1] - 2026-05-16
+
+### Added
+
+- Add the optional `metal` module.
+- Add `CVPixelBuffer` and `CVPixelBufferPool` attribute keys.
+
+## [0.1.0] - 2026-05-15
+
+### Added
+
+- Add CoreGraphics, IOSurface and dispatch queue bindings.
+- Add `CMSampleBuffer`, `CMTime`, `CMBlockBuffer` and `CMFormatDescription` bindings.
+- Add `CVPixelBuffer` and `CVPixelBufferPool` bindings.
+- Add null-tolerant `CMSampleBuffer` constructors.
