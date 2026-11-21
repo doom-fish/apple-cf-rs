@@ -293,10 +293,32 @@ public func cf_file_descriptor_get_type_id() -> Int {
 
 @_cdecl("cf_file_descriptor_create")
 public func cf_file_descriptor_create(_ nativeFD: Int32, _ closeOnInvalidate: Bool) -> UnsafeMutableRawPointer? {
-    guard let descriptor = CFFileDescriptorCreate(nil, nativeFD, closeOnInvalidate, acfNoopFileDescriptorCallback, nil) else {
-        return nil
+    if closeOnInvalidate {
+        guard let descriptor = CFFileDescriptorCreate(nil, nativeFD, true, acfNoopFileDescriptorCallback, nil) else {
+            return nil
+        }
+        return Unmanaged.passRetained(descriptor).toOpaque()
     }
-    return Unmanaged.passRetained(descriptor).toOpaque()
+    let duplicate = fcntl(nativeFD, F_DUPFD_CLOEXEC, 0)
+    guard duplicate >= 0 else { return nil }
+    let file = FileHandle(fileDescriptor: duplicate, closeOnDealloc: true)
+    var context = CFFileDescriptorContext(
+        version: 0,
+        info: Unmanaged.passUnretained(file).toOpaque(),
+        retain: { pointer in pointer.map { Unmanaged<FileHandle>.fromOpaque($0).retain().toOpaque() } },
+        release: { pointer in
+            if let pointer { Unmanaged<FileHandle>.fromOpaque(pointer).release() }
+        },
+        copyDescription: nil
+    )
+    return withExtendedLifetime(file) {
+        guard let descriptor = CFFileDescriptorCreate(
+            nil, duplicate, false, acfNoopFileDescriptorCallback, &context
+        ) else {
+            return nil
+        }
+        return Unmanaged.passRetained(descriptor).toOpaque()
+    }
 }
 
 @_cdecl("cf_file_descriptor_get_native")

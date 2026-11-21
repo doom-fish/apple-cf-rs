@@ -46,5 +46,5 @@ fn main() {
     let stdin = std::io::stdin();
     let fd = CFFileDescriptor::from_borrowed_fd(std::os::fd::AsFd::as_fd(&stdin))
         .expect("file descriptor");
-    assert_eq!(fd.native_descriptor(), 0);
+    assert!(fd.native_descriptor() >= 0);
 }

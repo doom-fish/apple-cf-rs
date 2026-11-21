@@ -41,14 +41,14 @@ Safe Rust wrappers
 
 ```toml
 [dependencies]
-apple-cf = "0.11"
+apple-cf = "0.12.0"
 ```
 
 Or enable only the Rust modules you use:
 
 ```toml
 [dependencies]
-apple-cf = { version = ">=0.11, <0.12", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
+apple-cf = { version = "0.12.0", default-features = false, features = ["cg", "cm", "cv", "dispatch", "iosurface"] }
 ```
 
 The `cg`, `iosurface`, `dispatch`, `cm` and `cv` features gate the Rust modules only. The Swift bridge is built as a single static library, so every build compiles all of it and links CoreFoundation, CoreGraphics, CoreMedia, CoreVideo, IOSurface, Metal and Foundation whichever features are enabled. The `metal` feature is a deprecated no-op.
@@ -173,6 +173,9 @@ Raw `from_raw` constructors adopt one caller-owned `+1` retain and are therefore
 `CMBlockBuffer::as_slice` and `CMBlockBuffer::cursor_ref` are `unsafe` for the same reason: the bytes belong to Core Media, can be shared with other sample buffers, and must be initialized and left unmodified while the slice lives. `CMBlockBuffer::cursor` and `copy_data_bytes` copy instead. `CMSampleBuffer::audio_buffer_list` hands out read-only views that keep the backing block buffer alive.
 
 Constructors that can fail on ordinary input return `Option` (`CFURL::from_string`, `CFURL::from_file_system_path`, `CFTimeZone::new`, `CFCalendar::new`, `CFMessagePort::create_echo_local`, `DispatchSemaphore::new`), and `CFString::new` accepts interior NUL bytes. `CFURL::from_string` follows the running system's `CFURLCreateWithString`, whose rules changed in macOS 27: it rejects an authority with an unbalanced or misplaced `[` or `]` or a second `@` (`http://[bad`, `http://bad]`, `http://user@@host/`), which earlier releases accept unchanged. `CFFileDescriptor` takes an `OwnedFd`, which Core Foundation closes, or a `BorrowedFd`, which it never closes.
+
+In version 0.12.0, keep the original descriptor open while you use the wrapper.
+On `main`, `CFFileDescriptor::from_borrowed_fd` owns a duplicate, so the wrapper remains valid after the original descriptor closes.
 
 `CVPixelBufferPool::create(..., max_buffers)` enforces the cap through Core Video's per-allocation threshold. Clones share that immutable policy across threads. Per-call auxiliary attributes are honored, flush flags map directly to the native API, and `try_create_pixel_buffer` distinguishes threshold exhaustion from other errors.
 
