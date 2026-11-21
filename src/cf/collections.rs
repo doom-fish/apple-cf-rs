@@ -457,8 +457,8 @@ impl CFMutableSet {
             ffi::cf_set_add_value(
                 self.as_ptr(),
                 CFSetCallbacks::checked_ptr(self.1, candidate),
-            )
-        };
+            );
+        }
     }
 
     /// Replace the matching value if it is already present.
@@ -467,8 +467,8 @@ impl CFMutableSet {
             ffi::cf_set_replace_value(
                 self.as_ptr(),
                 CFSetCallbacks::checked_ptr(self.1, candidate),
-            )
-        };
+            );
+        }
     }
 
     /// Insert or replace `candidate`.
@@ -477,8 +477,8 @@ impl CFMutableSet {
             ffi::cf_set_set_value(
                 self.as_ptr(),
                 CFSetCallbacks::checked_ptr(self.1, candidate),
-            )
-        };
+            );
+        }
     }
 
     /// Remove `candidate` if it exists.
@@ -487,8 +487,8 @@ impl CFMutableSet {
             ffi::cf_set_remove_value(
                 self.as_ptr(),
                 CFSetCallbacks::checked_ptr(self.1, candidate),
-            )
-        };
+            );
+        }
     }
 
     /// Remove every value from the set.
