@@ -540,7 +540,6 @@ extern "C" {
         allocator: CFAllocatorRef,
         cacheAttributes: CFDictionaryRef,
         metalDevice: *mut core::ffi::c_void,
-        metalBufferAttributes: CFDictionaryRef,
         cacheOut: *mut CVMetalBufferCacheRef,
     ) -> CVReturn;
 }

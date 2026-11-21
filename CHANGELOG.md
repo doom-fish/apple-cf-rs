@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0] - 2026-11-21
+
+### Changed
+
+- Core Foundation sets check the value type before they call string-copy callbacks. Copies preserve the callback mode.
+- The raw Core Video buffer cache constructor now uses the four arguments in the SDK declaration.
+
 ## [0.11.7] - 2026-10-27
 
 ### Added

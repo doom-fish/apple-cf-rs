@@ -17,6 +17,8 @@ Safe Rust bindings for Apple's shared **Core\*** frameworks — the foundation u
 | [`cv`](src/cv) | `CVBuffer`, `CVImageBuffer`, `CVPixelBuffer`, `CVPixelBufferPool`, `CVMetalTextureCache` | `cv` | ✅ |
 | [`utils`](src/utils) | Shared FFI helpers (always on) | — | ✅ |
 
+`CFSetCallbacks::CopyString` requires a `CFString` for each value and lookup key. A different type causes a Rust panic before the native call. Copies retain the callback mode. Sets adopted from raw pointers use the string restriction because Core Foundation does not expose the callbacks.
+
 ## Why this crate exists
 
 Every doom-fish crate that wraps a media-adjacent Apple framework needs the same primitives — `CFString`, `CGRect`, `CVPixelBuffer`, `IOSurface`, dispatch queues, time values. Instead of re-vendoring those inside every crate (and drifting), this crate owns them once.

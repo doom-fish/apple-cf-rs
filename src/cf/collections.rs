@@ -47,8 +47,8 @@ impl_cf_type_wrapper!(CFDictionary, cf_dictionary_get_type_id);
 /// Alias for `CFDictionary`.
 pub type CFDict = CFDictionary;
 impl_cf_type_wrapper!(CFBag, cf_bag_get_type_id);
-impl_cf_type_wrapper!(CFSet, cf_set_get_type_id);
-impl_cf_type_wrapper!(CFMutableSet, cf_set_get_type_id);
+impl_cf_type_wrapper!(CFSet, cf_set_get_type_id, Option<CFSetCallbacks>);
+impl_cf_type_wrapper!(CFMutableSet, cf_set_get_type_id, Option<CFSetCallbacks>);
 impl_cf_type_wrapper!(CFAttributedString, cf_attributed_string_get_type_id);
 
 /// Safe representation of the `CFSetCallBacks` / `kCFTypeSetCallBacks` /
@@ -61,6 +61,20 @@ pub enum CFSetCallbacks {
     Type = 0,
     /// Copy inserted `CFString` values using `kCFCopyStringSetCallBacks`.
     CopyString = 1,
+}
+
+impl CFSetCallbacks {
+    fn checked_ptr(mode: Option<Self>, value: &dyn AsCFType) -> *mut c_void {
+        let ptr = value.as_ptr();
+        if mode != Some(Self::Type) {
+            assert_eq!(
+                unsafe { ffi::cf_type_get_type_id(ptr) },
+                CFString::type_id(),
+                "a string-copy set or a set with unknown callbacks requires CFString values"
+            );
+        }
+        ptr
+    }
 }
 
 type CFSetApplyTask<'a> = Box<dyn FnMut(CFType) + 'a>;
@@ -230,24 +244,36 @@ impl CFSet {
     /// Create an immutable set from borrowed Core Foundation values with explicit callback semantics.
     #[must_use]
     pub fn from_values_with_callbacks(values: &[&dyn AsCFType], callbacks: CFSetCallbacks) -> Self {
-        let raw_values: Vec<*mut c_void> = values.iter().map(|value| value.as_ptr()).collect();
+        let raw_values: Vec<_> = values
+            .iter()
+            .map(|value| CFSetCallbacks::checked_ptr(Some(callbacks), *value))
+            .collect();
         let ptr =
             unsafe { ffi::cf_set_create(raw_values.as_ptr(), raw_values.len(), callbacks as i32) };
-        unsafe { Self::from_raw(ptr) }.expect("CFSetCreate returned NULL")
+        Self(
+            unsafe { CFType::from_raw(ptr) }.expect("CFSetCreate returned NULL"),
+            Some(callbacks),
+        )
     }
 
     /// Create an immutable retained copy of this set.
     #[must_use]
     pub fn copy(&self) -> Self {
         let ptr = unsafe { ffi::cf_set_create_copy(self.as_ptr()) };
-        unsafe { Self::from_raw(ptr) }.expect("CFSetCreateCopy returned NULL")
+        Self(
+            unsafe { CFType::from_raw(ptr) }.expect("CFSetCreateCopy returned NULL"),
+            self.1,
+        )
     }
 
     /// Create a mutable retained copy of this set.
     #[must_use]
     pub fn mutable_copy(&self, capacity: usize) -> CFMutableSet {
         let ptr = unsafe { ffi::cf_set_create_mutable_copy(self.as_ptr(), capacity) };
-        unsafe { CFMutableSet::from_raw(ptr) }.expect("CFSetCreateMutableCopy returned NULL")
+        CFMutableSet(
+            unsafe { CFType::from_raw(ptr) }.expect("CFSetCreateMutableCopy returned NULL"),
+            self.1,
+        )
     }
 
     /// Number of values in the set.
@@ -265,19 +291,34 @@ impl CFSet {
     /// Whether the set contains `candidate`.
     #[must_use]
     pub fn contains(&self, candidate: &dyn AsCFType) -> bool {
-        unsafe { ffi::cf_set_contains_value(self.as_ptr(), candidate.as_ptr()) }
+        unsafe {
+            ffi::cf_set_contains_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        }
     }
 
     /// Number of times `candidate` appears in the set (0 or 1).
     #[must_use]
     pub fn count_of_value(&self, candidate: &dyn AsCFType) -> usize {
-        unsafe { ffi::cf_set_get_count_of_value(self.as_ptr(), candidate.as_ptr()) }
+        unsafe {
+            ffi::cf_set_get_count_of_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        }
     }
 
     /// Copy a matching value using `CFSetGetValue` semantics.
     #[must_use]
     pub fn get(&self, candidate: &dyn AsCFType) -> Option<CFType> {
-        let ptr = unsafe { ffi::cf_set_get_value(self.as_ptr(), candidate.as_ptr()) };
+        let ptr = unsafe {
+            ffi::cf_set_get_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        };
         unsafe { CFType::from_raw(ptr) }
     }
 
@@ -286,7 +327,11 @@ impl CFSet {
     pub fn get_if_present(&self, candidate: &dyn AsCFType) -> Option<CFType> {
         let mut ptr = std::ptr::null_mut();
         let present = unsafe {
-            ffi::cf_set_get_value_if_present(self.as_ptr(), candidate.as_ptr(), &raw mut ptr)
+            ffi::cf_set_get_value_if_present(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+                &raw mut ptr,
+            )
         };
         present.then(|| unsafe { CFType::from_raw(ptr) }).flatten()
     }
@@ -324,7 +369,10 @@ impl CFMutableSet {
     #[must_use]
     pub fn with_callbacks(capacity: usize, callbacks: CFSetCallbacks) -> Self {
         let ptr = unsafe { ffi::cf_set_create_mutable(capacity, callbacks as i32) };
-        unsafe { Self::from_raw(ptr) }.expect("CFSetCreateMutable returned NULL")
+        Self(
+            unsafe { CFType::from_raw(ptr) }.expect("CFSetCreateMutable returned NULL"),
+            Some(callbacks),
+        )
     }
 
     /// Create a mutable set from borrowed Core Foundation values using type callbacks.
@@ -347,14 +395,20 @@ impl CFMutableSet {
     #[must_use]
     pub fn copy(&self) -> CFSet {
         let ptr = unsafe { ffi::cf_set_create_copy(self.as_ptr()) };
-        unsafe { CFSet::from_raw(ptr) }.expect("CFSetCreateCopy returned NULL")
+        CFSet(
+            unsafe { CFType::from_raw(ptr) }.expect("CFSetCreateCopy returned NULL"),
+            self.1,
+        )
     }
 
     /// Create a mutable retained copy of this set.
     #[must_use]
     pub fn mutable_copy(&self, capacity: usize) -> Self {
         let ptr = unsafe { ffi::cf_set_create_mutable_copy(self.as_ptr(), capacity) };
-        unsafe { Self::from_raw(ptr) }.expect("CFSetCreateMutableCopy returned NULL")
+        Self(
+            unsafe { CFType::from_raw(ptr) }.expect("CFSetCreateMutableCopy returned NULL"),
+            self.1,
+        )
     }
 
     /// Number of values in the set.
@@ -372,13 +426,23 @@ impl CFMutableSet {
     /// Whether the set contains `candidate`.
     #[must_use]
     pub fn contains(&self, candidate: &dyn AsCFType) -> bool {
-        unsafe { ffi::cf_set_contains_value(self.as_ptr(), candidate.as_ptr()) }
+        unsafe {
+            ffi::cf_set_contains_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        }
     }
 
     /// Number of times `candidate` appears in the set (0 or 1).
     #[must_use]
     pub fn count_of_value(&self, candidate: &dyn AsCFType) -> usize {
-        unsafe { ffi::cf_set_get_count_of_value(self.as_ptr(), candidate.as_ptr()) }
+        unsafe {
+            ffi::cf_set_get_count_of_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        }
     }
 
     /// Copy all values into a Rust vector.
@@ -389,22 +453,42 @@ impl CFMutableSet {
 
     /// Add `candidate` if it is not already present.
     pub fn add(&self, candidate: &dyn AsCFType) {
-        unsafe { ffi::cf_set_add_value(self.as_ptr(), candidate.as_ptr()) };
+        unsafe {
+            ffi::cf_set_add_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        };
     }
 
     /// Replace the matching value if it is already present.
     pub fn replace(&self, candidate: &dyn AsCFType) {
-        unsafe { ffi::cf_set_replace_value(self.as_ptr(), candidate.as_ptr()) };
+        unsafe {
+            ffi::cf_set_replace_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        };
     }
 
     /// Insert or replace `candidate`.
     pub fn set(&self, candidate: &dyn AsCFType) {
-        unsafe { ffi::cf_set_set_value(self.as_ptr(), candidate.as_ptr()) };
+        unsafe {
+            ffi::cf_set_set_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        };
     }
 
     /// Remove `candidate` if it exists.
     pub fn remove(&self, candidate: &dyn AsCFType) {
-        unsafe { ffi::cf_set_remove_value(self.as_ptr(), candidate.as_ptr()) };
+        unsafe {
+            ffi::cf_set_remove_value(
+                self.as_ptr(),
+                CFSetCallbacks::checked_ptr(self.1, candidate),
+            )
+        };
     }
 
     /// Remove every value from the set.

@@ -176,10 +176,24 @@ impl fmt::Debug for SwiftObject {
 }
 
 macro_rules! impl_cf_type_wrapper {
-    ($name:ident, $type_id_fn:ident) => {
-        #[derive(Clone, PartialEq, Eq, Hash)]
+    ($name:ident, $type_id_fn:ident $(, $metadata:ty)?) => {
+        #[derive(Clone)]
         #[doc = concat!("Safe wrapper around a retained Core Foundation `", stringify!($name), "` reference.")]
-        pub struct $name(pub(crate) crate::cf::base::CFType);
+        pub struct $name(pub(crate) crate::cf::base::CFType $(, $metadata)?);
+
+        impl PartialEq for $name {
+            fn eq(&self, other: &Self) -> bool {
+                self.0 == other.0
+            }
+        }
+
+        impl Eq for $name {}
+
+        impl std::hash::Hash for $name {
+            fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+                std::hash::Hash::hash(&self.0, state);
+            }
+        }
 
         impl $name {
             #[doc = concat!("Adopts a +1 retained `", stringify!($name), "` pointer and returns `None` for null.")]
@@ -189,7 +203,7 @@ macro_rules! impl_cf_type_wrapper {
             #[doc = concat!("A non-null `ptr` must be a live `", stringify!($name), "` pointer of the exact dynamic type carrying one retain transferred to this wrapper. The caller must not release or separately adopt that transferred retain.")]
             #[must_use]
             pub unsafe fn from_raw(ptr: *mut std::ffi::c_void) -> Option<Self> {
-                unsafe { crate::cf::base::CFType::from_raw(ptr) }.map(Self)
+                unsafe { crate::cf::base::CFType::from_raw(ptr) }.map(|value| Self(value $(, <$metadata>::default())?))
             }
 
             #[doc = concat!("Retains a +0 borrowed `", stringify!($name), "` pointer and returns an owned wrapper.")]
@@ -199,7 +213,7 @@ macro_rules! impl_cf_type_wrapper {
             #[doc = concat!("A non-null `ptr` must be a live `", stringify!($name), "` pointer of the exact dynamic type for the duration of the retain call.")]
             #[must_use]
             pub unsafe fn from_raw_borrowed(ptr: *mut std::ffi::c_void) -> Option<Self> {
-                unsafe { crate::cf::base::CFType::from_raw_borrowed(ptr) }.map(Self)
+                unsafe { crate::cf::base::CFType::from_raw_borrowed(ptr) }.map(|value| Self(value $(, <$metadata>::default())?))
             }
 
             /// Borrows the raw +0 Core Foundation pointer while `self` remains alive.
